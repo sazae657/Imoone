@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CP_Ended" xml:space="preserve">
+    <value>キャプション生成完了({0})</value>
+  </data>
+  <data name="IDM_APPLY" xml:space="preserve">
+    <value>適用</value>
+  </data>
+  <data name="IDM_CANCEL" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="IDM_EXIT" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="IDM_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="IDM_SAVE" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="IDM_START" xml:space="preserve">
+    <value>開始</value>
+  </data>
+  <data name="IDM_STOP" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="IP_CleanupDb" xml:space="preserve">
+    <value>インデックス整理中 …</value>
+  </data>
+  <data name="IP_E_Fail" xml:space="preserve">
+    <value>検索インデックスの生成に失敗</value>
+  </data>
+  <data name="IP_E_TagIndexFailed" xml:space="preserve">
+    <value>検索インデックスの生成に失敗</value>
+  </data>
+  <data name="IP_Ended" xml:space="preserve">
+    <value>インデックス作成完了({0})</value>
+  </data>
+  <data name="IP_TagIndexEnded" xml:space="preserve">
+    <value>タグインデックス作成完了 (グループ: {0} キャラ: {1})</value>
+  </data>
+  <data name="MC_About" xml:space="preserve">
+    <value>ImogeIndexについて  …</value>
+  </data>
+  <data name="MC_Quit" xml:space="preserve">
+    <value>ImogeIndexの終了</value>
+  </data>
+  <data name="ML_AppTitle" xml:space="preserve">
+    <value>ImogeIndex</value>
+  </data>
+  <data name="ML_CaptioningPreview" xml:space="preserve">
+    <value>プレビュー</value>
+  </data>
+  <data name="ML_D_Captioning" xml:space="preserve">
+    <value>キャプション生成</value>
+  </data>
+  <data name="ML_D_CustomOP" xml:space="preserve">
+    <value>カスタム操作</value>
+  </data>
+  <data name="ML_D_GenerateIndex" xml:space="preserve">
+    <value>ファイルの分析</value>
+  </data>
+  <data name="ML_D_GenerateTagIndex" xml:space="preserve">
+    <value>検索インデックスの生成</value>
+  </data>
+  <data name="ML_D_Vacuum" xml:space="preserve">
+    <value>データベースの整理</value>
+  </data>
+  <data name="ML_Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="ML_MinimizeToTray" xml:space="preserve">
+    <value>最小化時はタスクトレイに表示</value>
+  </data>
+  <data name="ML_OpenDatumRootFolder" xml:space="preserve">
+    <value>データフォルダーを開く(_ξ)</value>
+  </data>
+  <data name="ML_OpenSettingsFolder" xml:space="preserve">
+    <value>{0} の設定フォルダーを開く(_Ω)</value>
+  </data>
+  <data name="ML_OpenSettingure" xml:space="preserve">
+    <value>設定 …</value>
+  </data>
+  <data name="ML_Profile" xml:space="preserve">
+    <value>プロファイル</value>
+  </data>
+  <data name="ML_QuickScan" xml:space="preserve">
+    <value>高速スキャン(更新を検出しない)</value>
+  </data>
+  <data name="ML_RecaptionUpdated" xml:space="preserve">
+    <value>更新されたらキャプションも作り直す</value>
+  </data>
+  <data name="ML_RescanMetadata" xml:space="preserve">
+    <value>メタデータの再スキャン</value>
+  </data>
+  <data name="ML_SkipKnownError" xml:space="preserve">
+    <value>既知のエラーは無視</value>
+  </data>
+  <data name="ML_Theme" xml:space="preserve">
+    <value>テーマ</value>
+  </data>
+  <data name="PM_CheckingVLM" xml:space="preserve">
+    <value>LLM確認中</value>
+  </data>
+  <data name="PM_Closing" xml:space="preserve">
+    <value>とじこ中…</value>
+  </data>
+  <data name="PM_E_CaptionizerNotSanitized" xml:space="preserve">
+    <value>CaptionizerがSanitizeされていない？</value>
+  </data>
+  <data name="PM_Ended" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="PM_Error" xml:space="preserve">
+    <value>エラー : {0}</value>
+  </data>
+  <data name="PM_InPreparation" xml:space="preserve">
+    <value>準備中 …</value>
+  </data>
+  <data name="PM_Interrupted" xml:space="preserve">
+    <value>停止(後処理完了)</value>
+  </data>
+  <data name="PM_LoadingTagger" xml:space="preserve">
+    <value>Tagger読み込み中</value>
+  </data>
+  <data name="PM_Stopped" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="PM_StoppingProcessor" xml:space="preserve">
+    <value>{0} 停止中…</value>
+  </data>
+  <data name="PM_TaggerLoaded" xml:space="preserve">
+    <value>Tagger読み込み完了</value>
+  </data>
+  <data name="PM_VLMChecked" xml:space="preserve">
+    <value>LLM確認完了</value>
+  </data>
+  <data name="SG_Cap_LlamaCpp" xml:space="preserve">
+    <value>llama.cpp</value>
+  </data>
+  <data name="SG_Cap_Modepile" xml:space="preserve">
+    <value>モデルのコンパイル</value>
+  </data>
+  <data name="SG_Cap_Ollama" xml:space="preserve">
+    <value>Ollama</value>
+  </data>
+  <data name="SG_Cap_OpenAICompat" xml:space="preserve">
+    <value>OpenAI互換</value>
+  </data>
+  <data name="SG_Captionizer" xml:space="preserve">
+    <value>キャプショニング</value>
+  </data>
+  <data name="SG_E_DuplicateMetaAlias" xml:space="preserve">
+    <value>{0} : 重複するエントリーがある</value>
+  </data>
+  <data name="SG_E_DuplicateMetaAliasOfAlias" xml:space="preserve">
+    <value>{0} 重複するエイリアスがある</value>
+  </data>
+  <data name="SG_E_InvalidCharOnMetaAlias" xml:space="preserve">
+    <value>{0} 使用できない文字が含まれている (:;="'\|)</value>
+  </data>
+  <data name="SG_E_InvalidThreadNum" xml:space="preserve">
+    <value>不正なスレッド数</value>
+  </data>
+  <data name="SG_General" xml:space="preserve">
+    <value>全般</value>
+  </data>
+  <data name="SG_OpenDialogW" xml:space="preserve">
+    <value>…</value>
+  </data>
+  <data name="SG_Other" xml:space="preserve">
+    <value>その他</value>
+  </data>
+  <data name="SG_T_Group" xml:space="preserve">
+    <value>グループ</value>
+  </data>
+  <data name="SG_T_Groups" xml:space="preserve">
+    <value>グループ</value>
+  </data>
+  <data name="SG_T_IgnoreCase" xml:space="preserve">
+    <value>大文字小文字を区別しない</value>
+  </data>
+  <data name="SG_T_Index" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="SG_T_OpenRegexSandbox" xml:space="preserve">
+    <value>正規表現練習帳 …</value>
+  </data>
+  <data name="SG_T_Regex" xml:space="preserve">
+    <value>正規表現</value>
+  </data>
+  <data name="SG_T_RegexSandbox" xml:space="preserve">
+    <value>正規表現練習帳</value>
+  </data>
+  <data name="SG_T_Result" xml:space="preserve">
+    <value>結果</value>
+  </data>
+  <data name="SG_T_Text" xml:space="preserve">
+    <value>テスト文字列</value>
+  </data>
+  <data name="SG_T_Value" xml:space="preserve">
+    <value>あたい</value>
+  </data>
+  <data name="SG_Tagger" xml:space="preserve">
+    <value>タギング</value>
+  </data>
+  <data name="SGD_Settingure" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="SW_BuffersPerThread" xml:space="preserve">
+    <value>スレッド毎の溜め込みバッファー数</value>
+  </data>
+  <data name="SW_CacheDir" xml:space="preserve">
+    <value>キャッシュフォルダー</value>
+  </data>
+  <data name="SW_CapAbortThreshold" xml:space="preserve">
+    <value>連続失敗で打ち切る回数(0で無効)</value>
+  </data>
+  <data name="SW_CapApiKey" xml:space="preserve">
+    <value>APIキー</value>
+  </data>
+  <data name="SW_CapEnable" xml:space="preserve">
+    <value>キャプショニングを行う</value>
+  </data>
+  <data name="SW_CapHttpTimeout" xml:space="preserve">
+    <value>HTTPタイムアウト(秒)</value>
+  </data>
+  <data name="SW_CapImageSize" xml:space="preserve">
+    <value>送信する画像サイズ</value>
+  </data>
+  <data name="SW_CapLlm_CustomPrompt" xml:space="preserve">
+    <value>カスタムプロンプト</value>
+  </data>
+  <data name="SW_CapLlm_MaxTokens" xml:space="preserve">
+    <value>max_tokens</value>
+  </data>
+  <data name="SW_CapLlm_NumCtx" xml:space="preserve">
+    <value>num_ctx</value>
+  </data>
+  <data name="SW_CapLlm_NumPredict" xml:space="preserve">
+    <value>num_predict</value>
+  </data>
+  <data name="SW_CapLlm_RepeatPenalty" xml:space="preserve">
+    <value>repeat_penalty</value>
+  </data>
+  <data name="SW_CapLlm_Temperature" xml:space="preserve">
+    <value>temperature</value>
+  </data>
+  <data name="SW_CapLlm_TopK" xml:space="preserve">
+    <value>top_k</value>
+  </data>
+  <data name="SW_CapLlm_TopP" xml:space="preserve">
+    <value>top_p</value>
+  </data>
+  <data name="SW_CapLlm_UseCustomPrompt" xml:space="preserve">
+    <value>カスタムプロンプトを使う</value>
+  </data>
+  <data name="SW_CapLlmType" xml:space="preserve">
+    <value>キャプショニングに使うLLM</value>
+  </data>
+  <data name="SW_CapModel" xml:space="preserve">
+    <value>モデル</value>
+  </data>
+  <data name="SW_CapMoreHere" xml:space="preserve">
+    <value>そこもっと(正規表現)</value>
+  </data>
+  <data name="SW_CapNoMoreHere" xml:space="preserve">
+    <value>除外(正規表現)</value>
+  </data>
+  <data name="SW_CapRetry" xml:space="preserve">
+    <value>リトライ回数</value>
+  </data>
+  <data name="SW_CapUrl" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="SW_E_Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="SW_E_SaveFailed" xml:space="preserve">
+    <value>設定の保存に失敗しました</value>
+  </data>
+  <data name="SW_EnableThumbnail" xml:space="preserve">
+    <value>サムネイルを作成する</value>
+  </data>
+  <data name="SW_ExcludePath" xml:space="preserve">
+    <value>除外するフォルダー</value>
+  </data>
+  <data name="SW_ExcludePattern" xml:space="preserve">
+    <value>除外パターン(正規表現)</value>
+  </data>
+  <data name="SW_FC_AllFile" xml:space="preserve">
+    <value>すべてのファイル (*.*)|*.*</value>
+  </data>
+  <data name="SW_FC_Model" xml:space="preserve">
+    <value>モデル</value>
+  </data>
+  <data name="SW_FC_ModelFilter" xml:space="preserve">
+    <value>モデル (*.onnx)|*.onnx|すべてのファイル (*.*)|*.*</value>
+  </data>
+  <data name="SW_FC_TagCsvFilter" xml:space="preserve">
+    <value>タグ (*.csv)|*.csv|すべてのファイル (*.*)|*.*</value>
+  </data>
+  <data name="SW_FC_TagJsonFilter" xml:space="preserve">
+    <value>タグ (*.json)|*.json|すべてのファイル (*.*)|*.*</value>
+  </data>
+  <data name="SW_FC_Tags" xml:space="preserve">
+    <value>タグ</value>
+  </data>
+  <data name="SW_ImageExtension" xml:space="preserve">
+    <value>画像拡張子(正規表現)</value>
+  </data>
+  <data name="SW_LogLevel" xml:space="preserve">
+    <value>ログレベル</value>
+  </data>
+  <data name="SW_MetadatumSearchTags" xml:space="preserve">
+    <value>メタデータム検索タグ</value>
+  </data>
+  <data name="SW_Niraction" xml:space="preserve">
+    <value>ﾆﾗｸｼｮﾝ</value>
+  </data>
+  <data name="SW_NiractionEnable" xml:space="preserve">
+    <value>ﾆﾗｸｼｮﾝ</value>
+  </data>
+  <data name="SW_NiractionHost" xml:space="preserve">
+    <value>ﾆﾗｸｼｮﾝﾎｽﾄ</value>
+  </data>
+  <data name="SW_SearchPath" xml:space="preserve">
+    <value>検索するフォルダー</value>
+  </data>
+  <data name="SW_TaggerCharacterThreshold" xml:space="preserve">
+    <value>キャラクターの閾値</value>
+  </data>
+  <data name="SW_TaggerDevicePolicy" xml:space="preserve">
+    <value>WinMLデバイスポリシー</value>
+  </data>
+  <data name="SW_TaggerEnable" xml:space="preserve">
+    <value>タグ付けをする</value>
+  </data>
+  <data name="SW_TaggerModel" xml:space="preserve">
+    <value>モデル(*.onnx)</value>
+  </data>
+  <data name="SW_TaggerTags" xml:space="preserve">
+    <value>タグファイル(*.csvまたは*.json)</value>
+  </data>
+  <data name="SW_TaggerThreads" xml:space="preserve">
+    <value>並列実行数</value>
+  </data>
+  <data name="SW_TaggerThreshold" xml:space="preserve">
+    <value>タグの閾値</value>
+  </data>
+  <data name="SW_TaggerType" xml:space="preserve">
+    <value>Taggerの種類</value>
+  </data>
+  <data name="SW_Threads" xml:space="preserve">
+    <value>スレッド数</value>
+  </data>
+  <data name="SW_ThumbnailSize" xml:space="preserve">
+    <value>サムネイルのサイズ</value>
+  </data>
+  <data name="TB_CleanupDb" xml:space="preserve">
+    <value>サムネイル整理中 …</value>
+  </data>
+  <data name="TM_Idle" xml:space="preserve">
+    <value>待機中</value>
+  </data>
+  <data name="TM_Running" xml:space="preserve">
+    <value>実行中</value>
+  </data>
+  <data name="TM_ShuttingDown" xml:space="preserve">
+    <value>終了処理中</value>
+  </data>
+  <data name="TM_Stopping" xml:space="preserve">
+    <value>停止処理中</value>
+  </data>
+  <data name="WG_D_VLM1" xml:space="preserve">
+    <value>送信</value>
+  </data>
+  <data name="WG_D_VLM2" xml:space="preserve">
+    <value>送信: {0}x{1} / {2:N0} バイト</value>
+  </data>
+  <data name="WG_E_CloseTheSettingure" xml:space="preserve">
+    <value>設定ウインドウが開きっぱでごわす</value>
+  </data>
+  <data name="WG_E_InvalidArgument" xml:space="preserve">
+    <value>引数エラー</value>
+  </data>
+  <data name="WG_E_InvalidTaggerSetting" xml:space="preserve">
+    <value>Taggerの設定がおかしい</value>
+  </data>
+  <data name="WG_Eroare" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="WG_Error" xml:space="preserve">
+    <value>エラー : {0}</value>
+  </data>
+  <data name="WG_Stopping" xml:space="preserve">
+    <value>停止中…</value>
+  </data>
+</root>

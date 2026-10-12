@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="APT_Clasico" xml:space="preserve">
+    <value>エクスペリエンス</value>
+  </data>
+  <data name="APT_Dark" xml:space="preserve">
+    <value>ダーク</value>
+  </data>
+  <data name="APT_Light" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="APT_System" xml:space="preserve">
+    <value>システム</value>
+  </data>
+  <data name="E_M_DetailsBelow" xml:space="preserve">
+    <value>詳細は以下に記録されている {0}</value>
+  </data>
+  <data name="E_M_EliminateApp" xml:space="preserve">
+    <value>{0}
+
+アプリケーションを終了しますん</value>
+  </data>
+  <data name="E_M_ExceptionObzekt" xml:space="preserve">
+    <value>非Exceptionの例外オブジェクト: {0}</value>
+  </data>
+  <data name="E_M_FatalErrorApr" xml:space="preserve">
+    <value>{0} - 致命的なエラー</value>
+  </data>
+  <data name="E_M_UnexpectedError" xml:space="preserve">
+    <value>予期しないエラーが発生しますん</value>
+  </data>
+  <data name="E_M_UnexpectedErrorApr" xml:space="preserve">
+    <value>{0} - 予期しないエラーが発生しますん</value>
+  </data>
+  <data name="E_M_WantToContinue" xml:space="preserve">
+    <value>{0}
+
+作戦続行？
+「いいえ」を選ぶとアプリケーションを終了。</value>
+  </data>
+  <data name="E_TitleIsNull" xml:space="preserve">
+    <value>Titleがnull</value>
+  </data>
+  <data name="E_UnhandledException" xml:space="preserve">
+    <value>未処理の例外</value>
+  </data>
+  <data name="LNG_RestartRequired" xml:space="preserve">
+    <value>言語設定は再起動後に反映され申す</value>
+  </data>
+  <data name="LNG_System" xml:space="preserve">
+    <value>システム</value>
+  </data>
+</root>

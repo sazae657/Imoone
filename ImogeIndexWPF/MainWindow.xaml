@@ -1,0 +1,152 @@
+<web3:Nuendow x:Class="ImogeIndexWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:themes="clr-namespace:ImogeIndex.Web3.Dictators;assembly=ImogeIndex.Web3"
+        xmlns:web3="clr-namespace:ImogeIndex.Web3;assembly=ImogeIndex.Web3"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImogeIndexWPF"
+        xmlns:modelle="clr-namespace:ImogeIndexWPF.Modelle"
+        xmlns:properties="clr-namespace:ImogeIndexWPF.Properties"
+        xmlns:web3properties="clr-namespace:ImogeIndex.Web3.Properties;assembly=ImogeIndex.Web3"
+        mc:Ignorable="d"
+        Foreground="{DynamicResource WindowForegroundBrush}"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        SizeToContent="Height"
+        Title="{x:Static properties:Resources.ML_AppTitle}" Height="424" Width="548">
+    <web3:Nuendow.DataContext>
+        <modelle:MainWindowModell/>
+    </web3:Nuendow.DataContext>
+    <web3:Nuendow.InputBindings>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding StartCommand}" />
+        <KeyBinding Gesture="Ctrl+P" Command="{Binding OpenSettingureCommand}" />
+        <KeyBinding Gesture="Ctrl+O" Command="{Binding OpenSettingFolderCommand}" />
+        <KeyBinding Gesture="Ctrl+M" Command="{Binding OpenProfileFolderCommand}" />
+        <KeyBinding Gesture="Ctrl+W" Command="{Binding OpenRegexSandboxCommand}" />
+        <KeyBinding Key="OemComma" Modifiers="Ctrl" 
+                    Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+    </web3:Nuendow.InputBindings>
+    <web3:Nuendow.Resources>
+        <web3:BindingProxy x:Key="Proxy" Data="{Binding}" />
+        <web3:BindingProxy x:Key="WindowProxy"
+                   Data="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+    </web3:Nuendow.Resources>
+    <DockPanel Margin="4">
+        <DockPanel DockPanel.Dock="Top" Margin="4">
+            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="8,0,0,0">
+                <Button MinWidth="40" x:Name="StartBittan" 
+                        IsEnabled="{Binding Operatable}"
+                        Command="{Binding StartCommand}" 
+                        Content="{x:Static properties:Resources.IDM_START}" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding MessageText}"/>
+                <ProgressBar Value="{Binding Progress}" Minimum="0" Maximum="1.0" MinHeight="16" Margin="0,4,0,0"/>
+                <StackPanel x:Name="SubProgressContainer">
+                    <!--
+                    <local:IncommingProgressBar Value="{Binding SubProgress}" />
+                    -->
+                </StackPanel>
+
+            </StackPanel>
+        </DockPanel>
+        <DockPanel>
+            <Expander IsExpanded="False" BorderThickness="0" Collapsed="Expander_Collapsed" Margin="0,2,0,0">
+                <Expander.Header>
+                    <!-- プロファイル欄 -->
+                    <StackPanel Orientation="Horizontal" Margin="8,2,0,2">
+                        <TextBlock Text="{x:Static properties:Resources.ML_Profile}" VerticalAlignment="Center" />
+                        <ComboBox IsEnabled="{Binding Settingurable}" 
+                              SelectionChanged="Profiles_SelectionChanged" 
+                              ItemsSource="{Binding Profiles}" 
+                              SelectedItem="{Binding ActiveProfile}" 
+                              IsEditable="False"  Margin="4,0,0,0" Padding="6,3,24,3" VerticalAlignment="Center"/>
+
+                        <!-- 設定ドロップダウン -->
+                        <ToggleButton Margin="4,0,0,0" Loaded="ToggleButton_Loaded" VerticalAlignment="Center" Padding="2">
+                            <ToggleButton.ContextMenu>
+                                <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Opened="SettingsMenu_Opened">
+                                    <MenuItem IsEnabled="{Binding Settingurable}" Header="{x:Static properties:Resources.ML_OpenSettingure}" InputGestureText="Ctrl+P" Command="{Binding OpenSettingureCommand}" />
+                                    <Separator/>
+                                    <CheckBox IsEnabled="{Binding Settingurable}" IsChecked="{Binding SkipKnownError}" Content="{x:Static properties:Resources.ML_SkipKnownError}"/>
+                                    <CheckBox IsEnabled="{Binding Settingurable}" IsChecked="{Binding RescanMetadata}" Content="{x:Static properties:Resources.ML_RescanMetadata}"/>
+                                    <CheckBox IsEnabled="{Binding Settingurable}" IsChecked="{Binding QuickScan}" Content="{x:Static properties:Resources.ML_QuickScan}"/>
+                                    <CheckBox IsEnabled="{Binding Settingurable}" IsChecked="{Binding RecaptionUpdated}" Content="{x:Static properties:Resources.ML_RecaptionUpdated}"/>
+                                    <Separator/>
+                                    <MenuItem Header="{Binding OpenSettingMenuHeader}" InputGestureText="Ctrl+O" Command="{Binding OpenSettingFolderCommand}" />
+                                    <MenuItem Header="{x:Static properties:Resources.ML_OpenDatumRootFolder}" InputGestureText="Ctrl+M" Command="{Binding OpenProfileFolderCommand}" />
+                                    <Separator/>
+                                    <CheckBox IsChecked="{Binding MinimizeToTray}" Content="{x:Static properties:Resources.ML_MinimizeToTray}"/>
+                                    <Separator/>
+                                    <MenuItem Header="{x:Static properties:Resources.SG_T_OpenRegexSandbox}" InputGestureText="Ctrl+W" Command="{Binding OpenRegexSandboxCommand}"/>
+                                    <MenuItem StaysOpenOnClick="True">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{x:Static properties:Resources.ML_Theme}" Margin="0,0,8,0"/>
+                                                <ComboBox x:Name="ThemeBox" ItemsSource="{Binding Themes}" 
+                                                              SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
+                                                              Loaded="ThemeBox_Loaded" 
+                                                              SelectionChanged="ThemeBox_SelectionChanged" 
+                                                              MinWidth="100" 
+                                                              Margin="4,0,0,0"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+
+                                    <MenuItem StaysOpenOnClick="True">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{x:Static properties:Resources.ML_Language}" Margin="0,0,8,0"/>
+                                                <ComboBox ItemsSource="{Binding Languages}"
+                                                              SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                                                              SelectionChanged="LanguageBox_SelectionChanged"
+                                                              MinWidth="100"
+                                                              Margin="4,0,0,0"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+
+                                    <Separator/>
+                                    <MenuItem Header="{x:Static properties:Resources.ML_D_CustomOP}">
+                                        <MenuItem IsEnabled="{Binding Settingurable}" Header="{x:Static properties:Resources.ML_D_GenerateIndex}" Command="{Binding RunProzessorCommand}" CommandParameter="{x:Static modelle:SelectiveProcess.Index}"/>
+                                        <MenuItem IsEnabled="{Binding Settingurable}" Header="{x:Static properties:Resources.ML_D_GenerateTagIndex}" Command="{Binding RunProzessorCommand}" CommandParameter="{x:Static modelle:SelectiveProcess.TagIndex}"/>
+                                        <MenuItem IsEnabled="{Binding Settingurable}" Header="{x:Static properties:Resources.ML_D_Vacuum}" Command="{Binding RunProzessorCommand}" CommandParameter="{x:Static modelle:SelectiveProcess.Vacuum}"/>
+                                        <MenuItem IsEnabled="{Binding Settingurable}" Header="{x:Static properties:Resources.ML_D_Captioning}" Command="{Binding RunProzessorCommand}" CommandParameter="{x:Static modelle:SelectiveProcess.Captioning}"/>
+                                    </MenuItem>
+                                    <Separator/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_About}" Command="{Binding OpenAboutDialogCommand}"/>
+                                    <Separator/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_Quit}" 
+                                              InputGestureText="Ctrl+," 
+                                              Command="{Binding CloseWindowCommand}"
+                                              CommandParameter="{Binding Source={StaticResource WindowProxy},Path=Data}"/>
+                                </ContextMenu>
+                            </ToggleButton.ContextMenu>
+                            <WrapPanel Margin="2">
+                                <TextBlock Text="&#xE115;" FontSize="12" FontFamily="{StaticResource Muast}"/>
+                            </WrapPanel>
+                        </ToggleButton>
+                    </StackPanel>
+                </Expander.Header>
+                <Grid Margin="0,8,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="48" MinHeight="16"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="100*"/>
+                    </Grid.RowDefinitions>
+                    <Border Background="{DynamicResource HeaderBackgroundBrush}">
+                        <TextBlock Text="{x:Static properties:Resources.ML_CaptioningPreview}" FontSize="12" Margin="2" />
+                    </Border>
+                    <Image Grid.Row="1" Source="{Binding DebugImg}" />
+                    <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Background="{DynamicResource SplitterBrush}"/>
+                    <DockPanel Grid.Row="3">
+                        <TextBox Text="{Binding DebugText}" AcceptsReturn="True" MinLines="15" IsReadOnly="True"  Margin="0,4,0,0" />
+                    </DockPanel>
+                </Grid>
+            </Expander>
+        </DockPanel>
+    </DockPanel>
+</web3:Nuendow>

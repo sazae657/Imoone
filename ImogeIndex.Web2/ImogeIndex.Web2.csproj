@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>$(NetCoreAppWinTarget)</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <Platforms>x64</Platforms>
+        <WindowsPackageType>None</WindowsPackageType>
+        <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+        <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+        <AssemblyVersion>$(NirVersion)</AssemblyVersion>
+        <FileVersion>$(MurVersion)</FileVersion>
+        <Version>$(MurVersion)</Version>
+        <PackageLicenseExpression>$(Muricense)</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="xunit.v3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ImogeIndex\ImogeIndex.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit" />
+        <Using Include="System.IO" />
+        <Using Include="System.Net.Http" />
+    </ItemGroup>
+
+</Project>

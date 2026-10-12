@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PMG_Description" xml:space="preserve">
+    <value>2つのプロファイルの設定とDBをマージして新しいプロファイルを作る</value>
+  </data>
+  <data name="PMG_OptCentury" xml:space="preserve">
+    <value>マージ元のプロファイルCentury(衝突される側)。プロファイル名かフォルダー</value>
+  </data>
+  <data name="PMG_OptBongo" xml:space="preserve">
+    <value>マージ元のプロファイルBongo(衝突する側)。プロファイル名かフォルダー</value>
+  </data>
+  <data name="PMG_OptOut" xml:space="preserve">
+    <value>出力先フォルダー(存在しないか空であること)</value>
+  </data>
+  <data name="PMG_OptName" xml:space="preserve">
+    <value>指定するとProfile.tomlにこの名前で登録する</value>
+  </data>
+  <data name="PMG_E_Error" xml:space="preserve">
+    <value>エラー: {0}</value>
+  </data>
+  <data name="PMG_E_ProfileNotFound" xml:space="preserve">
+    <value>プロファイル {0} が見つからない</value>
+  </data>
+  <data name="PMG_E_DatumNotFound" xml:space="preserve">
+    <value>{0} が見つからない</value>
+  </data>
+  <data name="PMG_E_SameProfile" xml:space="preserve">
+    <value>同じプロファイル同士はマージできない: {0}</value>
+  </data>
+  <data name="PMG_E_OutputIsSource" xml:space="preserve">
+    <value>出力先がマージ元と同じ: {0}</value>
+  </data>
+  <data name="PMG_E_OutputNotEmpty" xml:space="preserve">
+    <value>出力先 {0} が空じゃない</value>
+  </data>
+  <data name="PMG_E_VersionMismatch" xml:space="preserve">
+    <value>{0} のバージョンが一致しない: A={1} B={2}</value>
+  </data>
+  <data name="PMG_E_ProfileExists" xml:space="preserve">
+    <value>プロファイル {0} は既に登録されておる</value>
+  </data>
+  <data name="PMG_W_Running" xml:space="preserve">
+    <value>警告: ImogeIndexが起動中。マージ中に書き込まれた内容は反映されないですん</value>
+  </data>
+  <data name="PMG_W_SettingDiffers" xml:space="preserve">
+    <value>警告: 設定 {0} が異なるのでAの値を使う (Century={1} Bongo={2})</value>
+  </data>
+  <data name="PMG_W_MetaTypeConflict" xml:space="preserve">
+    <value>警告: メタデータムエイリアス {0} は {1} と型が食い違うので捨て申した</value>
+  </data>
+  <data name="PMG_W_ExcludeOverlap" xml:space="preserve">
+    <value>警告: 除外パス {0} が検索パス {1} と重なっている。次回のインデックス生成でレコードが消える可能性がありますん</value>
+  </data>
+  <data name="PMG_W_ExcludePatternAdded" xml:space="preserve">
+    <value>警告: 除外パターン {0} が両方のプロファイルに適用される</value>
+  </data>
+  <data name="PMG_W_ModelMixed" xml:space="preserve">
+    <value>警告: TaggerかキャプショニングのLLMが異なるので、タグ/キャプションは複数のモデル由来が混在する</value>
+  </data>
+  <data name="PMG_W_ColumnMismatch" xml:space="preserve">
+    <value>警告: テーブル {0} の列が一致しないので共通の列だけコピーしましたん</value>
+  </data>
+  <data name="PMG_W_UnknownTable" xml:space="preserve">
+    <value>警告: テーブル {0} はマージ対象外</value>
+  </data>
+  <data name="PMG_I_Merging" xml:space="preserve">
+    <value>マージ中: Century={0} Bongo={1}</value>
+  </data>
+  <data name="PMG_I_Result" xml:space="preserve">
+    <value>Century: {0}件 + Bongo: {1}件 (パス重複でスキップ: {2}件) → {3}件</value>
+  </data>
+  <data name="PMG_I_Registered" xml:space="preserve">
+    <value>Profile.tomlに {0} を登録した</value>
+  </data>
+  <data name="PMG_I_Done" xml:space="preserve">
+    <value>完了: {0}</value>
+  </data>
+  <data name="PMG_I_Hint" xml:space="preserve">
+    <value>一度、ImogeIndexを実行して検索インデックスを作る事が必要でごわす</value>
+  </data>
+</root>

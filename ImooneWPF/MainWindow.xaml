@@ -1,0 +1,365 @@
+<web3:Nuendow x:Class="ImooneWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImooneWPF"
+        xmlns:controls="clr-namespace:ImooneWPF.Controls"
+        xmlns:modelle="clr-namespace:ImooneWPF.Modelle"
+        xmlns:properties="clr-namespace:ImooneWPF.Properties"
+        xmlns:web3="clr-namespace:ImogeIndex.Web3;assembly=ImogeIndex.Web3"
+        xmlns:mur="clr-namespace:ImogeIndex.Mur;assembly=ImogeIndex"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Closed="Window_Closed"
+        Title="{x:Static properties:Resources.MC_AppTitle}" Height="450" Width="800"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        Foreground="{DynamicResource WindowForegroundBrush}">
+    <web3:Nuendow.DataContext>
+        <modelle:MainWindowModell/>
+    </web3:Nuendow.DataContext>
+    <web3:Nuendow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Controls/FileDisplayResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <web3:BindingProxy x:Key="Proxy" Data="{Binding}" />
+            <web3:BindingProxy x:Key="WindowProxy"
+                   Data="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+            <DataTemplate x:Key="AscendingColumnHeaderTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding}" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=GridViewColumnHeader}}"/>
+                    <TextBlock Text="▲" Margin="5,0,0,0" FontSize="8" VerticalAlignment="Center"
+                               Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=GridViewColumnHeader}}"/>
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="DescendingColumnHeaderTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding}" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=GridViewColumnHeader}}"/>
+                    <TextBlock Text="▼" Margin="5,0,0,0" FontSize="8" VerticalAlignment="Center"
+                               Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=GridViewColumnHeader}}"/>
+                </StackPanel>
+            </DataTemplate>
+            <BooleanToVisibilityConverter x:Key="B2VC"/>
+        </ResourceDictionary>
+    </web3:Nuendow.Resources>
+    <web3:Nuendow.InputBindings>
+        <KeyBinding Key="P" Modifiers="Shift+Alt" Command="{Binding SwitchDetailPaneCommand}" />
+        <KeyBinding Key="W" Modifiers="Ctrl" Command="{Binding ClearDetailPaneCommand}" />
+        <KeyBinding Key="W" Modifiers="Ctrl+Shift" Command="{Binding EmergencyCommand}" />
+        <KeyBinding Key="R" Modifiers="Ctrl+Shift" Command="{Binding ReloadDatumCommand}" />
+        <KeyBinding Key="Q" Modifiers="Ctrl" Command="{Binding LaunchIndexToolCommand}" />
+        <KeyBinding Key="D" Modifiers="Alt" Command="{Binding FocusSearchTextBoxCommand}" />
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenSettingFolderCommand}" />
+        <KeyBinding Key="M" Modifiers="Ctrl" Command="{Binding OpenProfileFolderCommand}" />
+
+        <KeyBinding Key="D6" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.List}" />
+        <KeyBinding Key="D5" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.ThumbList}" />
+        <KeyBinding Key="D4" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.IconS}" />
+        <KeyBinding Key="D3" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.IconM}" />
+        <KeyBinding Key="D2" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.IconL}" />
+        <KeyBinding Key="D1" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.IconH}" />
+
+        <KeyBinding Key="OemComma" Modifiers="Ctrl" Command="{Binding CloseWindowCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+        
+    </web3:Nuendow.InputBindings>
+    <DockPanel Margin="4">
+        <StackPanel DockPanel.Dock="Top">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="4,0,0,0">
+                    <!-- 設定ドロップダウン -->
+                    <ToggleButton x:Name="MainMenuBox" VerticalAlignment="Center" Margin="2,0,2,4" Padding="3" Loaded="ToggleButton_Loaded">
+                        <ToggleButton.ContextMenu>
+                            <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                                <MenuItem x:Name="FileDisplayModeMenu" Header="{x:Static properties:Resources.MC_D_Display}">
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_List}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.List}" InputGestureText="Ctrl+Shift+6"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_ThumbList}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.ThumbList}" InputGestureText="Ctrl+Shift+5"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconS}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.IconS}" InputGestureText="Ctrl+Shift+4"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconM}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.IconM}" InputGestureText="Ctrl+Shift+3"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconL}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.IconL}" InputGestureText="Ctrl+Shift+2"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconH}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.IconH}" InputGestureText="Ctrl+Shift+1"/>
+                                </MenuItem>
+                                <Separator/>
+                                <CheckBox IsChecked="{Binding IncrementalSearch}" Content="{x:Static properties:Resources.MC_IncrementalSearch}"/>
+                                <CheckBox IsChecked="{Binding MinimizeToTray}" Content="{x:Static properties:Resources.MC_MinimizeToTray}"/>
+                                <Separator/>
+                                <!-- 類似検索のハッシュ選択(最後の1種は外せないのでCanExecuteで無効化) -->
+                                <MenuItem Header="{x:Static properties:Resources.MC_SimilarHashes}">
+                                    <MenuItem Header="{x:Static properties:Resources.MC_SimilarHashPHash}" IsChecked="{Binding UsePHash, Mode=OneWay}" StaysOpenOnClick="True"
+                                              Command="{Binding ToggleSimilarHashCommand}" CommandParameter="{x:Static mur:SimilarHashAlgorithm.PHash}"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_SimilarHashAHash}" IsChecked="{Binding UseAHash, Mode=OneWay}" StaysOpenOnClick="True"
+                                              Command="{Binding ToggleSimilarHashCommand}" CommandParameter="{x:Static mur:SimilarHashAlgorithm.AHash}"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_SimilarHashDHash}" IsChecked="{Binding UseDHash, Mode=OneWay}" StaysOpenOnClick="True"
+                                              Command="{Binding ToggleSimilarHashCommand}" CommandParameter="{x:Static mur:SimilarHashAlgorithm.DHash}"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_SimilarHashWHash}" IsChecked="{Binding UseWHash, Mode=OneWay}" StaysOpenOnClick="True"
+                                              Command="{Binding ToggleSimilarHashCommand}" CommandParameter="{x:Static mur:SimilarHashAlgorithm.WHash}"/>
+                                </MenuItem>
+                                <Separator/>
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Text="{x:Static properties:Resources.MC_Theme}"/>
+                                    <ComboBox ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme}"
+                                              IsEditable="False" SelectionChanged="ThemeBox_SelectionChanged" Margin="4,0,10,0" MinWidth="80"/>
+                                </DockPanel>
+
+                                <DockPanel>
+                                    <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Text="{x:Static properties:Resources.MC_Language}"/>
+                                    <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}"
+                                              IsEditable="False" SelectionChanged="LanguageBox_SelectionChanged" Margin="4,0,10,0" MinWidth="80"/>
+                                </DockPanel>
+
+                                <Separator/>
+
+                                <MenuItem  Header="{x:Static properties:Resources.MC_ClearDetailPane}" InputGestureText="Shift+W" Command="{Binding ClearDetailPaneCommand}"/>
+                                <MenuItem  Header="{x:Static properties:Resources.MC_ReloadDatum}" InputGestureText="Ctrl+Shift+R" IsEnabled="{Binding IsProfileSwitchable}" Command="{Binding ReloadDatumCommand}"/>
+                                <Separator/>
+                                <MenuItem  Header="{x:Static properties:Resources.MC_LaunchIndexTool}" InputGestureText="Ctrl+Q" Command="{Binding LaunchIndexToolCommand}"/>
+                                <Separator/>
+                                <MenuItem Header="{Binding OpenSettingMenuHeader}" InputGestureText="Ctrl+O" Command="{Binding OpenSettingFolderCommand}" />
+                                <MenuItem Header="{x:Static properties:Resources.MC_OpenDatumRootFolder}" InputGestureText="Ctrl+M" Command="{Binding OpenProfileFolderCommand}" />
+
+                                <Separator/>
+                                <MenuItem Header="{x:Static properties:Resources.MC_About}" Command="{Binding OpenAboutDialogCommand}"/>
+                                <Separator/>
+                                <MenuItem Header="{x:Static properties:Resources.MC_Quit}"
+                                          InputGestureText="Ctrl+," 
+                                          Command="{Binding CloseWindowCommand}"
+                                          CommandParameter="{Binding Source={StaticResource WindowProxy},Path=Data}"/>
+                            </ContextMenu>
+                        </ToggleButton.ContextMenu>
+                        <WrapPanel Margin="1">
+                            <TextBlock Text="{x:Static properties:Resources.MC_PulldownMenu}" FontSize="14" FontFamily="{StaticResource Muast}"/>
+                        </WrapPanel>
+                    </ToggleButton>
+
+                    <!-- 詳細ペイン開閉ボタム -->
+                    <Button Command="{Binding SwitchDetailPaneCommand}"
+                            ToolTip="{x:Static properties:Resources.MC_ToggleDetailPane}" Margin="2,0,2,4" Padding="4" FontFamily="{StaticResource Muast}" FontSize="14">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                <Setter Property="Content" Value="{x:Static properties:Resources.MC_DetailOpen}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ShowDetailPane}" Value="True">
+                                        <Setter Property="Content" Value="{x:Static properties:Resources.MC_DetailClose}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+                <!-- 検索ボックス -->
+                <Grid Margin="0,0,0,4">
+                    <TextBox x:Name="SearchTextBox"
+                             Padding="2"
+                             FontSize="12"
+                             VirtualizingStackPanel.IsVirtualizing="True"
+                             VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                    <!-- これのプレースホルダー(つうか、いい加減標準で用意してくれよ) -->
+                    <TextBlock Text="{Binding SearchPlaceholder}"
+                               Margin="3,0" VerticalAlignment="Center"
+                               FontSize="{Binding FontSize, ElementName=SearchTextBox}"
+                               Foreground="{Binding Foreground, ElementName=SearchTextBox}"
+                               Opacity="0.6" TextTrimming="CharacterEllipsis" IsHitTestVisible="False">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=SearchTextBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <!-- プレースホルダー文言が空なら表示しない -->
+                                    <DataTrigger Binding="{Binding SearchPlaceholder}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </DockPanel>
+            <DockPanel Margin="0,0,0,4" Visibility="{Binding IsSimilarSearch, Converter={StaticResource B2VC}}">
+                <Button DockPanel.Dock="Right" Content="{x:Static properties:Resources.MC_SimilarSearchClear}"
+                        Click="ClearSimilarSearch_Click" Padding="6,2" Margin="8,0,0,0"/>
+                <TextBlock Text="{Binding SimilarSearchText}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                           ToolTip="{x:Static properties:Resources.MC_SimilarSearchHint}"/>
+            </DockPanel>
+        </StackPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="{Binding FileCountText}"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <ProgressBar Height="12" MinWidth="128" Minimum="0" Maximum="1.0" 
+                             Value="{Binding SubProgress}" IsIndeterminate="{Binding SubProgressWasIndeterminate}"/>
+            </StatusBarItem>
+
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="{x:Static properties:Resources.MC_Profile}"/>
+                    <ComboBox ItemsSource="{Binding Profiles}"
+                              IsEnabled="{Binding IsProfileSwitchable}"
+                              SelectedItem="{Binding ActiveProfile}"
+                              IsEditable="False"
+                              SelectionChanged="ProfileBox_SelectionChanged"  Margin="4,0,0,0"  Padding="6,3,24,3"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+
+        <Grid x:Name="Grod">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition>
+                    <ColumnDefinition.Style>
+                        <Style TargetType="{x:Type ColumnDefinition}">
+                            <Setter Property="Width" Value="4" />
+                            <Style.Triggers>
+                                <!-- メイン -->
+                                <DataTrigger Binding="{Binding ShowDetailPane}" Value="False">
+                                    <Setter Property="Width" Value="0" />
+                                    <Setter Property="MaxWidth" Value="0" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ColumnDefinition.Style>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                    <ColumnDefinition.Style>
+                        <Style TargetType="{x:Type ColumnDefinition}">
+                            <Setter Property="Width" Value="{Binding DetailPaneWidth}" />
+                            <Style.Triggers>
+                                <!-- 詳細ペイン -->
+                                <DataTrigger Binding="{Binding ShowDetailPane}" Value="False">
+                                    <Setter Property="Width" Value="0" />
+                                    <Setter Property="MaxWidth" Value="0" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ColumnDefinition.Style>
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!-- 結果表示用のListView -->
+            <controls:EssenUndFressenView x:Name="FileListView" Style="{StaticResource {x:Type ListView}}"
+                    BorderThickness="0"
+                    SelectionMode="Single"
+                    VirtualizingPanel.IsVirtualizing="True"
+                    VirtualizingPanel.VirtualizationMode="Recycling"
+                    ScrollViewer.CanContentScroll="True"
+                    SelectionChanged="FileListView_SelectionChanged"
+                    KeyDown="FileListView_KeyDown"
+                    PreviewMouseRightButtonUp="FileListView_PreviewMouseRightButtonUp"
+                    PreviewMouseLeftButtonUp="FileListView_PreviewMouseLeftButtonUp">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+                        <EventSetter Event="MouseDoubleClick"  Handler="ListViewItem_MouseDoubleClick" />
+                        <EventSetter Event="ContextMenuOpening"  Handler="FileListView_ContextMenuOpening" />
+                        <EventSetter Event="ToolTipOpening" Handler="ToolTip_Opening" />
+                        <Setter Property="ContextMenu">
+                            <Setter.Value>
+                                <!-- アイコン右栗メニュー -->
+                                <ContextMenu DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                                    <!-- 開く -->
+                                    <MenuItem Header="{x:Static properties:Resources.MC_Open}" InputGestureText="Enter"
+                                            Command="{Binding Data.OpenFileCommand, Source={StaticResource Proxy}}"
+                                            CommandParameter="{Binding PlacementTarget.Content, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                    <!-- フォルダー開く -->
+                                    <MenuItem Header="{x:Static properties:Resources.MC_OpenFolder}" InputGestureText="Shift+Enter"
+                                            Command="{Binding Data.OpenFolderCommand, Source={StaticResource Proxy}}"
+                                            CommandParameter="{Binding PlacementTarget.Content, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                    <!-- コピィ -->
+                                    <MenuItem Header="{x:Static properties:Resources.MC_CopyFilePath}" InputGestureText="Ctrl+Shift+C"
+                                              Command="{Binding Data.CopyFilePathCommand, Source={StaticResource Proxy}}"
+                                              CommandParameter="{Binding PlacementTarget.Content, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+
+                                    <Separator/>
+                                    <!-- 類似検索 -->
+                                    <MenuItem Header="{x:Static properties:Resources.MC_SearchSimilarImages}"
+                                              Command="{Binding Data.SearchSimilarImagesCommand, Source={StaticResource Proxy}}"
+                                              CommandParameter="{Binding PlacementTarget.Content, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                    <!-- ﾆﾗｸｼｮﾝ -->
+                                    <MenuItem Header="{x:Static properties:Resources.MC_N_Niraction}" Visibility="{Binding Data.NiractionEnabled, Source={StaticResource Proxy},Converter={StaticResource B2VC}, Mode=OneWay}">
+                                        <MenuItem Header="{x:Static properties:Resources.MC_N_SendVerify}"
+                                                  Command="{Binding Data.SendNiractionVerifyCommand, Source={StaticResource Proxy}}"
+                                                  CommandParameter="{Binding PlacementTarget.Content, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                        <MenuItem Header="{x:Static properties:Resources.MC_N_SendDistance}"
+                                                  Command="{Binding Data.SendNiractionDistanceCommand, Source={StaticResource Proxy}}"
+                                                  CommandParameter="{Binding PlacementTarget.Content, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+
+                                    </MenuItem>
+                                    <Image MaxWidth="128" />
+                                </ContextMenu>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="ToolTip">
+                            <Setter.Value>
+                                <ToolTip BorderBrush="{DynamicResource ToolTipBorderBrush}" BorderThickness="1" Padding="10"
+                                            DataContext="{Binding}">
+                                    <StackPanel Orientation="Vertical">
+                                        <!--
+                                        <TextBlock Text="{Binding Name}" Foreground="{DynamicResource ToolTipForegroundBrush}" TextWrapping="Wrap"/>
+                                        <Separator Background="{DynamicResource SeparatorBrush}" Margin="0,5"/>
+                                        -->
+                                        <Image MaxWidth="128" />
+                                    </StackPanel>
+                                </ToolTip>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+                                <EventSetter Event="Click" Handler="FileListColumnHeader_Click"/>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+                        <GridViewColumn x:Name="FileNameColumn" Header="{x:Static properties:Resources.LH_FileName}" DisplayMemberBinding="{Binding Name}" Width="160"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.LH_Folder}" DisplayMemberBinding="{Binding Path}" Width="200"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.LH_CreatedAt}" DisplayMemberBinding="{Binding DateTime, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}" Width="100"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.LH_Tag}" DisplayMemberBinding="{Binding Tag}" Width="200"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.LH_Character}" DisplayMemberBinding="{Binding Character}" Width="200"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.LH_Keyword}" DisplayMemberBinding="{Binding Keyword}" Width="200"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.LH_Costume}" DisplayMemberBinding="{Binding Costume}" Width="200"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.LH_Scene}" DisplayMemberBinding="{Binding Scene}" Width="200"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.LH_Objects}" DisplayMemberBinding="{Binding Objects}" Width="200"/>
+                    </GridView>
+                </ListView.View>
+            </controls:EssenUndFressenView>
+            <!-- 右詳細 -->
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+            <DockPanel Grid.Column="2">
+                <!-- がぞう -->
+                <StackPanel Margin="4" DockPanel.Dock="Top">
+                    <Image Source="{Binding DetailBitmap}" MaxHeight="{Binding DetailThumbnailSize}" />
+                    <CheckBox Content="{x:Static properties:Resources.MC_ShowOriginal}" IsChecked="{Binding DetailPaneShowOriginal}" Margin="0,4,0,4" />
+                </StackPanel>
+
+                <!-- データム表示 -->
+                <ListView x:Name="DetailFieldsListView" ItemsSource="{Binding DetailFields}" Margin="4,0,0,0">
+                    <ListView.CommandBindings>
+                        <CommandBinding Command="Copy" Executed="DetailFieldCopyCommand_Executed"/>
+                    </ListView.CommandBindings>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+                            <Setter Property="ContextMenu">
+                                <Setter.Value>
+                                    <ContextMenu>
+                                        <MenuItem Header="{x:Static properties:Resources.WC_Copy}" Command="Copy"
+                                                  CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                    </ContextMenu>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Value" Width="Auto" DisplayMemberBinding="{Binding Value}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
+</web3:Nuendow>

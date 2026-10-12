@@ -1,0 +1,86 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>$(NetCoreAppWinTarget)</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <UseWindowsForms>true</UseWindowsForms>
+        <Nullable>enable</Nullable>
+        <Platforms>x64</Platforms>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <WindowsPackageType>None</WindowsPackageType>
+        <ApplicationIcon>Properties\Resources\IDI_ICON1.ico</ApplicationIcon>
+        <AssemblyVersion>$(NirVersion)</AssemblyVersion>
+        <FileVersion>$(MurVersion)</FileVersion>
+        <Version>$(MurVersion)</Version>
+        <Product>ｲﾓｹﾞｼﾝｸﾞ</Product>
+        <PackageLicenseExpression>$(Muricense)</PackageLicenseExpression>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+    </PropertyGroup>
+    <ItemGroup>
+        <Using Remove="System.Windows.Forms" />
+        <Using Remove="System.Drawing" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Properties\Resources\IDI_ICON1.ico" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Mvvm" />
+        <PackageReference Include="Magick.NET.SystemWindowsMedia" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <!-- TODO: MainWindowのコードビハインドがデカくなりすぎた -->
+        <Compile Update="MainWindow.Tray.cs">
+            <DependentUpon>MainWindow.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="MainWindow.DetailPane.cs">
+            <DependentUpon>MainWindow.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="MainWindow.Profile.cs">
+            <DependentUpon>MainWindow.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="MainWindow.Search.cs">
+            <DependentUpon>MainWindow.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="MainWindow.Settings.cs">
+            <DependentUpon>MainWindow.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="MainWindow.SubWindows.cs">
+            <DependentUpon>MainWindow.xaml</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ImogeIndex.Web3\ImogeIndex.Web3.csproj" />
+        <ProjectReference Include="..\ImogeIndex\ImogeIndex.csproj" />
+        
+        <!-- ImogeIndexWPFをコピらせる用参照 -->
+        <ProjectReference Include="..\ImogeIndexWPF\ImogeIndexWPF.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Properties\Embed.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Embed.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Properties\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Properties\Embed.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Embed.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Properties\Resources.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+</Project>

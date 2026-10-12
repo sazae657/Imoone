@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "ImogeIndexWPF": {
+      "commandName": "Project",
+      "commandLineArgs": "--multiple --quick-scan",
+      "debugEngines": "managed"
+    },
+    "Auto": {
+      "commandName": "Project",
+      "commandLineArgs": "--multiple --auto --quick-scan --profile Test --no-window",
+      "debugEngines": "managed"
+    }
+  }
+}

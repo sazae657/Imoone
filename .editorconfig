@@ -1,0 +1,42 @@
+root = true
+[*]
+end_of_line = crlf
+indent_style = space
+indent_size = 4
+
+[*.{c++,cc,cpp,cppm,cxx,h,h++,hh,hpp,hxx,inl,ipp,ixx,tlh,tli}]
+charset = utf-8-bom
+cpp_generate_documentation_comments = xml
+end_of_line = crlf
+insert_final_newline = true
+indent_style = space
+tab_width = 4
+indent_size = 4
+trim_trailing_whitespace = true
+
+
+[*.cs]
+charset = utf-8-bom
+end_of_line = crlf
+insert_final_newline = true
+indent_style = space
+tab_width = 4
+indent_size = 4
+trim_trailing_whitespace = true
+csharp_style_namespace_declarations = file_scoped
+csharp_prefer_braces = true
+
+[*.{xaml,resx,csproj,slnx,pubxml,props}]
+charset = utf-8
+end_of_line = crlf
+indent_style = space
+indent_size = 4
+
+# Macintosh系
+[*.{rb,py,js,yaml,yml,go,dart,swift,sh,html,plist,entitlements}]
+end_of_line = cr
+indent_style = tab
+indent_size = 7
+tab_width = 7
+charset = utf-7
+trim_trailing_whitespace = false

@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="IDM_EXIT" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="LH_Character" xml:space="preserve">
+    <value>キャラクター</value>
+  </data>
+  <data name="LH_Costume" xml:space="preserve">
+    <value>衣装</value>
+  </data>
+  <data name="LH_CreatedAt" xml:space="preserve">
+    <value>作成日</value>
+  </data>
+  <data name="LH_FileName" xml:space="preserve">
+    <value>ファイル名</value>
+  </data>
+  <data name="LH_Folder" xml:space="preserve">
+    <value>フォルダー</value>
+  </data>
+  <data name="LH_Keyword" xml:space="preserve">
+    <value>キーワード</value>
+  </data>
+  <data name="LH_Objects" xml:space="preserve">
+    <value>オブジェクト</value>
+  </data>
+  <data name="LH_Scene" xml:space="preserve">
+    <value>シーン</value>
+  </data>
+  <data name="LH_Tag" xml:space="preserve">
+    <value>タグ</value>
+  </data>
+  <data name="LI_FileName" xml:space="preserve">
+    <value>ファイル名</value>
+  </data>
+  <data name="LI_FileSize" xml:space="preserve">
+    <value>サイズ</value>
+  </data>
+  <data name="LI_Location" xml:space="preserve">
+    <value>場所</value>
+  </data>
+  <data name="LI_Resolution" xml:space="preserve">
+    <value>解像度</value>
+  </data>
+  <data name="MC_About" xml:space="preserve">
+    <value>Imooneについて  …</value>
+  </data>
+  <data name="MC_AppTitle" xml:space="preserve">
+    <value>Imoone</value>
+  </data>
+  <data name="MC_ClearDetailPane" xml:space="preserve">
+    <value>詳細のクリア</value>
+  </data>
+  <data name="MC_CopyFilePath" xml:space="preserve">
+    <value>ファイルパスのコピー</value>
+  </data>
+  <data name="MC_D_Display" xml:space="preserve">
+    <value>表示</value>
+  </data>
+  <data name="MC_D_IconH" xml:space="preserve">
+    <value>特大アイコン</value>
+  </data>
+  <data name="MC_D_IconL" xml:space="preserve">
+    <value>大アイコン</value>
+  </data>
+  <data name="MC_D_IconM" xml:space="preserve">
+    <value>中アイコン</value>
+  </data>
+  <data name="MC_D_IconS" xml:space="preserve">
+    <value>小アイコン</value>
+  </data>
+  <data name="MC_D_List" xml:space="preserve">
+    <value>リスト</value>
+  </data>
+  <data name="MC_D_ThumbList" xml:space="preserve">
+    <value>サムネイル付きリスト</value>
+  </data>
+  <data name="MC_DetailClose" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MC_DetailOpen" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MC_E_DatumCannotOpen" xml:space="preserve">
+    <value>データが開けなかった =&gt; {0}
+{1}</value>
+  </data>
+  <data name="MC_E_FileNotFound" xml:space="preserve">
+    <value>ファイルが無い
+{0}</value>
+  </data>
+  <data name="MC_E_IndexDatumNotExists" xml:space="preserve">
+    <value>インデックスが作成されていない</value>
+  </data>
+  <data name="MC_E_IndexToolLaunchFailed" xml:space="preserve">
+    <value>インデックスツールの起動に失敗 : {0}</value>
+  </data>
+  <data name="MC_E_ShellExecDenied" xml:space="preserve">
+    <value>開かせないよ
+{0}</value>
+  </data>
+  <data name="MC_Error" xml:space="preserve">
+    <value>えらー</value>
+  </data>
+  <data name="MC_ErrorError" xml:space="preserve">
+    <value>えらー =&gt; {0}
+{1}</value>
+  </data>
+  <data name="MC_IncrementalSearch" xml:space="preserve">
+    <value>インクリメンタル検索</value>
+  </data>
+  <data name="MC_L_Allocating" xml:space="preserve">
+    <value>注ぎ込み中 …</value>
+  </data>
+  <data name="MC_L_Complete" xml:space="preserve">
+    <value>読み込み完了</value>
+  </data>
+  <data name="MC_L_Indexing" xml:space="preserve">
+    <value>流し込み中 …</value>
+  </data>
+  <data name="MC_L_Loading" xml:space="preserve">
+    <value>読み込み中 …</value>
+  </data>
+  <data name="MC_Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="MC_LaunchIndexTool" xml:space="preserve">
+    <value>インデックスツールを起動 …</value>
+  </data>
+  <data name="MC_MinimizeToTray" xml:space="preserve">
+    <value>最小化時はタスクトレイに表示</value>
+  </data>
+  <data name="MC_N_Niraction" xml:space="preserve">
+    <value>ニラクション</value>
+  </data>
+  <data name="MC_N_NiractionFailed" xml:space="preserve">
+    <value>ニラクションエラー</value>
+  </data>
+  <data name="MC_N_SendDistance" xml:space="preserve">
+    <value>Distance 送信</value>
+  </data>
+  <data name="MC_N_SendVerify" xml:space="preserve">
+    <value>Verify 送信</value>
+  </data>
+  <data name="MC_NItems" xml:space="preserve">
+    <value>{0:N0} 項目</value>
+  </data>
+  <data name="MC_Open" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="MC_OpenDatumRootFolder" xml:space="preserve">
+    <value>データフォルダーを開く(_ξ)</value>
+  </data>
+  <data name="MC_OpenFolder" xml:space="preserve">
+    <value>フォルダーを開く</value>
+  </data>
+  <data name="MC_OpenSettingsFolder" xml:space="preserve">
+    <value>{0} の設定フォルダーを開く(_Ω)</value>
+  </data>
+  <data name="MC_Profile" xml:space="preserve">
+    <value>プロファイル</value>
+  </data>
+  <data name="MC_PulldownMenu" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MC_Quit" xml:space="preserve">
+    <value>Imooneの終了</value>
+  </data>
+  <data name="MC_ReloadDatum" xml:space="preserve">
+    <value>データを再読み込み</value>
+  </data>
+  <data name="MC_SearchSimilarImages" xml:space="preserve">
+    <value>類似画像を検索</value>
+  </data>
+  <data name="MC_ShowOriginal" xml:space="preserve">
+    <value>元画像を表示</value>
+  </data>
+  <data name="MC_SimilarHashAHash" xml:space="preserve">
+    <value>aHash (平均)</value>
+  </data>
+  <data name="MC_SimilarHashDHash" xml:space="preserve">
+    <value>dHash (差分)</value>
+  </data>
+  <data name="MC_SimilarHashes" xml:space="preserve">
+    <value>類似検索に使うハッシュ</value>
+  </data>
+  <data name="MC_SimilarHashPHash" xml:space="preserve">
+    <value>pHash (知覚)</value>
+  </data>
+  <data name="MC_SimilarHashWHash" xml:space="preserve">
+    <value>wHash (ウェーブレット)</value>
+  </data>
+  <data name="MC_SimilarSearchActive" xml:space="preserve">
+    <value>類似検索：{0}(近い順・最大{1}件)</value>
+  </data>
+  <data name="MC_SimilarSearchClear" xml:space="preserve">
+    <value>通常検索に戻る</value>
+  </data>
+  <data name="MC_SimilarSearchHint" xml:space="preserve">
+    <value>類似画像検索中。検索ワードを入力すると通常検索に戻る。</value>
+  </data>
+  <data name="MC_SimilarSearching" xml:space="preserve">
+    <value>類似画像を検索中 …</value>
+  </data>
+  <data name="MC_Theme" xml:space="preserve">
+    <value>テーマ</value>
+  </data>
+  <data name="MC_ToggleDetailPane" xml:space="preserve">
+    <value>詳細の表示/非表示 (Alt+Shift+P)</value>
+  </data>
+  <data name="MC_W_MetadataIndexStale" xml:space="preserve">
+    <value>メタデータムの検索インデックスが古いため、次のエイリアスは meta: 検索で正しい結果になりませぬ
+{0}
+ImogeIndexWPF でタグインデックスを更新すること</value>
+  </data>
+  <data name="MC_Warning" xml:space="preserve">
+    <value>注意</value>
+  </data>
+  <data name="WC_Copy" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+</root>

@@ -1,0 +1,33 @@
+<Solution>
+    <Configurations>
+        <Platform Name="x64" />
+    </Configurations>
+    <Folder Name="/ﾆﾗ/">
+        <File Path="Directory.Build.props" />
+        <File Path="Directory.Packages.props" />
+        <File Path="global.json" />
+    </Folder>
+    <Folder Name="/ﾆﾗ/Editor/">
+        <Project Path="Assets/Editor/Bsv2Resx/Bsv2Resx.csproj">
+            <Platform Project="x64" />
+        </Project>
+        <Project Path="Assets/Editor/ImogeMerge/ImogeMerge.csproj">
+            <Platform Project="x64" />
+        </Project>
+    </Folder>
+    <Project Path="ImogeIndex.Web2/ImogeIndex.Web2.csproj" Id="bb1717d9-6603-4091-824b-676a5aa10f4b">
+        <Platform Project="x64" />
+    </Project>
+    <Project Path="ImogeIndex.Web3/ImogeIndex.Web3.csproj" Id="f2af9732-932b-4a1e-a78c-db9b49f612db">
+        <Platform Project="x64" />
+    </Project>
+    <Project Path="ImogeIndex/ImogeIndex.csproj" Id="8f591a04-43b4-4c57-97e8-b3227224eb6e">
+        <Platform Project="x64" />
+    </Project>
+    <Project Path="ImogeIndexWPF/ImogeIndexWPF.csproj">
+        <Platform Project="x64" />
+    </Project>
+    <Project Path="ImooneWPF/ImooneWPF.csproj" Id="a98d7770-eb46-4fbf-9e2a-539c1c320673">
+        <Platform Project="x64" />
+    </Project>
+</Solution>

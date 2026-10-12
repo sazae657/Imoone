@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>$(NetCoreAppWinTarget)</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <UseWindowsForms>true</UseWindowsForms>
+        <Platforms>x64</Platforms>
+        <Nullable>enable</Nullable>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <WindowsPackageType>None</WindowsPackageType>
+        <ApplicationIcon>Properties\Resources\IDI_ICON1.ico</ApplicationIcon>
+        <AssemblyVersion>$(NirVersion)</AssemblyVersion>
+        <FileVersion>$(MurVersion)</FileVersion>
+        <Version>$(MurVersion)</Version>
+        <PackageLicenseExpression>$(Muricense)</PackageLicenseExpression>
+        <Product>ｲﾓｹﾞｲﾝﾃﾞｯｸｽﾂーﾙ</Product>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="Properties\Resources\IDI_ICON1.ico" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <Using Remove="System.Windows.Forms" />
+        <Using Remove="System.Drawing" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <EmbeddedResource Include="Properties\Resources\IDI_ICON1.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.CommandLine" />
+        <PackageReference Include="CommunityToolkit.Mvvm" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ImogeIndex.Web3\ImogeIndex.Web3.csproj" />
+        <ProjectReference Include="..\ImogeIndex\ImogeIndex.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Properties\Embed.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Embed.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Properties\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Properties\Embed.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Embed.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Properties\Resources.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Modelle\" />
+    </ItemGroup>
+    
+</Project>

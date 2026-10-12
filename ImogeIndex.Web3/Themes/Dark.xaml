@@ -1,0 +1,139 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ボーダーとか -->
+    <CornerRadius x:Key="MurcRadiusM">1</CornerRadius>
+    <CornerRadius x:Key="MurcRadiusS">0</CornerRadius>
+    <CornerRadius x:Key="ExpanderRadius">50</CornerRadius>
+
+    <!-- 黒テーマの色定義 -->
+    <Color x:Key="WindowBackgroundColor">#1E1E1E</Color>
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WindowBackgroundColor}" />
+
+    <Color x:Key="WindowForegroundColor">#F0F0F0</Color>
+    <SolidColorBrush x:Key="WindowForegroundBrush" Color="{StaticResource WindowForegroundColor}" />
+
+    <Color x:Key="HyperlinkForegroundColor">#60CDFF</Color>
+    <SolidColorBrush x:Key="HyperlinkForegroundBrush" Color="{StaticResource HyperlinkForegroundColor}" />
+
+    <Color x:Key="ControlBackgroundColor">#252526</Color>
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource ControlBackgroundColor}" />
+
+    <Color x:Key="ControlBackgroundHoverColor">#3E3E42</Color>
+    <SolidColorBrush x:Key="ControlBackgroundHoverBrush" Color="{StaticResource ControlBackgroundHoverColor}" />
+
+    <Color x:Key="ControlBackgroundPressedColor">#2D2D30</Color>
+    <SolidColorBrush x:Key="ControlBackgroundPressedBrush" Color="{StaticResource ControlBackgroundPressedColor}" />
+
+    <Color x:Key="ControlBackgroundDisabledColor">#2D2D30</Color>
+    <SolidColorBrush x:Key="ControlBackgroundDisabledBrush" Color="{StaticResource ControlBackgroundDisabledColor}" />
+
+    <Color x:Key="ControlForegroundColor">#F0F0F0</Color>
+    <SolidColorBrush x:Key="ControlForegroundBrush" Color="{StaticResource ControlForegroundColor}" />
+
+    <Color x:Key="ControlForegroundDisabledColor">#6D6D6D</Color>
+    <SolidColorBrush x:Key="ControlForegroundDisabledBrush" Color="{StaticResource ControlForegroundDisabledColor}" />
+
+    <Color x:Key="ControlBorderColor">#3F3F46</Color>
+    <SolidColorBrush x:Key="ControlBorderBrush" Color="{StaticResource ControlBorderColor}" />
+
+    <Color x:Key="ControlBorderHoverColor">#55555C</Color>
+    <SolidColorBrush x:Key="ControlBorderHoverBrush" Color="{StaticResource ControlBorderHoverColor}" />
+
+    <Color x:Key="ControlBorderFocusedColor">#0078D4</Color>
+    <SolidColorBrush x:Key="ControlBorderFocusedBrush" Color="{StaticResource ControlBorderFocusedColor}" />
+
+    <Color x:Key="InputBackgroundColor">#252526</Color>
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="{StaticResource InputBackgroundColor}" />
+
+    <Color x:Key="InputForegroundColor">#FFFFFF</Color>
+    <SolidColorBrush x:Key="InputForegroundBrush" Color="{StaticResource InputForegroundColor}" />
+
+    <Color x:Key="ListBackgroundColor">#1E1E1E</Color>
+    <SolidColorBrush x:Key="ListBackgroundBrush" Color="{StaticResource ListBackgroundColor}" />
+
+    <Color x:Key="ListItemForegroundColor">#E0E0E0</Color>
+    <SolidColorBrush x:Key="ListItemForegroundBrush" Color="{StaticResource ListItemForegroundColor}" />
+
+    <Color x:Key="ListItemHoverColor">#2A2D2E</Color>
+    <SolidColorBrush x:Key="ListItemHoverBrush" Color="{StaticResource ListItemHoverColor}" />
+
+    <Color x:Key="ListItemSelectedColor">#094771</Color>
+    <SolidColorBrush x:Key="ListItemSelectedBrush" Color="{StaticResource ListItemSelectedColor}" />
+
+    <Color x:Key="ListItemSelectedForegroundColor">#FFFFFF</Color>
+    <SolidColorBrush x:Key="ListItemSelectedForegroundBrush" Color="{StaticResource ListItemSelectedForegroundColor}" />
+
+    <Color x:Key="ListItemSelectedInactiveColor">#37373D</Color>
+    <SolidColorBrush x:Key="ListItemSelectedInactiveBrush" Color="{StaticResource ListItemSelectedInactiveColor}" />
+
+    <Color x:Key="HeaderBackgroundColor">#252526</Color>
+    <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="{StaticResource HeaderBackgroundColor}" />
+
+    <Color x:Key="HeaderForegroundColor">#CCCCCC</Color>
+    <SolidColorBrush x:Key="HeaderForegroundBrush" Color="{StaticResource HeaderForegroundColor}" />
+
+    <Color x:Key="HeaderBorderColor">#3F3F46</Color>
+    <SolidColorBrush x:Key="HeaderBorderBrush" Color="{StaticResource HeaderBorderColor}" />
+
+    <Color x:Key="HeaderHoverColor">#333337</Color>
+    <SolidColorBrush x:Key="HeaderHoverBrush" Color="{StaticResource HeaderHoverColor}" />
+
+    <Color x:Key="HeaderPressedColor">#3F3F46</Color>
+    <SolidColorBrush x:Key="HeaderPressedBrush" Color="{StaticResource HeaderPressedColor}" />
+
+    <Color x:Key="StatusBarBackgroundColor">#252526</Color>
+    <SolidColorBrush x:Key="StatusBarBackgroundBrush" Color="{StaticResource StatusBarBackgroundColor}" />
+
+    <Color x:Key="StatusBarForegroundColor">#CCCCCC</Color>
+    <SolidColorBrush x:Key="StatusBarForegroundBrush" Color="{StaticResource StatusBarForegroundColor}" />
+
+    <Color x:Key="SeparatorColor">#3F3F46</Color>
+    <SolidColorBrush x:Key="SeparatorBrush" Color="{StaticResource SeparatorColor}" />
+
+    <Color x:Key="SplitterColor">#333337</Color>
+    <SolidColorBrush x:Key="SplitterBrush" Color="{StaticResource SplitterColor}" />
+
+    <Color x:Key="ToolTipBackgroundColor">#252526</Color>
+    <SolidColorBrush x:Key="ToolTipBackgroundBrush" Color="{StaticResource ToolTipBackgroundColor}" />
+
+    <Color x:Key="ToolTipForegroundColor">#E0E0E0</Color>
+    <SolidColorBrush x:Key="ToolTipForegroundBrush" Color="{StaticResource ToolTipForegroundColor}" />
+
+    <Color x:Key="ToolTipBorderColor">#007ACC</Color>
+    <SolidColorBrush x:Key="ToolTipBorderBrush" Color="{StaticResource ToolTipBorderColor}" />
+
+    <Color x:Key="ContextMenuBackgroundColor">#252526</Color>
+    <SolidColorBrush x:Key="ContextMenuBackgroundBrush" Color="{StaticResource ContextMenuBackgroundColor}" />
+
+    <Color x:Key="ContextMenuForegroundColor">#E0E0E0</Color>
+    <SolidColorBrush x:Key="ContextMenuForegroundBrush" Color="{StaticResource ContextMenuForegroundColor}" />
+
+    <Color x:Key="MenuItemHoverColor">#333337</Color>
+    <SolidColorBrush x:Key="MenuItemHoverBrush" Color="{StaticResource MenuItemHoverColor}" />
+
+    <Color x:Key="AccentColor">#0078D4</Color>
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
+
+    <Color x:Key="ProgressBarBackgroundColor">#333337</Color>
+    <SolidColorBrush x:Key="ProgressBarBackgroundBrush" Color="{StaticResource ProgressBarBackgroundColor}" />
+
+    <Color x:Key="ProgressBarForegroundColor">#0078D4</Color>
+    <SolidColorBrush x:Key="ProgressBarForegroundBrush" Color="{StaticResource ProgressBarForegroundColor}" />
+
+    <Color x:Key="ScrollBarTrackColor">#1E1E1E</Color>
+    <SolidColorBrush x:Key="ScrollBarTrackBrush" Color="{StaticResource ScrollBarTrackColor}" />
+
+    <Color x:Key="ScrollBarThumbColor">#4E4E52</Color>
+    <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="{StaticResource ScrollBarThumbColor}" />
+
+    <Color x:Key="ScrollBarThumbHoverColor">#686868</Color>
+    <SolidColorBrush x:Key="ScrollBarThumbHoverBrush" Color="{StaticResource ScrollBarThumbHoverColor}" />
+
+    <Color x:Key="ScrollBarThumbPressedColor">#808080</Color>
+    <SolidColorBrush x:Key="ScrollBarThumbPressedBrush" Color="{StaticResource ScrollBarThumbPressedColor}" />
+
+    <Color x:Key="PopupBackgroundColor">#252526</Color>
+    <SolidColorBrush x:Key="PopupBackgroundBrush" Color="{StaticResource PopupBackgroundColor}" />
+
+</ResourceDictionary>

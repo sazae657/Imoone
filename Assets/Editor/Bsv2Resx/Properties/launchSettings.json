@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Bsv2Resx": {
+      "commandName": "Project",
+      "commandLineArgs": "resx\r\n--bsv $(MSBuildProjectDirectory)\\..\\Assets\\Strings\\ImogeIndexWPF.bsv\r\n--resx $(MSBuildProjectDirectory)\\..\\ImogeIndexWPF\\Properties\\Resources.resx"
+    },
+    "mdconv": {
+      "commandName": "Project",
+      "commandLineArgs": "mdconv\r\n--md $(MSBuildProjectDirectory)\\..\\..\\..\\THIRD-PARTY-LICENSES.md\r\n--res $(MSBuildProjectDirectory)\\..\\..\\..\\ImogeIndex\\Properties\\Resources\\Licenses.xml\r\n--insertion $(MSBuildProjectDirectory)\\..\\..\\..\\LICENSE"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+task :default => [:bUiLdS]task :bUiLS do       sh "dotnet build"end

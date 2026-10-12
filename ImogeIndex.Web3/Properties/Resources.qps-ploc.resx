@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="APT_Clasico" xml:space="preserve">
+    <value>𓇌𓎡𓅱𓋔𓅱𓊪𓇌𓂋𓇋𓇌𓈖𓋔𓅱</value>
+  </data>
+  <data name="APT_Dark" xml:space="preserve">
+    <value>𓂧𓄿 𓎡𓅱</value>
+  </data>
+  <data name="APT_Light" xml:space="preserve">
+    <value>𓂋𓄿𓇋𓏏𓅱</value>
+  </data>
+  <data name="APT_System" xml:space="preserve">
+    <value>𓈙𓇋𓋔𓅱𓏏𓇌𓅓𓅱</value>
+  </data>
+  <data name="E_M_DetailsBelow" xml:space="preserve">
+    <value> 𓈙𓅱𓅱𓋔𓄿𓇋𓉔𓄿𓇋𓎡𓄿𓈖𓇋𓎡𓇋𓂋𓅱𓎡𓅱𓋔𓄿𓂋𓇌𓏏𓇌𓇋𓂋𓅱{0}</value>
+  </data>
+  <data name="E_M_EliminateApp" xml:space="preserve">
+    <value>{0}
+
+𓄿𓊪𓅱𓂋𓇋𓎡𓇌 𓈙𓅱𓈖𓅱𓈙𓅱𓅱𓂋𓇌𓅱𓅱𓈙𓇋𓅓𓄿𓋔𓅱𓈖</value>
+  </data>
+  <data name="E_M_ExceptionObzekt" xml:space="preserve">
+    <value> 𓉔𓇋𓇌𓎡𓋔𓎡𓇌𓊪𓏏𓇋𓅱𓈖𓈖𓅱𓂋𓇌𓇋𓎼𓄿𓇋𓅱𓃀𓅱𓆓𓇋ぇ𓎡𓅱𓏏𓅱:{0}</value>
+  </data>
+  <data name="E_M_FatalErrorApr" xml:space="preserve">
+    <value>{0}  -𓍿𓇋𓅓𓇌𓇋𓏏𓇌𓎡𓇋𓈖𓄿𓇌𓂋𓄿 </value>
+  </data>
+  <data name="E_M_UnexpectedError" xml:space="preserve">
+    <value>𓇌𓅱𓎡𓇋𓈙𓇋𓈖𓄿𓇋𓇌𓂋𓄿 𓎼𓄿𓉔𓄿𓋔𓇌𓇋𓈙𓇋𓅓𓄿𓋔𓅱𓈖</value>
+  </data>
+  <data name="E_M_UnexpectedErrorApr" xml:space="preserve">
+    <value>{0}  -𓇌𓅱𓎡𓇋𓈙𓇋𓈖𓄿𓇋𓇌𓂋𓄿 𓎼𓄿𓉔𓄿𓋔𓇌𓇋𓈙𓇋𓅓𓄿𓋔𓅱𓈖</value>
+  </data>
+  <data name="E_M_WantToContinue" xml:space="preserve">
+    <value>{0}
+
+
+𓋔𓄿𓎡𓅱𓋔𓇌𓈖𓊃𓅱𓎡𓅱𓅱?「𓇋𓇋𓇌」𓅱𓇌𓂋𓄿𓃀𓅱𓏏𓅱𓄿𓊪𓅱𓂋𓇋𓎡𓇌 𓈙𓅱𓈖𓅱𓈙𓅱𓅱𓂋𓇌𓅱𓅱。</value>
+  </data>
+  <data name="E_TitleIsNull" xml:space="preserve">
+    <value>𓏏𓇋𓏏𓃭𓇌𓎼𓄿𓈖𓅱𓃭𓃭</value>
+  </data>
+  <data name="E_UnhandledException" xml:space="preserve">
+    <value>𓅓𓇋𓈙𓅱𓂋𓇋𓈖𓅱𓂋𓇌𓇋𓎼𓄿𓇋</value>
+  </data>
+  <data name="LNG_RestartRequired" xml:space="preserve">
+    <value>𓎼𓇌𓈖𓎼𓅱𓋔𓇌𓏏𓇌𓇋𓉔𓄿𓋔𓄿𓇋𓎡𓇋𓂧𓅱𓅱𓎼𓅱𓈖𓇋𓉔𓄿𓈖𓇌𓇋𓋔𓄿𓂋𓇌𓅓𓅱𓅱𓋔𓅱</value>
+  </data>
+  <data name="LNG_System" xml:space="preserve">
+    <value>𓈙𓇋𓋔𓅱𓏏𓇌𓅓𓅱</value>
+  </data>
+</root>

@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CAP_E_AbortedException" xml:space="preserve">
+    <value>リクエストが{0}回連続で失敗したのでキャプショニング打ち切り: {1}</value>
+  </data>
+  <data name="CAP_E_EmptyCaption" xml:space="preserve">
+    <value>キャプションが空</value>
+  </data>
+  <data name="CAP_E_EmptyVlmRespnse" xml:space="preserve">
+    <value>LLMからのレスポンスが空</value>
+  </data>
+  <data name="CAP_E_EndpointNotSet" xml:space="preserve">
+    <value>URLが設定されていない</value>
+  </data>
+  <data name="CAP_E_HealthUnreachable" xml:space="preserve">
+    <value>Health失敗</value>
+  </data>
+  <data name="CAP_E_HostUnreachable" xml:space="preserve">
+    <value>ホストに接続できない: {0}</value>
+  </data>
+  <data name="CAP_E_HttpError" xml:space="preserve">
+    <value>HTTPエラー({0}) : {1}</value>
+  </data>
+  <data name="CAP_E_LoadImage" xml:space="preserve">
+    <value>画像を読み込めない: {0}</value>
+  </data>
+  <data name="CAP_E_LoadImageNtr" xml:space="preserve">
+    <value>画像を読み込めない: {0} : {1}</value>
+  </data>
+  <data name="CAP_E_ModelListFailed" xml:space="preserve">
+    <value>{0}: モデル一覧を取得できなかった</value>
+  </data>
+  <data name="CAP_E_ModelUnavailable" xml:space="preserve">
+    <value>{0} が利用できない</value>
+  </data>
+  <data name="CAP_E_NetworkError" xml:space="preserve">
+    <value>通信エラー: {0}</value>
+  </data>
+  <data name="CAP_E_NotSanitized" xml:space="preserve">
+    <value>Sanitizeが呼ばれていない</value>
+  </data>
+  <data name="CAP_E_RequestTimeout" xml:space="preserve">
+    <value>リクエストがタイムアウト</value>
+  </data>
+  <data name="CAP_E_TomlCorruption" xml:space="preserve">
+    <value>TOMLが不正</value>
+  </data>
+  <data name="CAP_E_Unhealthy" xml:space="preserve">
+    <value>Health が異常: {0}</value>
+  </data>
+  <data name="CM_E_SyntaxError" xml:space="preserve">
+    <value>{0} 行目: {1} 不正な行</value>
+  </data>
+  <data name="CP_Anyalize" xml:space="preserve">
+    <value>解析</value>
+  </data>
+  <data name="CP_Captioning" xml:space="preserve">
+    <value>キャプショニング</value>
+  </data>
+  <data name="CP_CheckingThumbnail" xml:space="preserve">
+    <value>サムネイル確認中…</value>
+  </data>
+  <data name="CP_CheckingTimestamp" xml:space="preserve">
+    <value>日付確認中…</value>
+  </data>
+  <data name="CP_DeferredFile" xml:space="preserve">
+    <value>エラーで後回しにしたファイル: {0}: {1}件</value>
+  </data>
+  <data name="CP_E_AnyalizeMetadatumFailed" xml:space="preserve">
+    <value>メタデータムの解析に失敗: {0}: {1}</value>
+  </data>
+  <data name="CP_E_ImageAnyalizeFailed" xml:space="preserve">
+    <value>画像の解析に失敗: {0}: {1}</value>
+  </data>
+  <data name="CP_E_ImageLoadFailed" xml:space="preserve">
+    <value>{0}: 画像読み込み失敗</value>
+  </data>
+  <data name="CP_E_ImagePreprocessFailed" xml:space="preserve">
+    <value>画像の前処理に失敗: {0}: {1}</value>
+  </data>
+  <data name="CP_IndexingCompleted" xml:space="preserve">
+    <value>インデックス作成完了 (未探索: {0} フォルダー 読み込み失敗: {1}ファイル)</value>
+  </data>
+  <data name="CP_IndexLoaded" xml:space="preserve">
+    <value>Index読み込み完了</value>
+  </data>
+  <data name="CP_InspectUpdate" xml:space="preserve">
+    <value>更新確認 {0}件: {1}</value>
+  </data>
+  <data name="CP_Load" xml:space="preserve">
+    <value>読み込み</value>
+  </data>
+  <data name="CP_LoadIndexProgress" xml:space="preserve">
+    <value>Index読み込み {0}/{1}</value>
+  </data>
+  <data name="CP_LoadingIndex" xml:space="preserve">
+    <value>Index読み込み</value>
+  </data>
+  <data name="CP_Saving" xml:space="preserve">
+    <value>保存中 …</value>
+  </data>
+  <data name="CP_SkipDirectory" xml:space="preserve">
+    <value>探索をスキップ: {0} {1}</value>
+  </data>
+  <data name="CP_SkipReparsePoint" xml:space="preserve">
+    <value>再解析ポイントは探索対象外</value>
+  </data>
+  <data name="CP_Tagging" xml:space="preserve">
+    <value>タグ付け</value>
+  </data>
+  <data name="CP_UpdateCompleted" xml:space="preserve">
+    <value>更新反映完了 {0}/{1}</value>
+  </data>
+  <data name="CP_UpdateInProgress" xml:space="preserve">
+    <value>更新反映中 {0}/{1}</value>
+  </data>
+  <data name="FX_FileScan" xml:space="preserve">
+    <value>ファイルスキャン</value>
+  </data>
+  <data name="FX_SavingTimestamp" xml:space="preserve">
+    <value>日付保存中 ...</value>
+  </data>
+  <data name="FX_TimestampSaved" xml:space="preserve">
+    <value>日付保存完了</value>
+  </data>
+  <data name="GL_E_DirectoryNotFound" xml:space="preserve">
+    <value>{0} がない</value>
+  </data>
+  <data name="GL_E_FewGeneration" xml:space="preserve">
+    <value>世代数は1以上</value>
+  </data>
+  <data name="GL_E_InvalidValue" xml:space="preserve">
+    <value>{0} の値がおかしい</value>
+  </data>
+  <data name="GL_E_MP_Assign" xml:space="preserve">
+    <value>{0}: =がない</value>
+  </data>
+  <data name="GL_E_MP_BothType" xml:space="preserve">
+    <value>{0}: 同じエイリアスの型はtextまたはnumberに統一してちょ</value>
+  </data>
+  <data name="GL_E_MP_InvalidGrade" xml:space="preserve">
+    <value>{0}: alias/tagがない</value>
+  </data>
+  <data name="GL_E_MP_InvalidType" xml:space="preserve">
+    <value>{0}: 型はtextまたはnumberで指定</value>
+  </data>
+  <data name="GL_E_MP_TypeSyntax" xml:space="preserve">
+    <value>{0}: alias:text=tag または alias:number=tag で指定</value>
+  </data>
+  <data name="GL_E_ProfileNotInProfiles" xml:space="preserve">
+    <value>{0} の {1} が {2} に無い</value>
+  </data>
+  <data name="GL_E_RootIsNull" xml:space="preserve">
+    <value>Rootがnull</value>
+  </data>
+  <data name="GL_E_UAP" xml:space="preserve">
+    <value>なにそれこわい: {0}</value>
+  </data>
+  <data name="GL_E_UnknownProfile" xml:space="preserve">
+    <value>不明なプロファイル {0}</value>
+  </data>
+  <data name="IM_E_EncodeThumbnailFailed" xml:space="preserve">
+    <value>サムネイルのエンコードに失敗</value>
+  </data>
+  <data name="IM_E_GetPixelFailed" xml:space="preserve">
+    <value>画素を取り出せない</value>
+  </data>
+  <data name="IM_E_GetPixelsFailed" xml:space="preserve">
+    <value>画素バッファを取得できない</value>
+  </data>
+  <data name="IM_E_GetThumbnailPixelsFailed" xml:space="preserve">
+    <value>サムネイルの画素を取得できなかった</value>
+  </data>
+  <data name="IM_E_ReadMetadata" xml:space="preserve">
+    <value>メタデータを読み込めなかった</value>
+  </data>
+  <data name="IM_E_ResizeFailed" xml:space="preserve">
+    <value>リサイズに失敗</value>
+  </data>
+  <data name="LC_ImogeIndex" xml:space="preserve">
+    <value>ImogeIndex</value>
+  </data>
+  <data name="MUR_E_HashNotCalculated" xml:space="preserve">
+    <value>基準画像のハッシュが未計算</value>
+  </data>
+  <data name="MUR_E_HashNotSelected" xml:space="preserve">
+    <value>ハッシュが1種も選ばれていない</value>
+  </data>
+  <data name="NIR_E_GCount" xml:space="preserve">
+    <value>数がおかしい {0}</value>
+  </data>
+  <data name="NIR_E_GHash" xml:space="preserve">
+    <value>ハッシュ不一致</value>
+  </data>
+  <data name="NIR_E_GId" xml:space="preserve">
+    <value>IDがおかしい {0}</value>
+  </data>
+  <data name="NIR_E_GImage" xml:space="preserve">
+    <value>imageがおかしい</value>
+  </data>
+  <data name="NIR_E_GSize" xml:space="preserve">
+    <value>サイズがおかしい {0}</value>
+  </data>
+  <data name="NIR_E_LiteralCorrupted" xml:space="preserve">
+    <value>ストリームの途中でリテラルデータが途切れ申した</value>
+  </data>
+  <data name="NIR_E_ResponseTooLarge" xml:space="preserve">
+    <value>受信メッセージがデカすぎる {0}</value>
+  </data>
+  <data name="NIR_E_TokenCorrupted" xml:space="preserve">
+    <value>ストリームの途中で一致トークンが途切れ申した</value>
+  </data>
+  <data name="SM_E_ColumnMustNotExist" xml:space="preserve">
+    <value>{0}.{1}: DBバージョンに対して未追加のはずのカラムがある</value>
+  </data>
+  <data name="SM_E_ColumnNotIncludedDefinition" xml:space="preserve">
+    <value>{0}: 定義にないカラムがある</value>
+  </data>
+  <data name="SM_E_CountingFailed" xml:space="preserve">
+    <value>カウント取得失敗</value>
+  </data>
+  <data name="SM_E_DatumFromTheFuture" xml:space="preserve">
+    <value>DBバージョン {0} は対応バージョン {1} より新しいので開けませぬ</value>
+  </data>
+  <data name="SM_E_DatumNotOpen" xml:space="preserve">
+    <value>DBが開かれていない</value>
+  </data>
+  <data name="SM_E_DatumNotOpenEx" xml:space="preserve">
+    <value>{0} が開かれていない</value>
+  </data>
+  <data name="SM_E_DatumTamperingDuringTabulation" xml:space="preserve">
+    <value>集計中にデータが更新された</value>
+  </data>
+  <data name="SM_E_DatumVersionNotFount" xml:space="preserve">
+    <value>バージョン情報がないので自動移行できませぬ</value>
+  </data>
+  <data name="SM_E_DatunNeedsUpdate" xml:space="preserve">
+    <value>DBの更新が必要</value>
+  </data>
+  <data name="SM_E_EnumParseFailed" xml:space="preserve">
+    <value>Enum.TryParse&lt;{0}&gt;({1})が失敗</value>
+  </data>
+  <data name="SM_E_GetAttributeFailed" xml:space="preserve">
+    <value>{0} が取れないない</value>
+  </data>
+  <data name="SM_E_InvalidColumnVersion" xml:space="preserve">
+    <value>{0}: カラムの追加バージョンおかしい</value>
+  </data>
+  <data name="SM_E_LengthMultipleOf" xml:space="preserve">
+    <value>データ長が不正 ({0}バイトの倍数じゃないとだめ)</value>
+  </data>
+  <data name="SM_E_MissingColumn" xml:space="preserve">
+    <value>{0}: 必要カラムが欠落している</value>
+  </data>
+  <data name="SM_E_MissingColumnEx" xml:space="preserve">
+    <value>{0}.{1}: 既存カラムが欠落している</value>
+  </data>
+  <data name="SM_E_NotInSchema" xml:space="preserve">
+    <value>スキーマに無い {0}</value>
+  </data>
+  <data name="SM_E_NotInTypeMap" xml:space="preserve">
+    <value>{0}: TypeMapにない</value>
+  </data>
+  <data name="SM_E_NotOpenOrReadOnly" xml:space="preserve">
+    <value>Connectionがﾇﾙもしくは書き込み不許可</value>
+  </data>
+  <data name="SM_E_NotOpenOrReadOnlyEx" xml:space="preserve">
+    <value>{0} がﾇﾙもしくは書き込み不許可</value>
+  </data>
+  <data name="SM_E_PkeyNotMigratable" xml:space="preserve">
+    <value>{0}.{1}: 主キーとUNIQUEカラムは自動追加させねえよ</value>
+  </data>
+  <data name="SM_E_PropertyTypeIsNull" xml:space="preserve">
+    <value>{0} PropertyTypeがnullだった</value>
+  </data>
+  <data name="SM_E_UnknownBindValueType" xml:space="preserve">
+    <value>バインド変数の型が不明: {0}</value>
+  </data>
+  <data name="SM_E_UnknownColumn" xml:space="preserve">
+    <value>{0}: 不明な列</value>
+  </data>
+  <data name="SM_E_UnsupportedSearchField" xml:space="preserve">
+    <value>{0}: 未対応の検索フィールド</value>
+  </data>
+  <data name="TB_E_CreateThumbnailFailed" xml:space="preserve">
+    <value>サムネイルの作成に失敗: {0}: {1}</value>
+  </data>
+  <data name="TB_SkipDuplicateIndex" xml:space="preserve">
+    <value>重複レコードなのでスキップ : {0}</value>
+  </data>
+  <data name="TP_E_ReadOnlyIndex" xml:space="preserve">
+    <value>インデックスが読み取り専用で開かれている</value>
+  </data>
+  <data name="TP_Index" xml:space="preserve">
+    <value>インデックス</value>
+  </data>
+  <data name="TP_ProcessingTag" xml:space="preserve">
+    <value>タグ集計中</value>
+  </data>
+  <data name="TW_E_DeleteFailed" xml:space="preserve">
+    <value>{0} の削除に失敗</value>
+  </data>
+  <data name="TW_E_FailedToResize" xml:space="preserve">
+    <value>縮小できない</value>
+  </data>
+  <data name="TW_E_GetPixelsFailed" xml:space="preserve">
+    <value>リサイズ結果を取り出せない</value>
+  </data>
+  <data name="TW_E_ImageIsNull" xml:space="preserve">
+    <value>画像がnull</value>
+  </data>
+  <data name="TW_E_ImageTooSmall" xml:space="preserve">
+    <value>サイズが小さすぎる</value>
+  </data>
+  <data name="TW_E_InvalidPixelFormat" xml:space="preserve">
+    <value>BGRA8888じゃないと困る: {0}</value>
+  </data>
+  <data name="TW_E_MetadataLoadFailed" xml:space="preserve">
+    <value>{0}: メタデータが読み込めなかった</value>
+  </data>
+  <data name="TW_E_MetadataNotExists" xml:space="preserve">
+    <value>{0}: メタデータが無い</value>
+  </data>
+  <data name="TW_E_ModelNotExists" xml:space="preserve">
+    <value>{0}: モデルが無い</value>
+  </data>
+  <data name="TW_E_ModelNotLoaded" xml:space="preserve">
+    <value>モデルが読み込まれていない</value>
+  </data>
+  <data name="TW_E_ModelPathIsNull" xml:space="preserve">
+    <value>ModelPathがnull</value>
+  </data>
+  <data name="TW_E_PixelBufferFailed" xml:space="preserve">
+    <value>画素バッファーを確保できない</value>
+  </data>
+  <data name="TW_E_ReadRgbFailed" xml:space="preserve">
+    <value>RGBで読み込めない</value>
+  </data>
+  <data name="TW_InitializingOrt" xml:space="preserve">
+    <value>ORT初期化中…</value>
+  </data>
+  <data name="TW_InitializingWML" xml:space="preserve">
+    <value>WML初期化開始</value>
+  </data>
+  <data name="TW_LoadingModel" xml:space="preserve">
+    <value>モデル読み込み中… {0}</value>
+  </data>
+  <data name="TW_LoadingTag" xml:space="preserve">
+    <value>Tag 読み込み中… {0}</value>
+  </data>
+  <data name="TW_Modepiling" xml:space="preserve">
+    <value>モデルコンパイル中… {0}</value>
+  </data>
+  <data name="TW_WMLInitialized" xml:space="preserve">
+    <value>WML初期化完了</value>
+  </data>
+  <data name="ZG_Error" xml:space="preserve">
+    <value>{0} エラー: {1}</value>
+  </data>
+  <data name="FS_E_UnknownScheme" xml:space="preserve">
+    <value>未登録のスキームなので読めない: {0}</value>
+  </data>
+</root>

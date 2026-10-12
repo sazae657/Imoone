@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CP_Ended" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓋔𓇌𓇋𓋔𓇌𓇋𓎡𓄿𓈖𓂋𓇌𓅱𓅱({0})</value>
+  </data>
+  <data name="IDM_APPLY" xml:space="preserve">
+    <value>𓏏𓇌𓎡𓇋𓇌𓅱𓅱</value>
+  </data>
+  <data name="IDM_CANCEL" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓈖𓋔𓇌𓂋𓅱</value>
+  </data>
+  <data name="IDM_EXIT" xml:space="preserve">
+    <value>𓈙𓅱𓅱𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="IDM_OK" xml:space="preserve">
+    <value>𓅱𓎡</value>
+  </data>
+  <data name="IDM_SAVE" xml:space="preserve">
+    <value>𓉔𓅱𓊃𓅱𓈖</value>
+  </data>
+  <data name="IDM_START" xml:space="preserve">
+    <value>𓎡𓄿𓇋𓈙𓇋</value>
+  </data>
+  <data name="IDM_STOP" xml:space="preserve">
+    <value>𓏏𓇌𓇋𓈙𓇋</value>
+  </data>
+  <data name="IP_CleanupDb" xml:space="preserve">
+    <value> 𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓋔𓇌𓇋𓂋𓇋𓍿𓅱𓅱…</value>
+  </data>
+  <data name="IP_E_Fail" xml:space="preserve">
+    <value>𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓈖𓅱𓋔𓇌𓇋𓋔𓇌𓇋𓈖𓇋𓈙𓇋𓊪𓄿𓇋</value>
+  </data>
+  <data name="IP_E_TagIndexFailed" xml:space="preserve">
+    <value>𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓈖𓅱𓋔𓇌𓇋𓋔𓇌𓇋𓈖𓇋𓈙𓇋𓊪𓄿𓇋</value>
+  </data>
+  <data name="IP_Ended" xml:space="preserve">
+    <value>𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓋔𓄿𓎡𓅱𓋔𓇌𓇋𓎡𓄿𓈖𓂋𓇌𓅱𓅱({0})</value>
+  </data>
+  <data name="IP_TagIndexEnded" xml:space="preserve">
+    <value>  𓏏𓄿𓎼𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓋔𓄿𓎡𓅱𓋔𓇌𓇋𓎡𓄿𓈖𓂋𓇌𓅱𓅱(𓎼𓅱𓂋𓅱 𓊪𓅱:{0}  𓎡𓇌𓄿𓂋𓄿:{1})</value>
+  </data>
+  <data name="MC_About" xml:space="preserve">
+    <value>  𓇋𓅓𓅱𓎼𓇌𓇋𓈖𓂧𓇌𓎡𓋔𓈖𓇋𓏏𓅱𓇋𓏏𓇌…</value>
+  </data>
+  <data name="MC_Quit" xml:space="preserve">
+    <value>𓇋𓅓𓅱𓎼𓇌𓇋𓈖𓂧𓇌𓎡𓋔𓈖𓅱𓈙𓅱𓅱𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="ML_AppTitle" xml:space="preserve">
+    <value>𓇋𓅓𓅱𓎼𓇌𓇋𓈖𓂧𓇌𓎡𓋔</value>
+  </data>
+  <data name="ML_CaptioningPreview" xml:space="preserve">
+    <value>𓊪𓅱𓂋𓇌𓃀𓇌𓅱 </value>
+  </data>
+  <data name="ML_D_Captioning" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓋔𓇌𓇋𓋔𓇌𓇋</value>
+  </data>
+  <data name="ML_D_CustomOP" xml:space="preserve">
+    <value>𓎡𓄿𓋔𓅱𓏏𓄿𓅓𓅱𓋔𓅱𓅱𓋔𓄿</value>
+  </data>
+  <data name="ML_D_GenerateIndex" xml:space="preserve">
+    <value>𓆑𓅱ぁ𓇋𓂋𓅱𓈖𓅱𓃀𓅱𓈖𓋔𓇌𓎡𓇋</value>
+  </data>
+  <data name="ML_D_GenerateTagIndex" xml:space="preserve">
+    <value>𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓈖𓅱𓋔𓇌𓇋𓋔𓇌𓇋</value>
+  </data>
+  <data name="ML_D_Vacuum" xml:space="preserve">
+    <value>𓂧𓇌 𓏏𓄿𓃀𓇌 𓋔𓅱𓈖𓅱𓋔𓇌𓇋𓂋𓇋</value>
+  </data>
+  <data name="ML_Language" xml:space="preserve">
+    <value>𓎼𓇌𓈖𓎼𓅱</value>
+  </data>
+  <data name="ML_MinimizeToTray" xml:space="preserve">
+    <value>𓋔𓄿𓇋𓈙𓅱𓅱𓎡𓄿𓆓𓇋𓉔𓄿𓏏𓄿𓋔𓅱𓎡𓅱𓏏𓅱𓂋𓇌𓇋𓈖𓇋𓉔𓇌𓅱𓅱𓆓𓇋</value>
+  </data>
+  <data name="ML_OpenDatumRootFolder" xml:space="preserve">
+    <value>𓂧𓇌 𓏏𓄿𓆑𓅱ぉ𓂋𓅱𓂧𓄿 𓅱𓉔𓇋𓂋𓄿𓎡𓅱(_𓎡𓅱𓈙𓇋 )</value>
+  </data>
+  <data name="ML_OpenSettingsFolder" xml:space="preserve">
+    <value>{0} 𓈖𓅱𓋔𓇌𓏏𓇌𓇋𓆑𓅱ぉ𓂋𓅱𓂧𓄿 𓅱𓉔𓇋𓂋𓄿𓎡𓅱(_𓅱𓅓𓇌𓎼𓄿)</value>
+  </data>
+  <data name="ML_OpenSettingure" xml:space="preserve">
+    <value> 𓋔𓇌𓏏𓇌𓇋…</value>
+  </data>
+  <data name="ML_Profile" xml:space="preserve">
+    <value>𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱</value>
+  </data>
+  <data name="ML_QuickScan" xml:space="preserve">
+    <value>𓎡𓅱𓅱𓋔𓅱𓎡𓅱𓋔𓅱𓎡𓇌𓄿𓈖(𓎡𓅱𓅱𓈙𓇋𓈖𓅱𓎡𓇌𓈖𓈙𓅱𓏏𓅱𓈙𓇋𓈖𓄿𓇋)</value>
+  </data>
+  <data name="ML_RecaptionUpdated" xml:space="preserve">
+    <value>𓎡𓅱𓅱𓈙𓇋𓈖𓋔𓄿𓂋𓇌𓏏𓄿𓂋𓄿𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓅓𓅱𓏏𓅱𓎡𓅱𓂋𓇋𓈖𓄿𓅱𓋔𓅱</value>
+  </data>
+  <data name="ML_RescanMetadata" xml:space="preserve">
+    <value>𓅓𓇌𓏏𓄿𓂧𓇌 𓏏𓄿𓈖𓅱𓋔𓄿𓇋𓋔𓅱𓎡𓇌𓄿𓈖</value>
+  </data>
+  <data name="ML_SkipKnownError" xml:space="preserve">
+    <value>𓎡𓇋𓍿𓇋𓈖𓅱𓇌𓂋𓄿 𓉔𓄿𓅓𓅱𓈙𓇋</value>
+  </data>
+  <data name="ML_Theme" xml:space="preserve">
+    <value>𓏏𓇌 𓅓𓄿</value>
+  </data>
+  <data name="PM_CheckingVLM" xml:space="preserve">
+    <value>𓃭𓃭𓅓𓎡𓄿𓎡𓅱𓈖𓇋𓈖𓍿𓅱𓅱</value>
+  </data>
+  <data name="PM_Closing" xml:space="preserve">
+    <value>𓏏𓅱𓆓𓇋𓎡𓅱𓍿𓅱𓅱…</value>
+  </data>
+  <data name="PM_E_CaptionizerNotSanitized" xml:space="preserve">
+    <value>𓎡𓄿𓊪𓏏𓇋𓅱𓈖𓇋𓊃𓇌𓂋𓎼𓄿𓋔𓄿𓈖𓇋𓏏𓇋𓊃𓇌𓋔𓄿𓂋𓇌𓏏𓇌𓇋𓈖𓄿𓇋?</value>
+  </data>
+  <data name="PM_Ended" xml:space="preserve">
+    <value>𓎡𓄿𓈖𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="PM_Error" xml:space="preserve">
+    <value>  𓇌𓂋𓄿 :{0}</value>
+  </data>
+  <data name="PM_InPreparation" xml:space="preserve">
+    <value> 𓆓𓅱𓈖𓃀𓇋𓍿𓅱𓅱…</value>
+  </data>
+  <data name="PM_Interrupted" xml:space="preserve">
+    <value>𓏏𓇌𓇋𓈙𓇋(𓄿𓏏𓅱𓈙𓅱𓂋𓇋𓎡𓄿𓈖𓂋𓇌𓅱𓅱)</value>
+  </data>
+  <data name="PM_LoadingTagger" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓎼𓇌𓂋𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋𓈖𓄿𓎡𓄿</value>
+  </data>
+  <data name="PM_Stopped" xml:space="preserve">
+    <value>𓏏𓇌𓇋𓈙𓇋</value>
+  </data>
+  <data name="PM_StoppingProcessor" xml:space="preserve">
+    <value>{0} 𓏏𓇌𓇋𓈙𓇋𓍿𓅱𓅱…</value>
+  </data>
+  <data name="PM_TaggerLoaded" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓎼𓇌𓂋𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋𓎡𓄿𓈖𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="PM_VLMChecked" xml:space="preserve">
+    <value>𓃭𓃭𓅓𓎡𓄿𓎡𓅱𓈖𓇋𓈖𓎡𓄿𓈖𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="SG_Cap_LlamaCpp" xml:space="preserve">
+    <value>𓃭𓃭𓄿𓅓𓄿.𓎡𓊪𓊪</value>
+  </data>
+  <data name="SG_Cap_Modepile" xml:space="preserve">
+    <value>𓅓𓅱𓂧𓇌𓂋𓅱𓈖𓅱𓎡𓅱𓈖𓊪𓄿𓇋𓂋𓅱</value>
+  </data>
+  <data name="SG_Cap_Ollama" xml:space="preserve">
+    <value>𓅱𓃭𓃭𓄿𓅓𓄿</value>
+  </data>
+  <data name="SG_Cap_OpenAICompat" xml:space="preserve">
+    <value>𓅱𓊪𓇌𓈖𓄿𓇋𓎼𓅱𓎡𓄿𓈖</value>
+  </data>
+  <data name="SG_Captionizer" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓇋𓈖𓎼𓅱</value>
+  </data>
+  <data name="SG_E_DuplicateMetaAlias" xml:space="preserve">
+    <value>{0}  :𓆓𓅱𓅱𓆑𓅱𓎡𓅱𓋔𓅱𓂋𓅱𓇌𓈖𓏏𓅱𓂋𓇋 𓎼𓄿𓄿𓂋𓅱</value>
+  </data>
+  <data name="SG_E_DuplicateMetaAliasOfAlias" xml:space="preserve">
+    <value>{0} 𓆓𓅱𓅱𓆑𓅱𓎡𓅱𓋔𓅱𓂋𓅱𓇌𓇋𓂋𓇋𓄿𓋔𓅱𓎼𓄿𓄿𓂋𓅱</value>
+  </data>
+  <data name="SG_E_InvalidCharOnMetaAlias" xml:space="preserve">
+    <value>{0}  𓈙𓇋𓇌𓅱𓅱𓂧𓇌𓎡𓇋𓈖𓄿𓇋𓅓𓅱𓆓𓇋𓎼𓄿𓆑𓅱𓎡𓅱𓅓𓄿𓂋𓇌𓏏𓇌𓇋𓂋𓅱(:;="'\|)</value>
+  </data>
+  <data name="SG_E_InvalidThreadNum" xml:space="preserve">
+    <value>𓆑𓅱𓋔𓇌𓇋𓈖𓄿𓋔𓅱𓂋𓇌𓂧𓅱𓋔𓅱𓅱</value>
+  </data>
+  <data name="SG_General" xml:space="preserve">
+    <value>𓊃𓇌𓈖𓊪𓄿𓈖</value>
+  </data>
+  <data name="SG_OpenDialogW" xml:space="preserve">
+    <value>…</value>
+  </data>
+  <data name="SG_Other" xml:space="preserve">
+    <value>𓋔𓅱𓈖𓅱𓏏𓄿</value>
+  </data>
+  <data name="SG_T_Group" xml:space="preserve">
+    <value>𓎼𓅱𓂋𓅱 𓊪𓅱</value>
+  </data>
+  <data name="SG_T_Groups" xml:space="preserve">
+    <value>𓎼𓅱𓂋𓅱 𓊪𓅱</value>
+  </data>
+  <data name="SG_T_IgnoreCase" xml:space="preserve">
+    <value>𓅱𓅱𓅓𓅱𓆓𓇋 𓂧𓄿𓇋𓅓𓅱𓈖𓆓𓇋𓎡𓅱𓅓𓅱𓆓𓇋𓅱𓎡𓅱𓃀𓇌𓏏𓅱𓈙𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="SG_T_Index" xml:space="preserve">
+    <value>𓇋𓍿𓇋</value>
+  </data>
+  <data name="SG_T_OpenRegexSandbox" xml:space="preserve">
+    <value> 𓋔𓇌𓇋𓎡𓇋𓉔𓇌𓅱𓅱𓎼𓇌𓈖𓂋𓇌𓈖𓈙𓅱𓅱𓍿𓅱𓅱…</value>
+  </data>
+  <data name="SG_T_Regex" xml:space="preserve">
+    <value>𓋔𓇌𓇋𓎡𓇋𓉔𓇌𓅱𓅱𓎼𓇌𓈖</value>
+  </data>
+  <data name="SG_T_RegexSandbox" xml:space="preserve">
+    <value>𓋔𓇌𓇋𓎡𓇋𓉔𓇌𓅱𓅱𓎼𓇌𓈖𓂋𓇌𓈖𓈙𓅱𓅱𓍿𓅱𓅱</value>
+  </data>
+  <data name="SG_T_Result" xml:space="preserve">
+    <value>𓎡𓇌𓎡𓄿</value>
+  </data>
+  <data name="SG_T_Text" xml:space="preserve">
+    <value>𓏏𓇌𓋔𓅱𓏏𓅱𓅓𓅱𓆓𓇋𓂋𓇌𓏏𓅱</value>
+  </data>
+  <data name="SG_T_Value" xml:space="preserve">
+    <value>𓄿𓏏𓄿𓇋</value>
+  </data>
+  <data name="SG_Tagger" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓇋𓈖𓎼𓅱</value>
+  </data>
+  <data name="SGD_Settingure" xml:space="preserve">
+    <value>𓋔𓇌𓏏𓇌𓇋</value>
+  </data>
+  <data name="SW_BuffersPerThread" xml:space="preserve">
+    <value>𓋔𓅱𓂋𓇌𓂧𓅱𓎼𓅱𓏏𓅱𓈖𓅱𓏏𓄿𓅓𓇌𓎡𓅱𓅓𓇋𓃀𓄿𓆑𓅱ぁ 𓋔𓅱𓅱</value>
+  </data>
+  <data name="SW_CacheDir" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓈙𓅱𓆑𓅱ぉ𓂋𓅱𓂧𓄿 </value>
+  </data>
+  <data name="SW_CapAbortThreshold" xml:space="preserve">
+    <value>𓂋𓇌𓈖𓊃𓅱𓎡𓅱𓈙𓇋𓊪𓄿𓇋𓂧𓇌𓅱𓍿𓇋𓎡𓇋𓂋𓅱𓎡𓄿𓇋𓋔𓅱𓅱(0𓂧𓇌𓅓𓅱𓎡𓅱𓅱)</value>
+  </data>
+  <data name="SW_CapApiKey" xml:space="preserve">
+    <value>𓄿𓊪𓇋𓎡𓇋 </value>
+  </data>
+  <data name="SW_CapEnable" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓇋𓈖𓎼𓅱𓅱𓅱𓎡𓅱𓈖𓄿𓅱</value>
+  </data>
+  <data name="SW_CapHttpTimeout" xml:space="preserve">
+    <value>𓉔𓏏𓏏𓊪𓏏𓄿𓇋𓅓𓅱𓄿𓅱𓏏𓅱(𓃀𓇌𓅱𓅱)</value>
+  </data>
+  <data name="SW_CapImageSize" xml:space="preserve">
+    <value>𓋔𓅱𓅱𓈙𓇋𓈖𓋔𓅱𓂋𓅱𓎼𓄿𓊃𓅱𓅱𓋔𓄿𓇋𓊃𓅱</value>
+  </data>
+  <data name="SW_CapLlm_CustomPrompt" xml:space="preserve">
+    <value>𓎡𓄿𓋔𓅱𓏏𓄿𓅓𓅱𓊪𓅱𓂋𓅱𓈖𓊪𓅱𓏏𓅱</value>
+  </data>
+  <data name="SW_CapLlm_MaxTokens" xml:space="preserve">
+    <value>𓅓𓄿𓎡𓋔_𓏏𓅱𓎡𓇌𓈖𓋔</value>
+  </data>
+  <data name="SW_CapLlm_NumCtx" xml:space="preserve">
+    <value>𓈖𓅱𓅓_𓎡𓏏𓎡𓋔</value>
+  </data>
+  <data name="SW_CapLlm_NumPredict" xml:space="preserve">
+    <value>𓈖𓅱𓅓_𓊪𓂋𓇌𓂧𓇋𓎡𓏏</value>
+  </data>
+  <data name="SW_CapLlm_RepeatPenalty" xml:space="preserve">
+    <value>𓂋𓇌𓊪𓇌𓄿𓏏_𓊪𓇌𓈖𓄿𓃭𓏏𓇌</value>
+  </data>
+  <data name="SW_CapLlm_Temperature" xml:space="preserve">
+    <value>𓏏𓇌𓅓𓊪𓇌𓂋𓄿𓏏𓅱𓂋𓇌</value>
+  </data>
+  <data name="SW_CapLlm_TopK" xml:space="preserve">
+    <value>𓏏𓅱𓊪_𓎡</value>
+  </data>
+  <data name="SW_CapLlm_TopP" xml:space="preserve">
+    <value>𓏏𓅱𓊪_𓊪</value>
+  </data>
+  <data name="SW_CapLlm_UseCustomPrompt" xml:space="preserve">
+    <value>𓎡𓄿𓋔𓅱𓏏𓄿𓅓𓅱𓊪𓅱𓂋𓅱𓈖𓊪𓅱𓏏𓅱𓅱𓏏𓅱𓎡𓄿𓅱</value>
+  </data>
+  <data name="SW_CapLlmType" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓇋𓈖𓎼𓅱𓈖𓇋𓏏𓅱𓎡𓄿𓅱𓃭𓃭𓅓</value>
+  </data>
+  <data name="SW_CapModel" xml:space="preserve">
+    <value>𓅓𓅱𓂧𓇌𓂋𓅱</value>
+  </data>
+  <data name="SW_CapMoreHere" xml:space="preserve">
+    <value>𓋔𓅱𓎡𓅱𓅓𓅱𓏏𓅱(𓋔𓇌𓇋𓎡𓇋𓉔𓇌𓅱𓅱𓎼𓇌𓈖)</value>
+  </data>
+  <data name="SW_CapNoMoreHere" xml:space="preserve">
+    <value>𓆓𓅱𓎼𓄿𓇋(𓋔𓇌𓇋𓎡𓇋𓉔𓇌𓅱𓅱𓎼𓇌𓈖)</value>
+  </data>
+  <data name="SW_CapRetry" xml:space="preserve">
+    <value>𓂋𓇋𓏏𓅱𓂋𓄿𓇋𓎡𓄿𓇋𓋔𓅱𓅱</value>
+  </data>
+  <data name="SW_CapUrl" xml:space="preserve">
+    <value>𓅱𓂋𓃭</value>
+  </data>
+  <data name="SW_E_Error" xml:space="preserve">
+    <value>𓇌𓂋𓄿 </value>
+  </data>
+  <data name="SW_E_SaveFailed" xml:space="preserve">
+    <value>𓋔𓇌𓏏𓇌𓇋𓈖𓅱𓉔𓅱𓊃𓅱𓈖𓈖𓇋𓈙𓇋𓊪𓄿𓇋𓈙𓇋𓅓𓄿𓈙𓇋𓏏𓄿</value>
+  </data>
+  <data name="SW_EnableThumbnail" xml:space="preserve">
+    <value>𓋔𓄿𓅓𓅱𓈖𓇌𓇋𓂋𓅱𓅱𓋔𓄿𓎡𓅱𓋔𓇌𓇋𓋔𓅱𓂋𓅱</value>
+  </data>
+  <data name="SW_ExcludePath" xml:space="preserve">
+    <value>𓆓𓅱𓎼𓄿𓇋𓋔𓅱𓂋𓅱𓆑𓅱ぉ𓂋𓅱𓂧𓄿 </value>
+  </data>
+  <data name="SW_ExcludePattern" xml:space="preserve">
+    <value>𓆓𓅱𓎼𓄿𓇋𓊪𓄿𓏏𓄿 𓈖(𓋔𓇌𓇋𓎡𓇋𓉔𓇌𓅱𓅱𓎼𓇌𓈖)</value>
+  </data>
+  <data name="SW_FC_AllFile" xml:space="preserve">
+    <value> 𓋔𓅱𓃀𓇌𓏏𓇌𓈖𓅱𓆑𓅱ぁ𓇋𓂋𓅱(*.*)|*.*</value>
+  </data>
+  <data name="SW_FC_Model" xml:space="preserve">
+    <value>𓅓𓅱𓂧𓇌𓂋𓅱</value>
+  </data>
+  <data name="SW_FC_ModelFilter" xml:space="preserve">
+    <value>  𓅓𓅱𓂧𓇌𓂋𓅱(*.𓅱𓈖𓈖𓎡𓋔)|*.𓅱𓈖𓈖𓎡𓋔|𓋔𓅱𓃀𓇌𓏏𓇌𓈖𓅱𓆑𓅱ぁ𓇋𓂋𓅱(*.*)|*.*</value>
+  </data>
+  <data name="SW_FC_TagCsvFilter" xml:space="preserve">
+    <value>  𓏏𓄿𓎼𓅱(*.𓎡𓋔𓆑)|*.𓎡𓋔𓆑|𓋔𓅱𓃀𓇌𓏏𓇌𓈖𓅱𓆑𓅱ぁ𓇋𓂋𓅱(*.*)|*.*</value>
+  </data>
+  <data name="SW_FC_TagJsonFilter" xml:space="preserve">
+    <value>  𓏏𓄿𓎼𓅱(*.𓆓𓋔𓅱𓈖)|*.𓆓𓋔𓅱𓈖|𓋔𓅱𓃀𓇌𓏏𓇌𓈖𓅱𓆑𓅱ぁ𓇋𓂋𓅱(*.*)|*.*</value>
+  </data>
+  <data name="SW_FC_Tags" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓅱</value>
+  </data>
+  <data name="SW_ImageExtension" xml:space="preserve">
+    <value>𓎼𓄿𓊃𓅱𓅱𓎡𓄿𓎡𓅱𓍿𓅱𓅱𓈙𓇋(𓋔𓇌𓇋𓎡𓇋𓉔𓇌𓅱𓅱𓎼𓇌𓈖)</value>
+  </data>
+  <data name="SW_LogLevel" xml:space="preserve">
+    <value>𓂋𓅱𓎼𓅱𓂋𓇌𓃀𓇌𓂋𓅱</value>
+  </data>
+  <data name="SW_MetadatumSearchTags" xml:space="preserve">
+    <value>𓅓𓇌𓏏𓄿𓂧𓇌 𓏏𓄿𓅓𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓏏𓄿𓎼𓅱</value>
+  </data>
+  <data name="SW_Niraction" xml:space="preserve">
+    <value>𓈖𓇋𓂋𓄿𓎡𓅱𓈙𓅱𓈖</value>
+  </data>
+  <data name="SW_NiractionEnable" xml:space="preserve">
+    <value>𓈖𓇋𓂋𓄿𓎡𓅱𓈙𓅱𓈖</value>
+  </data>
+  <data name="SW_NiractionHost" xml:space="preserve">
+    <value>𓈖𓇋𓂋𓄿𓎡𓅱𓈙𓅱𓈖𓉔𓅱𓋔𓅱𓏏𓅱</value>
+  </data>
+  <data name="SW_SearchPath" xml:space="preserve">
+    <value>𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓋔𓅱𓂋𓅱𓆑𓅱ぉ𓂋𓅱𓂧𓄿 </value>
+  </data>
+  <data name="SW_TaggerCharacterThreshold" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓂋𓄿𓎡𓅱𓏏𓄿 𓈖𓅱𓇋𓎡𓇋𓍿𓇋</value>
+  </data>
+  <data name="SW_TaggerDevicePolicy" xml:space="preserve">
+    <value>𓅱𓇋𓈖𓅓𓃭𓂧𓇌𓃀𓄿𓇋𓋔𓅱𓊪𓅱𓂋𓇋𓈙𓇋 </value>
+  </data>
+  <data name="SW_TaggerEnable" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓅱𓊃𓅱𓎡𓇌𓅱𓋔𓅱𓂋𓅱</value>
+  </data>
+  <data name="SW_TaggerModel" xml:space="preserve">
+    <value>𓅓𓅱𓂧𓇌𓂋𓅱(*.𓅱𓈖𓈖𓎡𓋔)</value>
+  </data>
+  <data name="SW_TaggerTags" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓅱𓆑𓅱ぁ𓇋𓂋𓅱(*.𓎡𓋔𓆑𓅓𓄿𓏏𓄿𓉔𓄿*.𓆓𓋔𓅱𓈖)</value>
+  </data>
+  <data name="SW_TaggerThreads" xml:space="preserve">
+    <value>𓉔𓇌𓇋𓂋𓇌𓏏𓅱𓆓𓇋𓎡𓅱𓅱𓋔𓅱𓅱</value>
+  </data>
+  <data name="SW_TaggerThreshold" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓅱𓈖𓅱𓇋𓎡𓇋𓍿𓇋</value>
+  </data>
+  <data name="SW_TaggerType" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓎼𓇌𓂋𓈖𓅱𓈙𓅱𓂋𓅱𓇋</value>
+  </data>
+  <data name="SW_Threads" xml:space="preserve">
+    <value>𓋔𓅱𓂋𓇌𓂧𓅱𓋔𓅱𓅱</value>
+  </data>
+  <data name="SW_ThumbnailSize" xml:space="preserve">
+    <value>𓋔𓄿𓅓𓅱𓈖𓇌𓇋𓂋𓅱𓈖𓅱𓋔𓄿𓇋𓊃𓅱</value>
+  </data>
+  <data name="TB_CleanupDb" xml:space="preserve">
+    <value> 𓋔𓄿𓅓𓅱𓈖𓇌𓇋𓂋𓅱𓋔𓇌𓇋𓂋𓇋𓍿𓅱𓅱…</value>
+  </data>
+  <data name="TM_Idle" xml:space="preserve">
+    <value>𓏏𓄿𓇋𓎡𓇋𓍿𓅱𓅱</value>
+  </data>
+  <data name="TM_Running" xml:space="preserve">
+    <value>𓆓𓇋𓎡𓅱𓅱𓍿𓅱𓅱</value>
+  </data>
+  <data name="TM_ShuttingDown" xml:space="preserve">
+    <value>𓈙𓅱𓅱𓂋𓇌𓅱𓅱𓈙𓅱𓂋𓇋𓍿𓅱𓅱</value>
+  </data>
+  <data name="TM_Stopping" xml:space="preserve">
+    <value>𓏏𓇌𓇋𓈙𓇋𓈙𓅱𓂋𓇋𓍿𓅱𓅱</value>
+  </data>
+  <data name="WG_D_VLM1" xml:space="preserve">
+    <value>𓋔𓅱𓅱𓈙𓇋𓈖</value>
+  </data>
+  <data name="WG_D_VLM2" xml:space="preserve">
+    <value> 𓋔𓅱𓅱𓈙𓇋𓈖:{0}𓎡𓋔{1}  /{2:N0} 𓃀𓄿𓇋𓏏𓅱</value>
+  </data>
+  <data name="WG_E_CloseTheSettingure" xml:space="preserve">
+    <value>𓋔𓇌𓏏𓇌𓇋𓅱𓇋𓈖𓂧𓅱𓅱𓎼𓄿𓉔𓇋𓂋𓄿𓎡𓇋𓊪𓄿𓂧𓇌𓎼𓅱𓅱𓄿𓋔𓅱</value>
+  </data>
+  <data name="WG_E_InvalidArgument" xml:space="preserve">
+    <value>𓉔𓇋𓎡𓇋𓋔𓅱𓅱𓇌𓂋𓄿 </value>
+  </data>
+  <data name="WG_E_InvalidTaggerSetting" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓎼𓇌𓂋𓈖𓅱𓋔𓇌𓏏𓇌𓇋𓎼𓄿𓅱𓎡𓄿𓈙𓇋𓇋</value>
+  </data>
+  <data name="WG_Eroare" xml:space="preserve">
+    <value>𓇌𓂋𓄿 </value>
+  </data>
+  <data name="WG_Error" xml:space="preserve">
+    <value>  𓇌𓂋𓄿 :{0}</value>
+  </data>
+  <data name="WG_Stopping" xml:space="preserve">
+    <value>𓏏𓇌𓇋𓈙𓇋𓍿𓅱𓅱…</value>
+  </data>
+</root>

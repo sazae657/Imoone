@@ -1,0 +1,68 @@
+<web3:Nuendow x:Class="ImooneWPF.NiractionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImooneWPF"
+        xmlns:modelle="clr-namespace:ImooneWPF.Modelle"
+        xmlns:properties="clr-namespace:ImooneWPF.Properties"
+        xmlns:web3="clr-namespace:ImogeIndex.Web3;assembly=ImogeIndex.Web3"
+        mc:Ignorable="d"
+        Title="{x:Static properties:Resources.MC_N_Niraction}" Height="450" Width="800">
+    <web3:Nuendow.DataContext>
+        <modelle:NiractionWindowModelle/>
+    </web3:Nuendow.DataContext>
+    <Grid>
+        <ListView ItemsSource="{Binding Items}" Margin="4,0,0,0">
+            <ListView.CommandBindings>
+                <CommandBinding Command="Copy" Executed="CopyCommand_Executed"/>
+            </ListView.CommandBindings>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu>
+                                <MenuItem Header="{x:Static properties:Resources.WC_Copy}" Command="Copy"
+                                                  CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Value" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="PlainValue" Text="{Binding First}" Visibility="Collapsed"/>
+                                    <TextBlock x:Name="LinkedValue">
+                                        <Hyperlink NavigateUri="{Binding Link}" RequestNavigate="Hyperlink_RequestNavigate">
+                                            <Run Text="{Binding First}"/>
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Link}" Value="{x:Null}">
+                                        <Setter TargetName="PlainValue" Property="Visibility" Value="Visible"/>
+                                        <Setter TargetName="LinkedValue" Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="#" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Thumbnail}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</web3:Nuendow>

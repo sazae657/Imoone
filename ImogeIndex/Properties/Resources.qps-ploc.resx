@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CAP_E_AbortedException" xml:space="preserve">
+    <value>𓂋𓇋𓎡𓅱𓇌𓋔𓅱𓏏𓅱𓎼𓄿{0} 𓎡𓄿𓇋𓂋𓇌𓈖𓊃𓅱𓎡𓅱𓂧𓇌𓈙𓇋𓊪𓄿𓇋𓈙𓇋𓏏𓄿𓈖𓅱𓂧𓇌𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓇋𓈖𓎼𓅱𓅱𓍿𓇋𓎡𓇋𓂋𓇋:{1}</value>
+  </data>
+  <data name="CAP_E_EmptyCaption" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓎼𓄿𓋔𓅱𓂋𓄿</value>
+  </data>
+  <data name="CAP_E_EmptyVlmRespnse" xml:space="preserve">
+    <value>𓃭𓃭𓅓𓎡𓄿𓂋𓄿𓈖𓅱𓂋𓇌𓋔𓅱𓊪𓅱𓈖𓋔𓅱𓎼𓄿𓋔𓅱𓂋𓄿</value>
+  </data>
+  <data name="CAP_E_EndpointNotSet" xml:space="preserve">
+    <value>𓅱𓂋𓃭𓎼𓄿𓋔𓇌𓏏𓇌𓇋𓋔𓄿𓂋𓇌𓏏𓇌𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="CAP_E_HealthUnreachable" xml:space="preserve">
+    <value>𓉔𓇌𓄿𓃭𓏏𓈙𓇋𓊪𓄿𓇋</value>
+  </data>
+  <data name="CAP_E_HostUnreachable" xml:space="preserve">
+    <value> 𓉔𓅱𓋔𓅱𓏏𓅱𓈖𓇋𓋔𓇌𓏏𓅱𓊃𓅱𓎡𓅱𓂧𓇌𓎡𓇋𓈖𓄿𓇋:{0}</value>
+  </data>
+  <data name="CAP_E_HttpError" xml:space="preserve">
+    <value>𓉔𓏏𓏏𓊪𓇌𓂋𓄿 ({0}  ):{1}</value>
+  </data>
+  <data name="CAP_E_LoadImage" xml:space="preserve">
+    <value> 𓎼𓄿𓊃𓅱𓅱𓅱𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇌𓈖𓄿𓇋:{0}</value>
+  </data>
+  <data name="CAP_E_LoadImageNtr" xml:space="preserve">
+    <value> 𓎼𓄿𓊃𓅱𓅱𓅱𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇌𓈖𓄿𓇋:{0}  :{1}</value>
+  </data>
+  <data name="CAP_E_ModelListFailed" xml:space="preserve">
+    <value>{0} :𓅓𓅱𓂧𓇌𓂋𓅱𓇋𓍿𓇋𓂋𓄿𓈖𓅱𓈙𓅱𓏏𓅱𓎡𓅱𓂧𓇌𓎡𓇋𓈖𓄿𓎡𓄿𓏏𓄿</value>
+  </data>
+  <data name="CAP_E_ModelUnavailable" xml:space="preserve">
+    <value>{0} 𓎼𓄿𓂋𓇋𓇌𓅱𓅱𓂧𓇌𓎡𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="CAP_E_NetworkError" xml:space="preserve">
+    <value> 𓏏𓅱𓅱𓈙𓇋𓈖𓇌𓂋𓄿 :{0}</value>
+  </data>
+  <data name="CAP_E_NotSanitized" xml:space="preserve">
+    <value>𓋔𓄿𓈖𓇋𓏏𓇋𓊃𓇌𓎼𓄿𓇌𓅱𓃀𓄿𓂋𓇌𓏏𓇌𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="CAP_E_RequestTimeout" xml:space="preserve">
+    <value>𓂋𓇋𓎡𓅱𓇌𓋔𓅱𓏏𓅱𓎼𓄿𓏏𓄿𓇋𓅓𓅱𓄿𓅱𓏏𓅱</value>
+  </data>
+  <data name="CAP_E_TomlCorruption" xml:space="preserve">
+    <value>𓏏𓅱𓅓𓃭𓎼𓄿𓆑𓅱𓋔𓇌𓇋</value>
+  </data>
+  <data name="CAP_E_Unhealthy" xml:space="preserve">
+    <value>  𓉔𓇌𓄿𓃭𓏏𓎼𓄿𓇋𓆓𓅱𓅱:{0}</value>
+  </data>
+  <data name="CM_E_SyntaxError" xml:space="preserve">
+    <value>{0}  𓄿𓂋𓅱𓎡𓇋𓅓𓇌:{1} 𓆑𓅱𓋔𓇌𓇋𓈖𓄿行</value>
+  </data>
+  <data name="CP_Anyalize" xml:space="preserve">
+    <value>𓎡𓄿𓇋𓋔𓇌𓎡𓇋</value>
+  </data>
+  <data name="CP_Captioning" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓇋𓈖𓎼𓅱</value>
+  </data>
+  <data name="CP_CheckingThumbnail" xml:space="preserve">
+    <value>𓋔𓄿𓅓𓅱𓈖𓇌𓇋𓂋𓅱𓎡𓄿𓎡𓅱𓈖𓇋𓈖𓍿𓅱𓅱…</value>
+  </data>
+  <data name="CP_CheckingTimestamp" xml:space="preserve">
+    <value>𓉔𓇋𓊃𓅱𓎡𓇌𓎡𓄿𓎡𓅱𓈖𓇋𓈖𓍿𓅱𓅱…</value>
+  </data>
+  <data name="CP_DeferredFile" xml:space="preserve">
+    <value> 𓇌𓂋𓄿 𓂧𓇌𓄿𓏏𓅱𓅓𓄿𓅱𓄿𓈙𓇋𓈖𓇋𓈙𓇋𓏏𓄿𓆑𓅱ぁ𓇋𓂋𓅱:{0} :{1}𓎡𓇌𓈖</value>
+  </data>
+  <data name="CP_E_AnyalizeMetadatumFailed" xml:space="preserve">
+    <value> 𓅓𓇌𓏏𓄿𓂧𓇌 𓏏𓄿𓅓𓅱𓈖𓅱𓎡𓄿𓇋𓋔𓇌𓎡𓇋𓈖𓇋𓈙𓇋𓊪𓄿𓇋:{0} :{1}</value>
+  </data>
+  <data name="CP_E_ImageAnyalizeFailed" xml:space="preserve">
+    <value> 𓎼𓄿𓊃𓅱𓅱𓈖𓅱𓎡𓄿𓇋𓋔𓇌𓎡𓇋𓈖𓇋𓈙𓇋𓊪𓄿𓇋:{0} :{1}</value>
+  </data>
+  <data name="CP_E_ImageLoadFailed" xml:space="preserve">
+    <value>{0} :𓎼𓄿𓊃𓅱𓅱𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋𓈙𓇋𓊪𓄿𓇋</value>
+  </data>
+  <data name="CP_E_ImagePreprocessFailed" xml:space="preserve">
+    <value> 𓎼𓄿𓊃𓅱𓅱𓈖𓅱𓊃𓇌𓈖𓈙𓅱𓂋𓇋𓈖𓇋𓈙𓇋𓊪𓄿𓇋:{0} :{1}</value>
+  </data>
+  <data name="CP_IndexingCompleted" xml:space="preserve">
+    <value>  𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓋔𓄿𓎡𓅱𓋔𓇌𓇋𓎡𓄿𓈖𓂋𓇌𓅱𓅱(𓅓𓇋𓏏𓄿𓈖𓋔𓄿𓎡𓅱:{0}   𓆑𓅱ぉ𓂋𓅱𓂧𓄿 𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋𓈙𓇋𓊪𓄿𓇋:{1}𓆑𓅱ぁ𓇋𓂋𓅱)</value>
+  </data>
+  <data name="CP_IndexLoaded" xml:space="preserve">
+    <value>𓇋𓈖𓂧𓇌𓎡𓋔𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋𓎡𓄿𓈖𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="CP_InspectUpdate" xml:space="preserve">
+    <value> 𓎡𓅱𓅱𓈙𓇋𓈖𓎡𓄿𓎡𓅱𓈖𓇋𓈖{0} 𓎡𓇌𓈖:{1}</value>
+  </data>
+  <data name="CP_Load" xml:space="preserve">
+    <value>𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋</value>
+  </data>
+  <data name="CP_LoadIndexProgress" xml:space="preserve">
+    <value> 𓇋𓈖𓂧𓇌𓎡𓋔𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋{0}/{1}</value>
+  </data>
+  <data name="CP_LoadingIndex" xml:space="preserve">
+    <value>𓇋𓈖𓂧𓇌𓎡𓋔𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋</value>
+  </data>
+  <data name="CP_Saving" xml:space="preserve">
+    <value> 𓉔𓅱𓊃𓅱𓈖𓍿𓅱𓅱…</value>
+  </data>
+  <data name="CP_SkipDirectory" xml:space="preserve">
+    <value> 𓏏𓄿𓈖𓋔𓄿𓎡𓅱𓅱𓋔𓅱𓎡𓇋𓊪𓅱:{0} {1}</value>
+  </data>
+  <data name="CP_SkipReparsePoint" xml:space="preserve">
+    <value>𓋔𓄿𓇋𓎡𓄿𓇋𓋔𓇌𓎡𓇋𓊪𓅱𓇋𓈖𓏏𓅱𓉔𓄿𓏏𓄿𓈖𓋔𓄿𓎡𓅱𓏏𓄿𓇋𓈙𓅱𓅱𓎼𓄿𓇋</value>
+  </data>
+  <data name="CP_Tagging" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓅱𓊃𓅱𓎡𓇌</value>
+  </data>
+  <data name="CP_UpdateCompleted" xml:space="preserve">
+    <value> 𓎡𓅱𓅱𓈙𓇋𓈖𓉔𓄿𓈖𓇌𓇋𓎡𓄿𓈖𓂋𓇌𓅱𓅱{0}/{1}</value>
+  </data>
+  <data name="CP_UpdateInProgress" xml:space="preserve">
+    <value> 𓎡𓅱𓅱𓈙𓇋𓈖𓉔𓄿𓈖𓇌𓇋𓍿𓅱𓅱{0}/{1}</value>
+  </data>
+  <data name="FX_FileScan" xml:space="preserve">
+    <value>𓆑𓅱ぁ𓇋𓂋𓅱𓋔𓅱𓎡𓇌𓄿𓈖</value>
+  </data>
+  <data name="FX_SavingTimestamp" xml:space="preserve">
+    <value> 𓉔𓇋𓊃𓅱𓎡𓇌𓉔𓅱𓊃𓅱𓈖𓍿𓅱𓅱...</value>
+  </data>
+  <data name="FX_TimestampSaved" xml:space="preserve">
+    <value>𓉔𓇋𓊃𓅱𓎡𓇌𓉔𓅱𓊃𓅱𓈖𓎡𓄿𓈖𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="GL_E_DirectoryNotFound" xml:space="preserve">
+    <value>{0} 𓎼𓄿𓈖𓄿𓇋</value>
+  </data>
+  <data name="GL_E_FewGeneration" xml:space="preserve">
+    <value>𓋔𓇌𓂧𓄿𓇋𓋔𓅱𓅱𓉔𓄿1𓇋𓆓𓅱𓅱</value>
+  </data>
+  <data name="GL_E_InvalidValue" xml:space="preserve">
+    <value>{0} 𓈖𓅱𓈖𓇌𓎼𓄿𓅱𓎡𓄿𓈙𓇋𓇋</value>
+  </data>
+  <data name="GL_E_MP_Assign" xml:space="preserve">
+    <value>{0} :=𓎼𓄿𓈖𓄿𓇋</value>
+  </data>
+  <data name="GL_E_MP_BothType" xml:space="preserve">
+    <value>{0} :𓅱𓈖𓄿𓆓𓇋𓇌𓇋𓂋𓇋𓄿𓋔𓅱𓈖𓅱𓎡𓄿𓏏𓄿𓉔𓄿𓏏𓇌𓎡𓋔𓏏𓅓𓄿𓏏𓄿𓉔𓄿𓈖𓅱𓅓𓃀𓇌𓂋𓈖𓇋𓏏𓅱𓅱𓇋𓏏𓅱𓈙𓇋𓏏𓇌𓍿𓅱</value>
+  </data>
+  <data name="GL_E_MP_InvalidGrade" xml:space="preserve">
+    <value>{0} :𓄿𓃭𓇋𓄿𓋔/𓏏𓄿𓎼𓎼𓄿𓈖𓄿𓇋</value>
+  </data>
+  <data name="GL_E_MP_InvalidType" xml:space="preserve">
+    <value>{0} :𓎡𓄿𓏏𓄿𓉔𓄿𓏏𓇌𓎡𓋔𓏏𓅓𓄿𓏏𓄿𓉔𓄿𓈖𓅱𓅓𓃀𓇌𓂋𓂧𓇌𓈙𓇋𓏏𓇌𓇋</value>
+  </data>
+  <data name="GL_E_MP_TypeSyntax" xml:space="preserve">
+    <value>{0}    :𓄿𓃭𓇋𓄿𓋔:𓏏𓇌𓎡𓋔𓏏=𓏏𓄿𓎼𓅓𓄿𓏏𓄿𓉔𓄿𓄿𓃭𓇋𓄿𓋔:𓈖𓅱𓅓𓃀𓇌𓂋=𓏏𓄿𓎼𓂧𓇌𓈙𓇋𓏏𓇌𓇋</value>
+  </data>
+  <data name="GL_E_ProfileNotInProfiles" xml:space="preserve">
+    <value>{0}  𓈖𓅱{1}  𓎼𓄿{2} 𓈖𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="GL_E_RootIsNull" xml:space="preserve">
+    <value>𓂋𓅱𓅱𓏏𓎼𓄿𓈖𓅱𓃭𓃭</value>
+  </data>
+  <data name="GL_E_UAP" xml:space="preserve">
+    <value> 𓎡𓄿𓈖𓍿𓇋𓎼𓄿𓇋𓎡𓄿𓂋𓄿𓎡𓅱𓂋𓅱𓎡𓇌𓅱𓅱𓆑𓅱:{0}</value>
+  </data>
+  <data name="GL_E_UnknownProfile" xml:space="preserve">
+    <value> 𓆑𓅱𓅓𓇌𓇋𓈖𓄿𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱{0}</value>
+  </data>
+  <data name="IM_E_EncodeThumbnailFailed" xml:space="preserve">
+    <value>𓋔𓄿𓅓𓅱𓈖𓇌𓇋𓂋𓅱𓈖𓅱𓇌𓈖𓎡𓅱 𓂧𓅱𓈖𓇋𓈙𓇋𓊪𓄿𓇋</value>
+  </data>
+  <data name="IM_E_GetPixelFailed" xml:space="preserve">
+    <value>𓎼𓄿𓋔𓅱𓅱𓏏𓅱𓂋𓇋𓂧𓄿𓋔𓇌𓈖𓄿𓇋</value>
+  </data>
+  <data name="IM_E_GetPixelsFailed" xml:space="preserve">
+    <value>𓎼𓄿𓋔𓅱𓃀𓄿𓆑𓅱ぁ𓅱𓈙𓅱𓏏𓅱𓎡𓅱𓂧𓇌𓎡𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="IM_E_GetThumbnailPixelsFailed" xml:space="preserve">
+    <value>𓋔𓄿𓅓𓅱𓈖𓇌𓇋𓂋𓅱𓈖𓅱𓎼𓄿𓋔𓅱𓅱𓈙𓅱𓏏𓅱𓎡𓅱𓂧𓇌𓎡𓇋𓈖𓄿𓎡𓄿𓏏𓄿</value>
+  </data>
+  <data name="IM_E_ReadMetadata" xml:space="preserve">
+    <value>𓅓𓇌𓏏𓄿𓂧𓇌 𓏏𓄿𓅱𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇌𓈖𓄿𓎡𓄿𓏏𓄿</value>
+  </data>
+  <data name="IM_E_ResizeFailed" xml:space="preserve">
+    <value>𓂋𓇋𓋔𓄿𓇋𓊃𓅱𓈖𓇋𓈙𓇋𓊪𓄿𓇋</value>
+  </data>
+  <data name="LC_ImogeIndex" xml:space="preserve">
+    <value>𓇋𓅓𓅱𓎼𓇌𓇋𓈖𓂧𓇌𓎡𓋔</value>
+  </data>
+  <data name="MUR_E_HashNotCalculated" xml:space="preserve">
+    <value>𓎡𓇋𓆓𓅱𓈖𓎼𓄿𓊃𓅱𓅱𓈖𓅱𓉔𓄿𓈙𓅱𓎼𓄿𓅓𓇋𓎡𓇌𓇋𓋔𓄿𓈖</value>
+  </data>
+  <data name="MUR_E_HashNotSelected" xml:space="preserve">
+    <value>𓉔𓄿𓈙𓅱𓎼𓄿𓇋𓈙𓅱𓅓𓅱𓇌𓂋𓄿𓃀𓄿𓂋𓇌𓏏𓇌𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="NIR_E_GCount" xml:space="preserve">
+    <value> 𓎡𓄿𓊃𓅱𓎼𓄿𓅱𓎡𓄿𓈙𓇋𓇋{0}</value>
+  </data>
+  <data name="NIR_E_GHash" xml:space="preserve">
+    <value>𓉔𓄿𓈙𓅱𓆑𓅱𓇋𓍿𓇋</value>
+  </data>
+  <data name="NIR_E_GId" xml:space="preserve">
+    <value> 𓇋𓂧𓎼𓄿𓅱𓎡𓄿𓈙𓇋𓇋{0}</value>
+  </data>
+  <data name="NIR_E_GImage" xml:space="preserve">
+    <value>𓇋𓅓𓄿𓎼𓇌𓎼𓄿𓅱𓎡𓄿𓈙𓇋𓇋</value>
+  </data>
+  <data name="NIR_E_GSize" xml:space="preserve">
+    <value> 𓋔𓄿𓇋𓊃𓅱𓎼𓄿𓅱𓎡𓄿𓈙𓇋𓇋{0}</value>
+  </data>
+  <data name="NIR_E_LiteralCorrupted" xml:space="preserve">
+    <value>𓋔𓅱𓏏𓅱𓂋𓇋 𓅓𓅱𓈖𓅱𓏏𓅱𓍿𓅱𓅱𓂧𓇌𓂋𓇋𓏏𓇌𓂋𓄿𓂋𓅱𓂧𓇌 𓏏𓄿𓎼𓄿𓏏𓅱𓎼𓇋𓂋𓇌𓅓𓅱𓅱𓈙𓇋𓏏𓄿</value>
+  </data>
+  <data name="NIR_E_ResponseTooLarge" xml:space="preserve">
+    <value> 𓆓𓅱𓈙𓇋𓈖𓅓𓇌𓋔𓇌 𓆓𓇋𓎼𓄿𓂧𓇌𓎡𓄿𓋔𓅱𓎼𓇋𓂋𓅱{0}</value>
+  </data>
+  <data name="NIR_E_TokenCorrupted" xml:space="preserve">
+    <value>𓋔𓅱𓏏𓅱𓂋𓇋 𓅓𓅱𓈖𓅱𓏏𓅱𓍿𓅱𓅱𓂧𓇌𓇋𓍿𓇋𓏏𓅱 𓎡𓅱𓈖𓎼𓄿𓏏𓅱𓎼𓇋𓂋𓇌𓅓𓅱𓅱𓈙𓇋𓏏𓄿</value>
+  </data>
+  <data name="SM_E_ColumnMustNotExist" xml:space="preserve">
+    <value>{0}.{1} :𓂧𓃀𓃀𓄿 𓆓𓅱𓈖𓈖𓇋𓏏𓄿𓇋𓈙𓇋𓏏𓇌𓅓𓇋𓏏𓅱𓇋𓎡𓄿𓈖𓅱𓉔𓄿𓊃𓅱𓈖𓅱𓎡𓄿𓂋𓄿𓅓𓅱𓎼𓄿𓄿𓂋𓅱</value>
+  </data>
+  <data name="SM_E_ColumnNotIncludedDefinition" xml:space="preserve">
+    <value>{0} :𓏏𓇌𓇋𓎼𓇋𓈖𓇋𓈖𓄿𓇋𓎡𓄿𓂋𓄿𓅓𓅱𓎼𓄿𓄿𓂋𓅱</value>
+  </data>
+  <data name="SM_E_CountingFailed" xml:space="preserve">
+    <value>𓎡𓄿𓅱𓈖𓏏𓅱𓈙𓅱𓏏𓅱𓎡𓅱𓈙𓇋𓊪𓄿𓇋</value>
+  </data>
+  <data name="SM_E_DatumFromTheFuture" xml:space="preserve">
+    <value> 𓂧𓃀𓃀𓄿 𓆓𓅱𓈖{0}  𓉔𓄿𓏏𓄿𓇋𓅱𓅱𓃀𓄿 𓆓𓅱𓈖{1} 𓇌𓅱𓂋𓇋𓄿𓏏𓄿𓂋𓄿𓈙𓇋𓇋𓈖𓅱𓂧𓇌𓄿𓎡𓇌𓅓𓄿𓋔𓇌𓈖𓅱</value>
+  </data>
+  <data name="SM_E_DatumNotOpen" xml:space="preserve">
+    <value>𓂧𓃀𓎼𓄿𓉔𓇋𓂋𓄿𓎡𓄿𓂋𓇌𓏏𓇌𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="SM_E_DatumNotOpenEx" xml:space="preserve">
+    <value>{0} 𓎼𓄿𓉔𓇋𓂋𓄿𓎡𓄿𓂋𓇌𓏏𓇌𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="SM_E_DatumTamperingDuringTabulation" xml:space="preserve">
+    <value>𓈙𓅱𓅱𓎡𓇌𓇋𓍿𓅱𓅱𓈖𓇋𓂧𓇌 𓏏𓄿𓎼𓄿𓎡𓅱𓅱𓈙𓇋𓈖𓋔𓄿𓂋𓇌𓏏𓄿</value>
+  </data>
+  <data name="SM_E_DatumVersionNotFount" xml:space="preserve">
+    <value>𓃀𓄿 𓆓𓅱𓈖𓆓𓅱𓅱𓉔𓅱𓅱𓎼𓄿𓈖𓄿𓇋𓈖𓅱𓂧𓇌𓆓𓇋𓂧𓅱𓅱𓇋𓎡𓅱𓅱𓂧𓇌𓎡𓇋𓅓𓄿𓋔𓇌𓈖𓅱</value>
+  </data>
+  <data name="SM_E_DatunNeedsUpdate" xml:space="preserve">
+    <value>𓂧𓃀𓈖𓅱𓎡𓅱𓅱𓈙𓇋𓈖𓎼𓄿𓉔𓇋𓏏𓅱𓇌𓅱𓅱</value>
+  </data>
+  <data name="SM_E_EnumParseFailed" xml:space="preserve">
+    <value>𓇌𓈖𓅱𓅓.𓏏𓂋𓇌𓊪𓄿𓂋𓋔𓇌&lt;{0}&gt;({1})𓎼𓄿𓈙𓇋𓊪𓄿𓇋</value>
+  </data>
+  <data name="SM_E_GetAttributeFailed" xml:space="preserve">
+    <value>{0} 𓎼𓄿𓏏𓅱𓂋𓇌𓈖𓄿𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="SM_E_InvalidColumnVersion" xml:space="preserve">
+    <value>{0} :𓎡𓄿𓂋𓄿𓅓𓅱𓈖𓅱𓏏𓅱𓇋𓎡𓄿𓃀𓄿 𓆓𓅱𓈖𓅱𓎡𓄿𓈙𓇋𓇋</value>
+  </data>
+  <data name="SM_E_LengthMultipleOf" xml:space="preserve">
+    <value> 𓂧𓇌 𓏏𓄿𓍿𓅱𓅱𓎼𓄿𓆑𓅱𓋔𓇌𓇋({0}𓃀𓄿𓇋𓏏𓅱𓈖𓅱𓃀𓄿𓇋𓋔𓅱𓅱𓆓𓄿𓈖𓄿𓇋𓏏𓅱𓂧𓄿𓅓𓇌)</value>
+  </data>
+  <data name="SM_E_MissingColumn" xml:space="preserve">
+    <value>{0} :𓉔𓇋𓏏𓅱𓇌𓅱𓅱𓎡𓄿𓂋𓄿𓅓𓅱𓎼𓄿𓎡𓇌𓏏𓅱𓂋𓄿𓎡𓅱𓈙𓇋𓏏𓇌𓇋𓂋𓅱</value>
+  </data>
+  <data name="SM_E_MissingColumnEx" xml:space="preserve">
+    <value>{0}.{1} :𓎡𓇋𓋔𓅱𓈖𓎡𓄿𓂋𓄿𓅓𓅱𓎼𓄿𓎡𓇌𓏏𓅱𓂋𓄿𓎡𓅱𓈙𓇋𓏏𓇌𓇋𓂋𓅱</value>
+  </data>
+  <data name="SM_E_NotInSchema" xml:space="preserve">
+    <value> 𓋔𓅱𓎡𓇋 𓅓𓄿𓈖𓇋𓈖𓄿𓇋{0}</value>
+  </data>
+  <data name="SM_E_NotInTypeMap" xml:space="preserve">
+    <value>{0} :𓏏𓇌𓊪𓇌𓅓𓄿𓊪𓈖𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="SM_E_NotOpenOrReadOnly" xml:space="preserve">
+    <value>𓎡𓅱𓈖𓈖𓇌𓎡𓏏𓇋𓅱𓈖𓎼𓄿𓈖𓅱𓂋𓅱𓅓𓅱𓈙𓇋𓎡𓅱𓉔𓄿𓎡𓄿𓎡𓇋𓎡𓅱𓅓𓇋𓆑𓅱𓎡𓇌𓅱𓎡𓄿</value>
+  </data>
+  <data name="SM_E_NotOpenOrReadOnlyEx" xml:space="preserve">
+    <value>{0} 𓎼𓄿𓈖𓅱𓂋𓅱𓅓𓅱𓈙𓇋𓎡𓅱𓉔𓄿𓎡𓄿𓎡𓇋𓎡𓅱𓅓𓇋𓆑𓅱𓎡𓇌𓅱𓎡𓄿</value>
+  </data>
+  <data name="SM_E_PkeyNotMigratable" xml:space="preserve">
+    <value>{0}.{1} :𓈙𓅱𓎡𓇋 𓏏𓅱𓅱𓈖𓇋𓈎𓅱𓇌𓎡𓄿𓂋𓄿𓅓𓅱𓉔𓄿𓆓𓇋𓂧𓅱𓅱𓏏𓅱𓇋𓎡𓄿𓋔𓄿𓋔𓇌𓈖𓇌𓇌𓇌𓅱</value>
+  </data>
+  <data name="SM_E_PropertyTypeIsNull" xml:space="preserve">
+    <value>{0} 𓊪𓂋𓅱𓊪𓇌𓂋𓏏𓇌𓏏𓇌𓊪𓇌𓎼𓄿𓈖𓅱𓃭𓃭𓂧𓄿𓏏𓄿</value>
+  </data>
+  <data name="SM_E_UnknownBindValueType" xml:space="preserve">
+    <value> 𓃀𓄿𓇋𓈖𓂧𓅱𓉔𓇌𓈖𓋔𓅱𓅱𓈖𓅱𓎡𓄿𓏏𓄿𓎼𓄿𓆑𓅱𓅓𓇌𓇋:{0}</value>
+  </data>
+  <data name="SM_E_UnknownColumn" xml:space="preserve">
+    <value>{0} :𓆑𓅱𓅓𓇌𓇋𓈖𓄿𓂋𓇌𓏏𓅱</value>
+  </data>
+  <data name="SM_E_UnsupportedSearchField" xml:space="preserve">
+    <value>{0} :𓅓𓇋𓏏𓄿𓇋𓅱𓅱𓈖𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓆑𓅱ぃ 𓂋𓅱𓂧𓅱</value>
+  </data>
+  <data name="TB_E_CreateThumbnailFailed" xml:space="preserve">
+    <value> 𓋔𓄿𓅓𓅱𓈖𓇌𓇋𓂋𓅱𓈖𓅱𓋔𓄿𓎡𓅱𓋔𓇌𓇋𓈖𓇋𓈙𓇋𓊪𓄿𓇋:{0} :{1}</value>
+  </data>
+  <data name="TB_SkipDuplicateIndex" xml:space="preserve">
+    <value>  𓆓𓅱𓅱𓆑𓅱𓎡𓅱𓂋𓇌𓎡𓅱 𓂧𓅱𓈖𓄿𓈖𓅱𓂧𓇌𓋔𓅱𓎡𓇋𓊪𓅱:{0}</value>
+  </data>
+  <data name="TP_E_ReadOnlyIndex" xml:space="preserve">
+    <value>𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓎼𓄿𓇌𓅱𓅓𓇋𓏏𓅱𓂋𓇋𓋔𓇌𓈖𓇌𓅱𓅱𓂧𓇌𓉔𓇋𓂋𓄿𓎡𓄿𓂋𓇌𓏏𓇌𓇋𓂋𓅱</value>
+  </data>
+  <data name="TP_Index" xml:space="preserve">
+    <value>𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱</value>
+  </data>
+  <data name="TP_ProcessingTag" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓅱𓈙𓅱𓅱𓎡𓇌𓇋𓍿𓅱𓅱</value>
+  </data>
+  <data name="TW_E_DeleteFailed" xml:space="preserve">
+    <value>{0} 𓈖𓅱𓋔𓄿𓎡𓅱𓆓𓅱𓈖𓇋𓈙𓇋𓊪𓄿𓇋</value>
+  </data>
+  <data name="TW_E_FailedToResize" xml:space="preserve">
+    <value>𓈙𓅱𓎡𓅱𓈙𓅱𓅱𓂧𓇌𓎡𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="TW_E_GetPixelsFailed" xml:space="preserve">
+    <value>𓂋𓇋𓋔𓄿𓇋𓊃𓅱𓎡𓇌𓎡𓄿𓅱𓏏𓅱𓂋𓇋𓂧𓄿𓋔𓇌𓈖𓄿𓇋</value>
+  </data>
+  <data name="TW_E_ImageIsNull" xml:space="preserve">
+    <value>𓎼𓄿𓊃𓅱𓅱𓎼𓄿𓈖𓅱𓃭𓃭</value>
+  </data>
+  <data name="TW_E_ImageTooSmall" xml:space="preserve">
+    <value>𓋔𓄿𓇋𓊃𓅱𓎼𓄿𓍿𓇋𓇋𓋔𓄿𓋔𓅱𓎼𓇋𓂋𓅱</value>
+  </data>
+  <data name="TW_E_InvalidPixelFormat" xml:space="preserve">
+    <value> 𓃀𓎼𓂋𓄿8888𓊃𓄿𓈖𓈖𓇌𓈖𓈖𓄿𓎼𓄿𓂋𓄿𓎡𓅱𓈖𓎡𓄿𓇋𓉔𓄿𓋔𓅱𓅱𓉔𓄿𓇋𓎡𓄿𓈖𓄿𓇋𓏏𓅱𓎡𓅱𓅓𓄿𓂋𓅱:{0}</value>
+  </data>
+  <data name="TW_E_MetadataLoadFailed" xml:space="preserve">
+    <value>{0} :𓅓𓇌𓏏𓄿𓂧𓇌 𓏏𓄿𓎼𓄿𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇌𓈖𓄿𓎡𓄿𓏏𓄿</value>
+  </data>
+  <data name="TW_E_MetadataNotExists" xml:space="preserve">
+    <value>{0} :𓅓𓇌𓏏𓄿𓂧𓇌 𓏏𓄿𓎼𓄿𓈖𓄿𓇋</value>
+  </data>
+  <data name="TW_E_ModelNotExists" xml:space="preserve">
+    <value>{0} :𓅓𓅱𓂧𓇌𓂋𓅱𓎼𓄿𓈖𓄿𓇋</value>
+  </data>
+  <data name="TW_E_ModelNotLoaded" xml:space="preserve">
+    <value>𓅓𓅱𓂧𓇌𓂋𓅱𓎼𓄿𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓄿𓂋𓇌𓏏𓇌𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="TW_E_ModelPathIsNull" xml:space="preserve">
+    <value>𓅓𓅱𓂧𓇌𓃭𓊪𓄿𓏏𓎼𓄿𓈖𓅱𓃭𓃭</value>
+  </data>
+  <data name="TW_E_PixelBufferFailed" xml:space="preserve">
+    <value>𓎼𓄿𓋔𓅱𓃀𓄿𓆑𓅱ぁ 𓅱𓎡𓄿𓎡𓅱𓉔𓅱𓂧𓇌𓎡𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="TW_E_ReadRgbFailed" xml:space="preserve">
+    <value>𓂋𓎼𓃀𓂧𓇌𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇌𓈖𓄿𓇋</value>
+  </data>
+  <data name="TW_InitializingOrt" xml:space="preserve">
+    <value>𓅱𓂋𓏏𓈙𓅱𓎡𓇋𓎡𓄿𓍿𓅱𓅱…</value>
+  </data>
+  <data name="TW_InitializingWML" xml:space="preserve">
+    <value>𓅱𓅓𓃭𓈙𓅱𓎡𓇋𓎡𓄿𓎡𓄿𓇋𓈙𓇋</value>
+  </data>
+  <data name="TW_LoadingModel" xml:space="preserve">
+    <value> 𓅓𓅱𓂧𓇌𓂋𓅱𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋𓍿𓅱𓅱…{0}</value>
+  </data>
+  <data name="TW_LoadingTag" xml:space="preserve">
+    <value>  𓏏𓄿𓎼𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋𓍿𓅱𓅱…{0}</value>
+  </data>
+  <data name="TW_Modepiling" xml:space="preserve">
+    <value> 𓅓𓅱𓂧𓇌𓂋𓅱𓎡𓅱𓈖𓊪𓄿𓇋𓂋𓅱𓍿𓅱𓅱…{0}</value>
+  </data>
+  <data name="TW_WMLInitialized" xml:space="preserve">
+    <value>𓅱𓅓𓃭𓈙𓅱𓎡𓇋𓎡𓄿𓎡𓄿𓈖𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="ZG_Error" xml:space="preserve">
+    <value>{0}  𓇌𓂋𓄿 :{1}</value>
+  </data>
+  <data name="PMG_Description" xml:space="preserve">
+    <value>𓆑𓅱𓏏𓄿𓏏𓅱𓈖𓅱𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱𓈖𓅱𓋔𓇌𓏏𓇌𓇋𓏏𓅱𓂧𓃀𓅱𓅓𓄿 𓆓𓇋𓈙𓇋𓏏𓇌𓄿𓏏𓄿𓂋𓄿𓈙𓇋𓇋𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱𓅱𓏏𓅱𓎡𓅱𓂋𓅱</value>
+  </data>
+  <data name="PMG_OptA" xml:space="preserve">
+    <value>𓅓𓄿 𓆓𓇋𓅓𓅱𓏏𓅱𓈖𓅱𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱𓄿(𓎡𓅱𓍿𓇋𓎼𓄿𓇌𓅱𓅱𓋔𓇌𓈖)。𓈖𓅱𓎡𓄿𓅓𓇌𓂋𓄿𓅓𓄿𓈖𓆑𓅱ぁ𓇋𓂋𓅱𓅓𓇌𓇋𓎡𓄿𓂧𓇌ぃ𓂋𓇌𓎡𓅱𓏏𓅱𓂋𓇋</value>
+  </data>
+  <data name="PMG_OptB" xml:space="preserve">
+    <value>𓅓𓄿 𓆓𓇋𓅓𓅱𓏏𓅱𓈖𓅱𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱𓃀𓇋 𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱𓅓𓇌𓇋𓎡𓄿𓂧𓇌ぃ𓂋𓇌𓎡𓅱𓏏𓅱𓂋𓇋</value>
+  </data>
+  <data name="PMG_OptOut" xml:space="preserve">
+    <value>𓈙𓅱𓏏𓅱𓂋𓇌𓅱𓎡𓅱𓋔𓄿𓎡𓇋𓂧𓇌ぃ𓂋𓇌𓎡𓅱𓏏𓅱𓂋𓇋(𓋔𓅱𓈖𓊃𓄿𓇋𓈙𓇋𓈖𓄿𓇋𓎡𓄿𓋔𓅱𓂋𓄿𓂧𓇌𓄿𓂋𓅱𓎡𓅱𓏏𓅱)</value>
+  </data>
+  <data name="PMG_OptName" xml:space="preserve">
+    <value>𓈙𓇋𓏏𓇌𓇋𓋔𓅱𓂋𓅱𓏏𓅱𓊪𓂋𓅱𓆑𓇋𓃭𓇌.𓏏𓅱𓅓𓃭𓈖𓇋𓎡𓅱𓈖𓅱𓈖𓄿𓅓𓄿𓇌𓂧𓇌𓏏𓅱𓅱𓂋𓅱𓎡𓅱𓋔𓅱𓂋𓅱</value>
+  </data>
+  <data name="PMG_E_Error" xml:space="preserve">
+    <value> 𓇌𓂋𓄿 :{0}</value>
+  </data>
+  <data name="PMG_E_ProfileNotFound" xml:space="preserve">
+    <value> 𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱{0} 𓎼𓄿𓅓𓇋𓏏𓅱𓎡𓄿𓂋𓄿𓈖𓄿𓇋</value>
+  </data>
+  <data name="PMG_E_DatumNotFound" xml:space="preserve">
+    <value>{0} 𓎼𓄿𓅓𓇋𓏏𓅱𓎡𓄿𓂋𓄿𓈖𓄿𓇋</value>
+  </data>
+  <data name="PMG_E_SameProfile" xml:space="preserve">
+    <value> 𓅱𓈖𓄿𓆓𓇋𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱𓂧𓅱𓅱𓈙𓇋𓉔𓄿𓅓𓄿 𓆓𓇋𓂧𓇌𓎡𓇋𓈖𓄿𓇋:{0}</value>
+  </data>
+  <data name="PMG_E_OutputIsSource" xml:space="preserve">
+    <value> 𓈙𓅱𓏏𓅱𓂋𓇌𓅱𓎡𓅱𓋔𓄿𓎡𓇋𓎼𓄿𓅓𓄿 𓆓𓇋𓅓𓅱𓏏𓅱𓏏𓅱𓅱𓈖𓄿𓆓𓇋:{0}</value>
+  </data>
+  <data name="PMG_E_OutputNotEmpty" xml:space="preserve">
+    <value> 𓈙𓅱𓏏𓅱𓂋𓇌𓅱𓎡𓅱𓋔𓄿𓎡𓇋{0} 𓎼𓄿𓋔𓅱𓂋𓄿𓆓𓄿𓈖𓄿𓇋</value>
+  </data>
+  <data name="PMG_E_VersionMismatch" xml:space="preserve">
+    <value>{0}  𓈖𓅱𓃀𓄿 𓆓𓅱𓈖𓎼𓄿𓇋𓍿𓇋𓈙𓇋𓈖𓄿𓇋:𓄿={1} 𓃀={2}</value>
+  </data>
+  <data name="PMG_E_ProfileExists" xml:space="preserve">
+    <value> 𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱{0} 𓉔𓄿𓋔𓅱𓂧𓇌𓈖𓇋𓏏𓅱𓅱𓂋𓅱𓎡𓅱𓋔𓄿𓂋𓇌𓏏𓇌𓇋𓂋𓅱</value>
+  </data>
+  <data name="PMG_W_Running" xml:space="preserve">
+    <value> 𓎡𓇌𓇋𓎡𓅱𓎡𓅱:𓇋𓅓𓅱𓎼𓇌𓇋𓈖𓂧𓇌𓎡𓋔𓎼𓄿𓎡𓇋𓂧𓅱𓅱𓍿𓅱𓅱。𓅓𓄿 𓆓𓇋𓍿𓅱𓅱𓈖𓇋𓎡𓄿𓎡𓇋𓎡𓅱𓅓𓄿𓂋𓇌𓏏𓄿𓈖𓄿𓇋𓇌𓅱𓅱𓉔𓄿𓉔𓄿𓈖𓇌𓇋𓋔𓄿𓂋𓇌𓈖𓄿𓇋</value>
+  </data>
+  <data name="PMG_W_SettingDiffers" xml:space="preserve">
+    <value>  𓎡𓇌𓇋𓎡𓅱𓎡𓅱:𓋔𓇌𓏏𓇌𓇋{0}  𓎼𓄿𓎡𓅱𓏏𓅱𓈖𓄿𓂋𓅱𓈖𓅱𓂧𓇌𓄿𓈖𓅱𓈖𓇌𓅱𓏏𓅱𓎡𓄿𓅱(𓄿={1} 𓃀={2})</value>
+  </data>
+  <data name="PMG_W_MetaTypeConflict" xml:space="preserve">
+    <value>  𓎡𓇌𓇋𓎡𓅱𓎡𓅱:𓅓𓇌𓏏𓄿𓂧𓇌 𓏏𓄿𓅓𓅱𓇌𓇋𓂋𓇋𓄿𓋔𓅱{0}  𓉔𓄿{1} 𓏏𓅱𓎡𓄿𓏏𓄿𓎼𓄿𓎡𓅱𓇋𓍿𓇋𓎼𓄿𓅱𓈖𓅱𓂧𓇌𓋔𓅱𓏏𓇌𓏏𓄿</value>
+  </data>
+  <data name="PMG_W_ExcludeOverlap" xml:space="preserve">
+    <value>  𓎡𓇌𓇋𓎡𓅱𓎡𓅱:𓆓𓅱𓎼𓄿𓇋𓊪𓄿𓋔𓅱{0}  𓎼𓄿𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓊪𓄿𓋔𓅱{1} 𓏏𓅱𓎡𓄿𓋔𓄿𓈖𓄿𓏏𓇌𓇋𓂋𓅱。𓆓𓇋𓎡𓄿𓇋𓈖𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓋔𓇌𓇋𓋔𓇌𓇋𓂧𓇌𓂋𓇌𓎡𓅱 𓂧𓅱𓎼𓄿𓎡𓇋𓇌𓂋𓅱𓎡𓄿𓈖𓅱𓅱𓋔𓇌𓇋𓎼𓄿𓄿𓂋𓅱</value>
+  </data>
+  <data name="PMG_W_ExcludePatternAdded" xml:space="preserve">
+    <value>  𓎡𓇌𓇋𓎡𓅱𓎡𓅱:𓆓𓅱𓎼𓄿𓇋𓊪𓄿𓏏𓄿 𓈖{0} 𓎼𓄿𓂋𓇌𓅱𓅱𓉔𓅱𓅱𓈖𓅱𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱𓈖𓇋𓏏𓇌𓎡𓇋𓇌𓅱𓅱𓋔𓄿𓂋𓇌𓂋𓅱</value>
+  </data>
+  <data name="PMG_W_ModelMixed" xml:space="preserve">
+    <value> 𓎡𓇌𓇋𓎡𓅱𓎡𓅱:𓏏𓄿𓎼𓎼𓇌𓂋𓎡𓄿𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓇋𓈖𓎼𓅱𓈖𓅱𓃭𓃭𓅓𓎼𓄿𓎡𓅱𓏏𓅱𓈖𓄿𓂋𓅱𓈖𓅱𓂧𓇌、𓏏𓄿𓎼𓅱/𓎡𓇌𓄿𓊪𓅱𓈙𓅱𓈖𓉔𓄿𓆑𓅱𓎡𓅱𓋔𓅱𓅱𓈖𓅱𓅓𓅱𓂧𓇌𓂋𓅱𓇌𓅱𓂋𓄿𓇋𓎼𓄿𓎡𓅱𓈖𓊃𓄿𓇋𓋔𓅱𓂋𓅱</value>
+  </data>
+  <data name="PMG_W_ColumnMismatch" xml:space="preserve">
+    <value>  𓎡𓇌𓇋𓎡𓅱𓎡𓅱:𓏏𓇌 𓃀𓅱𓂋𓅱{0} 𓈖𓅱𓂋𓇌𓏏𓅱𓎼𓄿𓇋𓍿𓇋𓈙𓇋𓈖𓄿𓇋𓈖𓅱𓂧𓇌𓎡𓇌𓅱𓅱𓏏𓅱𓅱𓈖𓅱𓂋𓇌𓏏𓅱𓂧𓄿𓎡𓇌𓎡𓅱𓊪𓇋 𓈙𓇋𓏏𓄿</value>
+  </data>
+  <data name="PMG_W_UnknownTable" xml:space="preserve">
+    <value>  𓎡𓇌𓇋𓎡𓅱𓎡𓅱:𓏏𓇌 𓃀𓅱𓂋𓅱{0} 𓉔𓄿𓅓𓄿 𓆓𓇋𓏏𓄿𓇋𓈙𓅱𓅱𓎼𓄿𓇋</value>
+  </data>
+  <data name="PMG_I_Merging" xml:space="preserve">
+    <value> 𓅓𓄿 𓆓𓇋𓍿𓅱𓅱:𓄿={0} 𓃀={1}</value>
+  </data>
+  <data name="PMG_I_Result" xml:space="preserve">
+    <value> 𓄿:{0}   𓎡𓇌𓈖+𓃀:{1}  𓎡𓇌𓈖(𓊪𓄿𓋔𓅱𓆓𓅱𓅱𓆑𓅱𓎡𓅱𓂧𓇌𓋔𓅱𓎡𓇋𓊪𓅱:{2}  𓎡𓇌𓈖)→{3}𓎡𓇌𓈖</value>
+  </data>
+  <data name="PMG_I_Registered" xml:space="preserve">
+    <value> 𓊪𓂋𓅱𓆑𓇋𓃭𓇌.𓏏𓅱𓅓𓃭𓈖𓇋{0} 𓅱𓏏𓅱𓅱𓂋𓅱𓎡𓅱𓈙𓇋𓏏𓄿</value>
+  </data>
+  <data name="PMG_I_Done" xml:space="preserve">
+    <value> 𓎡𓄿𓈖𓂋𓇌𓅱𓅱:{0}</value>
+  </data>
+  <data name="PMG_I_Hint" xml:space="preserve">
+    <value>𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓉔𓄿𓆓𓇋𓎡𓄿𓇋𓈖𓅱𓇋𓅓𓅱𓎼𓇌𓇋𓈖𓂧𓇌𓎡𓋔𓆓𓇋𓎡𓅱𓅱𓆓𓇋𓈖𓇋𓏏𓅱𓎡𓅱𓂋𓇋𓈖𓄿𓅱𓋔𓄿𓂋𓇌𓂋𓅱</value>
+  </data>
+  <data name="FS_E_UnknownScheme" xml:space="preserve">
+    <value> 𓅓𓇋𓏏𓅱𓅱𓂋𓅱𓎡𓅱𓈖𓅱𓋔𓅱𓎡𓇋 𓅓𓅱𓈖𓄿𓈖𓅱𓂧𓇌𓇌𓅱𓅓𓇌𓈖𓄿𓇋:{0}</value>
+  </data>
+</root>

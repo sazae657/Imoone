@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="IDM_EXIT" xml:space="preserve">
+    <value>𓈙𓅱𓅱𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="LH_Character" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓂋𓄿𓎡𓅱𓏏𓄿 </value>
+  </data>
+  <data name="LH_Costume" xml:space="preserve">
+    <value>𓇋𓈙𓅱𓅱</value>
+  </data>
+  <data name="LH_CreatedAt" xml:space="preserve">
+    <value>𓋔𓄿𓎡𓅱𓋔𓇌𓇋𓃀𓇋</value>
+  </data>
+  <data name="LH_FileName" xml:space="preserve">
+    <value>𓆑𓅱ぁ𓇋𓂋𓅱𓅓𓇌𓇋</value>
+  </data>
+  <data name="LH_Folder" xml:space="preserve">
+    <value>𓆑𓅱ぉ𓂋𓅱𓂧𓄿 </value>
+  </data>
+  <data name="LH_Keyword" xml:space="preserve">
+    <value>𓎡𓇋 𓅱𓄿 𓂧𓅱</value>
+  </data>
+  <data name="LH_Objects" xml:space="preserve">
+    <value>𓅱𓃀𓅱𓆓𓇋ぇ𓎡𓅱𓏏𓅱</value>
+  </data>
+  <data name="LH_Scene" xml:space="preserve">
+    <value>𓈙𓇋 𓈖</value>
+  </data>
+  <data name="LH_Tag" xml:space="preserve">
+    <value>𓏏𓄿𓎼𓅱</value>
+  </data>
+  <data name="LI_FileName" xml:space="preserve">
+    <value>𓆑𓅱ぁ𓇋𓂋𓅱𓅓𓇌𓇋</value>
+  </data>
+  <data name="LI_FileSize" xml:space="preserve">
+    <value>𓋔𓄿𓇋𓊃𓅱</value>
+  </data>
+  <data name="LI_Location" xml:space="preserve">
+    <value>𓃀𓄿𓈙𓅱</value>
+  </data>
+  <data name="LI_Resolution" xml:space="preserve">
+    <value>𓎡𓄿𓇋𓊃𓅱𓅱𓂧𓅱</value>
+  </data>
+  <data name="MC_About" xml:space="preserve">
+    <value>  𓇋𓅓𓅱𓅱𓈖𓇌𓈖𓇋𓏏𓅱𓇋𓏏𓇌…</value>
+  </data>
+  <data name="MC_AppTitle" xml:space="preserve">
+    <value>𓇋𓅓𓅱𓅱𓈖𓇌</value>
+  </data>
+  <data name="MC_ClearDetailPane" xml:space="preserve">
+    <value>𓈙𓅱𓅱𓋔𓄿𓇋𓈖𓅱𓎡𓅱𓂋𓇋𓄿</value>
+  </data>
+  <data name="MC_CopyFilePath" xml:space="preserve">
+    <value>𓆑𓅱ぁ𓇋𓂋𓅱𓊪𓄿𓋔𓅱𓈖𓅱𓎡𓅱𓊪𓇋 </value>
+  </data>
+  <data name="MC_D_Display" xml:space="preserve">
+    <value>𓉔𓇌𓅱𓅱𓆓𓇋</value>
+  </data>
+  <data name="MC_D_IconH" xml:space="preserve">
+    <value>𓏏𓅱𓎡𓅱𓂧𓄿𓇋𓄿𓇋𓎡𓅱𓈖</value>
+  </data>
+  <data name="MC_D_IconL" xml:space="preserve">
+    <value>𓂧𓄿𓇋𓄿𓇋𓎡𓅱𓈖</value>
+  </data>
+  <data name="MC_D_IconM" xml:space="preserve">
+    <value>𓍿𓅱𓅱𓄿𓇋𓎡𓅱𓈖</value>
+  </data>
+  <data name="MC_D_IconS" xml:space="preserve">
+    <value>𓈙𓅱𓅱𓄿𓇋𓎡𓅱𓈖</value>
+  </data>
+  <data name="MC_D_List" xml:space="preserve">
+    <value>𓂋𓇋𓋔𓅱𓏏𓅱</value>
+  </data>
+  <data name="MC_D_ThumbList" xml:space="preserve">
+    <value>𓋔𓄿𓅓𓅱𓈖𓇌𓇋𓂋𓅱𓏏𓅱𓎡𓇋𓂋𓇋𓋔𓅱𓏏𓅱</value>
+  </data>
+  <data name="MC_DetailClose" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MC_DetailOpen" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MC_E_DatumCannotOpen" xml:space="preserve">
+    <value>  𓂧𓇌 𓏏𓄿𓎼𓄿𓄿𓎡𓇌𓈖𓄿𓎡𓄿𓏏𓄿=&gt;{0}
+{1}</value>
+  </data>
+  <data name="MC_E_FileNotFound" xml:space="preserve">
+    <value>
+𓆑𓅱ぁ𓇋𓂋𓅱𓎼𓄿𓈖𓄿𓇋{0}</value>
+  </data>
+  <data name="MC_E_IndexDatumNotExists" xml:space="preserve">
+    <value>𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓎼𓄿𓋔𓄿𓎡𓅱𓋔𓇌𓇋𓋔𓄿𓂋𓇌𓏏𓇌𓇋𓈖𓄿𓇋</value>
+  </data>
+  <data name="MC_E_IndexToolLaunchFailed" xml:space="preserve">
+    <value>  𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓏏𓅱 𓂋𓅱𓈖𓅱𓎡𓇋𓂧𓅱𓅱𓈖𓇋𓈙𓇋𓊪𓄿𓇋:{0}</value>
+  </data>
+  <data name="MC_E_ShellExecDenied" xml:space="preserve">
+    <value>
+𓉔𓇋𓂋𓄿𓎡𓄿𓋔𓇌𓈖𓄿𓇋𓇌𓅱{0}</value>
+  </data>
+  <data name="MC_Error" xml:space="preserve">
+    <value>𓇌𓂋𓄿 </value>
+  </data>
+  <data name="MC_ErrorError" xml:space="preserve">
+    <value>  𓇌𓂋𓄿 =&gt;{0}
+{1}</value>
+  </data>
+  <data name="MC_IncrementalSearch" xml:space="preserve">
+    <value>𓇋𓈖𓎡𓅱𓂋𓇋𓅓𓇌𓈖𓏏𓄿𓂋𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱</value>
+  </data>
+  <data name="MC_L_Allocating" xml:space="preserve">
+    <value> 𓋔𓅱𓋔𓅱𓎼𓇋𓎡𓅱𓅓𓇋𓍿𓅱𓅱…</value>
+  </data>
+  <data name="MC_L_Complete" xml:space="preserve">
+    <value>𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋𓎡𓄿𓈖𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="MC_L_Indexing" xml:space="preserve">
+    <value> 𓈖𓄿𓎼𓄿𓈙𓇋𓎡𓅱𓅓𓇋𓍿𓅱𓅱…</value>
+  </data>
+  <data name="MC_L_Loading" xml:space="preserve">
+    <value> 𓇌𓅱𓅓𓇋𓎡𓅱𓅓𓇋𓍿𓅱𓅱…</value>
+  </data>
+  <data name="MC_Language" xml:space="preserve">
+    <value>𓎼𓇌𓈖𓎼𓅱</value>
+  </data>
+  <data name="MC_LaunchIndexTool" xml:space="preserve">
+    <value> 𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓏏𓅱 𓂋𓅱𓅱𓎡𓇋𓂧𓅱𓅱…</value>
+  </data>
+  <data name="MC_MinimizeToTray" xml:space="preserve">
+    <value>𓋔𓄿𓇋𓈙𓅱𓅱𓎡𓄿𓆓𓇋𓉔𓄿𓏏𓄿𓋔𓅱𓎡𓅱𓏏𓅱𓂋𓇌𓇋𓈖𓇋𓉔𓇌𓅱𓅱𓆓𓇋</value>
+  </data>
+  <data name="MC_N_Niraction" xml:space="preserve">
+    <value>𓈖𓇋𓂋𓄿𓎡𓅱𓈙𓅱𓈖</value>
+  </data>
+  <data name="MC_N_NiractionFailed" xml:space="preserve">
+    <value>𓈖𓇋𓂋𓄿𓎡𓅱𓈙𓅱𓈖𓇌𓂋𓄿 </value>
+  </data>
+  <data name="MC_N_SendDistance" xml:space="preserve">
+    <value> 𓂧𓇋𓋔𓏏𓄿𓈖𓎡𓇌𓋔𓅱𓅱𓈙𓇋𓈖</value>
+  </data>
+  <data name="MC_N_SendVerify" xml:space="preserve">
+    <value> 𓆑𓇌𓂋𓇋𓆑𓇌𓋔𓅱𓅱𓈙𓇋𓈖</value>
+  </data>
+  <data name="MC_NItems" xml:space="preserve">
+    <value>{0:N0} 𓎡𓅱𓅱𓅓𓅱𓎡𓅱</value>
+  </data>
+  <data name="MC_Open" xml:space="preserve">
+    <value>𓉔𓇋𓂋𓄿𓎡𓅱</value>
+  </data>
+  <data name="MC_OpenDatumRootFolder" xml:space="preserve">
+    <value>𓂧𓇌 𓏏𓄿𓆑𓅱ぉ𓂋𓅱𓂧𓄿 𓅱𓉔𓇋𓂋𓄿𓎡𓅱(_𓎡𓅱𓈙𓇋 )</value>
+  </data>
+  <data name="MC_OpenFolder" xml:space="preserve">
+    <value>𓆑𓅱ぉ𓂋𓅱𓂧𓄿 𓅱𓉔𓇋𓂋𓄿𓎡𓅱</value>
+  </data>
+  <data name="MC_OpenSettingsFolder" xml:space="preserve">
+    <value>{0} 𓈖𓅱𓋔𓇌𓏏𓇌𓇋𓆑𓅱ぉ𓂋𓅱𓂧𓄿 𓅱𓉔𓇋𓂋𓄿𓎡𓅱(_𓅱𓅓𓇌𓎼𓄿)</value>
+  </data>
+  <data name="MC_Profile" xml:space="preserve">
+    <value>𓊪𓅱𓂋𓅱𓆑𓅱ぁ𓇋𓂋𓅱</value>
+  </data>
+  <data name="MC_PulldownMenu" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MC_Quit" xml:space="preserve">
+    <value>𓇋𓅓𓅱𓅱𓈖𓇌𓈖𓅱𓈙𓅱𓅱𓂋𓇌𓅱𓅱</value>
+  </data>
+  <data name="MC_ReloadDatum" xml:space="preserve">
+    <value>𓂧𓇌 𓏏𓄿𓅱𓋔𓄿𓇋𓂧𓅱𓎡𓅱𓅓𓇋𓎡𓅱𓅓𓇋</value>
+  </data>
+  <data name="MC_SearchSimilarImages" xml:space="preserve">
+    <value>𓂋𓅱𓇋𓆓𓇋𓎼𓄿𓊃𓅱𓅱𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱</value>
+  </data>
+  <data name="MC_ShowOriginal" xml:space="preserve">
+    <value>𓅓𓅱𓏏𓅱𓎼𓄿𓊃𓅱𓅱𓅱𓉔𓇌𓅱𓅱𓆓𓇋</value>
+  </data>
+  <data name="MC_SimilarHashAHash" xml:space="preserve">
+    <value> 𓄿𓉔𓄿𓈙(𓉔𓇌𓇋𓎡𓇋𓈖)</value>
+  </data>
+  <data name="MC_SimilarHashDHash" xml:space="preserve">
+    <value> 𓂧𓉔𓄿𓈙(𓋔𓄿𓃀𓅱𓈖)</value>
+  </data>
+  <data name="MC_SimilarHashes" xml:space="preserve">
+    <value>𓂋𓅱𓇋𓆓𓇋𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓈖𓇋𓏏𓅱𓎡𓄿𓅱𓉔𓄿𓈙𓅱</value>
+  </data>
+  <data name="MC_SimilarHashPHash" xml:space="preserve">
+    <value> 𓆑𓄿𓈙(𓍿𓇋𓎡𓄿𓎡𓅱)</value>
+  </data>
+  <data name="MC_SimilarHashWHash" xml:space="preserve">
+    <value> 𓅱𓉔𓄿𓈙(𓅱ぇ 𓃀𓅱𓂋𓇌𓏏𓅱)</value>
+  </data>
+  <data name="MC_SimilarSearchActive" xml:space="preserve">
+    <value>𓂋𓅱𓇋𓆓𓇋𓎡𓇌𓈖𓋔𓄿𓎡𓅱:{0}(𓍿𓇋𓎡𓄿𓇋𓆓𓅱𓈖・𓋔𓄿𓇋𓂧𓄿𓇋{1}𓎡𓇌𓈖)</value>
+  </data>
+  <data name="MC_SimilarSearchClear" xml:space="preserve">
+    <value>𓏏𓅱𓅱𓆓𓅱𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓈖𓇋𓅓𓅱𓂧𓅱𓂋𓅱</value>
+  </data>
+  <data name="MC_SimilarSearchHint" xml:space="preserve">
+    <value>𓂋𓅱𓇋𓆓𓇋𓎼𓄿𓊃𓅱𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓍿𓅱𓅱。𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓅱𓄿 𓂧𓅱𓅱𓈖𓇌𓅱𓅱𓂋𓇌𓅱𓎡𓅱𓋔𓅱𓂋𓅱𓏏𓅱𓏏𓅱𓅱𓆓𓅱𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓈖𓇋𓅓𓅱𓂧𓅱𓂋𓅱。</value>
+  </data>
+  <data name="MC_SimilarSearching" xml:space="preserve">
+    <value> 𓂋𓅱𓇋𓆓𓇋𓎼𓄿𓊃𓅱𓅱𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓍿𓅱𓅱…</value>
+  </data>
+  <data name="MC_Theme" xml:space="preserve">
+    <value>𓏏𓇌 𓅓𓄿</value>
+  </data>
+  <data name="MC_ToggleDetailPane" xml:space="preserve">
+    <value> 𓈙𓅱𓅱𓋔𓄿𓇋𓈖𓅱𓉔𓇌𓅱𓅱𓆓𓇋/𓉔𓇋𓉔𓇌𓅱𓅱𓆓𓇋(𓄿𓃭𓏏+𓈙𓇋𓆑𓏏+𓊪)</value>
+  </data>
+  <data name="MC_W_MetadataIndexStale" xml:space="preserve">
+    <value>  
+𓅓𓇌𓏏𓄿𓂧𓇌 𓏏𓄿𓅓𓅱𓈖𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓎼𓄿𓆑𓅱𓂋𓅱𓇋𓏏𓄿𓅓𓇌、𓏏𓅱𓎼𓇋𓈖𓅱𓇌𓇋𓂋𓇋𓄿𓋔𓅱𓉔𓄿𓅓𓇌𓏏𓄿:𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓂧𓇌𓏏𓄿𓂧𓄿𓈙𓇋𓇋𓎡𓇌𓎡𓄿𓈖𓇋𓈖𓄿𓂋𓇋𓅓𓄿𓋔𓇌𓈖𓅱{0}
+ 𓇋𓅓𓅱𓎼𓇌𓇋𓈖𓂧𓇌𓎡𓋔𓅱𓊪𓆑𓂧𓇌𓏏𓄿𓎼𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓅱𓎡𓅱𓅱𓈙𓇋𓈖𓋔𓅱𓂋𓅱𓎡𓅱𓏏𓅱</value>
+  </data>
+  <data name="MC_Warning" xml:space="preserve">
+    <value>𓍿𓅱𓅱𓇋</value>
+  </data>
+  <data name="WC_Copy" xml:space="preserve">
+    <value>𓎡𓅱𓊪𓇋 </value>
+  </data>
+</root>

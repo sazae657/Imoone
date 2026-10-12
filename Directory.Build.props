@@ -1,0 +1,19 @@
+<Project>
+    <PropertyGroup>
+        <NetCoreAppTarget>net10.0</NetCoreAppTarget>
+        <NetCoreAppWinTarget>$(NetCoreAppTarget)-windows10.0.26100.0</NetCoreAppWinTarget>
+    </PropertyGroup>
+    <PropertyGroup>
+        <MurVersion>0.1.0.0</MurVersion>
+        <NirVersion>0.1.0.0</NirVersion>
+        <Authors>sazae657</Authors>
+        <Muricense>Zlib</Muricense>
+        <Copyright>Copyright (C) 2026 - sazae657</Copyright>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/sazae657/Imoone</RepositoryUrl>
+    </PropertyGroup>
+    <PropertyGroup>
+        <NeutralLanguage>ja</NeutralLanguage>
+        <SatelliteResourceLanguages>ja;en</SatelliteResourceLanguages>
+    </PropertyGroup>
+</Project>
