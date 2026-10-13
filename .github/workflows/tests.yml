@@ -25,6 +25,16 @@ jobs:
         runs-on: windows-2025
         timeout-minutes: 30
         steps:
+            - name: Set timezone to JST
+              run: tzutil /s "Tokyo Standard Time"
+
+            - name: Check timezone
+              shell: pwsh
+              run: |
+                tzutil /g
+                Get-Date
+                [TimeZoneInfo]::Local.Id
+
             - name: Checkout
               uses: actions/checkout@v7
               with:
@@ -39,7 +49,7 @@ jobs:
               run: dotnet restore
 
             - name: Build
-              run: dotnet build --configuration Release --no-restore
+              run: dotnet build --configuration Release --no-restore -p:Platform=x64
 
             - name: Run tests
-              run: dotnet test --project ImogeIndex.Web2/ImogeIndex.Web2.csproj --configuration Release -p:Platform=x64 --output Detailed -no-ansi --verbosity diag --no-progress
+              run: dotnet test --project ImogeIndex.Web2/ImogeIndex.Web2.csproj --configuration Release -p:Platform=x64 --no-restore --output Detailed -no-ansi --no-progress
