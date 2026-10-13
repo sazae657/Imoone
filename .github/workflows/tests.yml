@@ -42,4 +42,4 @@ jobs:
               run: dotnet build --configuration Release --no-restore
 
             - name: Run tests
-              run: dotnet test --project ImogeIndex.Web2/ImogeIndex.Web2.csproj --configuration Release -p:Platform=x64 --no-restore --output Detailed -no-ansi --verbosity diag --no-progress
+              run: dotnet test --project ImogeIndex.Web2/ImogeIndex.Web2.csproj --configuration Release -p:Platform=x64 --output Detailed -no-ansi --verbosity diag --no-progress
