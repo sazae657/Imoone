@@ -7,7 +7,6 @@
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
         <Platforms>x64</Platforms>
-        <WindowsPackageType>None</WindowsPackageType>
         <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
         <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
         <AssemblyVersion>$(NirVersion)</AssemblyVersion>
