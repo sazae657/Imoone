@@ -28,12 +28,18 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v7
               with:
-                  persist-credentials: false
+                persist-credentials: false
 
             - name: Setup .NET SDK
               uses: actions/setup-dotnet@v6
               with:
-                  global-json-file: global.json
+                global-json-file: global.json
+
+            - name: Install dependencies
+              run: dotnet restore
+
+            - name: Build
+              run: dotnet build --configuration Release --no-restore
 
             - name: Run tests
-              run: dotnet test --project ImogeIndex.Web2/ImogeIndex.Web2.csproj --configuration Release -p:Platform=x64 --no-progress
+              run: dotnet test --project ImogeIndex.Web2/ImogeIndex.Web2.csproj --configuration Release -p:Platform=x64 --no-restore --verbosity normal
