@@ -2,7 +2,7 @@
 using ImogeIndex.Common;
 using ImogeIndex.Storage;
 using ImogeIndex.Territories;
-using ImooneWPF.Storage;
+using ImogeIndex.Web6.Storage;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -11,7 +11,7 @@ namespace ImooneWPF;
 // ﾌﾟﾛﾌｧｲﾙ読み込みとｲﾓｹﾞｲﾝﾃﾞｯｸｽ連動
 public partial class MainWindow
 {
-    readonly ProfileLoader profileLoader = new();
+    readonly ProfileLoader profileLoader = new(ResourcePalabras.Instance);
     bool wasLoadingProfile;
 
     /// <summary>

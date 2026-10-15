@@ -1,8 +1,5 @@
 ﻿using ImogeIndex.Common;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
@@ -14,28 +11,7 @@ namespace ImogeIndex.Web3.Dictators;
 /// </summary>
 public static class CrashDictator
 {
-    /// <summary>
-    /// ｸﾗｯｼｭﾚﾎﾟーﾄ置き場
-    /// </summary>
-    const string CrashReportDir = "Essen+Fressen";
-
-    /// <summary>
-    /// 残しておくｸﾗｯｼｭﾚﾎﾟーﾄの数
-    /// </summary>
-    const int ReportGenerationCount = 20;
-
-    /// <summary>
-    /// この期間内に閾値を超えてUIｽﾚｯﾄﾞで例外が出たら続行を諦める
-    /// </summary>
-    static readonly TimeSpan BurstWindow = TimeSpan.FromSeconds(10);
-
-    /// <summary>
-    /// 続行を諦める例外回数
-    /// </summary>
-    const int BurstThreshold = 5;
-
     static readonly object syncRoot = new();
-    static readonly Queue<DateTime> recentFaults = new();
     static Application? aidecation;
     static string aideName = nameof(ImogeIndex);
     static bool registered;
@@ -69,6 +45,7 @@ public static class CrashDictator
             aidecation = app;
             aideName = name;
         }
+        CrashReporter.AppName = name;
         app.DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnDomainUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
@@ -167,17 +144,7 @@ public static class CrashDictator
     /// <summary>
     /// 短時間に例外が連発しているか
     /// </summary>
-    static bool IsBurstError()
-    {
-        var now = DateTime.UtcNow;
-        lock (syncRoot) {
-            recentFaults.Enqueue(now);
-            while (recentFaults.Count > 0 && now - recentFaults.Peek() > BurstWindow) {
-                recentFaults.Dequeue();
-            }
-            return recentFaults.Count >= BurstThreshold;
-        }
-    }
+    static bool IsBurstError() => CrashReporter.IsBurstError();
 
     /// <summary>
     /// 通常の終了経路(MainWindowのClosing)で後始末させつつ終了する
@@ -288,105 +255,13 @@ public static class CrashDictator
     /// <param name="source"></param>
     /// <param name="ex"></param>
     /// <returns>書き出したﾊﾟｽ(失敗したらnull)</returns>
-    static string? WriteReport(string source, Exception ex) => WriteReport(source, ex.ToString());
+    static string? WriteReport(string source, Exception ex) => CrashReporter.Write(source, ex);
 
     /// <summary>
-    /// ｸﾗｯｼｭﾚﾎﾟーﾄを書き出す。書けなければ一時ﾌｫﾙﾀﾞーに逃がす。
+    /// ｸﾗｯｼｭﾚﾎﾟーﾄを書き出す
     /// </summary>
     /// <param name="source"></param>
     /// <param name="detail"></param>
     /// <returns>書き出したﾊﾟｽ(失敗したらnull)</returns>
-    static string? WriteReport(string source, string detail)
-    {
-        var body = BuildReport(source, detail);
-        Debug.WriteLine(body);
-
-        // 開いていれば通常ﾛｸﾞにも残す(Logはﾌﾟﾛﾌｧｲﾙ未ﾛーﾄﾞでも安全)
-        try {
-            Logger.Dictator.Log(LogLevel.Error, $"{source}{Environment.NewLine}{detail}");
-        }
-        catch {
-            // ﾛｸﾞが死んでてもﾚﾎﾟーﾄは書く
-        }
-
-        var fileName = $"{aideName}-{DateTime.Now:yyyyMMdd-HHmmss-fff}-{Environment.ProcessId}.log";
-        foreach (var dir in EnumerateReportDirs()) {
-            try {
-                lock (syncRoot) {
-                    Directory.CreateDirectory(dir);
-                    var path = Path.Combine(dir, fileName);
-                    File.AppendAllText(path, body, Encoding.UTF8);
-                    PurgeOldReports(dir);
-                    return path;
-                }
-            }
-            catch {
-                // 次の候補へ
-            }
-        }
-        return null;
-    }
-
-    /// <summary>
-    /// ﾚﾎﾟーﾄ置き場の候補
-    /// </summary>
-    static IEnumerable<string> EnumerateReportDirs()
-    {
-        string? primary = null;
-        try {
-            primary = Path.Combine(SystemParams.SettingPouth.FullName, CrashReportDir);
-        }
-        catch {
-            // SystemParamsの初期化自体が死んでいる
-        }
-        if (primary != null) {
-            yield return primary;
-        }
-        yield return Path.Combine(Path.GetTempPath(), nameof(ImogeIndex), CrashReportDir);
-    }
-
-    /// <summary>
-    /// 古いﾚﾎﾟーﾄを消す
-    /// </summary>
-    static void PurgeOldReports(string dir)
-    {
-        try {
-            var olds = new DirectoryInfo(dir)
-                .EnumerateFiles($"{aideName}-*.log")
-                .OrderByDescending(x => x.Name, StringComparer.Ordinal)
-                .Skip(ReportGenerationCount);
-            foreach (var f in olds) {
-                f.Delete();
-            }
-        }
-        catch {
-            // 掃除失敗は無視
-        }
-    }
-
-    /// <summary>
-    /// ﾚﾎﾟーﾄ本文
-    /// </summary>
-    static string BuildReport(string source, string detail)
-    {
-        var sb = new StringBuilder();
-        sb.AppendLine($"==== {DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} {source} ====");
-        try {
-            var asm = Assembly.GetEntryAssembly();
-            var version = asm?
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
-                .InformationalVersion ?? asm?.GetName().Version?.ToString();
-            sb.AppendLine($"App     : {aideName} {version}");
-            sb.AppendLine($"Runtime : {RuntimeInformation.FrameworkDescription} {RuntimeInformation.ProcessArchitecture}");
-            sb.AppendLine($"OS      : {RuntimeInformation.OSDescription}");
-            sb.AppendLine($"Thread  : {Environment.CurrentManagedThreadId} {Thread.CurrentThread.Name}");
-        }
-        catch {
-            // 環境情報は取れなくてもよい
-        }
-        sb.AppendLine();
-        sb.AppendLine(detail);
-        sb.AppendLine();
-        return sb.ToString();
-    }
+    static string? WriteReport(string source, string detail) => CrashReporter.Write(source, detail);
 }

@@ -32,14 +32,15 @@ function GenerateEmbedContent {
 $proj="${ProzektRoot}\Assets\Editor\Bsv2Resx\Bsv2Resx.csproj"
 $dllPath =(dotnet msbuild -getProperty:TargetPath -p:Platform=x64 $proj)
 $exePath = [System.IO.Path]::ChangeExtension($dllPath, ".exe")
-#Write-Output $exePath
-dotnet build -v quiet -p:Platform=x64  ${proj}
+Write-Output $exePath
+#dotnet build -v quiet -p:Platform=x64  ${proj}
 
 GenerateEmbedContent -Bsv2Resx $exePath
 Get-ChildItem "${ProzektRoot}\Assets\Strings" -Directory | ForEach-Object {
     $par = $_.Name
     Generate -Bsv2Resx $exePath -Partition $par -Target ImogeIndex
     Generate -Bsv2Resx $exePath -Partition $par -Target ImogeIndex.Web3
+    Generate -Bsv2Resx $exePath -Partition $par -Target ImogeIndex.Web6
     Generate -Bsv2Resx $exePath -Partition $par -Target ImogeIndexWPF
     Generate -Bsv2Resx $exePath -Partition $par -Target ImooneWPF
     Generate -Bsv2Resx $exePath -Partition $par -Target ImogeMerge -Container "${ProzektRoot}\Assets\Editor"

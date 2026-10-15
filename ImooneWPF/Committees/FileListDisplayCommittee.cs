@@ -1,11 +1,14 @@
-﻿using ImooneWPF.Controls;
+﻿using ImogeIndex.Web6.Committees;
+using ImogeIndex.Web6.Dictators;
+using ImogeIndex.Web6.Modelle;
+using ImooneWPF.Controls;
 using ImooneWPF.Dictators;
-using ImooneWPF.Modelle;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace ImooneWPF.Committees;
@@ -22,7 +25,7 @@ public sealed class FileListDisplayCommittee : IDisposable {
     readonly BindingBase nameBinding;
     readonly Action captureColumnsDelegaty;
     readonly Action<MurDisplayMode> saveModeDelegaty;
-    readonly TileThumbnailDictator thumbnails = new();
+    readonly TileThumbnailDictator<BitmapSource> thumbnails = new(WpfTileBitmapDecoder.Instance);
     int selectionAnchor = -1;
     MurDisplayMode mode = MurDisplayMode.List;
     int changementVer;
@@ -201,29 +204,25 @@ public sealed class FileListDisplayCommittee : IDisposable {
         while (focused != null && focused is not ListViewItem) {
             focused = VisualTreeHelper.GetParent(focused);
         }
-        var current = focused == null ? list.SelectedIndex : list.ItemContainerGenerator.IndexFromContainer(focused);
-        var hasCurrent = current >= 0;
-        current = Math.Max(0, current);
-        var page = Math.Max(1, (int)(panel.ViewportHeight / panel.ItemHeight)) * panel.Columns;
-        var next = args.Key switch
+        TileMove? move = args.Key switch
         {
-            Key.Left => current - 1,
-            Key.Right => current + 1,
-            Key.Up => current - panel.Columns,
-            Key.Down => current + panel.Columns,
-            Key.Home => 0,
-            Key.End => list.Items.Count - 1,
-            Key.PageUp => current - page,
-            Key.PageDown => current + page,
-            _ => -1
+            Key.Left => TileMove.Left,
+            Key.Right => TileMove.Right,
+            Key.Up => TileMove.Up,
+            Key.Down => TileMove.Down,
+            Key.Home => TileMove.Home,
+            Key.End => TileMove.End,
+            Key.PageUp => TileMove.PageUp,
+            Key.PageDown => TileMove.PageDown,
+            _ => null
         };
-        if (args.Key is not (Key.Left or Key.Right or Key.Up or Key.Down or Key.Home or Key.End or Key.PageUp or Key.PageDown)) {
+        if (move == null) {
             return;
         }
-        if (!hasCurrent && args.Key != Key.End) {
-            next = 0;
-        }
-        next = Math.Clamp(next, 0, list.Items.Count - 1);
+        var current = focused == null ? list.SelectedIndex : list.ItemContainerGenerator.IndexFromContainer(focused);
+        var page = Math.Max(1, (int)(panel.ViewportHeight / panel.ItemHeight)) * panel.Columns;
+        var next = TileNavigation.Next(move.Value, current, panel.Columns, page, list.Items.Count);
+        current = Math.Max(0, current);
         var shift = Keyboard.Modifiers.HasFlag(ModifierKeys.Shift);
         var control = Keyboard.Modifiers.HasFlag(ModifierKeys.Control);
         if (!shift && !control) {

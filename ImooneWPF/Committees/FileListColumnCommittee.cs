@@ -1,4 +1,5 @@
-﻿using ImooneWPF.Dictators;
+﻿using ImogeIndex.Web6.Committees;
+using ImogeIndex.Web6.Dictators;
 using ImogeIndex.Mur;
 using System.ComponentModel;
 using System.Windows;
@@ -7,35 +8,13 @@ using System.Windows.Controls;
 namespace ImooneWPF.Committees;
 
 /// <summary>
-/// ﾘｽﾄのｶﾗﾑ制御
+/// ﾘｽﾄのｶﾗﾑ制御(状態はFileListColumnStateが持ち、ここはGridViewColumnとの対応付けだけ)
 /// </summary>
 internal sealed class FileListColumnCommittee
 {
     readonly FrameworkElement resourceOwner;
     readonly List<GridViewColumn> columns = new();
-    readonly List<double> widths = new();
-
-    // ﾒﾀﾃﾞーﾀﾑ対応しようかと思ったけどﾒﾓﾘ食うのでやめ
-    readonly string[] sortFields = [
-        nameof(FileItem.Name),
-        nameof(FileItem.Path),
-        nameof(FileItem.DateTime),
-        nameof(FileItem.Tag),
-        nameof(FileItem.Character),
-        nameof(FileItem.Keyword),
-        nameof(FileItem.Costume),
-        nameof(FileItem.Scene),
-        nameof(FileItem.Objects)
-    ];
-
-    bool[] visibility = Array.Empty<bool>();
-    int[] order = Array.Empty<int>();
-    GridViewColumn? sortColumn;
-    ListSortDirection sortDirection = ListSortDirection.Ascending;
-    // ｿーﾄ矢印出さない状態(類似検索中とか)
-    bool sortIndicatorHidden;
-    // 非表示禁止の列(ｻﾑﾈ付きﾘｽﾄのﾌｧｲﾙ名列)
-    GridViewColumn? pinnedColumn;
+    FileListColumnState state = new([]);
 
     public FileListColumnCommittee(FrameworkElement owner)
     {
@@ -61,22 +40,10 @@ internal sealed class FileListColumnCommittee
         }
 
         columns.AddRange(gridView.Columns);
-        widths.AddRange(columns.Select(column => column.Width));
-        if (SettingsDictator.Default.ColumnDimensions?.Length == columns.Count)
-        {
-            for (var index = 0; index < columns.Count; index++)
-            {
-                widths[index] = Math.Max(10, SettingsDictator.Default.ColumnDimensions[index]);
-            }
-        }
-        visibility = SettingsDictator.Default.ColumnVisibility?.Length == columns.Count
-            ? SettingsDictator.Default.ColumnVisibility.ToArray()
-            : Enumerable.Repeat(true, columns.Count).ToArray();
-        order = IsValidOrder(SettingsDictator.Default.ColumnOrder)
-            ? SettingsDictator.Default.ColumnOrder!.ToArray()
-            : Enumerable.Range(0, columns.Count).ToArray();
+        state = new FileListColumnState(columns.Select(column => column.Width).ToArray());
+        state.Load(SettingsDictator.Default);
         ApplyVisibility(gridView);
-        RestoreSort();
+        ApplySortTemplate(-1);
     }
 
     /// <summary>
@@ -94,8 +61,8 @@ internal sealed class FileListColumnCommittee
             {
                 Header = columns[index].Header,
                 IsCheckable = true,
-                IsChecked = visibility[index],
-                IsEnabled = columns[index] != pinnedColumn,
+                IsChecked = state.IsVisible(index),
+                IsEnabled = index != state.PinnedColumn,
                 Tag = index
             };
             menuItem.Click += clickHandler;
@@ -114,12 +81,11 @@ internal sealed class FileListColumnCommittee
     /// <returns></returns>
     public bool SetVisibility(GridView gridView, int index, bool isVisible)
     {
-        if (!isVisible && (visibility.Count(value => value) == 1 || columns[index] == pinnedColumn))
+        CaptureVisibleWidths();
+        if (!state.SetVisibility(index, isVisible))
         {
             return false;
         }
-        CaptureVisibleWidths();
-        visibility[index] = isVisible;
         ApplyVisibility(gridView);
         return true;
     }
@@ -131,15 +97,11 @@ internal sealed class FileListColumnCommittee
     /// <param name="column">nullで解除</param>
     public void Discipline(GridView gridView, GridViewColumn? column)
     {
-        pinnedColumn = column;
-        var index = column == null ? -1 : columns.IndexOf(column);
-        if (index < 0 || visibility[index])
-        {
-            return;
-        }
         CaptureVisibleWidths();
-        visibility[index] = true;
-        ApplyVisibility(gridView);
+        if (state.Pin(column == null ? -1 : columns.IndexOf(column)))
+        {
+            ApplyVisibility(gridView);
+        }
     }
 
     /// <summary>
@@ -149,49 +111,20 @@ internal sealed class FileListColumnCommittee
     /// <returns>並び順が変わった？</returns>
     public bool SortBy(GridViewColumn column)
     {
-        var columnIndex = columns.IndexOf(column);
-        if (columnIndex < 0 || columnIndex >= sortFields.Length)
+        var previous = state.SortIndicatorColumn;
+        if (!state.SortBy(columns.IndexOf(column)))
         {
             return false;
         }
-
-        if (sortColumn == column)
-        {
-            sortDirection = sortDirection == ListSortDirection.Ascending
-                ? ListSortDirection.Descending
-                : ListSortDirection.Ascending;
-        }
-        else
-        {
-            if (sortColumn != null)
-            {
-                sortColumn.HeaderTemplate = null;
-            }
-            sortColumn = column;
-            sortDirection = ListSortDirection.Ascending;
-        }
-        ApplySortTemplate();
+        ApplySortTemplate(previous);
         return true;
     }
 
     /// <summary>
     /// 現在のｿーﾄ状態の比較子
-    /// ﾘﾌﾚｸｼｮﾝ経由のSortDescriptionsは重いので型付きで比べる
     /// </summary>
     /// <returns>ｿーﾄしないならnull</returns>
-    public IComparer<FileItem>? CreateComparer()
-    {
-        if (sortColumn == null)
-        {
-            return null;
-        }
-        var columnIndex = columns.IndexOf(sortColumn);
-        if (columnIndex < 0 || columnIndex >= sortFields.Length)
-        {
-            return null;
-        }
-        return new FileItemComparer(sortFields[columnIndex], sortDirection == ListSortDirection.Descending);
-    }
+    public IComparer<FileItem>? CreateComparer() => state.CreateComparer();
 
     /// <summary>
     /// ｶﾗﾑの設定保存
@@ -200,29 +133,8 @@ internal sealed class FileListColumnCommittee
     public void CaptureSettings(GridView gridView)
     {
         CaptureVisibleWidths();
-        UpdateOrder(gridView);
-        SettingsDictator.Default.ColumnDimensions = widths.Select(width => Math.Max(10, (int)width)).ToArray();
-        SettingsDictator.Default.ColumnVisibility = visibility.ToArray();
-        SettingsDictator.Default.ColumnOrder = order.ToArray();
-        SettingsDictator.Default.SortColumn = sortColumn == null ? -1 : columns.IndexOf(sortColumn);
-        SettingsDictator.Default.SortDescending = sortDirection == ListSortDirection.Descending;
-    }
-
-    /// <summary>
-    /// ｿーﾄ状態復元
-    /// </summary>
-    private void RestoreSort()
-    {
-        var columnIndex = SettingsDictator.Default.SortColumn;
-        if (columnIndex < 0 || columnIndex >= sortFields.Length || columnIndex >= columns.Count)
-        {
-            return;
-        }
-        sortColumn = columns[columnIndex];
-        sortDirection = SettingsDictator.Default.SortDescending
-            ? ListSortDirection.Descending
-            : ListSortDirection.Ascending;
-        ApplySortTemplate();
+        state.UpdateVisibleOrder(gridView.Columns.Select(column => columns.IndexOf(column)).ToArray());
+        state.Save(SettingsDictator.Default);
     }
 
     /// <summary>
@@ -231,40 +143,30 @@ internal sealed class FileListColumnCommittee
     /// <param name="visible"></param>
     public void SetSortIndicatorVisible(bool visible)
     {
-        sortIndicatorHidden = !visible;
-        ApplySortTemplate();
+        var previous = state.SortIndicatorColumn;
+        state.SortIndicatorHidden = !visible;
+        ApplySortTemplate(previous);
     }
-
 
     /// <summary>
     /// 矢印
     /// </summary>
-    private void ApplySortTemplate()
+    /// <param name="previous">前に矢印を出していた列</param>
+    private void ApplySortTemplate(int previous)
     {
-        if (sortColumn == null)
+        if (previous >= 0 && previous < columns.Count)
+        {
+            columns[previous].HeaderTemplate = null;
+        }
+        var current = state.SortIndicatorColumn;
+        if (current < 0 || current >= columns.Count)
         {
             return;
         }
-        if (sortIndicatorHidden) {
-            sortColumn.HeaderTemplate = null;
-            return;
-        }
-        sortColumn.HeaderTemplate = (DataTemplate)resourceOwner.FindResource(
-            sortDirection == ListSortDirection.Ascending
+        columns[current].HeaderTemplate = (DataTemplate)resourceOwner.FindResource(
+            state.SortDirection == ListSortDirection.Ascending
                 ? "AscendingColumnHeaderTemplate"
                 : "DescendingColumnHeaderTemplate");
-    }
-
-    /// <summary>
-    /// このｿーﾄ有効？
-    /// </summary>
-    /// <param name="candidate"></param>
-    /// <returns></returns>
-    private bool IsValidOrder(int[]? candidate)
-    {
-        return candidate?.Length == columns.Count &&
-            candidate.All(index => index >= 0 && index < columns.Count) &&
-            candidate.Distinct().Count() == columns.Count;
     }
 
     /// <summary>
@@ -274,9 +176,9 @@ internal sealed class FileListColumnCommittee
     {
         for (var index = 0; index < columns.Count; index++)
         {
-            if (visibility[index] && columns[index].ActualWidth > 0)
+            if (state.IsVisible(index))
             {
-                widths[index] = Math.Max(10, columns[index].ActualWidth);
+                state.SetWidth(index, columns[index].ActualWidth);
             }
         }
     }
@@ -288,91 +190,10 @@ internal sealed class FileListColumnCommittee
     private void ApplyVisibility(GridView gridView)
     {
         gridView.Columns.Clear();
-        foreach (var index in order)
+        foreach (var index in state.VisibleOrder)
         {
-            if (!visibility[index])
-            {
-                continue;
-            }
-            columns[index].Width = widths[index];
+            columns[index].Width = state.GetWidth(index);
             gridView.Columns.Add(columns[index]);
         }
     }
-
-    /// <summary>
-    /// order更新
-    /// </summary>
-    /// <param name="gridView"></param>
-    private void UpdateOrder(GridView gridView)
-    {
-        if (order.Length != columns.Count)
-        {
-            return;
-        }
-        var visibleOrder = gridView.Columns.Select(column => columns.IndexOf(column)).ToArray();
-        if (visibleOrder.Length != visibility.Count(value => value) || visibleOrder.Any(index => index < 0))
-        {
-            return;
-        }
-        var visibleIndex = 0;
-        for (var index = 0; index < order.Length; index++)
-        {
-            if (visibility[order[index]])
-            {
-                order[index] = visibleOrder[visibleIndex++];
-            }
-        }
-    }
-}
-
-/// <summary>
-/// 一覧のｿーﾄ用比較子
-/// </summary>
-internal sealed class FileItemComparer : IComparer<FileItem>
-{
-    readonly Comparison<FileItem> comparison;
-    readonly bool descending;
-
-    public FileItemComparer(string field, bool descending)
-    {
-        this.descending = descending;
-        comparison = field switch {
-            nameof(FileItem.Path) => static (a, b) => {
-                var c = CompareText(a.Path, b.Path);
-                return c != 0 ? c : CompareText(a.Name, b.Name);
-            },
-            nameof(FileItem.DateTime) => static (a, b) => a.DateTime.CompareTo(b.DateTime),
-            nameof(FileItem.Tag) => static (a, b) => CompareText(a.Tag, b.Tag),
-            nameof(FileItem.Character) => static (a, b) => CompareText(a.Character, b.Character),
-            nameof(FileItem.Keyword) => static (a, b) => CompareText(a.Keyword, b.Keyword),
-            nameof(FileItem.Costume) => static (a, b) => CompareText(a.Costume, b.Costume),
-            nameof(FileItem.Scene) => static (a, b) => CompareText(a.Scene, b.Scene),
-            nameof(FileItem.Objects) => static (a, b) => CompareText(a.Objects, b.Objects),
-            _ => static (a, b) => CompareText(a.Name, b.Name),
-        };
-    }
-
-    public int Compare(FileItem? x, FileItem? y)
-    {
-        if (ReferenceEquals(x, y)) {
-            return 0;
-        }
-        if (x is null) {
-            return descending ? 1 : -1;
-        }
-        if (y is null) {
-            return descending ? -1 : 1;
-        }
-        var c = comparison(x, y);
-        return descending ? -c : c;
-    }
-
-    /// <summary>
-    /// ｶﾙﾁｬー指定比較は遅いので大文字小文字無視のOrdinalで
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    private static int CompareText(string? a, string? b)
-        => string.Compare(a, b, StringComparison.OrdinalIgnoreCase);
 }

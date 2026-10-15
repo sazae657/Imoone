@@ -102,12 +102,6 @@ public partial class App : Application
             Description = "プロファイル名",
             DefaultValueFactory = _ => null
         };
-
-        var multipleOption = new Option<bool>("--multiple") {
-            Description = "ﾓーﾁﾎﾟー",
-            DefaultValueFactory = _ => false
-        };
-
         var quickScanOption = new Option<bool>("--quick-scan", "-q")
         {
             Description = "高速スキャン",
@@ -119,13 +113,22 @@ public partial class App : Application
             DefaultValueFactory = _ => false
         };
 
+#if DEBUG
+        var multipleOption = new Option<bool>("--multiple") {
+            Description = "ﾓーﾁﾎﾟー",
+            DefaultValueFactory = _ => false
+        };
+#endif
+
         var rootCommand = new RootCommand(nameof(ImogeIndexWPF));
 
         rootCommand.Options.Add(autoOption);
         rootCommand.Options.Add(profileOption);
-        rootCommand.Options.Add(multipleOption);
         rootCommand.Options.Add(quickScanOption);
-        rootCommand.Options.Add(noWinOption);           
+        rootCommand.Options.Add(noWinOption);
+#if DEBUG
+        rootCommand.Options.Add(multipleOption);
+#endif
 
         // StartupEventArgs.Argsには実行ﾌｧｲﾙ名を除いた引数が入っている
         var parseResult = rootCommand.Parse(e.Args);
@@ -141,7 +144,11 @@ public partial class App : Application
         return new LaunchOptions(
             Auto: parseResult.GetValue(autoOption),
             Profile: parseResult.GetValue(profileOption),
+#if DEBUG
             AllowMultiple: parseResult.GetValue(multipleOption),
+#else
+            AllowMultiple: false,
+#endif
             QuickScan: parseResult.GetValue(quickScanOption),
             NoWindow: parseResult.GetValue(noWinOption)
         );

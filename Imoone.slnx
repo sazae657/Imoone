@@ -21,6 +21,9 @@
     <Project Path="ImogeIndex.Web3/ImogeIndex.Web3.csproj" Id="f2af9732-932b-4a1e-a78c-db9b49f612db">
         <Platform Project="x64" />
     </Project>
+    <Project Path="ImogeIndex.Web6/ImogeIndex.Web6.csproj">
+        <Platform Project="x64" />
+    </Project>
     <Project Path="ImogeIndex/ImogeIndex.csproj" Id="8f591a04-43b4-4c57-97e8-b3227224eb6e">
         <Platform Project="x64" />
     </Project>

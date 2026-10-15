@@ -7,7 +7,20 @@ namespace ImogeIndex.Territories;
 /// ｲﾝﾃﾞｯｸｽ生成関連の通知ﾏﾝ
 /// </summary>
 public static class IndexingCompletionNotifier {
-    const string PipeName = "ImogeIndex.{8BE579D0-5424-4073-B82D-EA143D5E0028}.Web3";
+    /// <summary>
+    /// ImooneWPFの受信口
+    /// </summary>
+    public const string PipeName = "ImogeIndex.{8BE579D0-5424-4073-B82D-EA143D5E0028}.Web3";
+
+    /// <summary>
+    /// 実験用の受信口
+    /// </summary>
+    public const string ExpPipeName = "ImogeIndex.{5D3A9E62-1C47-4B8F-A0D6-93E2F7B41C85}.EXP";
+
+    /// <summary>
+    /// 通知先全部
+    /// </summary>
+    static readonly string[] PipeNames = [PipeName, ExpPipeName];
     const int timeout = 200;
     const int RetryCount = 3;
 
@@ -23,11 +36,23 @@ public static class IndexingCompletionNotifier {
         if (string.IsNullOrWhiteSpace(profileName)) {
             return false;
         }
+        // 起動していない方を待たされないよう並列で送る
+        var results = await Task.WhenAll(PipeNames.Select(x => NotifyAsync(x, profileName, token)));
+        return results.Any(x => x);
+    }
 
+    /// <summary>
+    /// 1か所に通知
+    /// </summary>
+    /// <param name="pipeName"></param>
+    /// <param name="profileName"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    static async Task<bool> NotifyAsync(string pipeName, string profileName, CancellationToken token) {
         for (var attempt = 0; attempt < RetryCount; attempt++) {
             try {
                 using var client = new NamedPipeClientStream(
-                    ".", PipeName, PipeDirection.Out, PipeOptionsOf);
+                    ".", pipeName, PipeDirection.Out, PipeOptionsOf);
                 await client.ConnectAsync(timeout, token);
 
                 using var writer = new StreamWriter(
@@ -61,7 +86,8 @@ public static class IndexingCompletionNotifier {
     /// <summary>
     /// 完了通知を受信ﾏﾝ
     /// </summary>
-    public sealed class Listener : IAsyncDisposable {
+    /// <param name="pipeName">受信口(既定はImooneWPF用)</param>
+    public sealed class Listener(string pipeName = PipeName) : IAsyncDisposable {
         readonly CancellationTokenSource tokenSource = new();
         Task? taskable;
 
@@ -89,7 +115,7 @@ public static class IndexingCompletionNotifier {
             while (!cancellationToken.IsCancellationRequested) {
                 try {
                     using var server = new NamedPipeServerStream(
-                        PipeName, PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptionsOf);
+                        pipeName, PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptionsOf);
                     await server.WaitForConnectionAsync(cancellationToken);
 
                     using var reader = new StreamReader(
@@ -103,6 +129,13 @@ public static class IndexingCompletionNotifier {
                     break;
                 }
                 catch (IOException) {
+                    // 同じ受信口を他のﾌﾟﾛｾｽが握っている時に空回りしないよう少し待つ
+                    try {
+                        await Task.Delay(timeout * 5, cancellationToken);
+                    }
+                    catch (OperationCanceledException) {
+                        break;
+                    }
                 }
             }
         }

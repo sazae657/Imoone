@@ -6,32 +6,6 @@ using System.Windows.Interop;
 namespace ImogeIndex.Web3.Dictators;
 
 /// <summary>
-/// ﾃーﾏ種別
-/// </summary>
-public enum AppTheme
-{
-    /// <summary>
-    /// ｼｽﾃﾑ(OS設定に追従)
-    /// </summary>
-    System,
-
-    /// <summary>
-    /// 白
-    /// </summary>
-    Light,
-
-    /// <summary>
-    /// 黒
-    /// </summary>
-    Dark,
-
-    /// <summary>
-    /// XP!!!
-    /// </summary>
-    Clasico
-}
-
-/// <summary>
 /// ﾃーﾏの適用と切り替えを独裁
 /// </summary>
 public static class ThemeDictator

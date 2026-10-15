@@ -1,13 +1,13 @@
 ﻿using ImogeIndex.Mur;
 
-namespace ImooneWPF.Committees;
+namespace ImogeIndex.Web6.Committees;
 
 /// <summary>
-/// 一覧に流す項目列を作る
+/// 一覧に流す項目列製造
 /// ListCollectionViewのFilter/SortDescriptionsはUIｽﾚｯﾄﾞで全件回るので、
 /// ｿーﾄと絞り込みはｽﾚﾌﾟで済ませて出来上がった配列だけをUIに渡す
 /// </summary>
-internal sealed class FileListSourceCommittee
+public sealed class FileListSourceCommittee
 {
     IReadOnlyList<FileItem> items = Array.Empty<FileItem>();
     IComparer<FileItem>? comparer;

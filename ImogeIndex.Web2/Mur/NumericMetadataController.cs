@@ -233,7 +233,6 @@ public class NumericMetadataController {
         Assert.Empty(Matches("meta:iso:>=0", Load(empty)));
     }
 
-#if ENABLE_BENCH
     [Fact(DisplayName = "とりま10万件でどんなもんになるベンチ")]
     public void Index4() {
         var token = TestContext.Current.CancellationToken;
@@ -250,7 +249,6 @@ public class NumericMetadataController {
         index.Lookup(broad, ids);
         Assert.Equal(100000, ids.Count);
     }
-#endif
 
     /// <summary>
     /// ﾃﾞーﾀﾑ作成
