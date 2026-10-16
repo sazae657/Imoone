@@ -1,14 +1,35 @@
 ﻿using System.Data.SQLite;
-using System.IO;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
-namespace ImooneWPF.Dictators;
+namespace ImogeIndex.Web6.Dictators;
+
+/// <summary>
+/// 一覧用ｻﾑﾈのﾃﾞｺーﾀﾞー(UIﾌﾚーﾑﾜーｸごとに用意する)
+/// </summary>
+/// <typeparam name="TBitmap">表示用の画像型</typeparam>
+public interface ITileBitmapDecoder<TBitmap> where TBitmap : class
+{
+    /// <summary>
+    /// BLOBから画像を作る(ﾜーｶーから呼ばれる)
+    /// </summary>
+    /// <param name="bytes">ｻﾑﾈのBLOB</param>
+    /// <param name="size">長辺の上限</param>
+    /// <param name="portrait">縦長？</param>
+    /// <returns>読めなければnull</returns>
+    TBitmap? Decode(byte[] bytes, int size, bool portrait);
+
+    /// <summary>
+    /// ｷｬｯｼｭの重さ(ﾊﾞｲﾄ)
+    /// </summary>
+    /// <param name="bitmap"></param>
+    /// <returns></returns>
+    long Measure(TBitmap bitmap);
+}
 
 /// <summary>
 /// 一覧用のｻﾑﾈ読み込むﾏﾝ(ﾜーｶーで動く事に注意)
 /// </summary>
-public sealed class TileThumbnailDictator : IDisposable, IAsyncDisposable
+/// <typeparam name="TBitmap">表示用の画像型</typeparam>
+public sealed class TileThumbnailDictator<TBitmap> : IDisposable, IAsyncDisposable where TBitmap : class
 {
     const int MaxPending = 512;
     const int MaxEntries = 2048;
@@ -27,14 +48,14 @@ public sealed class TileThumbnailDictator : IDisposable, IAsyncDisposable
     bool disposedValue;
 
     private readonly record struct Key(int Generation, long Id, int Size);
-    private sealed record Cached(Key Key, BitmapSource? Bitmap, long Bytes);
+    private sealed record Cached(Key Key, TBitmap? Bitmap, long Bytes);
     private sealed class Request(Key key, string path, bool portrait)
     {
         public Key Key { get; } = key;
         public string Path { get; } = path;
         public bool Portrait { get; } = portrait;
         public int Readers;
-        public TaskCompletionSource<BitmapSource?> Completion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public TaskCompletionSource<TBitmap?> Completion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
     }
 
     /// <summary>
@@ -42,8 +63,13 @@ public sealed class TileThumbnailDictator : IDisposable, IAsyncDisposable
     /// </summary>
     static readonly int WorkerCount = Math.Clamp(Environment.ProcessorCount / 2, 1, 4);
 
-    public TileThumbnailDictator()
-        => workers = Enumerable.Range(0, WorkerCount).Select(_ => Task.Run(WorkAsync)).ToArray();
+    readonly ITileBitmapDecoder<TBitmap> decoder;
+
+    public TileThumbnailDictator(ITileBitmapDecoder<TBitmap> bitmapDecoder)
+    {
+        decoder = bitmapDecoder;
+        workers = Enumerable.Range(0, WorkerCount).Select(_ => Task.Run(WorkAsync)).ToArray();
+    }
     public event Action? Changed;
 
     /// <summary>
@@ -85,7 +111,7 @@ public sealed class TileThumbnailDictator : IDisposable, IAsyncDisposable
     /// <param name="portrait"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    public async Task<BitmapSource?> GetAsync(long id, int size, bool portrait, CancellationToken token)
+    public async Task<TBitmap?> GetAsync(long id, int size, bool portrait, CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
         Request request;
@@ -185,7 +211,7 @@ public sealed class TileThumbnailDictator : IDisposable, IAsyncDisposable
                         continue;
                     }
                     stopping.Token.ThrowIfCancellationRequested();
-                    BitmapSource? bitmap = null;
+                    TBitmap? bitmap = null;
                     try
                     {
                         if (connection == null && File.Exists(request.Path))
@@ -240,43 +266,13 @@ public sealed class TileThumbnailDictator : IDisposable, IAsyncDisposable
     /// <param name="command">準備済みのSELECT</param>
     /// <param name="request"></param>
     /// <returns></returns>
-    private static BitmapSource? Read(SQLiteCommand command, Request request)
+    private TBitmap? Read(SQLiteCommand command, Request request)
     {
         command.Parameters[0].Value = request.Key.Id;
         if (command.ExecuteScalar() is not byte[] bytes) {
             return null;
         }
-        using var stream = new MemoryStream(bytes, false);
-        var bitmap = new BitmapImage();
-        bitmap.BeginInit();
-        bitmap.CacheOption = BitmapCacheOption.OnLoad;
-        if (request.Portrait) {
-            bitmap.DecodePixelHeight = request.Key.Size;
-        }
-        else {
-            bitmap.DecodePixelWidth = request.Key.Size;
-        }
-        bitmap.StreamSource = stream;
-        bitmap.EndInit();
-
-        // 長辺を上限内に収める
-        var scale = Math.Min(1.0, (double)request.Key.Size / Math.Max(bitmap.PixelWidth, bitmap.PixelHeight));
-        if (scale >= 1 && (bitmap.Format == PixelFormats.Bgr32 || bitmap.Format == PixelFormats.Pbgra32)) {
-            // そのまま描ける形式なら変換とｺﾋﾟーを省く(JPEGはだいたいBgr32で来る)
-            bitmap.Freeze();
-            return bitmap;
-        }
-        BitmapSource pixels = bitmap;
-        if (scale < 1) {
-            pixels = new TransformedBitmap(pixels, new ScaleTransform(scale, scale));
-        }
-        pixels = new FormatConvertedBitmap(pixels, PixelFormats.Pbgra32, null, 0);
-        var stride = pixels.PixelWidth * 4;
-        var buffer = new byte[stride * pixels.PixelHeight];
-        pixels.CopyPixels(buffer, stride, 0);
-        var result = BitmapSource.Create(pixels.PixelWidth, pixels.PixelHeight, 96, 96, PixelFormats.Pbgra32, null, buffer, stride);
-        result.Freeze();
-        return result;
+        return decoder.Decode(bytes, request.Key.Size, request.Portrait);
     }
 
     /// <summary>
@@ -284,9 +280,9 @@ public sealed class TileThumbnailDictator : IDisposable, IAsyncDisposable
     /// </summary>
     /// <param name="key"></param>
     /// <param name="bitmap"></param>
-    private void AddCache(Key key, BitmapSource? bitmap)
+    private void AddCache(Key key, TBitmap? bitmap)
     {
-        var bytes = bitmap == null ? 0 : (long)bitmap.PixelWidth * bitmap.PixelHeight * 4;
+        var bytes = bitmap == null ? 0 : decoder.Measure(bitmap);
         if (bytes > MaxBytes) {
             return;
         }

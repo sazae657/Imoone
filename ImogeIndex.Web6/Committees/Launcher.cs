@@ -4,12 +4,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace ImooneWPF.Committees;
+namespace ImogeIndex.Web6.Committees;
 
 /// <summary>
 /// ﾌﾟﾛｾｽ開いた結果
 /// </summary>
-internal enum LaunchStatus
+public enum LaunchStatus
 {
     Success,
     Denied,
@@ -22,12 +22,12 @@ internal enum LaunchStatus
 /// </summary>
 /// <param name="Status"></param>
 /// <param name="Exception"></param>
-internal sealed record FileLaunchResult(LaunchStatus Status, Exception? Exception = null);
+public sealed record FileLaunchResult(LaunchStatus Status, Exception? Exception = null);
 
 /// <summary>
 /// 外部ﾌﾟﾛｾｽを開くﾏﾝ
 /// </summary>
-internal sealed class Launcher
+public sealed class Launcher
 {
     readonly HashSet<Regex> allowIE = new();
     readonly HashSet<string> denyIE = new(StringComparer.OrdinalIgnoreCase);

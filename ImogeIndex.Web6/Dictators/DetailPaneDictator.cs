@@ -2,25 +2,25 @@
 using ImogeIndex.Common;
 using ImogeIndex.Storage;
 using ImogeIndex.Mur;
-using ImooneWPF.Storage;
+using ImogeIndex.Web6.Storage;
 using System.IO;
 using Tomlet;
 
-namespace ImooneWPF.Dictators;
+namespace ImogeIndex.Web6.Dictators;
 
 /// <summary>
 /// 詳細ﾍﾟｲﾝ
 /// </summary>
-internal sealed class DetailPaneDictator
+/// <param name="texts">表示文言</param>
+public sealed class DetailPaneDictator(IImoonePalabras texts)
 {
     /// <summary>
-    /// ｲﾝﾃﾞｯｸｽの接続はｽﾚｯﾄﾞｾーﾌでないのでｼﾘｱﾙ読み込み
+    /// ｲﾝﾃﾞｯｸｽの接続はｽﾚｯﾄﾞｾーﾌでないのでｼﾘｱﾙ読み
     /// </summary>
     readonly SemaphoreSlim loadLock = new(1, 1);
 
     /// <summary>
     /// ﾈﾀ読み込み(ｽﾚﾌﾟで)
-    /// ﾌｧｲﾙ属性やDBを見に行くのでUIｽﾚｯﾄﾞでやると選択移動がもたつく
     /// </summary>
     /// <param name="fileItem"></param>
     /// <param name="cancellationToken"></param>
@@ -63,19 +63,19 @@ internal sealed class DetailPaneDictator
     /// </summary>
     /// <param name="fields"></param>
     /// <param name="fileItem"></param>
-    private static void AddFileFields(List<MetadataPair> fields, FileItem fileItem)
+    private void AddFileFields(List<MetadataPair> fields, FileItem fileItem)
     {
         // FileRecordは10万件抱えると重いので、表示に要る分はFileItemに持ってるやつを使う
         var fileInfo = new FileInfo(fileItem.FullName);
-        fields.Add(new MetadataPair(Properties.Resources.LI_FileName, fileItem.Name));
-        fields.Add(new MetadataPair(Properties.Resources.LH_CreatedAt, fileItem.DateTime.ToString("yyyy/MM/dd HH:mm:ss")));
+        fields.Add(new MetadataPair(texts.DetailLabel(DetailFieldLabel.FileName), fileItem.Name));
+        fields.Add(new MetadataPair(texts.DetailLabel(DetailFieldLabel.CreatedAt), fileItem.DateTime.ToString("yyyy/MM/dd HH:mm:ss")));
         if (fileInfo.Exists)
         {
-            fields.Add(new MetadataPair(Properties.Resources.LI_Location, fileItem.Path));
-            fields.Add(new MetadataPair(Properties.Resources.LI_FileSize, fileInfo.Length.ToReadableSize()));
+            fields.Add(new MetadataPair(texts.DetailLabel(DetailFieldLabel.Location), fileItem.Path));
+            fields.Add(new MetadataPair(texts.DetailLabel(DetailFieldLabel.FileSize), fileInfo.Length.ToReadableSize()));
         }
         fields.Add(new MetadataPair(
-            Properties.Resources.LI_Resolution,
+            texts.DetailLabel(DetailFieldLabel.Resolution),
             $"{fileItem.Width}x{fileItem.Height}"));
 
         AddIfPresent(fields, nameof(FileRecord.Tags), fileItem.Tag);

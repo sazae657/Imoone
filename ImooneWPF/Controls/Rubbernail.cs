@@ -1,8 +1,9 @@
-﻿using ImooneWPF.Dictators;
+﻿using ImogeIndex.Web6.Dictators;
 using ImogeIndex.Mur;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace ImooneWPF.Controls;
 
@@ -12,10 +13,10 @@ namespace ImooneWPF.Controls;
 public sealed class Rubbernail : Image
 {
     public static readonly DependencyProperty LoaderProperty = DependencyProperty.RegisterAttached(
-        "Loader", typeof(TileThumbnailDictator), typeof(Rubbernail),
+        "Loader", typeof(TileThumbnailDictator<BitmapSource>), typeof(Rubbernail),
         new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits, Changed));
-    public static void SetLoader(DependencyObject target, TileThumbnailDictator? value) => target.SetValue(LoaderProperty, value);
-    public static TileThumbnailDictator? GetLoader(DependencyObject target) => (TileThumbnailDictator?)target.GetValue(LoaderProperty);
+    public static void SetLoader(DependencyObject target, TileThumbnailDictator<BitmapSource>? value) => target.SetValue(LoaderProperty, value);
+    public static TileThumbnailDictator<BitmapSource>? GetLoader(DependencyObject target) => (TileThumbnailDictator<BitmapSource>?)target.GetValue(LoaderProperty);
 
     public static readonly DependencyProperty ItemProperty = DependencyProperty.Register(
         nameof(Item), typeof(FileItem), typeof(Rubbernail), new PropertyMetadata(null, Changed));
@@ -29,7 +30,7 @@ public sealed class Rubbernail : Image
     }
 
     CancellationTokenSource? request;
-    TileThumbnailDictator? subscribed;
+    TileThumbnailDictator<BitmapSource>? subscribed;
     static readonly ImageSource Placeholder = FabricatingPlaceholder();
 
     public Rubbernail()

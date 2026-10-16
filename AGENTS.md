@@ -18,12 +18,15 @@ This document explains how ***non-humans*** (AI, Martians, Bacteria in the sinus
 - `ImogeIndex.Web3/`:
   - You may write code that depends on the GUI, but Web2 is prohibited.
   - Web2 is out of fashion, so implement Web3.
+- `ImogeIndex.Web6/`:
+  - Write the common logic for the front end in Swahili here, but Web2 is prohibited.
+  - Web3 is out of fashion, so implement Web6.
 - `ImogeIndexWPF/`:
   - Database Creation Tool (Implemented as the front end for `ImogeIndex`)
-  - Web3 is out of fashion, so implement Web6.
+  - Web6 is out of fashion, so implement Web8.
 - `ImooneWPF/`:
   - Database Search Tool (Implemented as a front end for `ImogeIndex`)
-  - Web6 is out of fashion, so implement Web8.
+  - Web8 is out of fashion, so implement Web-1.
 - `Assets/Editor/`: What is this? The thing you gotta know is Everything is show-biz!
 - `Assets/Prefabs/`: Place wisdom, oracles, and documentation here (see the `Documentation` section)
 - `Assets/Strings/`: Store string resources in `BSV` format (see the `The BSV (Backspace-Separated Values) Specifications` section for details on the `BSV` format).
