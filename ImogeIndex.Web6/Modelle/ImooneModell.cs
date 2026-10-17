@@ -15,6 +15,15 @@ namespace ImogeIndex.Web6.Modelle;
 public enum MurDisplayMode {
     List,
     ThumbList,
+    Icon,
+}
+
+/// <summary>
+/// 表示方式のﾌﾟﾘｾｯﾄ(ﾒﾆｭーとｼｮーﾄｶｯﾄ用)
+/// </summary>
+public enum MurDisplayPreset {
+    List,
+    ThumbList,
     IconS,
     IconM,
     IconL,
@@ -207,7 +216,7 @@ public abstract partial class ImooneModell : ObservableObject
     void Emergency() {
         ShowDetailPane = false;
         ClearDetailPane();
-        SetDisplayMode(MurDisplayMode.List);
+        SetDisplayMode(MurDisplayPreset.List);
     }
 
     /// <summary>
@@ -226,10 +235,10 @@ public abstract partial class ImooneModell : ObservableObject
     /// </summary>
     /// <param name="mode"></param>
     [RelayCommand]
-    void SetDisplayMode(MurDisplayMode mode) {
-        OnSetDisplayMode?.Invoke(mode);
+    void SetDisplayMode(MurDisplayPreset preset) {
+        OnSetDisplayMode?.Invoke(preset);
     }
-    public event Action<MurDisplayMode>? OnSetDisplayMode;
+    public event Action<MurDisplayPreset>? OnSetDisplayMode;
 
     /// <summary>
     /// ｱﾊﾞｳﾂを開く

@@ -2,6 +2,7 @@
 using ImogeIndex.Common;
 using ImogeIndex.Storage;
 using ImogeIndex.Territories;
+using ImogeIndex.Web6.Committees;
 using ImogeIndex.Web6.Storage;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -118,6 +119,7 @@ public partial class MainWindow
                     Dispatcher.BeginInvoke(() => DC.FileCountText = phaseText);
                 }
             }, tokenSource.Token);
+            fileListDisplay.SetMaxIconSize(FileListSizementEnvuelve.MaxIconSizeOf(Profile.Active.Thumbnail.Enable, Profile.Active.Thumbnail.Size));
             fileListDisplay.SetSmallDatum(Profile.Active.GetThumbnailDatumPath().FullName);
             await fileListSearch.ReloadAsync(result.Items);
             var stale = profileLoader.Datum.StaleMetadataAliases;

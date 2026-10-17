@@ -166,7 +166,12 @@ public class SettingsDictator
     /// <summary>
     /// ﾘｽﾄ表示ﾓーﾄﾞ
     /// </summary>
-    public MurDisplayMode FileDisplayMode { get; set; }
+    public MurDisplayMode FileListLayout { get; set; }
+
+    /// <summary>
+    /// ｱｲｺﾝ表示の寸法
+    /// </summary>
+    public int FileIconSize { get; set; } = 32;
 
     /// <summary>
     /// ﾏーﾃー

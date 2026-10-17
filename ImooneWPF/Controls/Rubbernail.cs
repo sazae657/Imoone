@@ -1,4 +1,4 @@
-﻿using ImogeIndex.Web6.Dictators;
+using ImogeIndex.Web6.Dictators;
 using ImogeIndex.Mur;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,10 +54,20 @@ public sealed class Rubbernail : Image
         Refresh();
     }
 
+    protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+        // 拡大縮小中は今の画像を引き伸ばしておいて、読めたら差し替える
+        if (e.Property == WidthProperty) {
+            Load(keepSource: true);
+        }
+    }
+
     /// <summary>
     /// もういらん
     /// </summary>
-    private void Detach()
+    /// <param name="keepSource">今の画像を残す？</param>
+    private void Detach(bool keepSource = false)
     {
         request?.Cancel();
         request?.Dispose();
@@ -66,15 +76,23 @@ public sealed class Rubbernail : Image
             subscribed.Changed -= Refresh;
         }
         subscribed = null;
-        Source = Placeholder;
+        if (!keepSource) {
+            Source = Placeholder;
+        }
     }
 
     /// <summary>
     /// 読み込み
     /// </summary>
-    private async void Refresh()
+    private void Refresh() => Load(keepSource: false);
+
+    /// <summary>
+    /// 読み込み本体
+    /// </summary>
+    /// <param name="keepSource">読めるまで今の画像を残す？</param>
+    private async void Load(bool keepSource)
     {
-        Detach();
+        Detach(keepSource);
         if (!IsLoaded || Item is not { } item || GetLoader(this) is not { } loader) {
             return;
         }

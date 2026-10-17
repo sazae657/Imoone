@@ -24,31 +24,51 @@ public sealed class FileListDisplayCommittee : IDisposable {
     readonly GridViewColumn nameColumn;
     readonly BindingBase nameBinding;
     readonly Action captureColumnsDelegaty;
-    readonly Action<MurDisplayMode> saveModeDelegaty;
+    readonly Action<FileListSizementEnvuelve> saveZoomDelegaty;
     readonly TileThumbnailDictator<BitmapSource> thumbnails = new(WpfTileBitmapDecoder.Instance);
+    readonly WheelNotchAccumulator wheel = new();
     int selectionAnchor = -1;
-    MurDisplayMode mode = MurDisplayMode.List;
+    /// <summary>
+    /// 表示中の拡大率
+    /// </summary>
+    FileListSizementEnvuelve zoom = new(MurDisplayMode.List, FileListSizementEnvuelve.MinIconSize);
+
+    /// <summary>
+    /// 要求拡大率(最大寸法で切られる前)
+    /// </summary>
+    FileListSizementEnvuelve requested = new(MurDisplayMode.List, FileListSizementEnvuelve.MinIconSize);
+
+    int maxIconSize = FileListSizementEnvuelve.IconSizeCeiling;
     int changementVer;
     string? datumPath;
     bool disposedValue;
 
+    /// <summary>
+    /// </summary>
+    /// <param name="flv">一覧</param>
+    /// <param name="modeMenu">表示方式ﾒﾆｭー</param>
+    /// <param name="fileNameColumn">ﾌｧｲﾙ名列</param>
+    /// <param name="captureColumns">列の状態を控える</param>
+    /// <param name="initialZoom">最初の拡大率</param>
+    /// <param name="saveZoom">拡大率が変わった(最大寸法で切られる前のが来る)</param>
     public FileListDisplayCommittee(EssenUndFressenView flv, MenuItem modeMenu, GridViewColumn fileNameColumn, Action captureColumns,
-        MurDisplayMode initialMode, Action<MurDisplayMode> saveMode) {
+        FileListSizementEnvuelve initialZoom, Action<FileListSizementEnvuelve> saveZoom) {
         list = flv;
         nameColumn = fileNameColumn;
         nameBinding = fileNameColumn.DisplayMemberBinding;
         modeEitems = modeMenu.Items.Cast<MenuItem>().ToArray();
         captureColumnsDelegaty = captureColumns;
-        saveModeDelegaty = saveMode;
+        saveZoomDelegaty = saveZoom;
         columns = (GridView)list.View;
         originalPanel = list.ItemsPanel;
         Rubbernail.SetLoader(list, thumbnails);
         list.PreviewKeyDown += OnKeyDown;
         list.PreviewMouseLeftButtonDown += OnMouseDown;
+        list.PreviewMouseWheel += OnMouseWheel;
         foreach (var item in modeEitems) {
             item.Click += OnModeClicked;
         }
-        SetMode(Enum.IsDefined(initialMode) ? initialMode : MurDisplayMode.List);
+        SetZoom(initialZoom.Clamp(maxIconSize));
     }
 
     /// <summary>
@@ -60,7 +80,19 @@ public sealed class FileListDisplayCommittee : IDisposable {
             return;
         }
         datumPath = path;
-        thumbnails.Reset(UsesThumbnail(mode) ? datumPath : null);
+        thumbnails.Reset(UsesThumbnail(zoom.Mode) ? datumPath : null);
+    }
+
+    /// <summary>
+    /// ｱｲｺﾝの最大寸法設定(ﾌﾟﾛﾌｧｲﾙ)
+    /// </summary>
+    /// <param name="size"></param>
+    public void SetMaxIconSize(int size) {
+        if (disposedValue) {
+            return;
+        }
+        maxIconSize = size;
+        Apply(requested.Clamp(maxIconSize));
     }
 
     /// <summary>
@@ -100,25 +132,71 @@ public sealed class FileListDisplayCommittee : IDisposable {
     /// <param name="sender"></param>
     /// <param name="args"></param>
     private void OnModeClicked(object sender, RoutedEventArgs args) {
-        if (sender is not MenuItem { Tag: MurDisplayMode requestedMode }) {
+        if (sender is not MenuItem { Tag: MurDisplayPreset preset }) {
             return;
         }
-        SetMode(requestedMode);
+        SetPreset(preset);
         args.Handled = true;
     }
 
     /// <summary>
-    /// ｱｲｺﾝ表示ﾓーﾄﾞ切替
+    /// Ctrl+ﾎｲーﾙで拡大縮小
     /// </summary>
-    /// <param name="next"></param>
-    public void SetMode(MurDisplayMode next) {
-        if (disposedValue || !Enum.IsDefined(next)) {
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    private void OnMouseWheel(object sender, MouseWheelEventArgs args) {
+        if (!Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) {
+            wheel.Reset();
             return;
         }
-        foreach (var item in modeEitems) {
-            item.IsChecked = item.Tag is MurDisplayMode itemMode && itemMode == next;
+        // 拡大縮小できない端でも一覧はｽｸﾛーﾙさせない
+        args.Handled = true;
+        var steps = wheel.Add(args.Delta);
+        if (steps != 0) {
+            SetZoom(zoom.Step(steps, maxIconSize));
         }
-        if (next == mode) {
+    }
+
+    /// <summary>
+    /// ﾌﾟﾘｾｯﾄに切替
+    /// </summary>
+    /// <param name="preset"></param>
+    public void SetPreset(MurDisplayPreset preset) {
+        if (!Enum.IsDefined(preset)) {
+            return;
+        }
+        SetZoom(FileListSizementEnvuelve.FromPreset(preset, maxIconSize));
+    }
+
+    /// <summary>
+    /// 操作で拡大率を変える
+    /// </summary>
+    /// <param name="next"></param>
+    private void SetZoom(FileListSizementEnvuelve next) {
+        if (disposedValue) {
+            return;
+        }
+        var changed = next != requested;
+        requested = next;
+        Apply(next);
+        if (changed) {
+            saveZoomDelegaty(requested);
+        }
+    }
+
+    /// <summary>
+    /// 拡大率を見た目に反映
+    /// </summary>
+    /// <param name="next"></param>
+    private void Apply(FileListSizementEnvuelve next) {
+        if (disposedValue) {
+            return;
+        }
+        var matched = next.MatchPreset(maxIconSize);
+        foreach (var item in modeEitems) {
+            item.IsChecked = item.Tag is MurDisplayPreset itemPreset && itemPreset == matched;
+        }
+        if (next == zoom) {
             return;
         }
 
@@ -129,22 +207,29 @@ public sealed class FileListDisplayCommittee : IDisposable {
         var anchor = FindVisibleItem(scroll) ?? selected;
         var hadFocus = list.IsKeyboardFocusWithin;
         var version = ++changementVer;
-        if (IsGridMode(mode)) {
+        var previous = zoom;
+        if (IsGridMode(previous.Mode) && previous.Mode != next.Mode) {
             captureColumnsDelegaty();
         }
-        mode = next;
-        thumbnails.Reset(UsesThumbnail(mode) ? datumPath : null);
-        ApplyNameCell(mode == MurDisplayMode.ThumbList);
-        if (IsGridMode(mode)) {
+        zoom = next;
+        if (UsesThumbnail(previous.Mode) != UsesThumbnail(zoom.Mode)) {
+            // 寸法はｷｬｯｼｭのｷーに入っているので、拡大縮小だけなら捨てない
+            thumbnails.Reset(UsesThumbnail(zoom.Mode) ? datumPath : null);
+        }
+        ApplyNameCell(zoom.Mode == MurDisplayMode.ThumbList);
+        if (IsGridMode(zoom.Mode)) {
             list.ItemTemplate = null;
             list.ItemsPanel = originalPanel;
             list.View = columns;
             ScrollViewer.SetHorizontalScrollBarVisibility(list, ScrollBarVisibility.Auto);
         }
         else {
+            TileMetrics.SetIconSize(list, zoom.IconSize);
+            TileMetrics.SetItemWidth(list, zoom.TileWidth);
+            TileMetrics.SetItemHeight(list, zoom.TileHeight);
             list.View = null;
-            list.ItemTemplate = (DataTemplate)list.FindResource($"TileTemplate{mode}");
-            list.ItemsPanel = (ItemsPanelTemplate)list.FindResource($"TilePanel{mode}");
+            list.ItemTemplate = (DataTemplate)list.FindResource(zoom.Horizontal ? "TileTemplateHorizontal" : "TileTemplateVertical");
+            list.ItemsPanel = (ItemsPanelTemplate)list.FindResource("TilePanel");
             ScrollViewer.SetHorizontalScrollBarVisibility(list, ScrollBarVisibility.Disabled);
         }
         if (!list.SelectedItems.Cast<object>().SequenceEqual(selectedItems)) {
@@ -162,7 +247,6 @@ public sealed class FileListDisplayCommittee : IDisposable {
                 (list.ItemContainerGenerator.ContainerFromItem(selected) as ListViewItem)?.Focus();
             }
         }, DispatcherPriority.Loaded);
-        saveModeDelegaty(mode);
     }
 
     /// <summary>
@@ -193,7 +277,7 @@ public sealed class FileListDisplayCommittee : IDisposable {
     /// <param name="sender"></param>
     /// <param name="args"></param>
     private void OnKeyDown(object sender, KeyEventArgs args) {
-        if (IsGridMode(mode) || list.Items.Count == 0 || Keyboard.Modifiers.HasFlag(ModifierKeys.Alt)) {
+        if (IsGridMode(zoom.Mode) || list.Items.Count == 0 || Keyboard.Modifiers.HasFlag(ModifierKeys.Alt)) {
             return;
         }
         var panel = FindChild<EssenUndFressenPanel>(list);
@@ -289,6 +373,7 @@ public sealed class FileListDisplayCommittee : IDisposable {
         changementVer++;
         list.PreviewKeyDown -= OnKeyDown;
         list.PreviewMouseLeftButtonDown -= OnMouseDown;
+        list.PreviewMouseWheel -= OnMouseWheel;
         foreach (var item in modeEitems) {
             item.Click -= OnModeClicked;
         }
