@@ -47,12 +47,16 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow {
         LoadSettings();
         var fileListGridView = (GridView)FileListView.View;
         fileListDisplay = new FileListDisplayCommittee(FileListView, FileDisplayModeMenu, FileNameColumn,
-            SaveFileListColumnSettings, SettingsDictator.Default.FileDisplayMode, mode =>
+            SaveFileListColumnSettings,
+            new FileListSizementEnvuelve(SettingsDictator.Default.FileListLayout, SettingsDictator.Default.FileIconSize), zoom =>
             {
                 // ｻﾑﾈ付きﾘｽﾄではｻﾑﾈの居場所が無くなるのでﾌｧｲﾙ名列を隠させない
-                fileListColumnJailer.Discipline(fileListGridView, mode == MurDisplayMode.ThumbList ? FileNameColumn : null);
-                SettingsDictator.Default.FileDisplayMode = mode;
-                SettingsDictator.Save();
+                fileListColumnJailer.Discipline(fileListGridView, zoom.Mode == MurDisplayMode.ThumbList ? FileNameColumn : null);
+                SettingsDictator.Default.FileListLayout = zoom.Mode;
+                SettingsDictator.Default.FileIconSize = zoom.IconSize;
+                // ﾎｲーﾙで連打されるので、落ち着いてからまとめて書き出す
+                saveSettingsTimer.Stop();
+                saveSettingsTimer.Start();
             });
         WireModelEvents();
         InitializeTrayIcon();
@@ -87,7 +91,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow {
         fileListSearch.Stop();
         tokenSource.Cancel();
         detailPane.Cancel();
-        DC.OnSetDisplayMode -= fileListDisplay.SetMode;
+        DC.OnSetDisplayMode -= fileListDisplay.SetPreset;
         fileListDisplay.Dispose();
         ThumbnailStore.Close();
         IndexStore.Close();
@@ -116,7 +120,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow {
     /// </summary>
     void WireModelEvents()
     {
-        DC.OnSetDisplayMode += fileListDisplay.SetMode;
+        DC.OnSetDisplayMode += fileListDisplay.SetPreset;
         DC.OnSearchSimilarImages += SearchSimilarImages;
         DC.OnSimilarHashSwitched += SimilarHash_Switched;
         DC.OnLaunchIndexTool += OnLaunchIndexTool;
