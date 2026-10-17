@@ -1,11 +1,52 @@
-﻿using ImogeIndex.Common;
+﻿using ImogeIndex.Web6.Modelle;
 using ImogeIndex.Mur;
-using ImooneWPF.Modelle;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Threading;
 
-namespace ImooneWPF.Committees;
+namespace ImogeIndex.Web6.Committees;
+
+/// <summary>
+/// 検索結果を流す一覧(UIﾌﾚーﾑﾜーｸ側で実装する)
+/// </summary>
+public interface IFileListHost
+{
+    /// <summary>
+    /// 検索ﾎﾞｯｸｽの文字列
+    /// </summary>
+    string QueryText { get; }
+
+    /// <summary>
+    /// 一覧に何か流してある？
+    /// </summary>
+    bool HasItemsSource { get; }
+
+    /// <summary>
+    /// 選択中の項目
+    /// </summary>
+    FileItem? SelectedItem { get; }
+
+    /// <summary>
+    /// 一覧を差し替える
+    /// </summary>
+    /// <param name="items"></param>
+    void Publish(IReadOnlyList<FileItem> items);
+
+    /// <summary>
+    /// 選択して見える所までｽｸﾛーﾙ
+    /// </summary>
+    /// <param name="item"></param>
+    void Reveal(FileItem item);
+
+    /// <summary>
+    /// 現在の並び順の比較子(ｿーﾄしないならnull)
+    /// </summary>
+    /// <returns></returns>
+    IComparer<FileItem>? CreateComparer();
+
+    /// <summary>
+    /// ｿーﾄ矢印の表示切り替え(類似検索中は消す)
+    /// </summary>
+    /// <param name="visible"></param>
+    void SetSortIndicatorVisible(bool visible);
+}
 
 // TODO: 後から来た要求が前の要求を追い越せるよう、要求ﾊﾞーｼﾞｮﾝとCTSと待ち合わせ用ﾀｽｸの三点で競合防御してるが
 // TODO: もうちょいｽﾏーﾄなが方法ないか考える
@@ -13,14 +54,13 @@ namespace ImooneWPF.Committees;
 /// <summary>
 /// 検索(通常検索/類似検索)と一覧の差し替えを統治する
 /// </summary>
-internal sealed class FileListSearchCommittee
+public sealed class FileListSearchCommittee
 {
     private const int SearchDelayMilliseconds = 300;
 
-    readonly ListView list;
-    readonly TextBox searchBox;
-    readonly MainWindowModell model;
-    readonly FileListColumnCommittee columns;
+    readonly IFileListHost list;
+    readonly ImooneModell model;
+    readonly IImoonePalabras texts;
     readonly ImogeDatum datum;
     readonly Action clearDetailDelegaty;
     readonly Action<Exception> showErrorDelegaty;
@@ -28,47 +68,38 @@ internal sealed class FileListSearchCommittee
 
     readonly MurSearcher fileSearcher = new();
     readonly FileListSourceCommittee fileListSource = new();
-    readonly DispatcherTimer searchTimer = new()
-    {
-        Interval = TimeSpan.FromMilliseconds(SearchDelayMilliseconds)
-    };
 
+    // ｲﾝｸﾘﾒﾝﾀﾙ検索の入力待ち
+    CancellationTokenSource? searchDelaySource;
     CancellationTokenSource? searchTokenSource;
     Task pendingSearch = Task.CompletedTask;
     long searchRequestVersion;
     FileItem? similarSearchTarget;
 
     /// <summary>
+    /// ﾀー
     /// </summary>
     /// <param name="fileList">結果を流す一覧</param>
-    /// <param name="searchTextBox">検索ﾎﾞｯｸｽ</param>
     /// <param name="modell">ﾓﾃﾞﾚ</param>
-    /// <param name="columnCommittee">並び順と並べ替え表示</param>
+    /// <param name="imooneTexts">表示文言</param>
     /// <param name="imogeDatum">検索対象のﾃﾞーﾀﾑ</param>
     /// <param name="clearDetail">詳細ﾍﾟｲﾝを空にする</param>
     /// <param name="showError">ｴﾗー表示</param>
     /// <param name="closing">ｳｨﾝﾄﾞｳが閉じられたらｷｬﾝｾﾙされるﾄーｸﾝ</param>
-    public FileListSearchCommittee(ListView fileList, TextBox searchTextBox, MainWindowModell modell,
-        FileListColumnCommittee columnCommittee, ImogeDatum imogeDatum,
-        Action clearDetail, Action<Exception> showError, CancellationToken closing)
+    public FileListSearchCommittee(IFileListHost fileList, ImooneModell modell, IImoonePalabras imooneTexts,
+        ImogeDatum imogeDatum, Action clearDetail, Action<Exception> showError, CancellationToken closing)
     {
         list = fileList;
-        searchBox = searchTextBox;
         model = modell;
-        columns = columnCommittee;
+        texts = imooneTexts;
         datum = imogeDatum;
         clearDetailDelegaty = clearDetail;
         showErrorDelegaty = showError;
         closingToken = closing;
-
-        searchTimer.Tick += SearchTimer_Tick;
-        searchBox.TextChanged += SearchBox_TextChanged;
-        searchBox.KeyDown += SearchBox_KeyDown;
     }
 
     /// <summary>
     /// 一覧の差し替え中？
-    /// 差し替えに伴う選択の付け外しを利用側で無視するため
     /// </summary>
     public bool IsSwappingItemsSource { get; private set; }
 
@@ -86,15 +117,18 @@ internal sealed class FileListSearchCommittee
     /// 並べ替えできる状態？
     /// 類似検索は距離順で並べているので並べ替えさせない
     /// </summary>
-    public bool CanResort => !model.IsSimilarSearch && list.ItemsSource != null;
+    public bool CanResort => !model.IsSimilarSearch && list.HasItemsSource;
 
     bool IsClosing => closingToken.IsCancellationRequested;
 
     #region 入力
 
-    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    /// <summary>
+    /// 検索ﾎﾞｯｸｽの文字列が変わった
+    /// </summary>
+    public void NotifyQueryChanged()
     {
-        searchTimer.Stop();
+        StopSearchDelay();
         if (model.IsSimilarSearch) {
             // 類似検索は解除して元の一覧に戻し、検索自体は通常の流れに任せる
             Track(RestoreNormalListAsync());
@@ -104,24 +138,54 @@ internal sealed class FileListSearchCommittee
             CancelSearchRequest();
         }
         if (model.IncrementalSearch) {
-            searchTimer.Start();
+            StartSearchDelay();
         }
     }
 
-    private void SearchBox_KeyDown(object sender, KeyEventArgs e)
+    /// <summary>
+    /// 検索ﾎﾞｯｸｽでEnterが押された
+    /// </summary>
+    /// <returns>処理した？</returns>
+    public bool NotifyEnter()
     {
-        if (!model.IncrementalSearch && e.Key == Key.Enter) {
-            Search();
-            e.Handled = true;
+        if (model.IncrementalSearch) {
+            return false;
         }
+        Search();
+        return true;
     }
 
-    private void SearchTimer_Tick(object? sender, EventArgs e)
+    /// <summary>
+    /// 入力が落ち着くまで待ってから検索する
+    /// </summary>
+    private async void StartSearchDelay()
     {
-        searchTimer.Stop();
+        var cts = new CancellationTokenSource();
+        searchDelaySource = cts;
+        try {
+            await Task.Delay(SearchDelayMilliseconds, cts.Token);
+        }
+        catch (OperationCanceledException) {
+            // 次の入力が来た
+            return;
+        }
+        if (!ReferenceEquals(searchDelaySource, cts)) {
+            return;
+        }
+        StopSearchDelay();
         if (model.IncrementalSearch) {
             Track(ApplySearchAsync());
         }
+    }
+
+    /// <summary>
+    /// 入力待ちを止める
+    /// </summary>
+    private void StopSearchDelay()
+    {
+        searchDelaySource?.Cancel();
+        searchDelaySource?.Dispose();
+        searchDelaySource = null;
     }
 
     #endregion
@@ -133,7 +197,7 @@ internal sealed class FileListSearchCommittee
     /// </summary>
     public void Search()
     {
-        searchTimer.Stop();
+        StopSearchDelay();
         Track(ApplySearchAsync());
     }
 
@@ -154,7 +218,7 @@ internal sealed class FileListSearchCommittee
     /// </summary>
     public async Task QuiesceAsync()
     {
-        searchTimer.Stop();
+        StopSearchDelay();
         CancelSearchRequest();
         try {
             await pendingSearch;
@@ -176,8 +240,8 @@ internal sealed class FileListSearchCommittee
         fileSearcher.Reset();
         fileListSource.Items = items;
         fileListSource.Filter = null;
-        fileListSource.Comparer = columns.CreateComparer();
-        model.FileCountText = Properties.Resources.MC_NItems.Morfat(fileListSource.Items.Count);
+        fileListSource.Comparer = list.CreateComparer();
+        model.FileCountText = texts.ItemCount(fileListSource.Items.Count);
         await PublishFileListAsync(closingToken);
         if (!IsClosing) {
             // 検索条件を復元(たぶん上手く行く)
@@ -193,7 +257,7 @@ internal sealed class FileListSearchCommittee
     /// <returns></returns>
     public async Task ResortAsync()
     {
-        fileListSource.Comparer = columns.CreateComparer();
+        fileListSource.Comparer = list.CreateComparer();
         try {
             await PublishFileListAsync(closingToken);
         }
@@ -207,7 +271,7 @@ internal sealed class FileListSearchCommittee
     /// </summary>
     public void Stop()
     {
-        searchTimer.Stop();
+        StopSearchDelay();
         searchTokenSource?.Cancel();
     }
 
@@ -241,7 +305,7 @@ internal sealed class FileListSearchCommittee
     /// </summary>
     private async Task ApplySearchAsync()
     {
-        if (list.ItemsSource == null) {
+        if (!list.HasItemsSource) {
             return;
         }
 
@@ -254,7 +318,7 @@ internal sealed class FileListSearchCommittee
 
         try {
             var query = new MurQuery();
-            query.Parse(searchBox.Text);
+            query.Parse(list.QueryText);
 
             if (query.IsEmpty()) {
                 // 検索文字が空ならﾌｨﾙﾀー解除
@@ -283,7 +347,6 @@ internal sealed class FileListSearchCommittee
 
     /// <summary>
     /// 現在の検索結果とｿーﾄ状態で一覧を作り直して差し替える
-    /// ｿーﾄと絞り込みはｽﾚﾌﾟで済ませて、UIｽﾚｯﾄﾞではItemsSourceを差し替えるだけにする
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
@@ -295,19 +358,18 @@ internal sealed class FileListSearchCommittee
             return;
         }
 
-        var selected = list.SelectedItem as FileItem;
+        var selected = list.SelectedItem;
         IsSwappingItemsSource = true;
         try {
-            list.ItemsSource = built;
+            list.Publish(built);
             if (selected != null && fileListSource.IsVisible(selected)) {
-                list.SelectedItem = selected;
-                list.ScrollIntoView(selected);
+                list.Reveal(selected);
             }
         }
         finally {
             IsSwappingItemsSource = false;
         }
-        model.FileCountText = Properties.Resources.MC_NItems.Morfat(built.Count);
+        model.FileCountText = texts.ItemCount(built.Count);
     }
 
     /// <summary>
@@ -316,7 +378,7 @@ internal sealed class FileListSearchCommittee
     private void ClearSimilarSearchMode()
     {
         if (model.IsSimilarSearch) {
-            columns.SetSortIndicatorVisible(true);
+            list.SetSortIndicatorVisible(true);
         }
         fileListSource.RankedItems = null;
         similarSearchTarget = null;
@@ -355,7 +417,7 @@ internal sealed class FileListSearchCommittee
     /// <returns></returns>
     private async Task ApplySimilarSearchAsync(FileItem target)
     {
-        searchTimer.Stop();
+        StopSearchDelay();
         CancelSearchRequest();
         var request = searchRequestVersion;
         var source = fileListSource.Items;
@@ -364,13 +426,13 @@ internal sealed class FileListSearchCommittee
         searchTokenSource = cts;
         model.IsSimilarSearch = true;
         similarSearchTarget = target;
-        columns.SetSortIndicatorVisible(false);
-        model.SimilarSearchText = Properties.Resources.MC_SimilarSearchActive.Morfat(target.Name, SimilarImageSearcher.ResultLimit);
+        list.SetSortIndicatorVisible(false);
+        model.SimilarSearchText = texts.SimilarSearchActive(target.Name, SimilarImageSearcher.ResultLimit);
         try {
             fileListSource.RankedItems = Array.Empty<FileItem>();
             clearDetailDelegaty();
             await PublishFileListAsync(cts.Token);
-            model.FileCountText = Properties.Resources.MC_SimilarSearching;
+            model.FileCountText = texts.SimilarSearching;
             var matches = await SimilarImageSearcher.SearchMoone(target, source, mosh, cts.Token);
             if (cts.IsCancellationRequested || request != searchRequestVersion
                 || !ReferenceEquals(source, fileListSource.Items) || IsClosing) {
@@ -382,8 +444,7 @@ internal sealed class FileListSearchCommittee
             if (cts.IsCancellationRequested || request != searchRequestVersion || IsClosing) {
                 return;
             }
-            list.SelectedItem = target;
-            list.ScrollIntoView(target);
+            list.Reveal(target);
         }
         catch (OperationCanceledException) {
             // 後続の検索やﾌﾟﾛﾌｧｲﾙ切り替えに置き換わった。

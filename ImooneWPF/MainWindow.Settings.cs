@@ -1,7 +1,7 @@
 ﻿using ImogeIndex;
 using ImogeIndex.Web3.Dialogs;
 using ImogeIndex.Web3.Dictators;
-using ImooneWPF.Dictators;
+using ImogeIndex.Web6.Dictators;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -101,7 +101,7 @@ public partial class MainWindow
     void LoadSettings()
     {
         Profile.Load();
-        SettingsDictator.Load();
+        SettingsDictator.Load(App.SettingsPartition);
         var theme = ThemeDisplay.StringToTheme(SettingsDictator.Default.Theme);
         ThemeDictator.ApplyTheme(theme);
         DC.SelectedTheme = ThemeDisplay.ThemeToString(theme);

@@ -1,6 +1,6 @@
 ﻿using ImogeIndex;
 using ImogeIndex.Web3.Dictators;
-using ImooneWPF.Dictators;
+using ImogeIndex.Web6.Dictators;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -14,6 +14,11 @@ public partial class App : Application {
     const string InstanceMutexName = @"Local\ImooneWPF.{E8820D29-8731-4C10-97B8-65D7888801DB}.web3";
     const string ActivateEventName = @"Local\ImooneWPF.{AA7A3E13-513E-49CB-86A7-D3E827230015}.web3";
     const uint AsfwAny = uint.MaxValue;
+
+    /// <summary>
+    /// 設定の保存先区画
+    /// </summary>
+    internal const string SettingsPartition = nameof(ImooneWPF);
 
     Mutex? singleInstanceMutex;
     EventWaitHandle? activateEvent;
@@ -67,7 +72,7 @@ public partial class App : Application {
             return;
         }
 
-        SettingsDictator.Load();
+        SettingsDictator.Load(SettingsPartition);
         // ｳｲﾝﾄﾞｳ生成前にﾘｿーｽの言語を確定させる
         LanguageDictator.Apply(SettingsDictator.Default.Language);
         var theme = ThemeDisplay.StringToTheme(SettingsDictator.Default.Theme);

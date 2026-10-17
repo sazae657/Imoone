@@ -1,7 +1,6 @@
 ﻿using ImogeIndex;
 using ImogeIndex.Captionizers;
 using ImogeIndex.Common;
-using ImogeIndex.Properties;
 using ImogeIndex.Storage;
 using ImogeIndex.Taggers;
 using ImogeIndex.Territories;

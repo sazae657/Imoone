@@ -2,7 +2,8 @@
 using ImogeIndex.Common;
 using ImogeIndex.Storage;
 using ImogeIndex.Territories;
-using ImooneWPF.Storage;
+using ImogeIndex.Web6.Committees;
+using ImogeIndex.Web6.Storage;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -11,7 +12,7 @@ namespace ImooneWPF;
 // ﾌﾟﾛﾌｧｲﾙ読み込みとｲﾓｹﾞｲﾝﾃﾞｯｸｽ連動
 public partial class MainWindow
 {
-    readonly ProfileLoader profileLoader = new();
+    readonly ProfileLoader profileLoader = new(ResourcePalabras.Instance);
     bool wasLoadingProfile;
 
     /// <summary>
@@ -118,6 +119,7 @@ public partial class MainWindow
                     Dispatcher.BeginInvoke(() => DC.FileCountText = phaseText);
                 }
             }, tokenSource.Token);
+            fileListDisplay.SetMaxIconSize(FileListSizementEnvuelve.MaxIconSizeOf(Profile.Active.Thumbnail.Enable, Profile.Active.Thumbnail.Size));
             fileListDisplay.SetSmallDatum(Profile.Active.GetThumbnailDatumPath().FullName);
             await fileListSearch.ReloadAsync(result.Items);
             var stale = profileLoader.Datum.StaleMetadataAliases;

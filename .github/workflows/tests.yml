@@ -1,0 +1,55 @@
+name: Test
+
+on:
+    pull_request:
+        types:
+            - opened
+            - synchronize
+    workflow_dispatch:
+    push:
+        branches:
+            - develop
+            - release
+            - master
+
+permissions:
+    contents: read
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    test:
+        name: Tests (Windows x64)
+        runs-on: windows-2025
+        timeout-minutes: 30
+        steps:
+            - name: Set timezone to JST
+              run: tzutil /s "Tokyo Standard Time"
+
+            - name: Check timezone
+              shell: pwsh
+              run: |
+                tzutil /g
+                Get-Date
+                [TimeZoneInfo]::Local.Id
+
+            - name: Checkout
+              uses: actions/checkout@v7
+              with:
+                persist-credentials: false
+
+            - name: Setup .NET SDK
+              uses: actions/setup-dotnet@v6
+              with:
+                global-json-file: global.json
+
+            - name: Install dependencies
+              run: dotnet restore
+
+            - name: Build
+              run: dotnet build --configuration Release --no-restore -p:Platform=x64
+
+            - name: Run tests
+              run: dotnet test --project ImogeIndex.Web2/ImogeIndex.Web2.csproj --configuration Release -p:Platform=x64 --no-restore --output Detailed -no-ansi --no-progress

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace ImogeIndex.Web3;
+namespace ImogeIndex.Web6;
 
 /// <summary>
 /// ｺﾏﾝﾄﾞ

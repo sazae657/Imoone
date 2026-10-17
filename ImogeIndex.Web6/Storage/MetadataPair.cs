@@ -1,4 +1,4 @@
-﻿namespace ImooneWPF.Storage;
+﻿namespace ImogeIndex.Web6.Storage;
 
 /// <summary>
 /// ﾒﾀﾒﾀ

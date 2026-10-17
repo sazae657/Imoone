@@ -1,17 +1,15 @@
-﻿using ImogeIndex;
-using ImogeIndex.Common;
+﻿using ImogeIndex.Common;
 using ImogeIndex.Mur;
-using ImooneWPF.Modelle;
-using System.IO;
+using ImogeIndex.Web6.Modelle;
 using Tomlet;
 using Tomlet.Attributes;
-
-namespace ImooneWPF.Dictators;
+using R = ImogeIndex.Web6.Properties.Resources;
+namespace ImogeIndex.Web6.Dictators;
 
 /// <summary>
 /// ｳｲﾝﾄﾞｳの種類
 /// </summary>
-internal enum WindowParamsKey
+public enum WindowParamsKey
 {
     Main
 }
@@ -19,7 +17,7 @@ internal enum WindowParamsKey
 /// <summary>
 /// ｳｲﾝﾄﾞｳ
 /// </summary>
-internal class WindowParams
+public class WindowParams
 {
     public WindowParams()
     {
@@ -40,12 +38,12 @@ internal class WindowParams
     public int Height { get; set; } = 800;
 }
 
-internal delegate void WindowParamsDelegaty(WindowParams prarm);
+public delegate void WindowParamsDelegaty(WindowParams prarm);
 
 /// <summary>
 /// 詳細ﾍﾟｲﾝのﾊﾟﾗﾒーﾀー
 /// </summary>
-internal class DetailPaneParams
+public class DetailPaneParams
 {
     public bool Visible { get; set; } = false;
     public int Width { get; set; } = 128;
@@ -57,13 +55,19 @@ internal class DetailPaneParams
 /// <summary>
 /// 自動保存用設定
 /// </summary>
-internal class SettingsDictator
+public class SettingsDictator
 {
     [TomlNonSerialized]
     private static SettingsDictator instance = new SettingsDictator();
 
     [TomlNonSerialized]
     public static SettingsDictator Default => instance;
+
+    /// <summary>
+    /// 保存先の区画
+    /// </summary>
+    [TomlNonSerialized]
+    private static string? partition;
 
     [TomlNonSerialized]
     private static readonly Dictionary<WindowParamsKey, WindowParams> WindowParamDefaults = new Dictionary<WindowParamsKey, WindowParams>() {
@@ -162,17 +166,28 @@ internal class SettingsDictator
     /// <summary>
     /// ﾘｽﾄ表示ﾓーﾄﾞ
     /// </summary>
-    public MurDisplayMode FileDisplayMode { get; set; }
+    public MurDisplayMode FileListLayout { get; set; }
+
+    /// <summary>
+    /// ｱｲｺﾝ表示の寸法
+    /// </summary>
+    public int FileIconSize { get; set; } = 32;
 
     /// <summary>
     /// ﾏーﾃー
     /// </summary>
-    public string Theme { get; set; } = ImogeIndex.Web3.Dictators.ThemeDictator.NameOfDefaultTheme;
+    public string Theme { get; set; } = NameOfDefaultTheme;
 
     /// <summary>
-    /// UI言語(空ならOS設定に従う、再起動で反映)
+    /// ﾃﾞﾌｫﾙﾄﾃーﾏ
     /// </summary>
-    public string Language { get; set; } = ImogeIndex.Web3.Dictators.LanguageDictator.NameOfSystemLanguage;
+    [TomlNonSerialized]
+    public const string NameOfDefaultTheme = "System";
+
+    /// <summary>
+    /// UI言語
+    /// </summary>
+    public string Language { get; set; } = string.Empty;
 
     /// <summary>
     /// ｴﾗー詳細表示
@@ -204,7 +219,10 @@ internal class SettingsDictator
     /// </summary>
     /// <returns></returns>
     static FileInfo CreateLocalState() {
-        return SystemParams.CreateFrontendLocalStateDir(nameof(ImooneWPF)).CombineFile(".DS_Store");
+        if (partition == null) {
+            throw new InvalidOperationException(R.DG_E_SaveBeforeLoad.Morfat(nameof(Load)));
+        }
+        return SystemParams.CreateFrontendLocalStateDir(partition).CombineFile(".DS_Store");
     }
 
     /// <summary>
@@ -240,8 +258,10 @@ internal class SettingsDictator
     /// <summary>
     /// 読み込み
     /// </summary>
-    public static void Load()
+    /// <param name="frontend">保存先の区画(ﾌﾛﾝﾄｴﾝﾄﾞ名)</param>
+    public static void Load(string frontend)
     {
+        partition = frontend;
         var sm = CreateLocalState();
         if (!sm.Exists) {
             instance = new();

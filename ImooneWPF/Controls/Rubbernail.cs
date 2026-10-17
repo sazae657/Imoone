@@ -1,8 +1,9 @@
-﻿using ImooneWPF.Dictators;
+using ImogeIndex.Web6.Dictators;
 using ImogeIndex.Mur;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace ImooneWPF.Controls;
 
@@ -12,10 +13,10 @@ namespace ImooneWPF.Controls;
 public sealed class Rubbernail : Image
 {
     public static readonly DependencyProperty LoaderProperty = DependencyProperty.RegisterAttached(
-        "Loader", typeof(TileThumbnailDictator), typeof(Rubbernail),
+        "Loader", typeof(TileThumbnailDictator<BitmapSource>), typeof(Rubbernail),
         new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits, Changed));
-    public static void SetLoader(DependencyObject target, TileThumbnailDictator? value) => target.SetValue(LoaderProperty, value);
-    public static TileThumbnailDictator? GetLoader(DependencyObject target) => (TileThumbnailDictator?)target.GetValue(LoaderProperty);
+    public static void SetLoader(DependencyObject target, TileThumbnailDictator<BitmapSource>? value) => target.SetValue(LoaderProperty, value);
+    public static TileThumbnailDictator<BitmapSource>? GetLoader(DependencyObject target) => (TileThumbnailDictator<BitmapSource>?)target.GetValue(LoaderProperty);
 
     public static readonly DependencyProperty ItemProperty = DependencyProperty.Register(
         nameof(Item), typeof(FileItem), typeof(Rubbernail), new PropertyMetadata(null, Changed));
@@ -29,7 +30,7 @@ public sealed class Rubbernail : Image
     }
 
     CancellationTokenSource? request;
-    TileThumbnailDictator? subscribed;
+    TileThumbnailDictator<BitmapSource>? subscribed;
     static readonly ImageSource Placeholder = FabricatingPlaceholder();
 
     public Rubbernail()
@@ -53,10 +54,20 @@ public sealed class Rubbernail : Image
         Refresh();
     }
 
+    protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+        // 拡大縮小中は今の画像を引き伸ばしておいて、読めたら差し替える
+        if (e.Property == WidthProperty) {
+            Load(keepSource: true);
+        }
+    }
+
     /// <summary>
     /// もういらん
     /// </summary>
-    private void Detach()
+    /// <param name="keepSource">今の画像を残す？</param>
+    private void Detach(bool keepSource = false)
     {
         request?.Cancel();
         request?.Dispose();
@@ -65,15 +76,23 @@ public sealed class Rubbernail : Image
             subscribed.Changed -= Refresh;
         }
         subscribed = null;
-        Source = Placeholder;
+        if (!keepSource) {
+            Source = Placeholder;
+        }
     }
 
     /// <summary>
     /// 読み込み
     /// </summary>
-    private async void Refresh()
+    private void Refresh() => Load(keepSource: false);
+
+    /// <summary>
+    /// 読み込み本体
+    /// </summary>
+    /// <param name="keepSource">読めるまで今の画像を残す？</param>
+    private async void Load(bool keepSource)
     {
-        Detach();
+        Detach(keepSource);
         if (!IsLoaded || Item is not { } item || GetLoader(this) is not { } loader) {
             return;
         }

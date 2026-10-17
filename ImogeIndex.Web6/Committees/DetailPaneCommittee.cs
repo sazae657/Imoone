@@ -1,51 +1,56 @@
-﻿using ImogeIndex.Mur;
-using ImooneWPF.Dictators;
-using ImooneWPF.Modelle;
-using ImooneWPF.Storage;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
+﻿using ImogeIndex.Web6.Dictators;
+using ImogeIndex.Web6.Modelle;
+using ImogeIndex.Web6.Storage;
+using ImogeIndex.Mur;
 
-namespace ImooneWPF.Committees;
+namespace ImogeIndex.Web6.Committees;
 
 /// <summary>
 /// 詳細ﾍﾟｲﾝとｻﾑﾈのﾌﾟﾚﾋﾞｭーを統治する
-/// 選択が変わるたびに前の読み込みを捨てて、画像とﾈﾀを早く終わった方から出す
 /// </summary>
-internal sealed class DetailPaneCommittee
+/// <typeparam name="TBitmap">表示用の画像型</typeparam>
+public sealed class DetailPaneCommittee<TBitmap> where TBitmap : class
 {
-    readonly MainWindowModell model;
-    readonly Visual dpiOwner;
+    readonly ImooneModell model;
+    readonly Action<TBitmap?> showBitmapDelegaty;
+    readonly Func<double> dpiScaleDelegaty;
+    readonly Func<double> screenLongSideDelegaty;
     readonly CancellationToken closingToken;
-    readonly ImagePreviewDictator imagePreviewDictator = new();
-    readonly DetailPaneDictator detailPaneDictator = new();
+    readonly ImagePreviewDictator<TBitmap> imagePreviewDictator;
+    readonly DetailPaneDictator detailPaneDictator;
     CancellationTokenSource? detailImageTokenSource;
 
     /// <summary>
     /// </summary>
-    /// <param name="modell"></param>
-    /// <param name="dpiSource"></param>
+    /// <param name="modell">ﾓﾃﾞﾚ</param>
+    /// <param name="texts">表示文言</param>
+    /// <param name="decoder">ﾌﾟﾚﾋﾞｭー画像のﾃﾞｺーﾀﾞー</param>
+    /// <param name="showDetailBitmap">詳細ﾍﾟｲﾝに画像を出す</param>
+    /// <param name="dpiScaleX">表示倍率</param>
+    /// <param name="screenLongSideDip">画面の長辺(DIP)</param>
     /// <param name="closing"></param>
-    public DetailPaneCommittee(MainWindowModell modell, Visual dpiSource, CancellationToken closing)
+    public DetailPaneCommittee(ImooneModell modell, IImoonePalabras texts, IImagePreviewDecoder<TBitmap> decoder,
+        Action<TBitmap?> showDetailBitmap, Func<double> dpiScaleX, Func<double> screenLongSideDip, CancellationToken closing)
     {
         model = modell;
-        dpiOwner = dpiSource;
+        showBitmapDelegaty = showDetailBitmap;
+        dpiScaleDelegaty = dpiScaleX;
+        screenLongSideDelegaty = screenLongSideDip;
         closingToken = closing;
+        imagePreviewDictator = new(decoder);
+        detailPaneDictator = new(texts);
     }
 
     /// <summary>
     /// 事前作成ｻﾑﾈが無い時に実物を縮めて読む寸法
     /// </summary>
     private int PreviewDecodeSize => (int)Math.Ceiling(
-        Math.Max(128, model.DetailThumbnailSize) * VisualTreeHelper.GetDpi(dpiOwner).DpiScaleX);
+        Math.Max(128, model.DetailThumbnailSize) * dpiScaleDelegaty());
 
     /// <summary>
     /// 詳細ﾍﾟｲﾝで実物を出す時の長辺上限
-    /// ﾍﾟｲﾝが画面より大きくなることはないので、8Kとかを原寸で抱えないよう画面の長辺で頭打ちにする
     /// </summary>
-    private int OriginalDecodeSize => (int)Math.Ceiling(
-        Math.Max(SystemParameters.PrimaryScreenWidth, SystemParameters.PrimaryScreenHeight)
-        * VisualTreeHelper.GetDpi(dpiOwner).DpiScaleX);
+    private int OriginalDecodeSize => (int)Math.Ceiling(screenLongSideDelegaty() * dpiScaleDelegaty());
 
     /// <summary>
     /// 詳細ﾍﾟｲﾝに項目を出す
@@ -54,7 +59,7 @@ internal sealed class DetailPaneCommittee
     public void Show(FileItem fileItem)
     {
         Cancel();
-        model.DetailBitmap = model.DetailPaneShowOriginal ? null : imagePreviewDictator.GetCachedThumbnail(fileItem);
+        showBitmapDelegaty(model.DetailPaneShowOriginal ? null : imagePreviewDictator.GetCachedThumbnail(fileItem));
         model.DetailFields.Clear();
         detailImageTokenSource = CancellationTokenSource.CreateLinkedTokenSource(closingToken);
         _ = LoadDetailAsync(fileItem, detailImageTokenSource.Token);
@@ -76,12 +81,12 @@ internal sealed class DetailPaneCommittee
     public void Clear()
     {
         Cancel();
-        model.DetailBitmap = null;
+        showBitmapDelegaty(null);
         model.DetailFields.Clear();
     }
 
     /// <summary>
-    /// 詳細ﾍﾟｲﾝもｻﾑﾈｷｬｯｼｭも空にする(ﾃﾞーﾀﾑ差し替え時)
+    /// 詳細ﾍﾟｲﾝとｻﾑﾈｷｬｯｼｭを空にする(ﾃﾞーﾀﾑ差し替え時)
     /// </summary>
     public void Reset()
     {
@@ -91,22 +96,22 @@ internal sealed class DetailPaneCommittee
 
     /// <summary>
     /// ｻﾑﾈを非同期で詰める
-    /// 読み込み中にｺﾝﾃﾅが別の項目に再利用されてたら捨てる
     /// </summary>
-    /// <param name="image"></param>
-    /// <param name="owner"></param>
     /// <param name="fileItem"></param>
+    /// <param name="applyDelegaty">詰める</param>
+    /// <param name="isStillDelegaty">詰める先がまだこの項目を表示してる？</param>
     /// <returns></returns>
-    public async Task FillThumbnailAsync(Image image, FrameworkElement owner, FileItem fileItem)
+    public async Task FillThumbnailAsync(FileItem fileItem, Action<TBitmap?> applyDelegaty, Func<bool> isStillDelegaty)
     {
+        // 読み込み中にｺﾝﾃﾅが別の項目に再利用されてたら捨てる
         var cached = imagePreviewDictator.GetCachedThumbnail(fileItem);
-        image.Source = cached;
+        applyDelegaty(cached);
         if (cached != null) {
             return;
         }
         var bitmap = await imagePreviewDictator.GetThumbnailAsync(fileItem, PreviewDecodeSize, closingToken);
-        if (!closingToken.IsCancellationRequested && ReferenceEquals(owner.DataContext, fileItem)) {
-            image.Source = bitmap;
+        if (!closingToken.IsCancellationRequested && isStillDelegaty()) {
+            applyDelegaty(bitmap);
         }
     }
 
@@ -127,7 +132,7 @@ internal sealed class DetailPaneCommittee
                 ? await imagePreviewDictator.GetPreviewAsync(fileItem, OriginalDecodeSize, cancellationToken)
                 : await imagePreviewDictator.GetThumbnailAsync(fileItem, PreviewDecodeSize, cancellationToken);
             if (!cancellationToken.IsCancellationRequested) {
-                model.DetailBitmap = bitmap;
+                showBitmapDelegaty(bitmap);
             }
         }
 

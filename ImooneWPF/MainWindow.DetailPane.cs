@@ -1,5 +1,5 @@
 ﻿using ImogeIndex.Mur;
-using ImooneWPF.Storage;
+using ImogeIndex.Web6.Storage;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -24,7 +24,8 @@ public partial class MainWindow
         {
             return;
         }
-        await detailPane.FillThumbnailAsync(image, item, fileItem);
+        await detailPane.FillThumbnailAsync(fileItem, bitmap => image.Source = bitmap,
+            () => ReferenceEquals(item.DataContext, fileItem));
     }
 
     /// <summary>

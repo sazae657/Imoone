@@ -2,7 +2,7 @@
 using ImogeIndex.Common;
 using ImogeIndex.Mur;
 using ImogeIndex.Web3.Dialogs;
-using ImooneWPF.Committees;
+using ImogeIndex.Web6.Committees;
 using System.Diagnostics;
 using System.IO;
 

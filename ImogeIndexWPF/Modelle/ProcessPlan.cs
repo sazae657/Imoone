@@ -6,10 +6,10 @@
 [Flags]
 internal enum SelectiveProcess
 {
-    Index = 1 << 0,
-    TagIndex = 1 << 1,
+    Index =      1 << 0,
+    TagIndex =   1 << 1,
     Captioning = 1 << 2,
-    Vacuum = 1 << 3,
+    Vacuum =     1 << 3,
 }
 
 /// <summary>

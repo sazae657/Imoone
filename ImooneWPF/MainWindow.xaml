@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ImooneWPF"
         xmlns:controls="clr-namespace:ImooneWPF.Controls"
         xmlns:modelle="clr-namespace:ImooneWPF.Modelle"
+        xmlns:imoone="clr-namespace:ImogeIndex.Web6.Modelle;assembly=ImogeIndex.Web6"
         xmlns:properties="clr-namespace:ImooneWPF.Properties"
         xmlns:web3="clr-namespace:ImogeIndex.Web3;assembly=ImogeIndex.Web3"
         xmlns:mur="clr-namespace:ImogeIndex.Mur;assembly=ImogeIndex"
@@ -54,12 +55,12 @@
         <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenSettingFolderCommand}" />
         <KeyBinding Key="M" Modifiers="Ctrl" Command="{Binding OpenProfileFolderCommand}" />
 
-        <KeyBinding Key="D6" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.List}" />
-        <KeyBinding Key="D5" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.ThumbList}" />
-        <KeyBinding Key="D4" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.IconS}" />
-        <KeyBinding Key="D3" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.IconM}" />
-        <KeyBinding Key="D2" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.IconL}" />
-        <KeyBinding Key="D1" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static modelle:MurDisplayMode.IconH}" />
+        <KeyBinding Key="D6" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static imoone:MurDisplayPreset.List}" />
+        <KeyBinding Key="D5" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static imoone:MurDisplayPreset.ThumbList}" />
+        <KeyBinding Key="D4" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static imoone:MurDisplayPreset.IconS}" />
+        <KeyBinding Key="D3" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static imoone:MurDisplayPreset.IconM}" />
+        <KeyBinding Key="D2" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static imoone:MurDisplayPreset.IconL}" />
+        <KeyBinding Key="D1" Modifiers="Ctrl+Shift" Command="{Binding SetDisplayModeCommand}" CommandParameter="{x:Static imoone:MurDisplayPreset.IconH}" />
 
         <KeyBinding Key="OemComma" Modifiers="Ctrl" Command="{Binding CloseWindowCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
@@ -74,12 +75,12 @@
                         <ToggleButton.ContextMenu>
                             <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
                                 <MenuItem x:Name="FileDisplayModeMenu" Header="{x:Static properties:Resources.MC_D_Display}">
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_List}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.List}" InputGestureText="Ctrl+Shift+6"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_ThumbList}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.ThumbList}" InputGestureText="Ctrl+Shift+5"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconS}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.IconS}" InputGestureText="Ctrl+Shift+4"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconM}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.IconM}" InputGestureText="Ctrl+Shift+3"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconL}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.IconL}" InputGestureText="Ctrl+Shift+2"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconH}" IsCheckable="True" Tag="{x:Static modelle:MurDisplayMode.IconH}" InputGestureText="Ctrl+Shift+1"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_List}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.List}" InputGestureText="Ctrl+Shift+6"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_ThumbList}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.ThumbList}" InputGestureText="Ctrl+Shift+5"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconS}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconS}" InputGestureText="Ctrl+Shift+4"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconM}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconM}" InputGestureText="Ctrl+Shift+3"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconL}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconL}" InputGestureText="Ctrl+Shift+2"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconH}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconH}" InputGestureText="Ctrl+Shift+1"/>
                                 </MenuItem>
                                 <Separator/>
                                 <CheckBox IsChecked="{Binding IncrementalSearch}" Content="{x:Static properties:Resources.MC_IncrementalSearch}"/>
