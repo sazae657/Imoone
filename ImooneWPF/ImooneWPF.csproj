@@ -4,7 +4,6 @@
         <TargetFramework>$(NetCoreAppWinTarget)</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
-        <UseWindowsForms>true</UseWindowsForms>
         <Nullable>enable</Nullable>
         <Platforms>x64</Platforms>
         <PublishReadyToRun>true</PublishReadyToRun>
@@ -17,12 +16,12 @@
         <PackageLicenseExpression>$(Muricense)</PackageLicenseExpression>
         <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
+
     <ItemGroup>
-        <Using Remove="System.Windows.Forms" />
-        <Using Remove="System.Drawing" />
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Properties\Resources\IDI_ICON1.ico" />
+        <Content Include="Properties\Resources\IDI_ICON1.ico" 
+                 Link="Assets\Imoone.ico" 
+                 CopyToOutputDirectory="PreserveNewest" 
+                 CopyToPublishDirectory="PreserveNewest" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm" />
@@ -61,11 +60,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="Properties\Embed.Designer.cs">
-          <DesignTime>True</DesignTime>
-          <AutoGen>True</AutoGen>
-          <DependentUpon>Embed.resx</DependentUpon>
-        </Compile>
         <Compile Update="Properties\Resources.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
@@ -75,10 +69,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Update="Properties\Embed.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>Embed.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
         <EmbeddedResource Update="Properties\Resources.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
