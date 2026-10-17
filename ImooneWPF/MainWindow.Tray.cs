@@ -1,16 +1,14 @@
 ﻿using System.ComponentModel;
+using System.IO;
 using System.Windows;
-using Forms = System.Windows.Forms;
+using ImogeIndex.Web6.Ganadores;
 
 namespace ImooneWPF;
 
-// Windows.Formsの参照を混ぜたくねえので分離したﾄﾚｲｱｲｺﾝ関連
-// (あまり肥大化したらDictatorに切り出す)
+// ﾀｽｸﾄﾚｲ関連
 public partial class MainWindow
 {
-    Forms.NotifyIcon? trayIcon;
-    Forms.ContextMenuStrip? trayMenu;
-    System.Drawing.Icon? trayImage;
+    NiraTrayIcon? trayIcon;
     WindowState restoreWindowState = WindowState.Normal;
 
     /// <summary>
@@ -33,7 +31,7 @@ public partial class MainWindow
             restoreWindowState = WindowState;
             if (trayIcon != null)
             {
-                trayIcon.Visible = false;
+                trayIcon.Hide();
             }
             return;
         }
@@ -44,26 +42,25 @@ public partial class MainWindow
 
         if (trayIcon == null)
         {
-            trayImage = Properties.Embed.IDI_TRAYICON;
-            trayMenu = new Forms.ContextMenuStrip();
-            trayMenu.Items.Add(Properties.Resources.IDM_EXIT, null,
-                (_, _) => Dispatcher.Invoke(Close));
-            trayIcon = new Forms.NotifyIcon
+            try
             {
-                Icon = trayImage,
-                ContextMenuStrip = trayMenu
-            };
-            trayIcon.MouseClick += (_, args) =>
+                trayIcon = new NiraTrayIcon(
+                    Path.Combine(AppContext.BaseDirectory, "Assets", "Imoone.ico"), Properties.Resources.IDM_EXIT);
+                trayIcon.RestoreRequested += () => Dispatcher.BeginInvoke(new Action(RestoreFromTray));
+                trayIcon.ExitRequested += () => Dispatcher.BeginInvoke(new Action(Close));
+                trayIcon.RegistrationLost += () => Dispatcher.BeginInvoke(new Action(RestoreFromTray));
+            }
+            catch (System.ComponentModel.Win32Exception ex)
             {
-                if (args.Button == Forms.MouseButtons.Left)
-                {
-                    Dispatcher.Invoke(RestoreFromTray);
-                }
-            };
+                System.Diagnostics.Trace.TraceError(ex.ToString());
+                return;
+            }
         }
         UpdateTrayText();
-        trayIcon.Visible = true;
-        Hide();
+        if (trayIcon.TryShow())
+        {
+            Hide();
+        }
     }
 
     private void TrayModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -83,17 +80,7 @@ public partial class MainWindow
         {
             return;
         }
-        // 通知領域の文字数制限を超えないように丸める
-        var text = Properties.Resources.MC_AppTitle;
-        if (!string.IsNullOrEmpty(DC.ActiveProfile)) {
-            text += " - " + DC.ActiveProfile.Replace('\r', ' ').Replace('\n', ' ');
-        }
-        if (text.Length > 63)
-        {
-            var length = char.IsHighSurrogate(text[61]) ? 61 : 62;
-            text = text[..length] + "…";
-        }
-        trayIcon.Text = text;
+        trayIcon.UpdateText(Properties.Resources.MC_AppTitle, DC.ActiveProfile);
     }
 
     /// <summary>
@@ -105,6 +92,7 @@ public partial class MainWindow
         {
             return;
         }
+        trayIcon?.Hide();
         Show();
         WindowState = restoreWindowState;
         Activate();
@@ -118,8 +106,6 @@ public partial class MainWindow
         StateChanged -= Window_StateChanged;
         DC.PropertyChanged -= TrayModel_PropertyChanged;
         trayIcon?.Dispose();
-        trayMenu?.Dispose();
-        trayImage?.Dispose();
         trayIcon = null;
     }
 }

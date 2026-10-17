@@ -79,8 +79,14 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
 
         if (launchOptions.NoWindow && WindowState == WindowState.Minimized) {
             // 最小化状態来るとStateChangedが来ないのでここでﾄｲﾚへ送る
-            trayIcon.Show();
-            Hide();
+            if (trayIcon.TryShow())
+            {
+                Hide();
+            }
+            else
+            {
+                RestoreFromTray();
+            }
         }
 
         subWindows.RegisterMessages();
@@ -660,8 +666,14 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
             return;
         }
         if (launchOptions.NoWindow || DC.MinimizeToTray) {
-            trayIcon.Show();
-            Hide();
+            if (trayIcon.TryShow())
+            {
+                Hide();
+            }
+            else
+            {
+                RestoreFromTray();
+            }
         }
     }
 

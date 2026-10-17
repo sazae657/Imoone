@@ -5,7 +5,6 @@
         <TargetFramework>$(NetCoreAppWinTarget)</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
-        <UseWindowsForms>true</UseWindowsForms>
         <Platforms>x64</Platforms>
         <Nullable>enable</Nullable>
         <PublishReadyToRun>true</PublishReadyToRun>
@@ -23,15 +22,11 @@
         <None Remove="Properties\Resources\IDI_ICON1.ico" />
     </ItemGroup>
 
-
     <ItemGroup>
-        <Using Remove="System.Windows.Forms" />
-        <Using Remove="System.Drawing" />
-    </ItemGroup>
-
-
-    <ItemGroup>
-        <EmbeddedResource Include="Properties\Resources\IDI_ICON1.ico" />
+        <Content Include="Properties\Resources\IDI_ICON1.ico" 
+                 Link="Assets\ImogeIndex.ico" 
+                 CopyToOutputDirectory="PreserveNewest" 
+                 CopyToPublishDirectory="PreserveNewest" />
     </ItemGroup>
 
     <ItemGroup>
@@ -40,16 +35,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ImogeIndex.Web3\ImogeIndex.Web3.csproj" />
         <ProjectReference Include="..\ImogeIndex\ImogeIndex.csproj" />
+        <ProjectReference Include="..\ImogeIndex.Web3\ImogeIndex.Web3.csproj" />
+        <ProjectReference Include="..\ImogeIndex.Web6\ImogeIndex.Web6.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="Properties\Embed.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>Embed.resx</DependentUpon>
-        </Compile>
         <Compile Update="Properties\Resources.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
@@ -58,10 +49,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Update="Properties\Embed.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Embed.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
         <EmbeddedResource Update="Properties\Resources.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>

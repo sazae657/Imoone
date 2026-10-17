@@ -1,5 +1,8 @@
-﻿using System.Windows.Threading;
-using Forms = System.Windows.Forms;
+﻿using ImogeIndex.Web6.Ganadores;
+using System.ComponentModel;
+using System.IO;
+using System.Windows.Threading;
+
 
 namespace ImogeIndexWPF.Dictators;
 
@@ -8,91 +11,116 @@ namespace ImogeIndexWPF.Dictators;
 /// </summary>
 internal sealed class TrayIconDictator : IDisposable
 {
-    readonly Forms.NotifyIcon icon;
-    readonly Forms.ContextMenuStrip menu = new();
-    readonly Forms.ToolStripMenuItem start;
-    readonly Forms.ToolStripMenuItem stop;
-    readonly Forms.ToolStripMenuItem exit;
+    readonly Dispatcher dispatcher;
+    readonly Action restore;
+    readonly IReadOnlyList<TrayMenuCommand?> commands;
     readonly DispatcherTimer timer;
     readonly Func<string> getStatus;
-    private bool disposedValue;
+    NiraTrayIcon? icon;
+    bool canStart;
+    bool canStop;
+    bool canExit;
+    bool disposed;
 
     public TrayIconDictator(Dispatcher dispatcher, Action restore, Action startAction,
         Action stopAction, Action exitAction, Func<string> getStatus)
     {
+        this.dispatcher = dispatcher;
+        this.restore = restore;
         this.getStatus = getStatus;
-        start = new Forms.ToolStripMenuItem(Properties.Resources.IDM_START);
-        stop = new Forms.ToolStripMenuItem(Properties.Resources.IDM_STOP);
-        exit = new Forms.ToolStripMenuItem(Properties.Resources.IDM_EXIT);
-        start.Click += (_, _) => dispatcher.Invoke(startAction);
-        stop.Click += (_, _) => dispatcher.Invoke(stopAction);
-        exit.Click += (_, _) => dispatcher.Invoke(exitAction);
-        menu.Items.AddRange([start, stop, new Forms.ToolStripSeparator(), exit]);
-        icon = new Forms.NotifyIcon {
-            Icon = Properties.Embed.IDI_TRAYICON,
-            ContextMenuStrip = menu
-        };
-        icon.MouseClick += (_, e) => {
-            if (e.Button == Forms.MouseButtons.Left) {
-                dispatcher.Invoke(restore);
-            }
-        };
+        commands = [
+            new TrayMenuCommand(Properties.Resources.IDM_START,
+                () => QueueCommand(startAction, () => canStart), () => canStart),
+            new TrayMenuCommand(Properties.Resources.IDM_STOP,
+                () => QueueCommand(stopAction, () => canStop), () => canStop),
+            null,
+            new TrayMenuCommand(Properties.Resources.IDM_EXIT,
+                () => QueueCommand(exitAction, () => canExit), () => canExit)
+        ];
         timer = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background,
             (_, _) => UpdateText(), dispatcher);
         timer.Stop();
     }
 
-    public void SetCommands(bool canStart, bool canStop, bool canExit)
+    void QueueCommand(Action action, Func<bool> enabled)
     {
-        start.Enabled = canStart;
-        stop.Enabled = canStop;
-        exit.Enabled = canExit;
+        dispatcher.BeginInvoke(new Action(() =>
+        {
+            if (!disposed && enabled())
+            {
+                action();
+            }
+        }));
     }
 
-    public void Show()
+    void QueueRestore()
     {
+        dispatcher.BeginInvoke(new Action(() =>
+        {
+            if (!disposed)
+            {
+                restore();
+            }
+        }));
+    }
+
+    public void SetCommands(bool canStart, bool canStop, bool canExit)
+    {
+        this.canStart = canStart;
+        this.canStop = canStop;
+        this.canExit = canExit;
+    }
+
+    public bool TryShow()
+    {
+        ObjectDisposedException.ThrowIf(disposed, this);
+        if (icon == null)
+        {
+            try
+            {
+                icon = new NiraTrayIcon(
+                    Path.Combine(AppContext.BaseDirectory, "Assets", "ImogeIndex.ico"), commands);
+                icon.RestoreRequested += QueueRestore;
+                icon.RegistrationLost += OnRegistrationLost;
+            }
+            catch (Win32Exception ex)
+            {
+                System.Diagnostics.Trace.TraceError(ex.ToString());
+                return false;
+            }
+        }
         UpdateText();
-        icon.Visible = true;
+        if (!icon.TryShow())
+        {
+            return false;
+        }
         timer.Start();
+        return true;
+    }
+
+    void OnRegistrationLost()
+    {
+        timer.Stop();
+        QueueRestore();
     }
 
     public void Hide()
     {
         timer.Stop();
-        icon.Visible = false;
+        icon?.Hide();
     }
 
-    void UpdateText()
-    {
-        // 通知領域の文字数制限を超えないように丸める
-        var text = getStatus().Replace('\r', ' ').Replace('\n', ' ');
-        if (text.Length > 63) {
-            var length = char.IsHighSurrogate(text[61]) ? 61 : 62;
-            text = text[..length] + "…";
-        }
-        if (icon.Text != text) {
-            icon.Text = text;
-        }
-    }
-
-    #region IDisposable
-
-    private void Dispose(bool disposing)
-    {
-        if (!disposedValue) {
-            timer.Stop();
-            icon.Visible = false;
-            icon.Dispose();
-            menu.Dispose();
-            disposedValue = true;
-        }
-    }
+    void UpdateText() => icon?.UpdateText(getStatus(), null);
 
     public void Dispose()
     {
-        Dispose(disposing: true);
-        GC.SuppressFinalize(this);
+        if (disposed)
+        {
+            return;
+        }
+        disposed = true;
+        timer.Stop();
+        icon?.Dispose();
+        icon = null;
     }
-
-    #endregion
 }
