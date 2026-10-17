@@ -89,25 +89,30 @@ public class CaptionProzessor  : IDisposable, IProzessor {
             return;
         }
 
-        double c = 0;
-        int errc = 0;
-        Captionizer.Dictator.ResetFailures();
+        // 先に対象を絞り込み
+        var targets = new List<FileRecord>();
         foreach (var x in filesIndex) {
             if (token.IsCancellationRequested) {
                 return;
             }
+            if (WasTarget(x)) {
+                targets.Add(x);
+            }
+        }
+        if (targets.Count == 0) {
+            return;
+        }
+
+        int c = 0;
+        int errc = 0;
+        Captionizer.Dictator.ResetFailures();
+        foreach (var x in targets) {
+            if (token.IsCancellationRequested) {
+                return;
+            }
             c++;
-            if (!x.IsAlive || x.HasCaption) {
-                continue;
-            }
-            if (SkipKnownError && mappedErrors.ContainsKey(x.Id)){
-                continue;
-            }
-            if (!IsTarget(x.Path)) {
-                continue;
-            }
             try {
-                OnProgress?.Invoke((int)c, filesIndex.Count, errc, Properties.Resources.CP_Captioning, $"{x.Path}");
+                OnProgress?.Invoke(c, targets.Count, errc, Properties.Resources.CP_Captioning, $"{x.Path}");
                 var rpm = await Captionizer.Predict(x.Path, token);
                 if (rpm == null) {
                     errc++;
@@ -142,6 +147,22 @@ public class CaptionProzessor  : IDisposable, IProzessor {
                 OnError?.Invoke(cf, Properties.Resources.ZG_Error.Morfat(nameof(CaptionProzessor),cf.Message));
             }
         }
+    }
+
+    /// <summary>
+    /// ｷｬﾌﾟｼｮﾆﾝｸﾞ対象のﾚｺーﾄﾞ？
+    /// </summary>
+    /// <param name="x"></param>
+    /// <returns></returns>
+    bool WasTarget(FileRecord x)
+    {
+        if (!x.IsAlive || x.HasCaption) {
+            return false;
+        }
+        if (SkipKnownError && mappedErrors.ContainsKey(x.Id)) {
+            return false;
+        }
+        return IsTarget(x.Path);
     }
 
     /// <summary>
