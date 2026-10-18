@@ -88,6 +88,9 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow {
         niractionWindow?.Close();
         niractionWindow = null;
 
+        labelEditWindow?.Close();
+        labelEditWindow = null;
+
         fileListSearch.Stop();
         tokenSource.Cancel();
         detailPane.Cancel();
@@ -95,6 +98,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow {
         fileListDisplay.Dispose();
         ThumbnailStore.Close();
         IndexStore.Close();
+        LabelStore.Close();
         SaveSettings();
     }
 
@@ -135,6 +139,8 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow {
         DC.OnFocusSearchTextBox += () => SearchTextBox.Focus();
         DC.OnOpenAboutDialog += OnOpenAboutDialog;
         DC.OnNiractionResponse += OnNiractionResponse;
+
+        DC.OnOpenLabelEdit += OnOpenLabelEdit;
     }
 
     private void ShowErrorDialog(Exception e, string? title = null)
@@ -252,6 +258,8 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow {
         {
             return;
         }
+
+        BuildLabelMenu(item.ContextMenu, fileItem);
 
         var image = item.ContextMenu.Items.OfType<Image>().FirstOrDefault();
         if (image == null)

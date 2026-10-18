@@ -203,6 +203,8 @@ public class ImogeDatum {
             // 塊ごとにｽﾚﾌﾟへ投げて読み取りと並行させる(並び順は塊の順で保つ)
             var batches = new List<Task<FileItem[]>>();
             var batch = new List<FileRecord>(ParseBatchSize);
+            // ﾗﾍﾞﾙはﾊｯｼｭで紐付いてるので、FileItem化する時に一緒に当てる
+            IReadOnlyDictionary<string, string>? labels = LabelStore.IsOpened ? LabelStore.Instance.LoadAll(token) : null;
             delegaty(DatumLoadPhase.Allocated, 0);
             try {
                 foreach (var x in IndexStore.Instance.QueryAll(token, ["container", "path"])) {
@@ -214,7 +216,7 @@ public class ImogeDatum {
                     }
                     batch.Add(x);
                     if (batch.Count == ParseBatchSize) {
-                        batches.Add(ParseBatchAsync(batch));
+                        batches.Add(ParseBatchAsync(batch, labels));
                         batch = new List<FileRecord>(ParseBatchSize);
                     }
                     if ((dd % 1000) == 0) {
@@ -222,7 +224,7 @@ public class ImogeDatum {
                     }
                 }
                 if (batch.Count != 0) {
-                    batches.Add(ParseBatchAsync(batch));
+                    batches.Add(ParseBatchAsync(batch, labels));
                 }
             }
             catch (ObjectDisposedException ex) when (token.IsCancellationRequested) {
@@ -269,12 +271,13 @@ public class ImogeDatum {
     /// 塊をまとめてFileItem化
     /// </summary>
     /// <param name="records"></param>
+    /// <param name="labels">ﾌｧｲﾙﾊｯｼｭ→ﾗﾍﾞﾙ</param>
     /// <returns></returns>
-    private static Task<FileItem[]> ParseBatchAsync(List<FileRecord> records)
+    private static Task<FileItem[]> ParseBatchAsync(List<FileRecord> records, IReadOnlyDictionary<string, string>? labels)
         => Task.Run(() => {
             var result = new List<FileItem>(records.Count);
             foreach (var x in records) {
-                if (FileItem.Parse(x) is { } item) {
+                if (FileItem.Parse(x, labels) is { } item) {
                     result.Add(item);
                 }
             }

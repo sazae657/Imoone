@@ -70,6 +70,51 @@ namespace ImooneWPF.Properties {
         }
         
         /// <summary>
+        ///   キャンセル に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string LE_Cancel {
+            get {
+                return ResourceManager.GetString("LE_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} : ラベルが重複している に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string LE_E_DuplicateLabel {
+            get {
+                return ResourceManager.GetString("LE_E_DuplicateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   改行区切りで入力 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string LE_InputHint {
+            get {
+                return ResourceManager.GetString("LE_InputHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ラベル編集 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string LE_LabelEdit {
+            get {
+                return ResourceManager.GetString("LE_LabelEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   保存 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string LE_Save {
+            get {
+                return ResourceManager.GetString("LE_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   キャラクター に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string LH_Character {
@@ -120,6 +165,15 @@ namespace ImooneWPF.Properties {
         public static string LH_Keyword {
             get {
                 return ResourceManager.GetString("LH_Keyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ラベル に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string LH_Label {
+            get {
+                return ResourceManager.GetString("LH_Label", resourceCulture);
             }
         }
         
@@ -416,6 +470,15 @@ namespace ImooneWPF.Properties {
         }
         
         /// <summary>
+        ///   ラベル に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MC_Labels {
+            get {
+                return ResourceManager.GetString("MC_Labels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   言語 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MC_Language {
@@ -515,6 +578,15 @@ namespace ImooneWPF.Properties {
         }
         
         /// <summary>
+        ///   ラベル編集 … に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MC_OpenLabelEdit {
+            get {
+                return ResourceManager.GetString("MC_OpenLabelEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} の設定フォルダーを開く(_Ω) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MC_OpenSettingsFolder {
@@ -556,6 +628,15 @@ namespace ImooneWPF.Properties {
         public static string MC_ReloadDatum {
             get {
                 return ResourceManager.GetString("MC_ReloadDatum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ラベルを外す に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MC_RemoveLabel {
+            get {
+                return ResourceManager.GetString("MC_RemoveLabel", resourceCulture);
             }
         }
         

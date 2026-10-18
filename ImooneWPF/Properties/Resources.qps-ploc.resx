@@ -277,4 +277,34 @@
   <data name="WC_Copy" xml:space="preserve">
     <value>𓎡𓅱𓊪𓇋 </value>
   </data>
+  <data name="MC_N_LabelEdit" xml:space="preserve">
+    <value>𓂋𓄿𓃀𓇌𓂋𓅱𓉔𓇌𓈖𓈙𓅱𓅱</value>
+  </data>
+  <data name="MC_OpenLabelEdit" xml:space="preserve">
+    <value> 𓂋𓄿𓃀𓇌𓂋𓅱𓉔𓇌𓈖𓈙𓅱𓅱…</value>
+  </data>
+  <data name="LE_LabelEdit" xml:space="preserve">
+    <value>𓂋𓄿𓃀𓇌𓂋𓅱𓉔𓇌𓈖𓈙𓅱𓅱</value>
+  </data>
+  <data name="LE_Save" xml:space="preserve">
+    <value>𓉔𓅱𓊃𓅱𓈖</value>
+  </data>
+  <data name="LE_Cancel" xml:space="preserve">
+    <value>𓎡𓇌𓄿𓈖𓋔𓇌𓂋𓅱</value>
+  </data>
+  <data name="LE_E_DuplicateLabel" xml:space="preserve">
+    <value>{0}  :𓂋𓄿𓃀𓇌𓂋𓅱𓎼𓄿𓆓𓅱𓅱𓆑𓅱𓎡𓅱𓈙𓇋𓏏𓇌𓇋𓂋𓅱</value>
+  </data>
+  <data name="MC_Labels" xml:space="preserve">
+    <value>𓂋𓄿𓃀𓇌𓂋𓅱</value>
+  </data>
+  <data name="MC_RemoveLabel" xml:space="preserve">
+    <value>𓂋𓄿𓃀𓇌𓂋𓅱𓅱𓉔𓄿𓊃𓅱𓋔𓅱</value>
+  </data>
+  <data name="LH_Label" xml:space="preserve">
+    <value>𓂋𓄿𓃀𓇌𓂋𓅱</value>
+  </data>
+  <data name="LE_InputHint" xml:space="preserve">
+    <value>𓎡𓄿𓇋𓎼𓇌𓅱𓅱𓎡𓅱𓎼𓇋𓂋𓇋𓂧𓇌𓈖𓇌𓅱𓅱𓂋𓇌𓅱𓎡𓅱</value>
+  </data>
 </root>

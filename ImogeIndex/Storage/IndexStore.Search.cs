@@ -168,7 +168,7 @@ public partial class IndexStore
     /// <returns></returns>
     internal long GetSearchDataVersion() {
         // 読み取りなので書き込み接続(ﾛｯｸ)は使わない
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         return ReadSearchRevision(justify.Connection, null);
     }
 

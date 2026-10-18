@@ -31,11 +31,15 @@ public class SystemParams
 
     internal const string IndexDatumName = "Level.db";
     internal const string ThumbnailDatumName = "Thumbnail.db";
+    internal const string LabelDatumName = "Label.db";
     internal const string ConfigName = "Config.toml";
     internal const string DefaultConfigName = ConfigName + ".default";
 
     internal const string ProfilesOf = "Profile.toml";
     internal const string DefaultProfilesOf = ProfilesOf + ".default";
+
+    internal const string UserDefinitionsName = "User.toml";
+    internal const string DefaultUserDefinitionsName = UserDefinitionsName + ".default";
 
     internal const string DefaultProfileLocation = "Profiles";
 

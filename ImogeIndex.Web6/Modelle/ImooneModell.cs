@@ -360,6 +360,13 @@ public abstract partial class ImooneModell : ObservableObject
     public event Action? OnOpenProfileFolder;
 
     /// <summary>
+    /// ﾗﾍﾞﾙ編集を開く
+    /// </summary>
+    [RelayCommand]
+    private void OpenLabelEdit() => OnOpenLabelEdit?.Invoke();
+    public event Action? OnOpenLabelEdit;
+
+    /// <summary>
     /// ﾆﾗｸｼｮﾝにVerify送信
     /// </summary>
     /// <param name="parameter"></param>

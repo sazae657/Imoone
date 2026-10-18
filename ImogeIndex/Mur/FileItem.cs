@@ -1,4 +1,5 @@
 ﻿using ImogeIndex.Storage;
+using System.ComponentModel;
 
 namespace ImogeIndex.Mur;
 
@@ -19,7 +20,7 @@ public enum SearchField {
 /// <summary>
 /// 都合の良いimoge_index
 /// </summary>
-public class FileItem {
+public class FileItem : INotifyPropertyChanged {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Path { get; set; } = string.Empty;
@@ -42,6 +43,39 @@ public class FileItem {
     public ulong AHash { get; set; }
     public ulong DHash { get; set; }
     public ulong WHash { get; set; }
+
+    string? label;
+    string? labelKey;
+
+    /// <summary>
+    /// ﾕーｻﾞー定義ﾗﾍﾞﾙ(ﾌﾛﾝﾄｴﾝﾄﾞから付け外しされるので書き換わる事注意)
+    /// </summary>
+    public string? Label {
+        get => label;
+        set {
+            var normalized = string.IsNullOrEmpty(value) ? null : value;
+            if (string.Equals(label, normalized, StringComparison.Ordinal)) {
+                return;
+            }
+            label = normalized;
+            labelKey = normalized == null ? null : NormalizeLabel(normalized);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Label)));
+        }
+    }
+
+    /// <summary>
+    /// 検索用に正規化したﾗﾍﾞﾙ
+    /// </summary>
+    public string? LabelKey => labelKey;
+
+    /// <summary>
+    /// ﾗﾍﾞﾙの完全一致比較用の正規化
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static string NormalizeLabel(string value) => Normalize(value.Trim());
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
     /// 解析完了ﾌﾗｸﾞ(ﾌﾟﾚーﾝ画像とか0になるので0 == 未完了はﾀﾞﾒ)
@@ -131,7 +165,15 @@ public class FileItem {
     /// </summary>
     /// <param name="x"></param>
     /// <returns></returns>
-    public static FileItem? Parse(FileRecord x) {
+    public static FileItem? Parse(FileRecord x) => Parse(x, null);
+
+    /// <summary>
+    /// FileRecordを都合良く加工(ﾗﾍﾞﾙ付き)
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="labels">ﾌｧｲﾙﾊｯｼｭ→ﾗﾍﾞﾙ</param>
+    /// <returns></returns>
+    public static FileItem? Parse(FileRecord x, IReadOnlyDictionary<string, string>? labels) {
         if (string.IsNullOrEmpty(x.Path)) {
             return null;
         }
@@ -163,6 +205,9 @@ public class FileItem {
             WHash = x.WHash,
             HasImageHashes = x.Version == SystemParams.VersionCurrent && x.Width > 0 && x.Height > 0,
         };
+        if (labels != null && labels.TryGetValue(x.FileHash, out var label)) {
+            fr.Label = label;
+        }
         fr.BuildSearchCache();
         return fr;
     }

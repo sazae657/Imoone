@@ -290,7 +290,7 @@ public abstract class DataStoreBase : IDisposable
     /// </summary>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    protected ReaderBowl JustifyReader()
+    protected ReaderBowl JustawayReader()
     {
         SQLiteConnection? c = null;
         lock (readerToilet) {
@@ -414,7 +414,7 @@ public abstract class DataStoreBase : IDisposable
         if (token.IsCancellationRequested) {
             return;
         }
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var transaction = justify.Connection.BeginTransaction(IsolationLevel.ReadCommitted);
         delegaty(transaction);
         transaction.Commit();
@@ -815,14 +815,14 @@ public abstract class DataStoreBase : IDisposable
             });
         }
         else {
-            using var justify = JustifyReader();
+            using var justify = JustawayReader();
             var currentVersion = GetUserVersion(justify.Connection);
             ValidateDatabaseVersion(currentVersion, targetVersion);
             if (currentVersion < targetVersion) {
                 throw new InvalidOperationException(Properties.Resources.SM_E_DatunNeedsUpdate);
             }
         }
-        using (var justify = JustifyReader()) {
+        using (var justify = JustawayReader()) {
             using var mapCommand = new SQLiteCommand(justify.Connection);
             foreach (var type in tables) {
                 CreateMapOfSchema(mapCommand, type, TableOf(type));

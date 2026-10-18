@@ -38,6 +38,7 @@ internal sealed class ResourcePalabras : IImoonePalabras
         DetailFieldLabel.Location => Resources.LI_Location,
         DetailFieldLabel.FileSize => Resources.LI_FileSize,
         DetailFieldLabel.Resolution => Resources.LI_Resolution,
+        DetailFieldLabel.Label => Resources.LH_Label,
         _ => label.ToString(),
     };
 }

@@ -111,7 +111,7 @@ public class ThumbnailStore : DataStoreBase
     /// </summary>
     /// <returns></returns>
     public int Count() {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT COUNT(id) FROM {TABLE};";
         using var reader = cmd.ExecuteReader();
@@ -127,7 +127,7 @@ public class ThumbnailStore : DataStoreBase
     /// <returns></returns>
     public IEnumerable<long> Keys()
     {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT id FROM {TABLE};";
         using var reader = cmd.ExecuteReader();
@@ -144,7 +144,7 @@ public class ThumbnailStore : DataStoreBase
         var cn = Count();
         keyOut = new HashSet<long>(cn);
 
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT id FROM {TABLE};";
         using var reader = cmd.ExecuteReader();
@@ -162,7 +162,7 @@ public class ThumbnailStore : DataStoreBase
     /// <param name="id"></param>
     /// <returns></returns>
     public bool Contains(long id) {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT id FROM {TABLE} where id=@id;";
         cmd.Parameters.Add("@id", System.Data.DbType.Int64);
@@ -234,7 +234,7 @@ public class ThumbnailStore : DataStoreBase
         if (!IsConnected) {
             return null;
         }
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT thumbnail FROM {TABLE} where id=@id;";
         cmd.Parameters.Add("@id", System.Data.DbType.Int64);
