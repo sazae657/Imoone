@@ -277,4 +277,31 @@ ImogeIndexWPF でタグインデックスを更新すること</value>
   <data name="WC_Copy" xml:space="preserve">
     <value>コピー</value>
   </data>
+  <data name="MC_OpenLabelEdit" xml:space="preserve">
+    <value>ラベル編集 …</value>
+  </data>
+  <data name="LE_LabelEdit" xml:space="preserve">
+    <value>ラベル編集</value>
+  </data>
+  <data name="LE_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="LE_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="LE_E_DuplicateLabel" xml:space="preserve">
+    <value>{0} : ラベルが重複している</value>
+  </data>
+  <data name="MC_Labels" xml:space="preserve">
+    <value>ラベル</value>
+  </data>
+  <data name="MC_RemoveLabel" xml:space="preserve">
+    <value>ラベルを外す</value>
+  </data>
+  <data name="LH_Label" xml:space="preserve">
+    <value>ラベル</value>
+  </data>
+  <data name="LE_InputHint" xml:space="preserve">
+    <value>改行区切りで入力</value>
+  </data>
 </root>

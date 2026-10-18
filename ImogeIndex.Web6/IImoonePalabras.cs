@@ -12,6 +12,7 @@ public enum DetailFieldLabel
     Location,
     FileSize,
     Resolution,
+    Label,
 }
 
 /// <summary>

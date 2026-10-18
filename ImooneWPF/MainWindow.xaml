@@ -119,10 +119,10 @@
                                 <Separator/>
                                 <MenuItem Header="{Binding OpenSettingMenuHeader}" InputGestureText="Ctrl+O" Command="{Binding OpenSettingFolderCommand}" />
                                 <MenuItem Header="{x:Static properties:Resources.MC_OpenDatumRootFolder}" InputGestureText="Ctrl+M" Command="{Binding OpenProfileFolderCommand}" />
-
+                                <Separator/>
+                                <MenuItem Header="{x:Static properties:Resources.MC_OpenLabelEdit}" Command="{Binding OpenLabelEditCommand}"/>
                                 <Separator/>
                                 <MenuItem Header="{x:Static properties:Resources.MC_About}" Command="{Binding OpenAboutDialogCommand}"/>
-                                <Separator/>
                                 <MenuItem Header="{x:Static properties:Resources.MC_Quit}"
                                           InputGestureText="Ctrl+," 
                                           Command="{Binding CloseWindowCommand}"
@@ -242,7 +242,7 @@
             <!-- 結果表示用のListView -->
             <controls:EssenUndFressenView x:Name="FileListView" Style="{StaticResource {x:Type ListView}}"
                     BorderThickness="0"
-                    SelectionMode="Single"
+                    SelectionMode="Extended"
                     VirtualizingPanel.IsVirtualizing="True"
                     VirtualizingPanel.VirtualizationMode="Recycling"
                     ScrollViewer.CanContentScroll="True"
@@ -287,6 +287,8 @@
                                                   CommandParameter="{Binding PlacementTarget.Content, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
 
                                     </MenuItem>
+                                    <!-- ラベル(中身は開く時に組み立てる) -->
+                                    <MenuItem Header="{x:Static properties:Resources.MC_Labels}" Tag="{x:Static local:MainWindow.LabelMenuTag}"/>
                                     <Image MaxWidth="128" />
                                 </ContextMenu>
                             </Setter.Value>
@@ -323,6 +325,7 @@
                         <GridViewColumn Header="{x:Static properties:Resources.LH_Costume}" DisplayMemberBinding="{Binding Costume}" Width="200"/>
                         <GridViewColumn Header="{x:Static properties:Resources.LH_Scene}" DisplayMemberBinding="{Binding Scene}" Width="200"/>
                         <GridViewColumn Header="{x:Static properties:Resources.LH_Objects}" DisplayMemberBinding="{Binding Objects}" Width="200"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.LH_Label}" DisplayMemberBinding="{Binding Label}" Width="120"/>
                     </GridView>
                 </ListView.View>
             </controls:EssenUndFressenView>

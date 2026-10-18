@@ -196,6 +196,7 @@ public class Settings : ICustomVariableJail {
         var rc = TomletMain.To<Settings>(t);
         rc.SettingFilePath = sm;
         rc.IPv7 = key;
+        rc.UserDefinitions = UserDefinitions.Load(key , path);
         return rc.Prepare(path);
     }
 
@@ -203,10 +204,16 @@ public class Settings : ICustomVariableJail {
 
     [TomlNonSerialized]
     public DirectoryInfo? Root { get; set; }
+
     [TomlNonSerialized]
     public FileInfo? SettingFilePath { get; private set; }
+
     [TomlNonSerialized]
     public string? IPv7 { get; set; }
+
+    [TomlNonSerialized]
+    public UserDefinitions? UserDefinitions { get; set; }
+
 
     [TomlPrecedingComment("検索するパス")]
     public List<string> SearchPaths { get; set; } = [@"${Env:USERPROFILE}\Pictures"];
@@ -248,7 +255,6 @@ public class Settings : ICustomVariableJail {
 
     [TomlPrecedingComment("キャプショニング設定")]
     public CaptionizeSetting Captioning { get; set; } = new();
-
 
     /// <summary>
     /// 保存

@@ -86,6 +86,7 @@ public partial class MurQuery {
             new ContainsTextQueryTermParser(CostumePrefix, [SearchField.Costume]),
             new ContainsTextQueryTermParser(ScenePrefix, [SearchField.Scene]),
             new ContainsTextQueryTermParser(ObjectPrefix, [SearchField.Objects]),
+            new LabelQueryTermParser(),
             new ContainsTextQueryTermParser(null, [SearchField.Name, SearchField.Path]),
         ];
         lock (parserLock) {

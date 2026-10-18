@@ -13,7 +13,7 @@ public partial class IndexStore
     /// <returns></returns>
     public IEnumerable<ImageReadRecord> GetImageReadRecords()
     {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var command = new SQLiteCommand("SELECT * FROM image_read_failures;", justify.Connection);
         using var reader = command.ExecuteReader();
         while (reader.Read()) {

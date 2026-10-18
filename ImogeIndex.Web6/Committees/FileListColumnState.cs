@@ -22,7 +22,8 @@ public sealed class FileListColumnState
         nameof(FileItem.Keyword),
         nameof(FileItem.Costume),
         nameof(FileItem.Scene),
-        nameof(FileItem.Objects)
+        nameof(FileItem.Objects),
+        nameof(FileItem.Label),
     ];
 
     /// <summary>
@@ -41,6 +42,7 @@ public sealed class FileListColumnState
         6 => item.Costume,
         7 => item.Scene,
         8 => item.Objects,
+        9 => item.Label,
         _ => null,
     };
 
@@ -288,6 +290,7 @@ public sealed class FileItemComparer : IComparer<FileItem>
             nameof(FileItem.Costume) => static (a, b) => CompareText(a.Costume, b.Costume),
             nameof(FileItem.Scene) => static (a, b) => CompareText(a.Scene, b.Scene),
             nameof(FileItem.Objects) => static (a, b) => CompareText(a.Objects, b.Objects),
+            nameof(FileItem.Label) => static (a, b) => CompareText(a.Label, b.Label),
             _ => static (a, b) => CompareText(a.Name, b.Name),
         };
     }

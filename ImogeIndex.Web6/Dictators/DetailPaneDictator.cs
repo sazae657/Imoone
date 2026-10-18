@@ -77,6 +77,7 @@ public sealed class DetailPaneDictator(IImoonePalabras texts)
         fields.Add(new MetadataPair(
             texts.DetailLabel(DetailFieldLabel.Resolution),
             $"{fileItem.Width}x{fileItem.Height}"));
+        AddIfPresent(fields, texts.DetailLabel(DetailFieldLabel.Label), fileItem.Label);
 
         AddIfPresent(fields, nameof(FileRecord.Tags), fileItem.Tag);
         AddIfPresent(fields, nameof(FileRecord.Characters), fileItem.Character);

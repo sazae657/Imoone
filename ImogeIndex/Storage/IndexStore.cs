@@ -838,7 +838,7 @@ public partial class IndexStore : DataStoreBase
     /// <returns></returns>
     public IEnumerable<ErrorRecord> ErrorAll()
     {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT * FROM errors;";
         using var reader = cmd.ExecuteReader();
@@ -853,7 +853,7 @@ public partial class IndexStore : DataStoreBase
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
     public long GetLastCounting() {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         return ReadCounting(justify.Connection, null);
     }
 
@@ -902,7 +902,7 @@ public partial class IndexStore : DataStoreBase
     /// </summary>
     /// <returns></returns>
     public int GetImogeCount() {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT COUNT(id) FROM imoge_index;";
         using var reader = cmd.ExecuteReader();
@@ -923,7 +923,7 @@ public partial class IndexStore : DataStoreBase
         if (!recordTypeMap.TryGetValue(typeof(FileRecord), out var prop)) {
             throw new Exception(Properties.Resources.SM_E_NotInTypeMap.Morfat(nameof(FileRecord)));
         }
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT * FROM imoge_index WHERE id = @id;";
         cmd.Parameters.Add("@id", System.Data.DbType.Int64);
@@ -948,7 +948,7 @@ public partial class IndexStore : DataStoreBase
         if (!recordTypeMap.TryGetValue(typeof(FileRecord), out var prop)) {
             throw new Exception(Properties.Resources.SM_E_NotInTypeMap.Morfat(nameof(FileRecord)));
         }
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT * FROM imoge_index;";
         using var reader = cmd.ExecuteReader();
@@ -978,7 +978,7 @@ public partial class IndexStore : DataStoreBase
             }
         }
 
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         var sk = string.Join(',', sortKey);
         cmd.CommandText = $"SELECT * FROM imoge_index order by {sk};";
@@ -998,7 +998,7 @@ public partial class IndexStore : DataStoreBase
     /// <param name="token"></param>
     /// <returns></returns>
     public IEnumerable<MetadataRecord> GetMetadata(long id, CancellationToken token) {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = "SELECT * FROM metadata where image_id = @id;";
         cmd.Parameters.Add("@id", System.Data.DbType.Int64);
@@ -1020,7 +1020,7 @@ public partial class IndexStore : DataStoreBase
     /// <returns></returns>
     public IEnumerable<MetadataRecord> GetMetadataOfTag(string tag, CancellationToken token)
     {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = "SELECT * FROM metadata where tag = @tag;";
         cmd.Parameters.Add("@tag", System.Data.DbType.String);
@@ -1085,7 +1085,7 @@ public partial class IndexStore : DataStoreBase
     /// <param name="token"></param>
     /// <returns></returns>
     public string? GetCaption(long id, CancellationToken token) {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = "SELECT caption FROM captions where id = @id;";
         cmd.Parameters.Add("@id", System.Data.DbType.Int64);
@@ -1121,7 +1121,7 @@ public partial class IndexStore : DataStoreBase
     /// <returns></returns>
     public IEnumerable<DirectoryIndexRecord> GetDirectoryIndex()
     {
-        using var justify = JustifyReader();
+        using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
         cmd.CommandText = $"SELECT * FROM directory_index;";
         using var reader = cmd.ExecuteReader();
