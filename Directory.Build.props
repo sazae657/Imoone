@@ -4,8 +4,8 @@
         <NetCoreAppWinTarget>$(NetCoreAppTarget)-windows10.0.26100.0</NetCoreAppWinTarget>
     </PropertyGroup>
     <PropertyGroup>
-        <MurVersion>0.1.1.0</MurVersion>
-        <NirVersion>0.1.1.0</NirVersion>
+        <MurVersion>0.1.2.0</MurVersion>
+        <NirVersion>0.1.2.0</NirVersion>
         <Authors>sazae657</Authors>
         <Muricense>Zlib</Muricense>
         <Copyright>Copyright (C) 2026 - sazae657</Copyright>
@@ -14,6 +14,6 @@
     </PropertyGroup>
     <PropertyGroup>
         <NeutralLanguage>ja</NeutralLanguage>
-        <SatelliteResourceLanguages>ja;en</SatelliteResourceLanguages>
+        <SatelliteResourceLanguages>ja;qps-ploc</SatelliteResourceLanguages>
     </PropertyGroup>
 </Project>

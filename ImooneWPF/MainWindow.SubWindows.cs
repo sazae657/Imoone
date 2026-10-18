@@ -3,8 +3,10 @@ using ImogeIndex.Common;
 using ImogeIndex.Mur;
 using ImogeIndex.Web3.Dialogs;
 using ImogeIndex.Web6.Committees;
+using ImogeIndex.Web6.Dictators;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 
 namespace ImooneWPF;
 
@@ -34,6 +36,9 @@ public partial class MainWindow
         ShowLaunchResult(fileLauncher.ShowInExplorer(path.FullName), path.FullName);
     }
 
+    /// <summary>
+    /// ｱﾊﾞｳﾂ
+    /// </summary>
     private void OnOpenAboutDialog()
     {
         if (aboutWeb3Dialog != null) {
@@ -47,6 +52,24 @@ public partial class MainWindow
         aboutWeb3Dialog.Owner = this;
         aboutWeb3Dialog.SetClientName(Properties.Resources.MC_AppTitle);
         aboutWeb3Dialog.Show();
+    }
+
+    LabelEditWindow? labelEditWindow;
+
+    /// <summary>
+    /// ﾗﾍﾞﾙ編集
+    /// </summary>
+    private void OnOpenLabelEdit()
+    {
+        if (labelEditWindow != null) {
+            labelEditWindow.Focus();
+            return;
+        }
+        labelEditWindow = new(Profile.Active.Source);
+        ConnfigureSubwindow(labelEditWindow, WindowParamsKey.LabelEdit);
+        labelEditWindow.Closed += (_, _) => StoreSubwindow(labelEditWindow, WindowParamsKey.LabelEdit, _ => labelEditWindow = null);
+        labelEditWindow.Owner = this;
+        labelEditWindow.Show();
     }
 
     /// <summary>
@@ -71,9 +94,37 @@ public partial class MainWindow
             return;
         }
         niractionWindow = new();
-        niractionWindow.Closed += (_, _) => niractionWindow = null;
+        ConnfigureSubwindow(niractionWindow, WindowParamsKey.Niraction);
+        niractionWindow.Closed += (_, _) => StoreSubwindow(niractionWindow, WindowParamsKey.Niraction, _ => niractionWindow = null);
         niractionWindow.Niraction(nir);
         niractionWindow.Show();
+    }
+
+    /// <summary>
+    /// 小窓保存
+    /// </summary>
+    /// <param name="w"></param>
+    /// <param name="key"></param>
+    private void StoreSubwindow(Window w, WindowParamsKey key, Action<Window> delegaty)
+    {
+        SettingsDictator.Default.WindowParamOf(key, param => {
+            param.Width = Math.Max(128, (int)w.Width);
+            param.Height = Math.Max(128, (int)w.Height);
+        });
+        delegaty(w);
+    }
+
+    /// <summary>
+    /// 小窓復元
+    /// </summary>
+    /// <param name="w"></param>
+    /// <param name="key"></param>
+    private void ConnfigureSubwindow(Window w, WindowParamsKey key)
+    {
+        SettingsDictator.Default.WindowParamOf(key, param => {
+            w.Width = Math.Max(128, param.Width);
+            w.Height = Math.Max(128, param.Height);
+        });
     }
 
     /// <summary>

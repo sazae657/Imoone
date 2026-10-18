@@ -11,7 +11,7 @@ namespace ImogeIndex.Web6.Dictators;
 /// </summary>
 public enum WindowParamsKey
 {
-    Main
+    Main, LabelEdit, Niraction
 }
 
 /// <summary>
@@ -71,7 +71,9 @@ public class SettingsDictator
 
     [TomlNonSerialized]
     private static readonly Dictionary<WindowParamsKey, WindowParams> WindowParamDefaults = new Dictionary<WindowParamsKey, WindowParams>() {
-        {WindowParamsKey.Main, new WindowParams(800, 800) }
+        {WindowParamsKey.Main, new WindowParams(800, 800) },
+        {WindowParamsKey.Niraction, new WindowParams(800, 460) },
+        {WindowParamsKey.LabelEdit, new WindowParams(450, 450) },
     };
 
     /// <summary>

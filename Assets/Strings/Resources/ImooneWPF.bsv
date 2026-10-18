@@ -1,11 +1,17 @@
 # Imoone用
 IDM_EXIT終了
+LE_Cancelキャンセル
+LE_E_DuplicateLabel{0} : ラベルが重複している
+LE_InputHint改行区切りで入力
+LE_LabelEditラベル編集
+LE_Save保存
 LH_Characterキャラクター
 LH_Costume衣装
 LH_CreatedAt作成日
 LH_FileNameファイル名
 LH_Folderフォルダー
 LH_Keywordキーワード
+LH_Labelラベル
 LH_Objectsオブジェクト
 LH_Sceneシーン
 LH_Tagタグ
@@ -38,6 +44,7 @@ MC_L_Allocating注ぎ込み中 …
 MC_L_Complete読み込み完了
 MC_L_Indexing流し込み中 …
 MC_L_Loading読み込み中 …
+MC_Labelsラベル
 MC_Language言語
 MC_LaunchIndexToolインデックスツールを起動 …
 MC_MinimizeToTray最小化時はタスクトレイに表示
@@ -49,11 +56,13 @@ MC_NItems{0:N0} 項目
 MC_Open開く
 MC_OpenDatumRootFolderデータフォルダーを開く(_ξ)
 MC_OpenFolderフォルダーを開く
+MC_OpenLabelEditラベル編集 …
 MC_OpenSettingsFolder{0} の設定フォルダーを開く(_Ω)
 MC_Profileプロファイル
 MC_PulldownMenu
 MC_QuitImooneの終了
 MC_ReloadDatumデータを再読み込み
+MC_RemoveLabelラベルを外す
 MC_SearchSimilarImages類似画像を検索
 MC_ShowOriginal元画像を表示
 MC_SimilarHashAHashaHash (平均)

@@ -180,6 +180,12 @@ public sealed class PreparedSettings {
     /// </summary>
     /// <returns></returns>
     public FileInfo GetThumbnailDatumPath() => CreateLocalStateFile(SystemParams.ThumbnailDatumName);
+
+    /// <summary>
+    /// ﾗﾍﾞﾙﾃﾞーﾀﾑのﾊﾟｽ
+    /// </summary>
+    /// <returns></returns>
+    public FileInfo GetLabelDatumPath() => CreateLocalStateFile(SystemParams.LabelDatumName);
     
 
 }

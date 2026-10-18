@@ -29,11 +29,13 @@ public sealed class ProfileLoader(IImoonePalabras texts)
                 try {
                     IndexStore.Oppen(false);
                     ThumbnailStore.Oppen(false);
+                    LabelStore.Oppen();
                 }
                 catch {
-                    // 片方だけ開いた状態を残さない
+                    // 一部だけ開いた状態を残さない
                     IndexStore.Close();
                     ThumbnailStore.Close();
+                    LabelStore.Close();
                     throw;
                 }
             }, cancellationToken);

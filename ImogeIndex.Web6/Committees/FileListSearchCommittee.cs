@@ -202,6 +202,22 @@ public sealed class FileListSearchCommittee
     }
 
     /// <summary>
+    /// ﾗﾍﾞﾙが付け外しされた
+    /// </summary>
+    public void NotifyLabelsChanged()
+    {
+        // 前回結果からの差分絞り込みは書き換え前の状態なので捨てる
+        fileSearcher.Reset();
+        if (IsClosing || model.IsSimilarSearch) {
+            return;
+        }
+        if (list.QueryText.Contains("label:", StringComparison.Ordinal)) {
+            // 項目が書き換わってるはずなので、ﾗﾍﾞﾙ条件で検索中なら絞り込み直し
+            Search();
+        }
+    }
+
+    /// <summary>
     /// 類似画像検索
     /// </summary>
     /// <param name="target"></param>

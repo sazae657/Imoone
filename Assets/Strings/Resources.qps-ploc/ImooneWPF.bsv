@@ -70,3 +70,13 @@ MC_ToggleDetailPane 𓈙𓅱𓅱𓋔𓄿𓇋𓈖𓅱𓉔𓇌𓅱𓅱𓆓𓇋/�
 MC_W_MetadataIndexStale  𓅓𓇌𓏏𓄿𓂧𓇌 𓏏𓄿𓅓𓅱𓈖𓅱𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓎼𓄿𓆑𓅱𓂋𓅱𓇋𓏏𓄿𓅓𓇌、𓏏𓅱𓎼𓇋𓈖𓅱𓇌𓇋𓂋𓇋𓄿𓋔𓅱𓉔𓄿𓅓𓇌𓏏𓄿:𓎡𓇌𓈖𓋔𓄿𓎡𓅱𓂧𓇌𓏏𓄿𓂧𓄿𓈙𓇋𓇋𓎡𓇌𓎡𓄿𓈖𓇋𓈖𓄿𓂋𓇋𓅓𓄿𓋔𓇌𓈖𓅱{0} 𓇋𓅓𓅱𓎼𓇌𓇋𓈖𓂧𓇌𓎡𓋔𓅱𓊪𓆑𓂧𓇌𓏏𓄿𓎼𓅱𓇋𓈖𓂧𓇌𓎡𓅱𓋔𓅱𓅱𓎡𓅱𓅱𓈙𓇋𓈖𓋔𓅱𓂋𓅱𓎡𓅱𓏏𓅱
 MC_Warning𓍿𓅱𓅱𓇋
 WC_Copy𓎡𓅱𓊪𓇋 
+MC_N_LabelEdit𓂋𓄿𓃀𓇌𓂋𓅱𓉔𓇌𓈖𓈙𓅱𓅱
+MC_OpenLabelEdit 𓂋𓄿𓃀𓇌𓂋𓅱𓉔𓇌𓈖𓈙𓅱𓅱…
+LE_LabelEdit𓂋𓄿𓃀𓇌𓂋𓅱𓉔𓇌𓈖𓈙𓅱𓅱
+LE_Save𓉔𓅱𓊃𓅱𓈖
+LE_Cancel𓎡𓇌𓄿𓈖𓋔𓇌𓂋𓅱
+LE_E_DuplicateLabel{0}  :𓂋𓄿𓃀𓇌𓂋𓅱𓎼𓄿𓆓𓅱𓅱𓆑𓅱𓎡𓅱𓈙𓇋𓏏𓇌𓇋𓂋𓅱
+MC_Labels𓂋𓄿𓃀𓇌𓂋𓅱
+MC_RemoveLabel𓂋𓄿𓃀𓇌𓂋𓅱𓅱𓉔𓄿𓊃𓅱𓋔𓅱
+LH_Label𓂋𓄿𓃀𓇌𓂋𓅱
+LE_InputHint𓎡𓄿𓇋𓎼𓇌𓅱𓅱𓎡𓅱𓎼𓇋𓂋𓇋𓂧𓇌𓈖𓇌𓅱𓅱𓂋𓇌𓅱𓎡𓅱
