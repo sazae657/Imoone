@@ -51,7 +51,7 @@ public sealed class FileListDisplayCommittee : IDisposable {
     /// <param name="captureColumns">列の状態を控える</param>
     /// <param name="initialZoom">最初の拡大率</param>
     /// <param name="saveZoom">拡大率が変わった(最大寸法で切られる前のが来る)</param>
-    public FileListDisplayCommittee(EssenUndFressenView flv, MenuItem modeMenu, GridViewColumn fileNameColumn, Action captureColumns,
+    public FileListDisplayCommittee(EssenUndFressenView flv, ContextMenu modeMenu, GridViewColumn fileNameColumn, Action captureColumns,
         FileListSizementEnvuelve initialZoom, Action<FileListSizementEnvuelve> saveZoom) {
         list = flv;
         nameColumn = fileNameColumn;

@@ -61,6 +61,21 @@
   <data name="IDM_EXIT" xml:space="preserve">
     <value>終了</value>
   </data>
+  <data name="LE_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="LE_E_DuplicateLabel" xml:space="preserve">
+    <value>{0} : ラベルが重複している</value>
+  </data>
+  <data name="LE_InputHint" xml:space="preserve">
+    <value>改行区切りで入力</value>
+  </data>
+  <data name="LE_LabelEdit" xml:space="preserve">
+    <value>ラベル編集</value>
+  </data>
+  <data name="LE_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
   <data name="LH_Character" xml:space="preserve">
     <value>キャラクター</value>
   </data>
@@ -78,6 +93,9 @@
   </data>
   <data name="LH_Keyword" xml:space="preserve">
     <value>キーワード</value>
+  </data>
+  <data name="LH_Label" xml:space="preserve">
+    <value>ラベル</value>
   </data>
   <data name="LH_Objects" xml:space="preserve">
     <value>オブジェクト</value>
@@ -179,6 +197,9 @@
   <data name="MC_L_Loading" xml:space="preserve">
     <value>読み込み中 …</value>
   </data>
+  <data name="MC_Labels" xml:space="preserve">
+    <value>ラベル</value>
+  </data>
   <data name="MC_Language" xml:space="preserve">
     <value>言語</value>
   </data>
@@ -212,20 +233,29 @@
   <data name="MC_OpenFolder" xml:space="preserve">
     <value>フォルダーを開く</value>
   </data>
+  <data name="MC_OpenLabelEdit" xml:space="preserve">
+    <value>ラベル編集 …</value>
+  </data>
   <data name="MC_OpenSettingsFolder" xml:space="preserve">
     <value>{0} の設定フォルダーを開く(_Ω)</value>
   </data>
   <data name="MC_Profile" xml:space="preserve">
     <value>プロファイル</value>
   </data>
-  <data name="MC_PulldownMenu" xml:space="preserve">
+  <data name="MC_DisplayPulldown" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="MC_SettingPulldown" xml:space="preserve">
+    <value></value>
   </data>
   <data name="MC_Quit" xml:space="preserve">
     <value>Imooneの終了</value>
   </data>
   <data name="MC_ReloadDatum" xml:space="preserve">
     <value>データを再読み込み</value>
+  </data>
+  <data name="MC_RemoveLabel" xml:space="preserve">
+    <value>ラベルを外す</value>
   </data>
   <data name="MC_SearchSimilarImages" xml:space="preserve">
     <value>類似画像を検索</value>
@@ -277,31 +307,10 @@ ImogeIndexWPF でタグインデックスを更新すること</value>
   <data name="WC_Copy" xml:space="preserve">
     <value>コピー</value>
   </data>
-  <data name="MC_OpenLabelEdit" xml:space="preserve">
-    <value>ラベル編集 …</value>
+  <data name="TS_R_Settings" xml:space="preserve">
+    <value>設定</value>
   </data>
-  <data name="LE_LabelEdit" xml:space="preserve">
-    <value>ラベル編集</value>
-  </data>
-  <data name="LE_Save" xml:space="preserve">
-    <value>保存</value>
-  </data>
-  <data name="LE_Cancel" xml:space="preserve">
-    <value>キャンセル</value>
-  </data>
-  <data name="LE_E_DuplicateLabel" xml:space="preserve">
-    <value>{0} : ラベルが重複している</value>
-  </data>
-  <data name="MC_Labels" xml:space="preserve">
-    <value>ラベル</value>
-  </data>
-  <data name="MC_RemoveLabel" xml:space="preserve">
-    <value>ラベルを外す</value>
-  </data>
-  <data name="LH_Label" xml:space="preserve">
-    <value>ラベル</value>
-  </data>
-  <data name="LE_InputHint" xml:space="preserve">
-    <value>改行区切りで入力</value>
+  <data name="TS_R_Display" xml:space="preserve">
+    <value>表示</value>
   </data>
 </root>

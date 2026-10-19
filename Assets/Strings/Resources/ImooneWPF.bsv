@@ -59,7 +59,8 @@ MC_OpenFolderフォルダーを開く
 MC_OpenLabelEditラベル編集 …
 MC_OpenSettingsFolder{0} の設定フォルダーを開く(_Ω)
 MC_Profileプロファイル
-MC_PulldownMenu
+MC_DisplayPulldown
+MC_SettingPulldown
 MC_QuitImooneの終了
 MC_ReloadDatumデータを再読み込み
 MC_RemoveLabelラベルを外す
@@ -79,3 +80,5 @@ MC_ToggleDetailPane詳細の表示/非表示 (Alt+Shift+P)
 MC_W_MetadataIndexStaleメタデータムの検索インデックスが古いため、次のエイリアスは meta: 検索で正しい結果になりませぬ{0}ImogeIndexWPF でタグインデックスを更新すること
 MC_Warning注意
 WC_Copyコピー
+TS_R_Settings設定
+TS_R_Display表示

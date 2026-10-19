@@ -358,6 +358,15 @@ namespace ImooneWPF.Properties {
         }
         
         /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MC_DisplayPulldown {
+            get {
+                return ResourceManager.GetString("MC_DisplayPulldown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   データが開けなかった =&gt; {0}
         ///{1} に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -605,15 +614,6 @@ namespace ImooneWPF.Properties {
         }
         
         /// <summary>
-        ///    に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string MC_PulldownMenu {
-            get {
-                return ResourceManager.GetString("MC_PulldownMenu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Imooneの終了 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MC_Quit {
@@ -646,6 +646,15 @@ namespace ImooneWPF.Properties {
         public static string MC_SearchSimilarImages {
             get {
                 return ResourceManager.GetString("MC_SearchSimilarImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MC_SettingPulldown {
+            get {
+                return ResourceManager.GetString("MC_SettingPulldown", resourceCulture);
             }
         }
         
@@ -774,6 +783,24 @@ namespace ImooneWPF.Properties {
         public static string MC_Warning {
             get {
                 return ResourceManager.GetString("MC_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   表示 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string TS_R_Display {
+            get {
+                return ResourceManager.GetString("TS_R_Display", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   設定 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string TS_R_Settings {
+            get {
+                return ResourceManager.GetString("TS_R_Settings", resourceCulture);
             }
         }
         
