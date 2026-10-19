@@ -70,19 +70,29 @@
         <StackPanel DockPanel.Dock="Top">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="4,0,0,0">
+                    <!-- 表示ドロップダウン -->
+                    <ToggleButton x:Name="SizeMenuBox" VerticalAlignment="Center" Margin="2,0,2,4" Padding="3" Loaded="ToggleButton_Loaded">
+                        <ToggleButton.ContextMenu>
+                            <ContextMenu x:Name="FileDisplayModeMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                                <MenuItem Header="{x:Static properties:Resources.MC_D_List}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.List}" InputGestureText="Ctrl+Shift+6"/>
+                                <MenuItem Header="{x:Static properties:Resources.MC_D_ThumbList}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.ThumbList}" InputGestureText="Ctrl+Shift+5"/>
+                                <MenuItem Header="{x:Static properties:Resources.MC_D_IconS}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconS}" InputGestureText="Ctrl+Shift+4"/>
+                                <MenuItem Header="{x:Static properties:Resources.MC_D_IconM}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconM}" InputGestureText="Ctrl+Shift+3"/>
+                                <MenuItem Header="{x:Static properties:Resources.MC_D_IconL}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconL}" InputGestureText="Ctrl+Shift+2"/>
+                                <MenuItem Header="{x:Static properties:Resources.MC_D_IconH}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconH}" InputGestureText="Ctrl+Shift+1"/>
+                            </ContextMenu>
+                        </ToggleButton.ContextMenu>
+                        <ToggleButton.ToolTip>
+                            <ToolTip Content="{x:Static properties:Resources.TS_R_Display}" />
+                        </ToggleButton.ToolTip>
+                        <WrapPanel Margin="1">
+                            <TextBlock Text="{x:Static properties:Resources.MC_DisplayPulldown}" FontSize="14" FontFamily="{StaticResource Muast}"/>
+                        </WrapPanel>
+                    </ToggleButton>
                     <!-- 設定ドロップダウン -->
                     <ToggleButton x:Name="MainMenuBox" VerticalAlignment="Center" Margin="2,0,2,4" Padding="3" Loaded="ToggleButton_Loaded">
                         <ToggleButton.ContextMenu>
                             <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                                <MenuItem x:Name="FileDisplayModeMenu" Header="{x:Static properties:Resources.MC_D_Display}">
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_List}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.List}" InputGestureText="Ctrl+Shift+6"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_ThumbList}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.ThumbList}" InputGestureText="Ctrl+Shift+5"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconS}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconS}" InputGestureText="Ctrl+Shift+4"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconM}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconM}" InputGestureText="Ctrl+Shift+3"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconL}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconL}" InputGestureText="Ctrl+Shift+2"/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_D_IconH}" IsCheckable="True" Tag="{x:Static imoone:MurDisplayPreset.IconH}" InputGestureText="Ctrl+Shift+1"/>
-                                </MenuItem>
-                                <Separator/>
                                 <CheckBox IsChecked="{Binding IncrementalSearch}" Content="{x:Static properties:Resources.MC_IncrementalSearch}"/>
                                 <CheckBox IsChecked="{Binding MinimizeToTray}" Content="{x:Static properties:Resources.MC_MinimizeToTray}"/>
                                 <Separator/>
@@ -129,8 +139,11 @@
                                           CommandParameter="{Binding Source={StaticResource WindowProxy},Path=Data}"/>
                             </ContextMenu>
                         </ToggleButton.ContextMenu>
+                        <ToggleButton.ToolTip>
+                            <ToolTip Content="{x:Static properties:Resources.TS_R_Settings}" />
+                        </ToggleButton.ToolTip>
                         <WrapPanel Margin="1">
-                            <TextBlock Text="{x:Static properties:Resources.MC_PulldownMenu}" FontSize="14" FontFamily="{StaticResource Muast}"/>
+                            <TextBlock Text="{x:Static properties:Resources.MC_SettingPulldown}" FontSize="14" FontFamily="{StaticResource Muast}"/>
                         </WrapPanel>
                     </ToggleButton>
 
@@ -149,6 +162,7 @@
                         </Button.Style>
                     </Button>
                 </StackPanel>
+                
                 <!-- 検索ボックス -->
                 <Grid Margin="0,0,0,4">
                     <TextBox x:Name="SearchTextBox"
