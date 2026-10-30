@@ -1,3 +1,6 @@
+param (
+    [switch]$KeepPdb = $false
+)
 $ErrorActionPreference = 'Stop'
 $route=Get-Item -Path "${PSScriptRoot}\..\.."
 $binaries=[System.IO.Path]::Combine($route, "Binaries\ImooneWPF")
@@ -10,7 +13,8 @@ dotnet publish $proj -r win-x64 -p:PublishProfile=FolderProfile -c Release
 if ($LASTEXITCODE -ne 0) {
    throw "dotnetが [${LASTEXITCODE}] で終了"
 }
-
-Get-ChildItem -Path $binaries -Filter "*.pdb" -Recurse | ForEach-Object {
-    Remove-Item -Path $_
+if (!${KeepPdb}) {
+    Get-ChildItem -Path $binaries -Filter "*.pdb" -Recurse | ForEach-Object {
+        Remove-Item -Path $_
+    }
 }
