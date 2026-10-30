@@ -80,3 +80,7 @@ MC_Labels𓂋𓄿𓃀𓇌𓂋𓅱
 MC_RemoveLabel𓂋𓄿𓃀𓇌𓂋𓅱𓅱𓉔𓄿𓊃𓅱𓋔𓅱
 LH_Label𓂋𓄿𓃀𓇌𓂋𓅱
 LE_InputHint𓎡𓄿𓇋𓎼𓇌𓅱𓅱𓎡𓅱𓎼𓇋𓂋𓇋𓂧𓇌𓈖𓇌𓅱𓅱𓂋𓇌𓅱𓎡𓅱
+MC_DisplayPulldown
+MC_SettingPulldown
+TS_R_Settings𓋔𓇌𓏏𓇌𓇋
+TS_R_Display𓉔𓇌𓅱𓅱𓆓𓇋

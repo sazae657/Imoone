@@ -307,4 +307,16 @@
   <data name="LE_InputHint" xml:space="preserve">
     <value>𓎡𓄿𓇋𓎼𓇌𓅱𓅱𓎡𓅱𓎼𓇋𓂋𓇋𓂧𓇌𓈖𓇌𓅱𓅱𓂋𓇌𓅱𓎡𓅱</value>
   </data>
+  <data name="MC_DisplayPulldown" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MC_SettingPulldown" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="TS_R_Settings" xml:space="preserve">
+    <value>𓋔𓇌𓏏𓇌𓇋</value>
+  </data>
+  <data name="TS_R_Display" xml:space="preserve">
+    <value>𓉔𓇌𓅱𓅱𓆓𓇋</value>
+  </data>
 </root>
