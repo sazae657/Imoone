@@ -308,7 +308,7 @@ internal class CamieTagger : TaggerBase {
         resized.ReadPixels(source.GetPixelSpan(), new PixelReadSettings(
             (uint)source.Width, (uint)source.Height, StorageType.Char,
             source.ColorType == SKColorType.Bgra8888 ? PixelMapping.BGRA : PixelMapping.RGBA));
-        resized.Alpha(AlphaOption.Off);
+        resized.Alpha(AlphaAction.Off);
         resized.FilterType = FilterType.Lanczos;
         resized.Resize(new MagickGeometry((uint)newWidth, (uint)newHeight) { IgnoreAspectRatio = true });
 
