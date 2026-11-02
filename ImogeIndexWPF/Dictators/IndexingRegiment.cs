@@ -64,6 +64,8 @@ internal sealed class IndexingRegiment : IDisposable
         captionProcessor.OnProgress += host.PostProgress;
         captionProcessor.OnError += Prozessor_OnError;
 
+        indexProcessor.TaggerSupplierDelegaty = ArrestTagger;
+
         WmlStrapper.OnProgress += host.PostProgress;
         WmlStrapper.OnMessage += host.PostMessage;
         TaggerObiekt.OnProgress += host.PostProgress;
@@ -294,16 +296,6 @@ internal sealed class IndexingRegiment : IDisposable
         thumbnailProcessor.MaxThreads = Profile.Active.Threads.Positive();
         thumbnailProcessor.ImageBufferCount = Profile.Active.BufferCount.Positive();
         captionProcessor.SkipKnownError = options.SkipKnownError;
-        if (Profile.Active.Tagger.Enable) {
-            host.ShowMessage(Properties.Resources.PM_LoadingTagger);
-            TaggerObiekt.Terminate();
-            await WmlStrapper.Sanitize(true);
-            // WML初期化自体は中断できないので終わった所で確認する
-            token.ThrowIfCancellationRequested();
-            var ccm = Profile.Active.CacheDirectory;
-            await TaggerObiekt.Sanitize(Profile.Active, ccm, token);
-            host.ShowMessage(Properties.Resources.PM_TaggerLoaded);
-        }
         token.ThrowIfCancellationRequested();
         Captionizer.Contaminate();
         if (Profile.Active.CaptioningEnabled) {
@@ -314,6 +306,24 @@ internal sealed class IndexingRegiment : IDisposable
             await cap.Verify(token);
             host.ShowMessage(Properties.Resources.PM_VLMChecked);
         }
+    }
+
+    /// <summary>
+    /// Tagger初期化(ﾀｸﾞ付け対象が見つかった時にﾌﾟﾛｾｯｻーのｽﾚｯﾄﾞから呼ばれる)
+    /// </summary>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    async Task<TaggerBase?> ArrestTagger(CancellationToken token)
+    {
+        host.PostMessage(Properties.Resources.PM_LoadingTagger);
+        TaggerObiekt.Terminate();
+        await WmlStrapper.Sanitize(true);
+        // WML初期化自体は中断できないので終わった所で確認する
+        token.ThrowIfCancellationRequested();
+        var ccm = Profile.Active.CacheDirectory;
+        await TaggerObiekt.Sanitize(Profile.Active, ccm, token);
+        host.PostMessage(Properties.Resources.PM_TaggerLoaded);
+        return TaggerObiekt.Default;
     }
 
     /// <summary>

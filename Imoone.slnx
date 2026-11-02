@@ -14,6 +14,7 @@
         <Project Path="Assets/Editor/ImogeMerge/ImogeMerge.csproj">
             <Platform Project="x64" />
         </Project>
+        <Project Path="Assets/Editor/MakeTestImage/MakeTestImage.csproj" />
     </Folder>
     <Project Path="ImogeIndex.Web2/ImogeIndex.Web2.csproj" Id="bb1717d9-6603-4091-824b-676a5aa10f4b">
         <Platform Project="x64" />

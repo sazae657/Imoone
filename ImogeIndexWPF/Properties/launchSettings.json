@@ -2,7 +2,7 @@
   "profiles": {
     "ImogeIndexWPF": {
       "commandName": "Project",
-      "commandLineArgs": "--multiple --quick-scan",
+      "commandLineArgs": " --quick-scan",
       "debugEngines": "managed"
     },
     "Auto": {
