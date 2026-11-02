@@ -118,6 +118,11 @@ public class IndexProzessor : IDisposable, IProzessor {
     /// </summary>
     public int CommitFreq { get; set; } = 20;
 
+    /// <summary>
+    /// ﾀｸﾞ付けが必要になった時に呼ばれるﾀｶﾞー供給元(初期化はここで行う)
+    /// </summary>
+    public Func<CancellationToken, Task<TaggerBase?>> TaggerSupplierDelegaty { get; set; } = _ => Task.FromResult(TaggerObiekt.Default);
+
     // 場所の比較は供給元に従う(ﾛーｶﾙは設定の表記揺れで別物扱いしないようにIgnoreCase)
     Dictionary<string, FileRecord> filesIndex;
 
@@ -928,7 +933,19 @@ public class IndexProzessor : IDisposable, IProzessor {
             return;
         }
 
-        var tagger = TaggerObiekt.Default;
+        // ﾀｶﾞー初期化が高ｺｽﾄなので、ﾀｸﾞ付け対象が無ければやらない
+        if (!filesIndex.Values.Any(w => w.IsAlive && !deferredFiles.Contains(w) && !w.HasTag)) {
+            return;
+        }
+
+        TaggerBase? tagger;
+        BeginVeryLongProcess?.Invoke();
+        try {
+            tagger = await TaggerSupplierDelegaty(token);
+        }
+        finally {
+            EndVeryLongProcess?.Invoke();
+        }
         if (tagger == null) {
             return;
         }
