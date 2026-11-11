@@ -55,7 +55,7 @@
         <DockPanel>
             <Expander IsExpanded="False" BorderThickness="0" Collapsed="Expander_Collapsed" Margin="0,2,0,0">
                 <Expander.Header>
-                    <!-- プロファイル欄 -->
+                    <!-- ﾌﾟﾛﾌｧｲﾙ欄 -->
                     <StackPanel Orientation="Horizontal" Margin="8,2,0,2">
                         <TextBlock Text="{x:Static properties:Resources.ML_Profile}" VerticalAlignment="Center" />
                         <ComboBox IsEnabled="{Binding Settingurable}" 
@@ -64,7 +64,7 @@
                               SelectedItem="{Binding ActiveProfile}" 
                               IsEditable="False"  Margin="4,0,0,0" Padding="6,3,24,3" VerticalAlignment="Center"/>
 
-                        <!-- 設定ドロップダウン -->
+                        <!-- 設定ﾄﾞﾛｯﾌﾟﾀﾞｳﾝ -->
                         <ToggleButton Margin="4,0,0,0" Loaded="ToggleButton_Loaded" VerticalAlignment="Center" Padding="2">
                             <ToggleButton.ContextMenu>
                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Opened="SettingsMenu_Opened">

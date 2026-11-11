@@ -66,8 +66,13 @@ public partial class MainWindow
         SaveFileListColumnSettings();
         if (DC.ShowDetailPane)
         {
-            SettingsDictator.Default.DetailPane.Width = Math.Max(64, (int)Grod.ColumnDefinitions[2].ActualWidth);
+            SettingsDictator.Default.DetailPane.Width = Math.Max(64, (int)DetailColumn.ActualWidth);
         }
+        if (DC.ShowFolderTree)
+        {
+            SettingsDictator.Default.FolderTree.Width = Math.Max(64, (int)FolderTreeColumn.ActualWidth);
+        }
+        SettingsDictator.Default.FolderTree.Visible = DC.ShowFolderTree;
         SettingsDictator.Default.DetailPane.Visible = DC.ShowDetailPane;
         SettingsDictator.Default.DetailPane.ShowOriginal = DC.DetailPaneShowOriginal;
 
@@ -122,6 +127,8 @@ public partial class MainWindow
         DC.ShowDetailPane = SettingsDictator.Default.DetailPane.Visible;
         DC.DetailPaneWidth = SettingsDictator.Default.DetailPane.Width;
         DC.DetailPaneShowOriginal = SettingsDictator.Default.DetailPane.ShowOriginal;
+        DC.ShowFolderTree = SettingsDictator.Default.FolderTree.Visible;
+        DC.FolderTreeWidth = Math.Max(64, SettingsDictator.Default.FolderTree.Width);
         DC.IncrementalSearch = SettingsDictator.Default.IncrementalSearch;
         DC.MinimizeToTray = SettingsDictator.Default.MinimizeToTray;
         DC.SimilarHashes = SettingsDictator.Default.SimilarHashMoone;

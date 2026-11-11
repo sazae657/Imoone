@@ -45,13 +45,18 @@ public sealed class FileListSourceCommittee
     }
 
     /// <summary>
+    /// ﾌｫﾙﾀﾞーの絞り込み(nullなら全ﾌｫﾙﾀﾞー)
+    /// </summary>
+    public FolderScope? Scope { get; set; }
+
+    /// <summary>
     /// 現在の条件で表示に残る？
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
     public bool IsVisible(FileItem item) => RankedItems is { } ranked
         ? ranked.Any(x => x.Id == item.Id)
-        : filter is null || filter.Contains(item.Id);
+        : (filter is null || filter.Contains(item.Id)) && (Scope is null || Scope.Contains(item));
 
     /// <summary>
     /// 類似検索の順位付き結果
@@ -77,10 +82,11 @@ public sealed class FileListSourceCommittee
             return ranked;
         }
         var ids = filter;
+        var scope = Scope;
         var sorted = await EnsureSorted().WaitAsync(token);
-        IReadOnlyList<FileItem> result = ids is null
+        IReadOnlyList<FileItem> result = ids is null && scope is null
             ? sorted
-            : await Task.Run(() => Extract(sorted, ids, token), token);
+            : await Task.Run(() => Extract(sorted, ids, scope, token), token);
         return ver == version ? result : null;
     }
 
@@ -133,17 +139,18 @@ public sealed class FileListSourceCommittee
     /// 抽出
     /// </summary>
     /// <param name="sorted"></param>
-    /// <param name="ids"></param>
+    /// <param name="ids">検索結果(nullなら全件)</param>
+    /// <param name="scope">ﾌｫﾙﾀﾞーの絞り込み(nullなら全ﾌｫﾙﾀﾞー)</param>
     /// <param name="token"></param>
     /// <returns></returns>
-    private static FileItem[] Extract(FileItem[] sorted, IdSet ids, CancellationToken token)
+    private static FileItem[] Extract(FileItem[] sorted, IdSet? ids, FolderScope? scope, CancellationToken token)
     {
-        var result = new List<FileItem>(Math.Min(ids.Count, sorted.Length));
+        var result = new List<FileItem>(ids is null ? sorted.Length : Math.Min(ids.Count, sorted.Length));
         for (var i = 0; i < sorted.Length; i++) {
             if ((i & 0xFFF) == 0) {
                 token.ThrowIfCancellationRequested();
             }
-            if (ids.Contains(sorted[i].Id)) {
+            if ((ids is null || ids.Contains(sorted[i].Id)) && (scope is null || scope.Contains(sorted[i]))) {
                 result.Add(sorted[i]);
             }
         }

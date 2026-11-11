@@ -29,7 +29,7 @@
     </ItemGroup>
     
     <ItemGroup>
-        <!-- TODO: MainWindowのコードビハインドがデカくなりすぎた -->
+        <!-- TODO: MainWindowのｺーﾄﾞﾋﾞﾊｲﾝﾄﾞがﾃﾞｶくなりすぎた -->
         <Compile Update="MainWindow.Tray.cs">
             <DependentUpon>MainWindow.xaml</DependentUpon>
         </Compile>
@@ -55,7 +55,7 @@
         <ProjectReference Include="..\ImogeIndex.Web3\ImogeIndex.Web3.csproj" />
         <ProjectReference Include="..\ImogeIndex\ImogeIndex.csproj" />
         
-        <!-- ImogeIndexWPFをコピらせる用参照 -->
+        <!-- ImogeIndexWPFをｺﾋﾟらせる用参照 -->
         <ProjectReference Include="..\ImogeIndexWPF\ImogeIndexWPF.csproj" />
     </ItemGroup>
 

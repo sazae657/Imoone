@@ -37,6 +37,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow {
         fileListSearch = new FileListSearchCommittee(
             new FileListHost(FileListView, SearchTextBox, fileListColumnJailer), DC, ResourcePalabras.Instance,
             profileLoader.Datum, detailPane.Clear, ex => ShowErrorDialog(ex), tokenSource.Token);
+        folderTree = new FolderTreeCommittee(DC, fileListSearch);
         SearchTextBox.TextChanged += (_, _) => fileListSearch.NotifyQueryChanged();
         SearchTextBox.KeyDown += (_, e) => {
             if (e.Key == Key.Enter && fileListSearch.NotifyEnter()) {
@@ -69,6 +70,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow {
     readonly FileListColumnCommittee fileListColumnJailer;
     readonly FileListDisplayCommittee fileListDisplay;
     readonly FileListSearchCommittee fileListSearch;
+    readonly FolderTreeCommittee folderTree;
     readonly DetailPaneCommittee<BitmapSource> detailPane;
 
     bool wasClosing;

@@ -84,3 +84,6 @@ MC_DisplayPulldown
 MC_SettingPulldown
 TS_R_Settings𓋔𓇌𓏏𓇌𓇋
 TS_R_Display𓉔𓇌𓅱𓅱𓆓𓇋
+MC_ToggleFolderTree 𓆑𓅱ぉ𓂋𓅱𓂧𓄿 𓏏𓅱𓂋𓇋 𓈖𓅱𓉔𓇌𓅱𓅱𓆓𓇋/𓉔𓇋𓉔𓇌𓅱𓅱𓆓𓇋(𓄿𓃭𓏏+𓈙𓇋𓆑𓏏+𓆑)
+MC_FolderTreeOpen
+MC_FolderTreeClose
