@@ -104,12 +104,13 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
 
             DC.OnOpenProfileFolder += () => ShowInExplorer(Profile.Dictator.ProfilePath?.FullName);
             DC.OnOpenSettingFolder += () => ShowInExplorer(Profile.Active.SettingFilePath?.FullName);
+            DC.OnLaunchImoone += OnLaunchImoone;
             DC.OnRunProzessor += OnRunProzessor;
             DC.OnStartCommand += OnStartBittan;
             DC.QuickScan = launchOptions.QuickScan;
         }
         catch (Exception re) {
-            ShowProcessMessage(Properties.Resources.WG_Eroare.Morfat(re.Message), re);
+            ShowProcessMessage(Properties.Resources.WG_Error.Morfat(re.Message), re);
             ExitStatus = ExitStatus.Failure;
             Close();
             return;
@@ -127,13 +128,13 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// <summary>
     /// 自動実行して結果を終了ｺーﾄﾞに残す
     /// </summary>
-    async Task RunAutoProcess()
+    private async Task RunAutoProcess()
     {
         try {
             ExitStatus = await ExecuteProcess(ProcessPlan.Full);
         }
         catch (Exception r) {
-            ShowProcessMessage(Properties.Resources.WG_Eroare.Morfat(r.Message), r);
+            ShowProcessMessage(Properties.Resources.WG_Error.Morfat(r.Message), r);
             ExitStatus = ExitStatus.Failure;
         }
     }
@@ -184,7 +185,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// 小ﾌﾟﾛｸﾞﾚｽﾊﾞー設定
     /// </summary>
     /// <param name="count"></param>
-    void SetupSubProgressContainer(int count)
+    private void SetupSubProgressContainer(int count)
     {
         if (count < 0) {
             SubProgressContainer.Children.Clear();
@@ -208,7 +209,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// 小ﾌﾟﾛｸﾞﾚｽに値を入れる
     /// </summary>
     /// <param name="value"></param>
-    void SetSubProgressValue(double value)
+    private void SetSubProgressValue(double value)
     {
         if (subProgressBars.Count > 0) {
             subProgressBars[0].Value = value;
@@ -218,7 +219,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// <summary>
     /// 操作可能/不可能の設定
     /// </summary>
-    void RefreshOperationControls()
+    private void RefreshOperationControls()
     {
         var canStart = state.CanStart;
         var canStop = state.CanStop;
@@ -232,7 +233,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// <summary>
     /// 停止要求
     /// </summary>
-    void RequestStop()
+    private void RequestStop()
     {
         if (!state.TryRequestStop()) {
             return;
@@ -245,7 +246,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// ﾒｲﾝﾌﾟﾛｾｽ実行
     /// </summary>
     /// <returns></returns>
-    async Task<ExitStatus> ExecuteProcess(ProcessPlan plan)
+    private async Task<ExitStatus> ExecuteProcess(ProcessPlan plan)
     {
         if (state.IsClosing) {
             return ExitStatus.Cancelled;
@@ -265,7 +266,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// 画面の状態から実行ｵﾌﾟｼｮﾝを作る
     /// </summary>
     /// <returns></returns>
-    IndexingOptions CreateIndexingOptions()
+    private IndexingOptions CreateIndexingOptions()
     {
         return new(
             RescanMetadata: DC.RescanMetadata,
@@ -280,7 +281,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// </summary>
     /// <param name="massage"></param>
     /// <param name="exception"></param>
-    void ShowProcessMessage(string massage, Exception? exception)
+    private void ShowProcessMessage(string massage, Exception? exception)
     {
         if (launchOptions.Auto) {
             // 自動実行中はﾀﾞｲｱﾛｸﾞもｳｲﾝﾄﾞｳも出さず、記録だけ残す
@@ -326,7 +327,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// 処理を開始してよいか確認する
     /// </summary>
     /// <returns></returns>
-    bool CanBeginProcess()
+    private bool CanBeginProcess()
     {
         if (!state.CanStart) {
             return false;
@@ -516,7 +517,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// pathをExplorerで開く
     /// </summary>
     /// <param name="path"></param>
-    void ShowInExplorer(string? path)
+    private void ShowInExplorer(string? path)
     {
         if (string.IsNullOrEmpty(path)) {
             return;
@@ -531,7 +532,27 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
             Process.Start(psi);
         }
         catch (Exception ex) {
-            ShowProcessMessage(Properties.Resources.WG_Eroare.Morfat(ex.Message), ex);
+            ShowProcessMessage(Properties.Resources.WG_Error.Morfat(ex.Message), ex);
+        }
+    }
+
+
+    /// <summary>
+    /// Imoone起動
+    /// </summary>
+    private void OnLaunchImoone() {
+        var iid = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ImooneWPF.exe");
+        var app = new ProcessStartInfo
+        {
+            FileName = iid
+        };
+        app.ArgumentList.Add(Profile.Dictator.ActiveProfile);
+        try {
+            Process.Start(app);
+        }
+        catch (Exception r) {
+            TaskenDialog.Error(this,
+                Properties.Resources.ML_E_LaunchImooneFailed.Morfat(r.Message), Properties.Resources.WG_Eroare);
         }
     }
 
@@ -539,7 +560,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// 重量級Dispatch
     /// </summary>
     /// <param name="action"></param>
-    void Auction(Action action)
+    private void Auction(Action action)
     {
         try {
             _ = Dispatcher.BeginInvoke(() => {
@@ -556,7 +577,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// <summary>
     /// これの設定自動読み込み
     /// </summary>
-    void LoadSettings()
+    private void LoadSettings()
     {
         DC.SelectedTheme = ThemeDisplay.ThemeToString(ThemeDictator.CurrentTheme);
         var language = LanguageDictator.Normalize(WarpSettings.Default.Language);
@@ -573,7 +594,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// <summary>
     /// これの設定保存
     /// </summary>
-    void SaveSettings() {
+    private void SaveSettings() {
         WarpSettings.Default.WindowParamOf(WindowParamsKey.Main, mwp => {
             mwp.Width = Math.Max(WarpDefaults.MainWindowWidth, (int)Width);
             mwp.Height = Math.Max(WarpDefaults.MainWindowHeight, (int)Height);
@@ -655,7 +676,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    void OnWindowStateChanged(object? sender, EventArgs e)
+    private void OnWindowStateChanged(object? sender, EventArgs e)
     {
         if (WindowState != WindowState.Minimized) {
             restoreState = WindowState;
@@ -700,7 +721,7 @@ public partial class MainWindow : ImogeIndex.Web3.Nuendow, IIndexingHost {
     /// ﾄﾚｲｱｲｺﾝのﾂーﾙﾁｯﾌﾟ用文字列作成
     /// </summary>
     /// <returns></returns>
-    string GetTrayStatus()
+    private string GetTrayStatus()
     {
         string status;
         if (state.IsClosing) {

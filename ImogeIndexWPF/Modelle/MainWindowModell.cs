@@ -216,6 +216,13 @@ internal partial class MainWindowModell : ObservableObject {
     }
 
     /// <summary>
+    /// ｲﾓーﾈ起動
+    /// </summary>
+    [RelayCommand]
+    private void LaunchImoone() => OnLaunchImoone?.Invoke();
+    public event Action? OnLaunchImoone;
+
+    /// <summary>
     /// 閉じろ
     /// </summary>
     /// <param name="window"></param>

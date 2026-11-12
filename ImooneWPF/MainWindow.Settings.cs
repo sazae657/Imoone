@@ -136,10 +136,19 @@ public partial class MainWindow
         {
             DC.Profiles.Add(x.Key);
         }
-        if (!string.IsNullOrEmpty(SettingsDictator.Default.LastProfile) &&
-            DC.Profiles.Contains(SettingsDictator.Default.LastProfile))
+        var profilec = SettingsDictator.Default.LastProfile;
+        var args = Environment.GetCommandLineArgs();
+        if (args.Length > 1) {
+            // args[1]からﾌﾟﾛﾌｧｲﾙ引かせる
+            if (DC.Profiles.Contains(args[1])) {
+                profilec = args[1];
+            }
+        }
+
+        if (!string.IsNullOrEmpty(profilec) &&
+            DC.Profiles.Contains(profilec))
         {
-            DC.ActiveProfile = SettingsDictator.Default.LastProfile;
+            DC.ActiveProfile = profilec;
             Profile.Dictator.SetActive(DC.ActiveProfile);
         }
         else
