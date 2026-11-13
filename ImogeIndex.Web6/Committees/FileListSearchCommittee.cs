@@ -104,6 +104,17 @@ public sealed class FileListSearchCommittee
     public bool IsSwappingItemsSource { get; private set; }
 
     /// <summary>
+    /// 一覧を差し替えた(差し替えた中身, ﾌｫﾙﾀﾞーﾂﾘーに件数を反映してよい？)
+    /// ﾌｫﾙﾀﾞー絞り込み中や類似検索中は後者がfalse
+    /// </summary>
+    public event Action<IReadOnlyList<FileItem>, bool>? ListPublished;
+
+    /// <summary>
+    /// 現在のﾌｫﾙﾀﾞー絞り込み
+    /// </summary>
+    public FolderScope? FolderScope => fileListSource.Scope;
+
+    /// <summary>
     /// 読み込み順の全件
     /// </summary>
     public IReadOnlyList<FileItem> Items => fileListSource.Items;
@@ -227,6 +238,27 @@ public sealed class FileListSearchCommittee
             return;
         }
         Track(ApplySimilarSearchAsync(target));
+    }
+
+    /// <summary>
+    /// ﾌｫﾙﾀﾞーで絞り込む(nullなら解除)
+    /// </summary>
+    /// <param name="scope"></param>
+    /// <param name="publish">一覧を作り直す？(読み込み前の復元ではfalse)</param>
+    public void SetFolderScope(FolderScope? scope, bool publish = true)
+    {
+        fileListSource.Scope = scope;
+        if (!publish || IsClosing || !list.HasItemsSource) {
+            return;
+        }
+        if (model.IsSimilarSearch) {
+            // 類似検索は抜けて通常の一覧に戻す
+            Track(RestoreNormalListAsync());
+            return;
+        }
+        // 実行中の検索は止めないでｷーﾌﾟ
+        var running = pendingSearch;
+        Track(Task.WhenAll(running, RepublishAsync()));
     }
 
     /// <summary>
@@ -362,12 +394,28 @@ public sealed class FileListSearchCommittee
     }
 
     /// <summary>
+    /// 検索条件はそのままで一覧だけ作り直す
+    /// </summary>
+    /// <returns></returns>
+    private async Task RepublishAsync()
+    {
+        try {
+            await PublishFileListAsync(closingToken);
+        }
+        catch (OperationCanceledException) {
+            // 閉じられた
+        }
+    }
+
+    /// <summary>
     /// 現在の検索結果とｿーﾄ状態で一覧を作り直して差し替える
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
     private async Task PublishFileListAsync(CancellationToken token)
     {
+        // ﾌｫﾙﾀﾞーで絞っておらず類似検索でもない時だけﾂﾘーに件数を流す
+        var treeApplicable = fileListSource.Scope is null && fileListSource.RankedItems is null;
         var built = await fileListSource.BuildAsync(token);
         if (built == null || IsClosing || token.IsCancellationRequested) {
             // 後続の要求に追い越された
@@ -386,6 +434,7 @@ public sealed class FileListSearchCommittee
             IsSwappingItemsSource = false;
         }
         model.FileCountText = texts.ItemCount(built.Count);
+        ListPublished?.Invoke(built, treeApplicable);
     }
 
     /// <summary>

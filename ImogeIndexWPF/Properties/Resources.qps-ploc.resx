@@ -454,4 +454,10 @@
   <data name="WG_Stopping" xml:space="preserve">
     <value>𓏏𓇌𓇋𓈙𓇋𓍿𓅱𓅱…</value>
   </data>
+  <data name="ML_LaunchImoone" xml:space="preserve">
+    <value>𓇋𓅓𓅱𓅱𓈖𓇌𓎡𓇋𓂧𓅱𓅱…</value>
+  </data>
+  <data name="ML_E_LaunchImooneFailed" xml:space="preserve">
+    <value>  𓇋𓅓𓅱𓅱𓈖𓇌𓈖𓅱𓎡𓇋𓂧𓅱𓅱𓈖𓇋𓈙𓇋𓊪𓄿𓇋:{0}</value>
+  </data>
 </root>

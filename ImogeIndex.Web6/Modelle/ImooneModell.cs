@@ -174,6 +174,31 @@ public abstract partial class ImooneModell : ObservableObject
     }
 
     /// <summary>
+    /// ﾌｫﾙﾀﾞーﾂﾘー表示切り替え
+    /// </summary>
+    [ObservableProperty]
+    public partial bool ShowFolderTree { get; set; } = true;
+
+    /// <summary>
+    /// ﾌｫﾙﾀﾞーﾂﾘーの幅
+    /// </summary>
+    [ObservableProperty]
+    public partial double FolderTreeWidth { get; set; } = 200;
+
+    /// <summary>
+    /// ﾌｫﾙﾀﾞーﾂﾘーの最上位(ﾌﾟﾛﾌｧｲﾙ名の節1個だけ入る)
+    /// </summary>
+    public ObservableCollection<FolderNode> FolderTreeRoots { get; } = new();
+
+    /// <summary>
+    /// ﾌｫﾙﾀﾞーﾂﾘー表示切り替え
+    /// </summary>
+    [RelayCommand]
+    void SwitchFolderTree() {
+        ShowFolderTree = !ShowFolderTree;
+    }
+
+    /// <summary>
     /// ﾆﾗｸｼｮﾝ有効？
     /// </summary>
     [ObservableProperty]

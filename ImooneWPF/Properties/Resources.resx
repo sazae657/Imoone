@@ -313,4 +313,13 @@ ImogeIndexWPF でタグインデックスを更新すること</value>
   <data name="TS_R_Display" xml:space="preserve">
     <value>表示</value>
   </data>
+  <data name="MC_ToggleFolderTree" xml:space="preserve">
+    <value>フォルダーツリーの表示/非表示 (Alt+Shift+F)</value>
+  </data>
+  <data name="MC_FolderTreeOpen" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MC_FolderTreeClose" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

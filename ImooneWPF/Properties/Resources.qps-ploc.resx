@@ -319,4 +319,13 @@
   <data name="TS_R_Display" xml:space="preserve">
     <value>𓉔𓇌𓅱𓅱𓆓𓇋</value>
   </data>
+  <data name="MC_ToggleFolderTree" xml:space="preserve">
+    <value> 𓆑𓅱ぉ𓂋𓅱𓂧𓄿 𓏏𓅱𓂋𓇋 𓈖𓅱𓉔𓇌𓅱𓅱𓆓𓇋/𓉔𓇋𓉔𓇌𓅱𓅱𓆓𓇋(𓄿𓃭𓏏+𓈙𓇋𓆑𓏏+𓆑)</value>
+  </data>
+  <data name="MC_FolderTreeOpen" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="MC_FolderTreeClose" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

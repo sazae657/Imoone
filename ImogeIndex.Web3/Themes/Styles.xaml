@@ -21,7 +21,7 @@
         <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
     </Style>
 
-    <!-- ハイパーリンクの基本スタイル -->
+    <!-- ﾊｲﾊﾟーﾘﾝｸの基本ｽﾀｲﾙ -->
     <Style TargetType="{x:Type Hyperlink}">
         <Setter Property="Foreground" Value="{DynamicResource HyperlinkForegroundBrush}" />
         <Setter Property="TextDecorations" Value="Underline" />
@@ -221,7 +221,7 @@
                                 <Border Background="{TemplateBinding Foreground}"
                                         CornerRadius="{DynamicResource MurcRadiusS}" />
                             </Decorator>
-                            <!-- 不確定バージョン -->
+                            <!-- 不確定ﾊﾞーｼﾞｮﾝ -->
                             <Canvas x:Name="IndeterminateIndicator" Visibility="Collapsed" ClipToBounds="True"
                                     IsHitTestVisible="False">
                                 <Viewbox Stretch="Fill"
@@ -244,7 +244,7 @@
                             <Setter TargetName="PART_Indicator" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="IndeterminateIndicator" Property="Visibility" Value="Visible" />
                         </Trigger>
-                        <!-- 不確定バージョン -->
+                        <!-- 不確定ﾊﾞーｼﾞｮﾝ -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsIndeterminate" Value="True" />
@@ -327,7 +327,7 @@
 
     <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource ThemeCheckBoxStyle}" />
 
-    <!-- ｴｷﾊﾟﾝの開閉ボタン -->
+    <!-- ｴｷﾊﾟﾝの開閉ﾎﾞﾀﾝ -->
     <Style x:Key="ExpanderToggleStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ControlForegroundBrush}" />
@@ -633,6 +633,122 @@
         </Setter>
     </Style>
 
+    <!-- TreeViewの開閉ﾎﾞﾀﾝ -->
+    <Style x:Key="TreeViewExpanderToggleStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Foreground" Value="{DynamicResource ListItemForegroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Background="Transparent" Width="16" Height="16">
+                        <Path x:Name="Arrow" Data="M 0 0 L 4 4 L 0 8" Stroke="{TemplateBinding Foreground}"
+                              StrokeThickness="1.5" HorizontalAlignment="Center" VerticalAlignment="Center"
+                              Opacity="0.7" RenderTransformOrigin="0.5,0.5"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Arrow" Property="RenderTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="90"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Arrow" Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- TreeViewｽﾀｲﾙ -->
+    <Style TargetType="{x:Type TreeView}">
+        <Setter Property="Background" Value="{DynamicResource ListBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ListItemForegroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
+    </Style>
+
+    <!-- TreeViewItemｽﾀｲﾙ(既定のままだとﾌｫｰｶｽ外れた時の選択色がOS任せでﾀﾞｰｸﾓｰﾄﾞで真っ白になる) -->
+    <Style TargetType="{x:Type TreeViewItem}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource ListItemForegroundBrush}"/>
+        <Setter Property="Padding" Value="3,1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="16"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <ToggleButton x:Name="Expander" Style="{StaticResource TreeViewExpanderToggleStyle}"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                                      ClickMode="Press"/>
+                        <Border x:Name="Bd" Grid.Column="1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="PART_Header" ContentSource="Header"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <ItemsPresenter x:Name="ItemsHost" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="false">
+                            <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="Expander" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+                        <Trigger SourceName="Bd" Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource ListItemHoverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource ListItemSelectedBrush}"/>
+                            <Setter TargetName="PART_Header" Property="TextElement.Foreground" Value="{DynamicResource ListItemSelectedForegroundBrush}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource ListItemSelectedInactiveBrush}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource ControlForegroundDisabledBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <!-- 仮想化する時は子の並べ方も仮想化対応にする -->
+            <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- ListViewｽﾀｲﾙ -->
     <Style TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="{DynamicResource ListBackgroundBrush}" />
@@ -668,7 +784,7 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <!-- 列を持たない一覧では項目テンプレートを表示する -->
+                        <!-- 列を持たない一覧では項目ﾃﾝﾌﾟﾚーﾄを表示する -->
                         <DataTrigger Binding="{Binding View, RelativeSource={RelativeSource AncestorType=ListView}}" Value="{x:Null}">
                             <Setter TargetName="RowPresenter" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="ItemPresenter" Property="Visibility" Value="Visible"/>

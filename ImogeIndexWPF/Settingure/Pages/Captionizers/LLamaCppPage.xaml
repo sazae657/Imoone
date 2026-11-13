@@ -101,7 +101,7 @@
                        ValidatesOnNotifyDataErrors=True}" />
             </StackPanel>
 
-            <!-- プロンプトのオーバーライド -->
+            <!-- ﾌﾟﾛﾝﾌﾟﾄのｵーﾊﾞーﾗｲﾄﾞ -->
             <Separator Grid.Row="10" Grid.ColumnSpan="2" />
             <TextBlock Grid.Row="11" Text="{x:Static properties:Resources.SW_CapLlm_UseCustomPrompt}" Style="{StaticResource LabelOf}" />
             <CheckBox Grid.Row="11" 

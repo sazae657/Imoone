@@ -14,6 +14,7 @@
         <Version>$(MurVersion)</Version>
         <Product>ｲﾓｹﾞｲﾝﾃﾞｯｸｽ</Product>
         <PackageLicenseExpression>$(Muricense)</PackageLicenseExpression>
+        <Features>$(InstantFeatures)</Features>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(Platform)' == 'x64'">

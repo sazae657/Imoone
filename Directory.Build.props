@@ -3,6 +3,11 @@
         <NetCoreAppTarget>net10.0</NetCoreAppTarget>
         <NetCoreAppWinTarget>$(NetCoreAppTarget)-windows10.0.26100.0</NetCoreAppWinTarget>
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(NetCoreAppTarget)' == 'net11.0'">
+        <InstantFeatures>runtime-async=on</InstantFeatures>
+    </PropertyGroup>
+    
     <PropertyGroup>
         <MurVersion>0.1.4.0</MurVersion>
         <NirVersion>0.1.4.0</NirVersion>
@@ -16,4 +21,5 @@
         <NeutralLanguage>ja</NeutralLanguage>
         <SatelliteResourceLanguages>ja;qps-ploc</SatelliteResourceLanguages>
     </PropertyGroup>
+   
 </Project>

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <!-- フロントエンドの共通のUI非依存ロジック(WPFもWinUIも参照しないこと) -->
+    <!-- ﾌﾛﾝﾄｴﾝﾄﾞの共通のUI非依存ﾛｼﾞｯｸ(WPFもWinUIも参照しないこと) -->
     <PropertyGroup>
         <TargetFramework>$(NetCoreAppWinTarget)</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -14,6 +14,8 @@
         <Version>$(MurVersion)</Version>
         <Product>ｲﾓｹﾞｼﾝｸﾞ(共通)</Product>
         <PackageLicenseExpression>$(Muricense)</PackageLicenseExpression>
+        <Features>$(InstantFeatures)</Features>
+        <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
     </PropertyGroup>
 
     <ItemGroup>

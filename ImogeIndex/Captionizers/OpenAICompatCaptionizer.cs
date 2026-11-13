@@ -6,31 +6,30 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using Tomlet;
-using Tomlet.Attributes;
 
 namespace ImogeIndex.Captionizers;
 
 public class OpenAICompatSetting
 {
-    [TomlPrecedingComment("OpenAI互換APIのURL")]
+    [ZundaHorizon("OpenAI互換APIのURL")]
     public string? Host { get; set; } = "http://localhost:1234";
 
-    [TomlPrecedingComment("OpenAI互換APIのAPIキー")]
+    [ZundaHorizon("OpenAI互換APIのAPIキー")]
     public string? ApiKey { get; set; } = string.Empty;
 
-    [TomlPrecedingComment("モデル")]
+    [ZundaHorizon("モデル")]
     public string? Model { get; set; } = "qwen/qwen3-vl-8b";
 
-    [TomlPrecedingComment("送信する画像の長辺サイズ")]
+    [ZundaHorizon("送信する画像の長辺サイズ")]
     public int ImageSize { get; set; } = 1024;
 
-    [TomlPrecedingComment("失敗時のリトライ回数")]
+    [ZundaHorizon("失敗時のリトライ回数")]
     public int Retry { get; set; } = 2;
 
-    [TomlPrecedingComment("カスタムプロンプトを使う")]
+    [ZundaHorizon("カスタムプロンプトを使う")]
     public bool UseCustomPrompt { get; set; } = false;
 
-    [TomlPrecedingComment("カスタムプロンプト")]
+    [ZundaHorizon("カスタムプロンプト")]
     public string CustomPrompt { get; set; } = string.Empty;
 
     public float Temperature { get; set; } = 0;

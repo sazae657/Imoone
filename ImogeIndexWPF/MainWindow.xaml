@@ -25,6 +25,7 @@
         <KeyBinding Gesture="Ctrl+O" Command="{Binding OpenSettingFolderCommand}" />
         <KeyBinding Gesture="Ctrl+M" Command="{Binding OpenProfileFolderCommand}" />
         <KeyBinding Gesture="Ctrl+W" Command="{Binding OpenRegexSandboxCommand}" />
+        <KeyBinding Gesture="Ctrl+Q" Command="{Binding LaunchImooneCommand}" />
         <KeyBinding Key="OemComma" Modifiers="Ctrl" 
                     Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
     </web3:Nuendow.InputBindings>
@@ -55,7 +56,7 @@
         <DockPanel>
             <Expander IsExpanded="False" BorderThickness="0" Collapsed="Expander_Collapsed" Margin="0,2,0,0">
                 <Expander.Header>
-                    <!-- プロファイル欄 -->
+                    <!-- ﾌﾟﾛﾌｧｲﾙ欄 -->
                     <StackPanel Orientation="Horizontal" Margin="8,2,0,2">
                         <TextBlock Text="{x:Static properties:Resources.ML_Profile}" VerticalAlignment="Center" />
                         <ComboBox IsEnabled="{Binding Settingurable}" 
@@ -64,7 +65,7 @@
                               SelectedItem="{Binding ActiveProfile}" 
                               IsEditable="False"  Margin="4,0,0,0" Padding="6,3,24,3" VerticalAlignment="Center"/>
 
-                        <!-- 設定ドロップダウン -->
+                        <!-- 設定ﾄﾞﾛｯﾌﾟﾀﾞｳﾝ -->
                         <ToggleButton Margin="4,0,0,0" Loaded="ToggleButton_Loaded" VerticalAlignment="Center" Padding="2">
                             <ToggleButton.ContextMenu>
                                 <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Opened="SettingsMenu_Opened">
@@ -80,6 +81,7 @@
                                     <Separator/>
                                     <CheckBox IsChecked="{Binding MinimizeToTray}" Content="{x:Static properties:Resources.ML_MinimizeToTray}"/>
                                     <Separator/>
+                                    <MenuItem Header="{x:Static properties:Resources.ML_LaunchImoone}" InputGestureText="Ctrl+Q" Command="{Binding LaunchImooneCommand}" />                                    
                                     <MenuItem Header="{x:Static properties:Resources.SG_T_OpenRegexSandbox}" InputGestureText="Ctrl+W" Command="{Binding OpenRegexSandboxCommand}"/>
                                     <MenuItem StaysOpenOnClick="True">
                                         <MenuItem.Header>
@@ -116,7 +118,7 @@
                                         <MenuItem IsEnabled="{Binding Settingurable}" Header="{x:Static properties:Resources.ML_D_Captioning}" Command="{Binding RunProzessorCommand}" CommandParameter="{x:Static modelle:SelectiveProcess.Captioning}"/>
                                     </MenuItem>
                                     <Separator/>
-                                    <MenuItem Header="{x:Static properties:Resources.MC_About}" Command="{Binding OpenAboutDialogCommand}"/>
+                                    <MenuItem Header="{x:Static properties:Resources.MC_About}" Command="{Binding OpenAboutDialogCommand}" />
                                     <Separator/>
                                     <MenuItem Header="{x:Static properties:Resources.MC_Quit}" 
                                               InputGestureText="Ctrl+," 

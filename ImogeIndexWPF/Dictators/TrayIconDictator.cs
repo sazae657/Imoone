@@ -28,7 +28,7 @@ internal sealed class TrayIconDictator : IDisposable
         this.dispatcher = dispatcher;
         this.restore = restore;
         this.getStatus = getStatus;
-        commands = [
+        commands = (TrayMenuCommand?[])[
             new TrayMenuCommand(Properties.Resources.IDM_START,
                 () => QueueCommand(startAction, () => canStart), () => canStart),
             new TrayMenuCommand(Properties.Resources.IDM_STOP,

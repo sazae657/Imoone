@@ -28,7 +28,7 @@ public class TagRecordsController : IDisposable
         thumbnailField.SetValue(null, thumbnails);
         image = new FileInfo(Path.Combine(work.FullName, "image.png"));
         File.WriteAllText(image.FullName, "original");
-        var file = Assert.Single(db.Store.AddFiles([FileTransaction.FromFile(image)!], CancellationToken.None));
+        var file = Assert.Single(db.Store.AddFiles((FileTransaction[])[FileTransaction.FromFile(image)!], CancellationToken.None));
         SaveTags(file, "original", 0.75f);
     }
 
@@ -41,7 +41,7 @@ public class TagRecordsController : IDisposable
         image.LastWriteTime = image.LastWriteTime.AddHours(1);
         image.Refresh();
         Assert.False(file.Refresh(image.AsSourceFile(), file.FileHash));
-        db.Store.Update([file], false, CancellationToken.None);
+        db.Store.Update((FileRecord[])[file], false, CancellationToken.None);
         Assert.Equal(original, ReadTags());
         Assert.True(Assert.Single(db.Store.QueryAll(CancellationToken.None)).HasTag);
     }
@@ -69,7 +69,7 @@ public class TagRecordsController : IDisposable
         image.Refresh();
         Assert.True(file.Refresh(image.AsSourceFile(), FileTransaction.FromFile(image)!.Hash!));
         Assert.Null(file.TaggingResult);
-        db.Store.Update([file], false, CancellationToken.None);
+        db.Store.Update((FileRecord[])[file], false, CancellationToken.None);
         Assert.Empty(ReadTags());
         Assert.False(Assert.Single(db.Store.QueryAll(CancellationToken.None)).HasTag);
     }
@@ -91,7 +91,7 @@ public class TagRecordsController : IDisposable
         file.TaggingResult.Tags.Add(new Tag { Name = "pending", Score = 0.5f });
         using var cts = new CancellationTokenSource();
         cts.Cancel();
-        db.Store.Update([file], false, cts.Token);
+        db.Store.Update((FileRecord[])[file], false, cts.Token);
         Assert.NotNull(file.TaggingResult);
     }
 
@@ -104,7 +104,7 @@ public class TagRecordsController : IDisposable
         file.TaggingResult.Tags.Add(new Tag { Name = name, Score = score });
         file.TaggingResult.Character.Add(new Tag { Name = file.Characters, Score = score });
         file.TaggingResult.Rating.Add(new Tag { Name = name + "-rating", Score = score });
-        db.Store.Update([file], false, CancellationToken.None);
+        db.Store.Update((FileRecord[])[file], false, CancellationToken.None);
     }
 
     (string Type, string Tag, double Score)[] ReadTags()
