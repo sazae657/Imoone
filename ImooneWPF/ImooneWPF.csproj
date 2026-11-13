@@ -15,6 +15,7 @@
         <Product>ｲﾓｹﾞｼﾝｸﾞ</Product>
         <PackageLicenseExpression>$(Muricense)</PackageLicenseExpression>
         <ApplicationManifest>app.manifest</ApplicationManifest>
+        <Features>$(InstantFeatures)</Features>
     </PropertyGroup>
 
     <ItemGroup>

@@ -27,14 +27,14 @@ public class MetadataRecordsController : IDisposable
         thumbnailField.SetValue(null, thumbnails);
         var image = new FileInfo(Path.Combine(work.FullName, "image.png"));
         File.WriteAllText(image.FullName, "original");
-        file = Assert.Single(db.Store.AddFiles([FileTransaction.FromFile(image)!], CancellationToken.None));
+        file = Assert.Single(db.Store.AddFiles((FileTransaction[])[FileTransaction.FromFile(image)!], CancellationToken.None));
     }
 
     [Fact(DisplayName = "保存が確定したらメタデータムを手放す")]
     public void ReleasesMetadataAfterCommit()
     {
         SetMetadata();
-        db.Store.Update([file], true, CancellationToken.None);
+        db.Store.Update((FileRecord[])[file], true, CancellationToken.None);
         Assert.Null(file.MetadataDatum);
         Assert.False(file.MetadataChanged);
         Assert.Equal(1, CountMetadata());
@@ -44,7 +44,7 @@ public class MetadataRecordsController : IDisposable
     public void KeepsMetadataWhenNotOptional()
     {
         SetMetadata();
-        db.Store.Update([file], false, CancellationToken.None);
+        db.Store.Update((FileRecord[])[file], false, CancellationToken.None);
         Assert.NotNull(file.MetadataDatum);
         Assert.True(file.MetadataChanged);
         Assert.Equal(0, CountMetadata());
@@ -56,7 +56,7 @@ public class MetadataRecordsController : IDisposable
         SetMetadata();
         using var cts = new CancellationTokenSource();
         cts.Cancel();
-        db.Store.Update([file], true, cts.Token);
+        db.Store.Update((FileRecord[])[file], true, cts.Token);
         Assert.NotNull(file.MetadataDatum);
         Assert.True(file.MetadataChanged);
     }

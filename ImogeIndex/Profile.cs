@@ -1,7 +1,6 @@
 ﻿using ImogeIndex.Common;
 using Tomlet;
 using Tomlet.Attributes;
-
 namespace ImogeIndex;
 
 /// <summary>
@@ -64,10 +63,10 @@ public class Profile : ICustomVariableJail {
     public FileInfo? ProfilePath { get; private set; }
 
 
-    [TomlPrecedingComment("デフォルトプロファイル")]
+    [ZundaHorizon("デフォルトプロファイル")]
     public string Default { get; set; } = string.Empty;
 
-    [TomlPrecedingComment("プロファイル")]
+    [ZundaHorizon("プロファイル")]
     public Dictionary<string, ProfileItem> Profiles { get; set; } = new();
 
     /// <summary>

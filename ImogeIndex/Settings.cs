@@ -16,31 +16,31 @@ public enum CaptionizerType {
 }
 
 public class CaptionizeSetting {
-    [TomlPrecedingComment("キャプショニングに使うLLM")]
+    [ZundaHorizon("キャプショニングに使うLLM")]
     public CaptionizerType Type { get; set; } = CaptionizerType.Ollama;
 
-    [TomlPrecedingComment("有効/無効")]
+    [ZundaHorizon("有効/無効")]
     public bool Enable { get; set; }
 
-    [TomlPrecedingComment("HTTPタイムアウト(秒)")]
+    [ZundaHorizon("HTTPタイムアウト(秒)")]
     public int HttpTimeout { get; set; } = 180;
 
-    [TomlPrecedingComment("連続でリクエストが失敗したらキャプショニングを打ち切る回数(0で無効)")]
+    [ZundaHorizon("連続でリクエストが失敗したらキャプショニングを打ち切る回数(0で無効)")]
     public int AbortThreshold { get; set; } = 5;
 
-    [TomlPrecedingComment("そこもっと")]
+    [ZundaHorizon("そこもっと")]
     public List<string> MoreHere { get; set; } = new();
 
-    [TomlPrecedingComment("そこ見ない")]
+    [ZundaHorizon("そこ見ない")]
     public List<string> NoMoreHere { get; set; } = new();
 
-    [TomlPrecedingComment("Ollama設定")]
+    [ZundaHorizon("Ollama設定")]
     public OllamaSetting Ollama { get; set; } = new();
 
-    [TomlPrecedingComment("llama.cpp設定")]
+    [ZundaHorizon("llama.cpp設定")]
     public LLamaCppSetting LLamaCpp { get; set; } = new();
 
-    [TomlPrecedingComment("OpenAI互換の設定")]
+    [ZundaHorizon("OpenAI互換の設定")]
     public OpenAICompatSetting OpenAICompat { get; set; } = new();
 }
 
@@ -49,38 +49,38 @@ public enum TaggerType {
 }
 
 public class TaggerSetting {
-    [TomlPrecedingComment("有効/無効")]
+    [ZundaHorizon("有効/無効")]
     public bool Enable { get; set; } = true;
 
-    [TomlPrecedingComment("Taggerの種類")]
+    [ZundaHorizon("Taggerの種類")]
     public TaggerType Type { get; set; } = TaggerType.WD;
 
-    [TomlPrecedingComment("model.onnxへのパス")]
+    [ZundaHorizon("model.onnxへのパス")]
     public string Model { get; set; } = "";
 
-    [TomlPrecedingComment("タグもしくはメタデータのファイル名")]
+    [ZundaHorizon("タグもしくはメタデータのファイル名")]
     public string Tags { get; set; } = "selected_tags.csv";
 
-    [TomlPrecedingComment("モデルのコンパイル")]
+    [ZundaHorizon("モデルのコンパイル")]
     public bool Modepile { get; set; } = true;
 
-    [TomlPrecedingComment("タグの閾値")]
+    [ZundaHorizon("タグの閾値")]
     public float Threshold { get; set; } = 0.35f;
-    [TomlPrecedingComment("キャラクターの閾値")]
+    [ZundaHorizon("キャラクターの閾値")]
     public float CharacterThreshold { get; set; } = 0.1f;
 
-    [TomlPrecedingComment("計算に使うデバイス")]
+    [ZundaHorizon("計算に使うデバイス")]
     public ExecutionProviderDevicePolicy DevicePolicy { get; set; } = ExecutionProviderDevicePolicy.MAX_PERFORMANCE;
 
-    [TomlPrecedingComment("スレッド数")]
+    [ZundaHorizon("スレッド数")]
     public int Threads { get; set; } = 1;
 }
 
 public class ThumbnailSetting {
-    [TomlPrecedingComment("有効/無効")]
+    [ZundaHorizon("有効/無効")]
     public bool Enable { get; set; } = true;
 
-    [TomlPrecedingComment("サムネイルの長辺")]
+    [ZundaHorizon("サムネイルの長辺")]
     public int Size { get; set; } = 256;
 }
 
@@ -215,45 +215,45 @@ public class Settings : ICustomVariableJail {
     public UserDefinitions? UserDefinitions { get; set; }
 
 
-    [TomlPrecedingComment("検索するパス")]
+    [ZundaHorizon("検索するパス")]
     public List<string> SearchPaths { get; set; } = [@"${Env:USERPROFILE}\Pictures"];
 
-    [TomlPrecedingComment("除外するパス")]
+    [ZundaHorizon("除外するパス")]
     public List<string> ExcludePaths { get; set; } = [];
 
-    [TomlPrecedingComment("除外パターン(正規表現)")]
+    [ZundaHorizon("除外パターン(正規表現)")]
     public List<string> ExcludePatterns { get; set; } = [];
 
-    [TomlPrecedingComment("画像の拡張子(正規表現)")]
+    [ZundaHorizon("画像の拡張子(正規表現)")]
     public List<string> ImageExtensions { get; set; } = [];
 
-    [TomlPrecedingComment("検索インデックスを作成するメタデータムタグ")]
+    [ZundaHorizon("検索インデックスを作成するメタデータムタグ")]
     public List<MetaAlias> MetadataSearchTags { get; set; } = [];
 
     //[TomlNonSerialized]
     //public List<Regex> MovieExtsnsions { get; set; } = [];
 
-    [TomlPrecedingComment("ログレベル")]
+    [ZundaHorizon("ログレベル")]
     public int LogLevel { get; set; } = 4;
-    [TomlPrecedingComment("画像処理のスレッド数")]
+    [ZundaHorizon("画像処理のスレッド数")]
     public int Threads { get; set; } = 4;
 
-    [TomlPrecedingComment("画像処理でメモリに溜め込む枚数/スレッド")]
+    [ZundaHorizon("画像処理でメモリに溜め込む枚数/スレッド")]
     public int BufferCount { get; set; } = 25;
 
-    [TomlPrecedingComment("キャッシュフォルダー")]
+    [ZundaHorizon("キャッシュフォルダー")]
     public string CacheDir { get; set; } = @"${IG:CONFIG_ROOT}\Cache";
 
-    [TomlPrecedingComment("ﾆﾗｸｼｮﾝ設定")]
+    [ZundaHorizon("ﾆﾗｸｼｮﾝ設定")]
     public NiractionSetting Niraction { get; set; } = new();
 
-    [TomlPrecedingComment("サムネイルの設定")]
+    [ZundaHorizon("サムネイルの設定")]
     public ThumbnailSetting Thumbnail { get; set; } = new();
 
-    [TomlPrecedingComment("Taggerの設定")]
+    [ZundaHorizon("Taggerの設定")]
     public TaggerSetting Tagger { get; set; } = new();
 
-    [TomlPrecedingComment("キャプショニング設定")]
+    [ZundaHorizon("キャプショニング設定")]
     public CaptionizeSetting Captioning { get; set; } = new();
 
     /// <summary>
@@ -382,7 +382,7 @@ public class Settings : ICustomVariableJail {
         var imageExtsnsions = CompileImageExtensions(ImageExtensions);
         var cacheDirectory = CacheDir.ExpandCustomVariables(this).AsDirectoryInfo();
         var moreHere = Captioning.MoreHere.Select(w => w.AsRegexIgnoreCase()).ToArray();
-        var noMoreHere = Captioning.NoMoreHere.Select(w => w.AsRegexIgnoreCase()).ToArray(); 
+        var noMoreHere = Captioning.NoMoreHere.Select(w => w.AsRegexIgnoreCase()).ToArray();
         return new PreparedSettings(this, searchPaths, excludePaths, excludePatterns, imageExtsnsions, moreHere, noMoreHere, cacheDirectory);
     }
 
