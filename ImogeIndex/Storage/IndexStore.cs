@@ -395,7 +395,9 @@ public partial class IndexStore : DataStoreBase
     public static bool IsOpened => instance != null;
 
 
-    IndexStore() { }
+    IndexStore() {
+        browseMapper = new(() => CompileProjectionMapper<FileRecord>(browseColumns));
+    }
 
     /// <summary>
     /// 開く
@@ -961,33 +963,35 @@ public partial class IndexStore : DataStoreBase
     }
 
     /// <summary>
-    /// ｲﾝﾃﾞｯｸｽ全取得
+    /// 閲覧側(FileItem.Parse)が使う列
+    /// </summary>
+    static readonly string[] browseColumns = [
+        "id", "path", "container", "file_hash", "version", "created_at", "width", "height",
+        "phash", "ahash", "dhash", "whash",
+        "characters", "tags", "keywords", "scene", "costume", "objects",
+    ];
+
+    /// <summary>
+    /// browseColumns用のﾏｯﾊﾟー(ｽｷーﾏが揃ってから初回だけ作る)
+    /// </summary>
+    readonly Lazy<Func<SQLiteDataReader, FileRecord>> browseMapper;
+
+    /// <summary>
+    /// 閲覧用のｲﾝﾃﾞｯｸｽ全取得
     /// </summary>
     /// <param name="token"></param>
-    /// <param name="sortKey"></param>
     /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public IEnumerable<FileRecord> QueryAll(CancellationToken token, string[] sortKey) {
-        if (!recordTypeMap.TryGetValue(typeof(FileRecord), out var prop)) {
-            throw new Exception(Properties.Resources.SM_E_NotInTypeMap.Morfat(nameof(FileRecord)));
-        }
-        // まぁ、ないとは思うけど列ﾁｪｯｸ
-        foreach (var cc in sortKey) {
-            if (!prop.Schemas.Any(w => w.Name == cc)) {
-                throw new Exception(Properties.Resources.SM_E_UnknownColumn.Morfat(cc));
-            }
-        }
-
+    public IEnumerable<FileRecord> QueryAllForBrowse(CancellationToken token) {
+        var mapper = browseMapper.Value;
         using var justify = JustawayReader();
         using var cmd = new SQLiteCommand(justify.Connection);
-        var sk = string.Join(',', sortKey);
-        cmd.CommandText = $"SELECT * FROM imoge_index order by {sk};";
+        cmd.CommandText = $"SELECT {string.Join(',', browseColumns)} FROM imoge_index;";
         using var reader = cmd.ExecuteReader();
         while (reader.Read()) {
             if (token.IsCancellationRequested) {
                 break;
             }
-            yield return MapInstance<FileRecord>(reader!, prop);
+            yield return mapper(reader);
         }
     }
 

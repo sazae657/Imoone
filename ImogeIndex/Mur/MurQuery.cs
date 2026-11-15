@@ -75,7 +75,7 @@ public partial class MurQuery {
             }
         }
         // 設定不正なら例外になるのでｷｬｯｼｭしない
-        IReadOnlyList<IQueryTermParser> parsers = [
+        IReadOnlyList<IQueryTermParser> parsers = (IQueryTermParser[])[
             new MetadataQueryTermParser(configured),
             new DateQueryTermParser(),
             new NumberQueryTermParser(WidthPrefix, static item => item.Width),

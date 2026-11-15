@@ -3,6 +3,7 @@ using ImogeIndex.Common;
 using ImogeIndex.Storage;
 using ImogeIndex.Territories;
 using ImogeIndex.Web6.Committees;
+using ImogeIndex.Web6.Dictators;
 using ImogeIndex.Web6.Storage;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -121,6 +122,9 @@ public partial class MainWindow
             }, tokenSource.Token);
             fileListDisplay.SetMaxIconSize(FileListSizementEnvuelve.MaxIconSizeOf(Profile.Active.Thumbnail.Enable, Profile.Active.Thumbnail.Size));
             fileListDisplay.SetSmallDatum(Profile.Active.GetThumbnailDatumPath().FullName);
+            // ﾂﾘーを作って前回の選択ﾌｫﾙﾀﾞーを絞り込みに戻してから一覧を流す
+            await folderTree.LoadAsync(DC.ActiveProfile, Profile.Active.SearchPaths, result.Items,
+                SettingsDictator.Default.LastFolders.GetValueOrDefault(DC.ActiveProfile), tokenSource.Token);
             await fileListSearch.ReloadAsync(result.Items);
             var stale = profileLoader.Datum.StaleMetadataAliases;
             if (stale.Count != 0) {

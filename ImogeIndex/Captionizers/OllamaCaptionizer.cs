@@ -5,28 +5,27 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using Tomlet;
-using Tomlet.Attributes;
 
 namespace ImogeIndex.Captionizers;
 
 public class OllamaSetting
 {
-    [TomlPrecedingComment("ollamaのURL")]
+    [ZundaHorizon("ollamaのURL")]
     public string? Host { get; set; } = "http://localhost:11434";
 
-    [TomlPrecedingComment("モデル")]
+    [ZundaHorizon("モデル")]
     public string? Model { get; set; } = "qwen3-vl:8b-instruct";
 
-    [TomlPrecedingComment("ollamaに送信する画像の長辺サイズ")]
+    [ZundaHorizon("ollamaに送信する画像の長辺サイズ")]
     public int ImageSize { get; set; } = 1024;
 
-    [TomlPrecedingComment("失敗時のリトライ回数")]
+    [ZundaHorizon("失敗時のリトライ回数")]
     public int Retry { get; set; } = 2;
 
-    [TomlPrecedingComment("カスタムプロンプトを使う")]
+    [ZundaHorizon("カスタムプロンプトを使う")]
     public bool UseCustomPrompt { get; set; } = false;
 
-    [TomlPrecedingComment("カスタムプロンプト")]
+    [ZundaHorizon("カスタムプロンプト")]
     public string CustomPrompt { get; set; } = string.Empty;
 
     public float Temperature { get; set; } = 0;

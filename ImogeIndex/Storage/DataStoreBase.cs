@@ -508,6 +508,38 @@ public abstract class DataStoreBase : IDisposable
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
     private static Func<SQLiteDataReader, T> CompileMapper<T>(RupSchema prop) where T : new()
+        => CompileMapperOf<T>(prop, null);
+
+    /// <summary>
+    /// 列を絞ったSELECT用のﾏｯﾊﾟーを作る
+    /// 指定しなかった列のﾌﾟﾛﾊﾟﾃｨは初期値のまま
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="columns">SELECT句と同じ並びのｶﾗﾑ名</param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    protected Func<SQLiteDataReader, T> CompileProjectionMapper<T>(IReadOnlyList<string> columns) where T : new()
+    {
+        if (!recordTypeMap.TryGetValue(typeof(T), out var prop)) {
+            throw new Exception(Properties.Resources.SM_E_NotInTypeMap.Morfat(typeof(T).Name));
+        }
+        foreach (var name in columns) {
+            if (!prop.Schemas.Any(w => w.Name == name && w.Column >= 0)) {
+                throw new Exception(Properties.Resources.SM_E_UnknownColumn.Morfat(name));
+            }
+        }
+        return CompileMapperOf<T>(prop, columns);
+    }
+
+    /// <summary>
+    /// ﾏｯﾊﾟー生成の本体
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="prop"></param>
+    /// <param name="columns">SELECT句のｶﾗﾑ名(nullならﾃーﾌﾞﾙ定義の並びで全ｶﾗﾑ)</param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    private static Func<SQLiteDataReader, T> CompileMapperOf<T>(RupSchema prop, IReadOnlyList<string>? columns) where T : new()
     {
         var readerParam = Expression.Parameter(typeof(SQLiteDataReader), "reader");
         var bindings = new List<MemberBinding>();
@@ -518,8 +550,22 @@ public abstract class DataStoreBase : IDisposable
             if (schema == null || schema.Column < 0) {
                 continue;
             }
+            var ordinal = schema.Column;
+            if (columns != null) {
+                // 絞った時はSELECT句の並びが列番号になる
+                ordinal = -1;
+                for (var n = 0; n < columns.Count; n++) {
+                    if (columns[n] == schema.Name) {
+                        ordinal = n;
+                        break;
+                    }
+                }
+                if (ordinal < 0) {
+                    continue;
+                }
+            }
 
-            var colExpr = Expression.Constant(schema.Column, typeof(int));
+            var colExpr = Expression.Constant(ordinal, typeof(int));
             var propertyType = property.PropertyType;
             Expression valueExpr;
 

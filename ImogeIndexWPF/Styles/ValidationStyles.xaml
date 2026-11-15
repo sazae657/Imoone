@@ -24,7 +24,7 @@
     </Style>
 
 
-    <!-- エラーメッセージ -->
+    <!-- ｴﾗーﾒｯｾーｼﾞ -->
     <Style x:Key="Validatable" TargetType="TextBox" BasedOn="{StaticResource ThemeTextBoxStyle}">
         <Setter Property="settingure:BindingErrorPoliticalOfficer.Enabled" Value="True" />
         <Setter Property="Validation.ErrorTemplate">
@@ -40,7 +40,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <!-- テキストボックスの枠線を赤くするトリガー -->
+        <!-- ﾃｷｽﾄﾎﾞｯｸｽの枠線を赤くするﾄﾘｶﾞー -->
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="False">
                 <Setter Property="Margin" Value="0,0,0,0"/>

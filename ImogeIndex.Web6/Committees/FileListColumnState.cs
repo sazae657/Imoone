@@ -13,7 +13,7 @@ public sealed class FileListColumnState
     /// 列番号ごとのｿーﾄ対象
     /// ﾒﾀﾃﾞーﾀﾑ対応しようかと思ったけどﾒﾓﾘ食うのでやめた
     /// </summary>
-    public static readonly IReadOnlyList<string> SortFields = [
+    public static readonly IReadOnlyList<string> SortFields = (string[])[
         nameof(FileItem.Name),
         nameof(FileItem.Path),
         nameof(FileItem.DateTime),

@@ -51,6 +51,14 @@ public class DetailPaneParams
 }
 
 
+/// <summary>
+/// ﾌｫﾙﾀﾞーﾂﾘーのﾊﾟﾗﾒーﾀー
+/// </summary>
+public class FolderTreeParams
+{
+    public bool Visible { get; set; } = true;
+    public int Width { get; set; } = 200;
+}
 
 /// <summary>
 /// 自動保存用設定
@@ -85,6 +93,16 @@ public class SettingsDictator
     /// 詳細ﾍﾟｲﾝ
     /// </summary>
     public DetailPaneParams DetailPane { get; set; } = new();
+
+    /// <summary>
+    /// ﾌｫﾙﾀﾞーﾂﾘー
+    /// </summary>
+    public FolderTreeParams FolderTree { get; set; } = new();
+
+    /// <summary>
+    /// ﾌﾟﾛﾌｧｲﾙごとに最後に選択したﾌｫﾙﾀﾞー(空文字は最上位)
+    /// </summary>
+    public Dictionary<string, string> LastFolders { get; set; } = new();
 
     /// <summary>
     /// 前回使ったﾌﾟﾛﾌｧｲﾙ

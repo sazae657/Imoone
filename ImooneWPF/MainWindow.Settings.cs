@@ -66,8 +66,13 @@ public partial class MainWindow
         SaveFileListColumnSettings();
         if (DC.ShowDetailPane)
         {
-            SettingsDictator.Default.DetailPane.Width = Math.Max(64, (int)Grod.ColumnDefinitions[2].ActualWidth);
+            SettingsDictator.Default.DetailPane.Width = Math.Max(64, (int)DetailColumn.ActualWidth);
         }
+        if (DC.ShowFolderTree)
+        {
+            SettingsDictator.Default.FolderTree.Width = Math.Max(64, (int)FolderTreeColumn.ActualWidth);
+        }
+        SettingsDictator.Default.FolderTree.Visible = DC.ShowFolderTree;
         SettingsDictator.Default.DetailPane.Visible = DC.ShowDetailPane;
         SettingsDictator.Default.DetailPane.ShowOriginal = DC.DetailPaneShowOriginal;
 
@@ -122,6 +127,8 @@ public partial class MainWindow
         DC.ShowDetailPane = SettingsDictator.Default.DetailPane.Visible;
         DC.DetailPaneWidth = SettingsDictator.Default.DetailPane.Width;
         DC.DetailPaneShowOriginal = SettingsDictator.Default.DetailPane.ShowOriginal;
+        DC.ShowFolderTree = SettingsDictator.Default.FolderTree.Visible;
+        DC.FolderTreeWidth = Math.Max(64, SettingsDictator.Default.FolderTree.Width);
         DC.IncrementalSearch = SettingsDictator.Default.IncrementalSearch;
         DC.MinimizeToTray = SettingsDictator.Default.MinimizeToTray;
         DC.SimilarHashes = SettingsDictator.Default.SimilarHashMoone;
@@ -129,10 +136,19 @@ public partial class MainWindow
         {
             DC.Profiles.Add(x.Key);
         }
-        if (!string.IsNullOrEmpty(SettingsDictator.Default.LastProfile) &&
-            DC.Profiles.Contains(SettingsDictator.Default.LastProfile))
+        var profilec = SettingsDictator.Default.LastProfile;
+        var args = Environment.GetCommandLineArgs();
+        if (args.Length > 1) {
+            // args[1]からﾌﾟﾛﾌｧｲﾙ引かせる
+            if (DC.Profiles.Contains(args[1])) {
+                profilec = args[1];
+            }
+        }
+
+        if (!string.IsNullOrEmpty(profilec) &&
+            DC.Profiles.Contains(profilec))
         {
-            DC.ActiveProfile = SettingsDictator.Default.LastProfile;
+            DC.ActiveProfile = profilec;
             Profile.Dictator.SetActive(DC.ActiveProfile);
         }
         else

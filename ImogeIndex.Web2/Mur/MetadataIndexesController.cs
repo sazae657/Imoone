@@ -5,6 +5,8 @@ using System.Reflection;
 
 namespace ImogeIndex.Web2;
 
+using LPT = (string Value, long[] Ids);
+
 /// <summary>
 /// ﾒﾀﾃﾞーﾀﾑ検索ｲﾝﾃﾞｯｸｽのﾃｽﾄ
 /// </summary>
@@ -27,8 +29,8 @@ public class MetadataIndexesController {
 
         var values = TagIndexProzessor.CollectMetadataValues(aliases, tag => source[tag]);
 
-        Assert.Equal([10L, 20L], values["canon"].Order());
-        Assert.Equal([30L], values["nikon"]);
+        Assert.Equal((long[])[10L, 20L], values["canon"].Order());
+        Assert.Equal((long[])[30L], values["nikon"]);
     }
 
     [Fact(DisplayName = "引用符付き")]
@@ -42,7 +44,7 @@ public class MetadataIndexesController {
 
     [Fact(DisplayName = "3-gramで候補を絞って画像IDを取得")]
     public void LookupByTrigram() {
-        var index = JailIndex([
+        var index = JailIndex((LPT[])[
             ("canon eos 5d", new long[] { 10, 20 }),
             ("canon powershot", new long[] { 30 }),
             ("nikon f2", new long[] { 40 }),
@@ -51,12 +53,12 @@ public class MetadataIndexesController {
 
         index.Lookup("canon eos", destination);
 
-        Assert.Equal([10L, 20L], destination.Order());
+        Assert.Equal((long[])[10L, 20L], destination.Order());
     }
 
     [Fact(DisplayName = "三文字未満は指定タグ内の値だけを走査")]
     public void LookupShortValue() {
-        var index = JailIndex([
+        var index = JailIndex((LPT[])[
             ("canon eos 5d", new long[] { 10 }),
             ("nikon f2", new long[] { 20 }),
         ]);
@@ -64,13 +66,13 @@ public class MetadataIndexesController {
 
         index.Lookup("f2", destination);
 
-        Assert.Equal([20L], destination);
+        Assert.Equal((long[])[20L], destination);
     }
 
     [Fact(DisplayName = "metaと日付のOR条件は部分的にインデックス使うはず")]
     public void MetaOr() {
         var datum = new ImogeDatum();
-        SetMetaIndex(datum, "model", JailIndex([
+        SetMetaIndex(datum, "model", JailIndex((LPT[])[
             ("canon eos 5d", new long[] { 10 }),
         ]));
         var query = new MurQuery();
@@ -95,7 +97,7 @@ public class MetadataIndexesController {
     [Fact(DisplayName = "meta同士のOR条件は必ずインデックス解決するはず")]
     public void MetaOrMeta() {
         var datum = new ImogeDatum();
-        SetMetaIndex(datum, "model", JailIndex([
+        SetMetaIndex(datum, "model", JailIndex((LPT[])[
             ("canon eos 5d", new long[] { 10 }),
             ("nikon f2", new long[] { 20 }),
         ]));
@@ -137,7 +139,7 @@ public class MetadataIndexesController {
     [Fact(DisplayName = "複数metaと通常条件の混合OR")]
     public void MetaVSMetaVsOtherOr() {
         var datum = new ImogeDatum();
-        SetMetaIndex(datum, "model", JailIndex([
+        SetMetaIndex(datum, "model", JailIndex((LPT[])[
             ("canon eos 5d", new long[] { 10 }),
             ("nikon f2", new long[] { 20 }),
         ]));
@@ -167,7 +169,7 @@ public class MetadataIndexesController {
     [Fact(DisplayName = "単独の否定条件はインデックスで除外する")]
     public void NegatedMetaIsExcludedById() {
         var datum = new ImogeDatum();
-        SetMetaIndex(datum, "model", JailIndex([
+        SetMetaIndex(datum, "model", JailIndex((LPT[])[
             ("canon eos 5d", new long[] { 10 }),
             ("nikon f2", new long[] { 20 }),
         ]));
@@ -185,7 +187,7 @@ public class MetadataIndexesController {
     [Fact(DisplayName = "肯定条件と否定条件のインデックス解決")]
     public void MetaAndNegatedMeta() {
         var datum = new ImogeDatum();
-        SetMetaIndex(datum, "model", JailIndex([
+        SetMetaIndex(datum, "model", JailIndex((LPT[])[
             ("canon eos 5d", new long[] { 10, 11 }),
             ("canon eos r5", new long[] { 11 }),
         ]));

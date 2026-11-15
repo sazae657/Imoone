@@ -167,7 +167,7 @@ public abstract class TaggerBase : IDisposable {
         try {
             OnMessage?.Invoke(Properties.Resources.TW_InitializingOrt);
             if (sessionOptions == null) {
-                sessionOptions = TryConfigure([_ => { }]);
+                sessionOptions = TryConfigure((Action<SessionOptions>[])[_ => { }]);
                 if (sessionOptions == null) {
                     return;
                 }

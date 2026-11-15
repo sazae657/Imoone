@@ -7,7 +7,6 @@ using System.Text;
 using System.Windows;
 using Tomlet;
 using Tomlet.Attributes;
-
 namespace ImogeIndexWPF.Dictators;
 
 /// <summary>

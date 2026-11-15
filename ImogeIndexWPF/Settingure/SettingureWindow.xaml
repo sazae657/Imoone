@@ -37,14 +37,14 @@
             <capts:OpenAICompatPage />
         </DataTemplate>
         
-        <!-- グループ指定 -->
+        <!-- ｸﾞﾙーﾌﾟ指定 -->
         <CollectionViewSource x:Key="Kwategory" Source="{Binding Categories}" >
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Group"/>
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
 
-        <!-- グループヘッダー -->
+        <!-- ｸﾞﾙーﾌﾟﾍｯﾀﾞー -->
         <DataTemplate x:Key="GroupHeaderTemplate">
             <Border Background="{DynamicResource HeaderBackgroundBrush}">
                 <TextBlock Text="{Binding Name}"  FontWeight="Bold" Foreground="{DynamicResource HeaderForegroundBrush}"/>
@@ -52,7 +52,7 @@
         </DataTemplate>
     </shared:Nuendow.Resources>
     <DockPanel>
-        <!-- 全ページ共通ボタン -->
+        <!-- 全ﾍﾟーｼﾞ共通ﾎﾞﾀﾝ -->
         <Border
             Grid.Row="1"
             Padding="12,12,0,12"
@@ -93,7 +93,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- 左ペイン -->
+            <!-- 左ﾍﾟｲﾝ -->
             <DockPanel>
                 <ListView ItemsSource="{Binding Source={StaticResource Kwategory}}" 
                           SelectedIndex="{Binding SelectedIndex}" 
@@ -119,7 +119,7 @@
                 <Border DockPanel.Dock="Top" Margin="0,0,0,4" Background="{DynamicResource HeaderBackgroundBrush}">
                     <TextBlock Text="{Binding PageTitle}" Foreground="{DynamicResource HeaderForegroundBrush}" Margin="4"/>
                 </Border>
-                <!-- 右ペイン -->
+                <!-- 右ﾍﾟｲﾝ -->
                 <ContentControl
                     Margin="8,8,8,8"
                     Content="{Binding CurrentPage}" />

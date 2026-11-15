@@ -27,7 +27,7 @@ internal sealed class Win32TrayBackend : ITrayBackend
     internal Win32TrayBackend(string iconPath, string exitText)
         : this(iconPath, Array.Empty<TrayMenuCommand?>())
     {
-        commands = [new TrayMenuCommand(exitText, () => ExitSelected?.Invoke())];
+        commands = (TrayMenuCommand?[])[new TrayMenuCommand(exitText, () => ExitSelected?.Invoke())];
     }
 
     internal Win32TrayBackend(string iconPath, IReadOnlyList<TrayMenuCommand?> commands)

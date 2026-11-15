@@ -24,7 +24,7 @@ public class UserDefinitions : ICustomVariableJail
     [TomlNonSerialized]
     public string? IPv7 { get; set; }
 
-    [TomlPrecedingComment("ラベル")]
+    [ZundaHorizon("ラベル")]
     public List<string> Labels { get; set; } = ["⭐", "⭐⭐", "⭐⭐⭐"];
 
     const string EnvGroup = "Env";

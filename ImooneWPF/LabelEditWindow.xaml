@@ -47,7 +47,7 @@
         <DockPanel Margin="4">
             <StackPanel DockPanel.Dock="Top">
                 <TextBlock Text="{x:Static properties:Resources.LE_InputHint}"/>
-                <!-- エラーメッセージ置き場 -->
+                <!-- ｴﾗーﾒｯｾーｼﾞ置き場 -->
                 <ItemsControl ItemsSource="{Binding (Validation.Errors), ElementName=LabelsText}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

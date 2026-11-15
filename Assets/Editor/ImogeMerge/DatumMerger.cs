@@ -58,7 +58,7 @@ public static class DatumMerger {
     static readonly HashSet<string> HandledTables = new(
         ImageTables.Select(w => w.Table)
             .Concat(SearchIndexTables)
-            .Concat([DirectoryTable, "counting", "search_index_revision"]),
+            .Concat((string[])[DirectoryTable, "counting", "search_index_revision"]),
         StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
