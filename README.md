@@ -87,6 +87,7 @@ http リクエスト経由での `ollama`/`llama.cpp`/`Chat Completions API (lms
 | `Ctrl+Shift+C` | 選択している画像のパスをクリップボードへコピー |
 | `Alt+D` | 検索ワード入力欄へフォーカス |
 | `Ctrl+Shift+P` | 詳細表示の表示切り替え |
+| `Ctrl+Shift+F` | フォルダー表示切り替え |
 | `Ctrl+W` | 詳細表示のクリア |
 | `Ctrl+Shift+W` | 詳細表示をクリア、詳細表示を閉じてリスト表示にする (緊急事態等用) |
 | `Ctrl+Shift+R` | データの再読み込み |
