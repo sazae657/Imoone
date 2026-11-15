@@ -173,6 +173,22 @@ public partial class IndexStore
     }
 
     /// <summary>
+    /// 検索ﾃﾞーﾀﾑのﾊﾞーｼﾞｮﾝ(検索用のﾃーﾌﾞﾙがまだ無いﾃﾞーﾀﾑならnull)
+    /// </summary>
+    /// <returns></returns>
+    internal long? TryGetSearchDataVersion() {
+        using var justify = JustawayReader();
+        using (var command = new SQLiteCommand(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='search_index_revision' LIMIT 1;",
+            justify.Connection)) {
+            if (command.ExecuteScalar() == null) {
+                return null;
+            }
+        }
+        return ReadSearchRevision(justify.Connection, null);
+    }
+
+    /// <summary>
     /// ﾘﾋﾞｼﾞｮﾝ読み込み
     /// </summary>
     /// <param name="transaction"></param>
