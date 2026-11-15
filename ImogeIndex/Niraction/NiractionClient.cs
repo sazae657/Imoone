@@ -2,7 +2,6 @@
 using ImogeIndex.Storage;
 using System.Buffers.Binary;
 using System.Security.Cryptography;
-using Tomlet.Attributes;
 
 namespace ImogeIndex.Niraction;
 
@@ -10,10 +9,10 @@ namespace ImogeIndex.Niraction;
 /// ﾆﾗｸｼｮﾝ設定
 /// </summary>
 public class NiractionSetting {
-    [TomlPrecedingComment("有効/無効")]
+    [ZundaHorizon("有効/無効")]
     public bool Enable { get; set; }
 
-    [TomlPrecedingComment("ﾆﾗｸｼｮﾝのURL")]
+    [ZundaHorizon("ﾆﾗｸｼｮﾝのURL")]
     public string? Host { get; set; } = "http://127.0.0.1:1192";
 }
 
@@ -64,7 +63,7 @@ public class NiractionGlueResponse
 /// <summary>
 /// ﾆﾗｸｼｮﾝ接続
 /// </summary>
-public class NiractionClient {        
+public class NiractionClient {
     static HttpClient httpClient = new HttpClient {
         Timeout = TimeSpan.FromSeconds(10) // 基本ﾐﾘ秒で返る
     };
@@ -104,7 +103,7 @@ public class NiractionClient {
     /// <returns></returns>
     public async Task<NiractionResponse?> Distance(FileRecord record, CancellationToken token) {
         var url = $"{setty.Host}/Niractions/Distance";
-        var req = new BSVWriter<BSVPair>([
+        var req = new BSVWriter<BSVPair>((BSVPair[])[
             new BSVPair("P", record.PHash.ToString()),
             new BSVPair("A", record.AHash.ToString()),
             new BSVPair("D", record.DHash.ToString()),
@@ -180,7 +179,7 @@ public class NiractionClient {
     public async Task<NiractionGlueResponse?> Glue(IEnumerable<long> keys, CancellationToken token)
     {
         var url = $"{setty.Host}/Niractions/Glue";
-        var req = new BSVWriter<BSVRow>([
+        var req = new BSVWriter<BSVRow>((BSVRow[])[
             new BSVRow(keys.Select(w => w.ToString()))
             ]
         );

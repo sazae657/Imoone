@@ -454,4 +454,10 @@
   <data name="WG_Stopping" xml:space="preserve">
     <value>停止中…</value>
   </data>
+  <data name="ML_LaunchImoone" xml:space="preserve">
+    <value>Imoone起動…</value>
+  </data>
+  <data name="ML_E_LaunchImooneFailed" xml:space="preserve">
+    <value>Imooneの起動に失敗 : {0}</value>
+  </data>
 </root>

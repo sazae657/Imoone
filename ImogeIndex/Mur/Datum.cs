@@ -196,57 +196,85 @@ public class ImogeDatum {
         await Task.Run(()=> {
             token.ThrowIfCancellationRequested();
             delegaty(DatumLoadPhase.Allocating, 0);
-            var cn = IndexStore.Instance.GetImogeCount();
+            var store = IndexStore.Instance;
+            var cn = store.GetImogeCount();
+            // 検索ｲﾝﾃﾞｯｸｽは別の読み取り接続で項目と並行して読む
+            // 読んでる間に書き換えられたか後で判るように、先に世代を控えておく
+            var revision = store.TryGetSearchDataVersion();
+            var indexTask = Task.Run(() => store.GetSearchIndex(token));
             var items = new List<FileItem>(Math.Max(cn, 0));
             long dd = 0;
             long maxRecordId = -1;
-            // 塊ごとにｽﾚﾌﾟへ投げて読み取りと並行させる(並び順は塊の順で保つ)
+            // 塊ごとにｽﾚﾌﾟへ投げて読み取りと並行させる(並び順は全部揃ってから付ける)
             var batches = new List<Task<FileItem[]>>();
             var batch = new List<FileRecord>(ParseBatchSize);
-            // ﾗﾍﾞﾙはﾊｯｼｭで紐付いてるので、FileItem化する時に一緒に当てる
-            IReadOnlyDictionary<string, string>? labels = LabelStore.IsOpened ? LabelStore.Instance.LoadAll(token) : null;
-            delegaty(DatumLoadPhase.Allocated, 0);
             try {
-                foreach (var x in IndexStore.Instance.QueryAll(token, ["container", "path"])) {
-                    token.ThrowIfCancellationRequested();
-                    dd++;
-                    // 集計の世代比較に使うので読み飛ばすﾚｺーﾄﾞのIDも見ておく
-                    if (x.Id > maxRecordId) {
-                        maxRecordId = x.Id;
+                // ﾗﾍﾞﾙはﾊｯｼｭで紐付いてるので、FileItem化する時に一緒に当てる
+                IReadOnlyDictionary<string, string>? labels = LabelStore.IsOpened ? LabelStore.Instance.LoadAll(token) : null;
+                delegaty(DatumLoadPhase.Allocated, 0);
+                try {
+                    foreach (var x in store.QueryAllForBrowse(token)) {
+                        token.ThrowIfCancellationRequested();
+                        dd++;
+                        // 集計の世代比較に使うので読み飛ばすﾚｺーﾄﾞのIDも見ておく
+                        if (x.Id > maxRecordId) {
+                            maxRecordId = x.Id;
+                        }
+                        batch.Add(x);
+                        if (batch.Count == ParseBatchSize) {
+                            batches.Add(ParseBatchAsync(batch, labels));
+                            batch = new List<FileRecord>(ParseBatchSize);
+                        }
+                        if ((dd % 1000) == 0) {
+                            delegaty(DatumLoadPhase.Loading, (double)dd / cn);
+                        }
                     }
-                    batch.Add(x);
-                    if (batch.Count == ParseBatchSize) {
+                    if (batch.Count != 0) {
                         batches.Add(ParseBatchAsync(batch, labels));
-                        batch = new List<FileRecord>(ParseBatchSize);
-                    }
-                    if ((dd % 1000) == 0) {
-                        delegaty(DatumLoadPhase.Loading, (double)dd / cn);
                     }
                 }
-                if (batch.Count != 0) {
-                    batches.Add(ParseBatchAsync(batch, labels));
+                catch (ObjectDisposedException ex) when (token.IsCancellationRequested) {
+                    // たぶん遅延評価中に殺された
+                    throw new OperationCanceledException(null, ex, token);
                 }
-            }
-            catch (ObjectDisposedException ex) when (token.IsCancellationRequested) {
-                // たぶん遅延評価中に殺された
-                throw new OperationCanceledException(null, ex, token);
-            }
 
-            // ﾌｫﾙﾀﾞー名は項目間で大量に被るので共有させる
-            var pool = new Dictionary<string, string>(StringComparer.Ordinal);
-            foreach (var parsed in batches) {
-                foreach (var item in parsed.GetAwaiter().GetResult()) {
-                    item.ShareStrings(pool);
-                    items.Add(item);
+                // ﾌｫﾙﾀﾞー名は項目間で大量に被るので共有させる
+                var pool = new Dictionary<string, string>(StringComparer.Ordinal);
+                foreach (var parsed in batches) {
+                    foreach (var item in parsed.GetAwaiter().GetResult()) {
+                        item.ShareStrings(pool);
+                        items.Add(item);
+                    }
                 }
+                token.ThrowIfCancellationRequested();
+                // 既定の並び(ﾌｫﾙﾀﾞー→ﾊﾟｽ)
+                // ﾀｸﾞ込みの太い行をSQLiteに並べ替えさせると一時B-treeに落ちて激遅なのでこっちでやる
+                items.Sort(CompareByLocation);
+                token.ThrowIfCancellationRequested();
             }
-            token.ThrowIfCancellationRequested();
+            catch {
+                // 並行して読んでる方が接続を掴んだまま残らないように、終わるのを待ってから抜ける
+                try {
+                    indexTask.Wait();
+                }
+                catch {
+                    // 元の例外を優先
+                }
+                throw;
+            }
 
             SearchIndices built;
             try {
                 delegaty(DatumLoadPhase.Indexing, 1.0);
+                var indexData = indexTask.GetAwaiter().GetResult();
+                if (store.TryGetSearchDataVersion() != revision) {
+                    // 読んでる間に書き換えられた。項目と食い違ってるかもしれないので読み直す
+                    indexData = store.GetSearchIndex(token);
+                }
+                // GetSearchIndexはｷｬﾝｾﾙ済みだと空で返ってくる
+                token.ThrowIfCancellationRequested();
                 var aliases = Profile.Active.MetadataSearchTags;
-                built = BuildSearchIndices(IndexStore.Instance.GetSearchIndex(token), maxRecordId,
+                built = BuildSearchIndices(indexData, maxRecordId,
                     MetadataIndexMarker.CalculateTagHash(aliases), aliases, token);
             }
             catch (ObjectDisposedException ex) when (token.IsCancellationRequested) {
@@ -260,6 +288,21 @@ public class ImogeDatum {
 
             delegaty(DatumLoadPhase.Complete, 0);
         }, token);
+    }
+
+    /// <summary>
+    /// 既定の並び順(ﾌｫﾙﾀﾞー→ﾌﾙﾊﾟｽの序数比較、同じならID順)
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    internal static int CompareByLocation(FileItem a, FileItem b) {
+        var c = string.CompareOrdinal(a.Path, b.Path);
+        if (c != 0) {
+            return c;
+        }
+        c = string.CompareOrdinal(a.FullName, b.FullName);
+        return c != 0 ? c : a.Id.CompareTo(b.Id);
     }
 
     /// <summary>

@@ -259,11 +259,29 @@ namespace ImogeIndexWPF.Properties {
         }
         
         /// <summary>
+        ///   Imooneの起動に失敗 : {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ML_E_LaunchImooneFailed {
+            get {
+                return ResourceManager.GetString("ML_E_LaunchImooneFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   言語 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ML_Language {
             get {
                 return ResourceManager.GetString("ML_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Imoone起動… に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ML_LaunchImoone {
+            get {
+                return ResourceManager.GetString("ML_LaunchImoone", resourceCulture);
             }
         }
         

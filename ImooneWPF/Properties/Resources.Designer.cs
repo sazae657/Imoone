@@ -434,6 +434,24 @@ namespace ImooneWPF.Properties {
         }
         
         /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MC_FolderTreeClose {
+            get {
+                return ResourceManager.GetString("MC_FolderTreeClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MC_FolderTreeOpen {
+            get {
+                return ResourceManager.GetString("MC_FolderTreeOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   インクリメンタル検索 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MC_IncrementalSearch {
@@ -763,6 +781,15 @@ namespace ImooneWPF.Properties {
         public static string MC_ToggleDetailPane {
             get {
                 return ResourceManager.GetString("MC_ToggleDetailPane", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   フォルダーツリーの表示/非表示 (Alt+Shift+F) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MC_ToggleFolderTree {
+            get {
+                return ResourceManager.GetString("MC_ToggleFolderTree", resourceCulture);
             }
         }
         

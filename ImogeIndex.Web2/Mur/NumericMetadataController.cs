@@ -143,8 +143,8 @@ public class NumericMetadataController {
         var restored = TomletMain.To<Settings>(TomletMain.TomlStringFrom(settings));
         Assert.Equal(Aliases, restored.MetadataSearchTags);
         var text = new MetaAlias { Alias = "ISO", Tag = "ISO Speed Ratings" };
-        Assert.Throws<ArgumentException>(() => MetaAlias.ValidateType([Aliases[0], text]));
-        Assert.NotEqual(MetadataIndexMarker.CalculateTagHash([Aliases[0]]), MetadataIndexMarker.CalculateTagHash([text]));
+        Assert.Throws<ArgumentException>(() => MetaAlias.ValidateType((MetaAlias[])[Aliases[0], text]));
+        Assert.NotEqual(MetadataIndexMarker.CalculateTagHash((MetaAlias[])[Aliases[0]]), MetadataIndexMarker.CalculateTagHash((MetaAlias[])[text]));
         Assert.Throws<ArgumentException>(() => MetaAlias.FromSettingure("iso:integer=ISO"));
     }
 
@@ -176,7 +176,7 @@ public class NumericMetadataController {
         Assert.Null(records[1].NumericValue);
         Assert.Equal(0d, records[2].NumericValue);
         Assert.Equal(0.008, new ImageMetadataValue(records[0]).NumericValue);
-        var collected = TagIndexProzessor.CollectNumericMetadataValues([Aliases[1]], _ => records, TestContext.Current.CancellationToken);
+        var collected = TagIndexProzessor.CollectNumericMetadataValues((MetaAlias[])[Aliases[1]], _ => records, TestContext.Current.CancellationToken);
         Assert.Equal(new long[] { 1 }, collected[0.008]);
         Assert.Equal(new long[] { 3 }, collected[0]);
         var data = JailedDatum();
@@ -219,10 +219,10 @@ public class NumericMetadataController {
 
     [Fact(DisplayName = "重複解決")]
     public void Index3() {
-        var merged = TagIndexProzessor.CollectNumericMetadataValues([
+        var merged = TagIndexProzessor.CollectNumericMetadataValues((MetaAlias[])[
             new() { Alias = "iso", Tag = "A", ValueType = MetadataValueType.Number },
             new() { Alias = "iso", Tag = "B", ValueType = MetadataValueType.Number },
-        ], tag => tag == "A" ? [new() { ImageId = 1, NumericValue = 100 }]
+        ], tag => tag == "A" ? (MetadataRecord[])[new() { ImageId = 1, NumericValue = 100 }]
             : [new() { ImageId = 1, NumericValue = 800 }, new() { ImageId = 2 }], TestContext.Current.CancellationToken);
         var data = new SearchIndexDataum();
         data.AddNumericField("meta:iso", merged, 10, 0, TestContext.Current.CancellationToken);
@@ -279,7 +279,7 @@ public class NumericMetadataController {
     public void StaleAliases2() {
         var datum = new ImogeDatum();
         datum.LoadSearchIndices(JailedDatum(), 11L, 0L, TestContext.Current.CancellationToken, Aliases);
-        Assert.Equal(["iso", "exposure", "model"], datum.StaleMetadataAliases);
+        Assert.Equal((string[])["iso", "exposure", "model"], datum.StaleMetadataAliases);
     }
 
     [Fact(DisplayName = "設定にあるのに作られていないエイリアスを報告する")]
@@ -289,7 +289,7 @@ public class NumericMetadataController {
             10, 0, TestContext.Current.CancellationToken);
         var datum = new ImogeDatum();
         datum.LoadSearchIndices(data, 10L, 0L, TestContext.Current.CancellationToken, Aliases);
-        Assert.Equal(["exposure", "model"], datum.StaleMetadataAliases);
+        Assert.Equal((string[])["exposure", "model"], datum.StaleMetadataAliases);
     }
 
     /// <summary>

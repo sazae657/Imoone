@@ -82,3 +82,6 @@ MC_Warning注意
 WC_Copyコピー
 TS_R_Settings設定
 TS_R_Display表示
+MC_ToggleFolderTreeフォルダーツリーの表示/非表示 (Alt+Shift+F)
+MC_FolderTreeOpen
+MC_FolderTreeClose

@@ -218,31 +218,31 @@ public class StringExtensionsController
     [Fact(DisplayName = "LFで分割する")]
     public void SplitNl1()
     {
-        Assert.Equal(["a", "b", "c"], "a\nb\nc".SplitNl());
+        Assert.Equal((string[])["a", "b", "c"], "a\nb\nc".SplitNl());
     }
 
     [Fact(DisplayName = "CrLfで分割する")]
     public void SplitNl2()
     {
-        Assert.Equal(["a", "b", "c"], "a\r\nb\r\nc".SplitNl());
+        Assert.Equal((string[])["a", "b", "c"], "a\r\nb\r\nc".SplitNl());
     }
 
     [Fact(DisplayName = "各要素をトリムする")]
     public void SplitNl3()
     {
-        Assert.Equal(["a", "b"], "  a  \n\tb\t".SplitNl());
+        Assert.Equal((string[])["a", "b"], "  a  \n\tb\t".SplitNl());
     }
 
     [Fact(DisplayName = "空行と空白のみの行を除去する")]
     public void SplitNl4()
     {
-        Assert.Equal(["a", "b"], "a\n\n   \r\n\r\nb\n".SplitNl());
+        Assert.Equal((string[])["a", "b"], "a\n\n   \r\n\r\nb\n".SplitNl());
     }
 
     [Fact(DisplayName = "改行が無ければ一要素になる")]
     public void SplitNl5()
     {
-        Assert.Equal(["single"], " single ".SplitNl());
+        Assert.Equal((string[])["single"], " single ".SplitNl());
     }
 
     [Fact(DisplayName = "空文字列なら空になる")]
@@ -259,25 +259,25 @@ public class StringExtensionsController
     [Fact(DisplayName = "カンマで分割する")]
     public void SplitCsv1()
     {
-        Assert.Equal(["a", "b", "c"], "a,b,c".SplitCsv());
+        Assert.Equal((string[])["a", "b", "c"], "a,b,c".SplitCsv());
     }
 
     [Fact(DisplayName = "空要素を除去する")]
     public void SplitCsv2()
     {
-        Assert.Equal(["a", "b"], ",a,,b,".SplitCsv());
+        Assert.Equal((string[])["a", "b"], ",a,,b,".SplitCsv());
     }
 
     [Fact(DisplayName = "前後の空白はトリムする")]
     public void SplitCsv3()
     {
-        Assert.Equal(["a", "b"], " a , b".SplitCsv());
+        Assert.Equal((string[])["a", "b"], " a , b".SplitCsv());
     }
 
     [Fact(DisplayName = "カンマが無ければ一要素になる")]
     public void SplitCsv4()
     {
-        Assert.Equal(["abc"], "abc".SplitCsv());
+        Assert.Equal((string[])["abc"], "abc".SplitCsv());
     }
 
     [Fact(DisplayName = "空文字列なら空になる")]
@@ -294,25 +294,25 @@ public class StringExtensionsController
     [Fact(DisplayName = "セミコロンで分割する")]
     public void SplitSmc1()
     {
-        Assert.Equal(["a", "b", "c"], "a;b;c".SplitSmc());
+        Assert.Equal((string[])["a", "b", "c"], "a;b;c".SplitSmc());
     }
 
     [Fact(DisplayName = "各要素をトリムする")]
     public void SplitSmc2()
     {
-        Assert.Equal(["a", "b"], " a ; b ".SplitSmc());
+        Assert.Equal((string[])["a", "b"], " a ; b ".SplitSmc());
     }
 
     [Fact(DisplayName = "空要素を除去する")]
     public void SplitSmc3()
     {
-        Assert.Equal(["a", "b"], ";a;;b;".SplitSmc());
+        Assert.Equal((string[])["a", "b"], ";a;;b;".SplitSmc());
     }
 
     [Fact(DisplayName = "空白のみの要素は消える")]
     public void SplitSmc4()
     {
-        Assert.Equal(["a", "b"], "a; ;b".SplitSmc());
+        Assert.Equal((string[])["a", "b"], "a; ;b".SplitSmc());
     }
 
     [Fact(DisplayName = "空文字列なら空になる")]
@@ -327,22 +327,22 @@ public class StringExtensionsController
     #region SplitNCS
     [Fact(DisplayName = "混在で分割する")]
     public void SplitNCS1() {
-        Assert.Equal(["a", "b", "c", "d", "e"], "a;b,c\nd\r\ne".SplitNCS());
+        Assert.Equal((string[])["a", "b", "c", "d", "e"], "a;b,c\nd\r\ne".SplitNCS());
     }
 
     [Fact(DisplayName = "混在で各要素をトリムする")]
     public void SplitNCS2() {
-        Assert.Equal(["a", "b", "c", "d", "e"], "a ; b , c \n d \r\n e".SplitNCS());
+        Assert.Equal((string[])["a", "b", "c", "d", "e"], "a ; b , c \n d \r\n e".SplitNCS());
     }
 
     [Fact(DisplayName = "混在で空要素を除去する")]
     public void SplitNCS3() {
-        Assert.Equal(["a", "b"], ",a;;\r\n,;b;\n".SplitNCS());
+        Assert.Equal((string[])["a", "b"], ",a;;\r\n,;b;\n".SplitNCS());
     }
 
     [Fact(DisplayName = "混在で空白のみの要素は消える")]
     public void SplitNCS4() {
-        Assert.Equal(["a", "b"], "a\r\n , ;b".SplitNCS());
+        Assert.Equal((string[])["a", "b"], "a\r\n , ;b".SplitNCS());
     }
 
     [Fact(DisplayName = "混在で空文字列なら空になる")]
