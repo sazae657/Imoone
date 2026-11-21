@@ -112,8 +112,7 @@ internal class WarpSettings {
 
     void SaveInternal() {
         var sm = CreateLocalState();
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        sm.OpenAndWriteText(t);
+        TomlHelper.Write(sm, this);
     }
 
     void PostLoad()
@@ -137,8 +136,7 @@ internal class WarpSettings {
             return;
         }
         try {
-            var t = TomlParser.ParseFile(sm.FullName);
-            instance = TomletMain.To<WarpSettings>(t);
+            instance = TomlHelper.Load<WarpSettings>(sm);
         }
         catch {
             instance = new();

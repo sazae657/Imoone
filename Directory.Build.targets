@@ -1,0 +1,14 @@
+<Project>
+    <!--
+        WinMLﾈｲﾃｨﾌﾞDLLのpublish混入対策
+    -->
+    <Target Name="_ImogeSuppressWindowsMLNativePublish"
+            AfterTargets="ResolveLockFileCopyLocalFiles"
+            Condition="('$(WindowsAppSDKSelfContained)' != 'true' and '$(MicrosoftWindowsAppSDKPackageDir)' != '') or
+                          '$(WindowsAppSDKMLPassthroughOnnxRuntime)' == 'true'">
+        <ItemGroup>
+            <_ResolvedCopyLocalBuildAssets Remove="@(_ResolvedCopyLocalBuildAssets)"
+                                           Condition="'%(_ResolvedCopyLocalBuildAssets.NuGetPackageId)' == 'Microsoft.Windows.AI.MachineLearning' and '%(_ResolvedCopyLocalBuildAssets.AssetType)' == 'native'" />
+        </ItemGroup>
+    </Target>
+</Project>
