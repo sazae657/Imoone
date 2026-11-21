@@ -23,7 +23,7 @@ https://github.com/sazae657/Imoone/releases/latest からバイナリ(ImooneWPF-
 
 ## 動作環境
 ### 必須要件
-- .NET10
+- .NET11
 - x64 版 **Windows11 24H2** 以降の Windows (Windows MLの要件)
 - それなりに潤沢なメモリ
 
