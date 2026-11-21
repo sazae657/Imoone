@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <NetCoreAppTarget>net10.0</NetCoreAppTarget>
+        <NetCoreAppTarget>net11.0</NetCoreAppTarget>
         <NetCoreAppWinTarget>$(NetCoreAppTarget)-windows10.0.26100.0</NetCoreAppWinTarget>
     </PropertyGroup>
 

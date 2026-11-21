@@ -451,9 +451,14 @@ public abstract class CaptionizerBase : ICaptionizer
         if (si >= 0) {
             mur = mur.Substring(0, si);
         }
-        TomlParser parser = new TomlParser();
-        TomlDocument document = parser.Parse(mur);
-        var rc = TomletMain.To<Gachas>(document);
+        Gachas? rc;
+        try {
+            rc = TomlHelper.Parse<Gachas>(mur);
+        }
+        catch (TomlException) {
+            // VLMが不正書式の物を返した可能性があるので補正してﾘﾄﾗｲ
+            rc = TomlHelper.Parse<Gachas>(CaptionErupter.Process(mur));
+        }
         if (rc != null) {
             ProcessProperties(rc);
             ProcessProperties(rc.Details);

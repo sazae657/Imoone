@@ -191,9 +191,7 @@ public class Settings : ICustomVariableJail {
             tmp.SaveInternal(path);
         }
         tmp.SaveDefault(path);
-
-        var t = TomlParser.ParseFile(sm.FullName);
-        var rc = TomletMain.To<Settings>(t);
+        var rc = TomlHelper.Load<Settings>(sm);
         rc.SettingFilePath = sm;
         rc.IPv7 = key;
         rc.UserDefinitions = UserDefinitions.Load(key , path);
@@ -263,8 +261,7 @@ public class Settings : ICustomVariableJail {
     void SaveInternal(DirectoryInfo root) {
         ImageExtensions = [.. GetDefaultExtension()];
         var sm = root.CombineFile(SystemParams.ConfigName);
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        sm.OpenAndWriteText(t);
+        TomlHelper.Write(sm, this);
     }
 
     /// <summary>
@@ -274,8 +271,7 @@ public class Settings : ICustomVariableJail {
     void SaveDefault(DirectoryInfo root) {
         ImageExtensions = [.. GetDefaultExtension()];
         var sm = root.CombineFile(SystemParams.DefaultConfigName);
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        sm.OpenAndWriteText(t);
+        TomlHelper.Write(sm, this);
     }
 
     /// <summary>
@@ -286,8 +282,7 @@ public class Settings : ICustomVariableJail {
         if (SettingFilePath == null) {
             return;
         }
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        await SettingFilePath.WriteAndStoreAsync(fs => fs.WriteAsync(Encoding.UTF8.GetBytes(t)).AsTask());
+        await TomlHelper.WriteAsync(SettingFilePath, this);
     }
 
     const string EnvGroup = "Env";
