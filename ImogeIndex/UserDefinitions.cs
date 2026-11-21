@@ -46,8 +46,7 @@ public class UserDefinitions : ICustomVariableJail
             tmp.SaveInternal(path);
         }
         tmp.SaveDefault(path);
-        var t = TomlParser.ParseFile(sm.FullName);
-        var rc = TomletMain.To<UserDefinitions>(t);
+        var rc = TomlHelper.Load<UserDefinitions>(sm);
         rc.SettingFilePath = sm;
         rc.IPv7 = key;
         return rc;
@@ -61,8 +60,7 @@ public class UserDefinitions : ICustomVariableJail
     void SaveInternal(DirectoryInfo root)
     {
         var sm = root.CombineFile(SystemParams.UserDefinitionsName);
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        sm.OpenAndWriteText(t);
+        TomlHelper.Write(sm, this);
     }
 
     /// <summary>
@@ -72,8 +70,7 @@ public class UserDefinitions : ICustomVariableJail
     void SaveDefault(DirectoryInfo root)
     {
         var sm = root.CombineFile(SystemParams.DefaultUserDefinitionsName);
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        sm.OpenAndWriteText(t);
+        TomlHelper.Write(sm, this);
     }
 
     /// <summary>
@@ -85,8 +82,7 @@ public class UserDefinitions : ICustomVariableJail
         if (SettingFilePath == null) {
             return;
         }
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        await SettingFilePath.WriteAndStoreAsync(fs => fs.WriteAsync(Encoding.UTF8.GetBytes(t)).AsTask());
+        await TomlHelper.WriteAsync(SettingFilePath, this);
     }
 
     /// <summary>

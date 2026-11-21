@@ -31,8 +31,7 @@ public class Profile : ICustomVariableJail {
         }
         tmp.SaveTemplate();
 
-        var t = TomlParser.ParseFile(sm.FullName);
-        instance = TomletMain.To<Profile>(t);
+        instance = TomlHelper.Load<Profile>(sm);
         instance.ProfilePath = sm;
         instance.Prepare(sm.Directory!);
     }
@@ -145,8 +144,7 @@ public class Profile : ICustomVariableJail {
         Default = DefaultKey;
         Profiles.Add(DefaultKey, new ProfileItem { Path = SystemParams.DefaultProfileLocation + Path.DirectorySeparatorChar + DefaultKey });
         var sm = SystemParams.CreateLocalStateFile(SystemParams.ProfilesOf).AsFileInfo();
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        sm.OpenAndWriteText(t);
+        TomlHelper.Write(sm, this);
     }
 
     /// <summary>
@@ -156,7 +154,6 @@ public class Profile : ICustomVariableJail {
         Default = DefaultKey;
         Profiles.TryAdd(DefaultKey, new ProfileItem { Path = SystemParams.DefaultProfileLocation + Path.DirectorySeparatorChar + DefaultKey });
         var sm = SystemParams.CreateLocalStateFile(SystemParams.DefaultProfilesOf).AsFileInfo();
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        sm.OpenAndWriteText(t);
+        TomlHelper.Write(sm, this);
     }
 }

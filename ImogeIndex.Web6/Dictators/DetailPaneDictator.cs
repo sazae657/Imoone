@@ -102,8 +102,7 @@ public sealed class DetailPaneDictator(IImoonePalabras texts)
 
         try
         {
-            var document = new TomlParser().Parse(caption);
-            var parsedCaption = TomletMain.To<Gachas>(document);
+            var parsedCaption = TomlHelper.Parse<Gachas>(caption);
             fields.Add(new MetadataPair(
                 nameof(parsedCaption.PeopleCount),
                 parsedCaption.PeopleCount.ToString()));

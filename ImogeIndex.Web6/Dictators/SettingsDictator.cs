@@ -263,8 +263,7 @@ public class SettingsDictator
     void SaveInternal()
     {
         var sm = CreateLocalState();
-        var t = TomletMain.TomlStringFrom(this, TomlSerializerOptions.Default);
-        sm.OpenAndWriteText(t);
+        TomlHelper.Write(sm, this);
     }
 
     /// <summary>
@@ -289,8 +288,7 @@ public class SettingsDictator
             return;
         }
         try {
-            var t = TomlParser.ParseFile(sm.FullName);
-            instance = TomletMain.To<SettingsDictator>(t);
+            instance = TomlHelper.Load<SettingsDictator>(sm);
         }
         catch {
             instance = new();
