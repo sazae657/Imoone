@@ -12,11 +12,11 @@
     <PackageVersion Include="MetadataExtractor" Version="2.9.3" />
     <PackageVersion Include="Microsoft.AI.Foundry.Local.WinML" Version="1.2.4" />
     <PackageVersion Include="Microsoft.Windows.AI.MachineLearning" Version="2.1.74" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.6.4" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.7.0" />
     <PackageVersion Include="ReadJEnc" Version="1.3.1.2" />
     <PackageVersion Include="Samboy063.Tomlet" Version="6.2.0" />
     <PackageVersion Include="SkiaSharp" Version="4.154.0" />
-    <PackageVersion Include="System.CommandLine" Version="2.0.14" />
+    <PackageVersion Include="System.CommandLine" Version="3.0.0" />
     <PackageVersion Include="System.Data.SQLite.Core" Version="1.0.119" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
     <PackageVersion Include="xunit.v3" Version="4.0.2" />
